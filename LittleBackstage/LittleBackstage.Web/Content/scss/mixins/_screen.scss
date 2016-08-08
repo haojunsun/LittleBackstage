@@ -1,0 +1,23 @@
+﻿$screen-io:                  320px !default;
+$screen-xs:                  480px !default;
+$screen-sm:                  768px !default;
+$screen-md:                  992px !default;
+$screen-lg:                  1200px !default;
+
+$screen-io-min:              $screen-io !default;
+$screen-xs-min:              $screen-xs !default;
+$screen-sm-min:              $screen-sm !default;
+$screen-md-min:              $screen-md !default;
+$screen-lg-min:              $screen-lg !default;
+
+$screen-ios:                 $screen-io-min !default;
+$screen-phone:               $screen-xs-min !default;
+$screen-tablet:              $screen-sm-min !default;
+$screen-desktop:             $screen-md-min !default;
+$screen-lg-desktop:          $screen-lg-min !default;
+
+$screen-io-max:              ($screen-xs-min - 1) !default;
+$screen-xs-max:              ($screen-sm-min - 1) !default;
+$screen-sm-max:              ($screen-md-min - 1) !default;
+$screen-md-max:              ($screen-lg-min - 1) !default;
+

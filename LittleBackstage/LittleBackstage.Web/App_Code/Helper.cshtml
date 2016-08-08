@@ -1,0 +1,16 @@
+﻿@using System.Web.Mvc
+@helper ValidationMessages(WebViewPage page)
+{
+    if (!page.ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+            <ul>
+                @foreach (var error in page.ViewData.ModelState.Values.SelectMany(x => x.Errors))
+                {
+                    <li>@error.ErrorMessage</li>
+                }
+            </ul>
+        </div>
+    }
+}

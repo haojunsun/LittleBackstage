@@ -1,0 +1,32 @@
+﻿// Arrow
+@mixin border-arrow-top($x, $y, $color) {
+    width: 0;
+    height: 0;
+    border-width: 0 $x $y;
+    border-style: solid;
+    border-color: transparent transparent $color;
+}
+
+@mixin border-arrow-rgt($x, $y, $color ) {
+    width: 0;
+    height: 0;
+    border-width: $y 0 $y $x;
+    border-style: solid;
+    border-color: transparent transparent transparent $color;
+}
+
+@mixin border-arrow-btm($x, $y, $color ) {
+    width: 0;
+    height: 0;
+    border-width: $x $y 0;
+    border-style: solid;
+    border-color: $color transparent transparent;
+}
+
+@mixin border-arrow-lft($x, $y, $color ) {
+    width: 0;
+    height: 0;
+    border-width: $y $x $y 0;
+    border-style: solid;
+    border-color: transparent $color transparent transparent;
+}

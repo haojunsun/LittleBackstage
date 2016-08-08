@@ -1,0 +1,25 @@
+﻿// Background
+@mixin bg-default($repeat: no-repeat,$p-x: center,$p-y: center) {
+    background-repeat: $repeat;
+    background-position: $p-x $p-y;
+}
+
+@mixin bg-image($width, $height,$x, $y) {
+    background-image: $assets-images-url;
+    background-repeat: no-repeat;
+    background-position: $x $y;
+    width: $width;
+    height: $height;
+}
+
+@mixin bg-contain($repeat: no-repeat,$p-x: center, $p-y: center,$size: contain) {
+    background-repeat: $repeat;
+    background-position: $p-x $p-y;
+    background-size: contain;
+}
+
+@mixin bg-cover($repeat: no-repeat,$p-x: center, $p-y: center,$size: cover) {
+    background-repeat: $repeat;
+    background-position: $p-x $p-y;
+    background-size: cover;
+}

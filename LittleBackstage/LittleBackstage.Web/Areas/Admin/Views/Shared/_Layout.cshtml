@@ -1,0 +1,425 @@
+﻿@functions {
+    public string CheckActive(string controller)
+    {
+        var controllers = controller.Split(',');
+        string currentController = Request.RequestContext.RouteData.Values["controller"].ToString();
+        return controllers.Any(x => x == currentController) ? "active" : "";
+    }
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>@ViewBag.Title - Project Dolphin</title>
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="~/Assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Assets/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" />
+    <link href="~/Assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Assets/plugins/uniform/css/uniform.default.min.css" rel="stylesheet" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <!-- BEGIN PAGE LEVEL STYLES -->
+    @RenderSection("head", false)
+    <!-- END PAGE LEVEL STYLES -->
+    <!-- BEGIN THEME STYLES -->
+    <link href="~/Assets/css/components-rounded.css" id="style_components" rel="stylesheet" type="text/css">
+    <link href="~/Assets/css/plugins.css" rel="stylesheet" type="text/css">
+    <link href="~/Assets/css/layout.css" rel="stylesheet" type="text/css">
+    <link href="~/Assets/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color">
+    <link href="~/Assets/css/custom.css" rel="stylesheet" type="text/css">
+    <link href="~/Areas/Admin/Content/site-admin.css" rel="stylesheet" type="text/css" />
+    <!-- END THEME STYLES -->
+    <script>
+        var sc = sc || {};
+        sc.baseUrl = '@Url.Content("~/")';
+    </script>
+</head>
+<body ng-app="scApp" ng-controller="RootController">
+    <!-- BEGIN HEADER -->
+    <div class="page-header">
+        <!-- BEGIN HEADER TOP -->
+        <div class="page-header-top">
+            <div class="container">
+                <!-- BEGIN LOGO -->
+                <div class="page-logo">
+                    <a href="@Url.Action("Index", "Home")">
+                        @*<img src="~/Assets/img/logo-default.png" alt="logo" class="logo-default">*@
+                        <h1>文艺发展中心</h1>
+                    </a>
+                </div>
+                <!-- END LOGO -->
+                <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+                <a href="javascript:;" class="menu-toggler"></a>
+                <!-- END RESPONSIVE MENU TOGGLER -->
+                <!-- BEGIN TOP NAVIGATION MENU -->
+                <div class="top-menu">
+                    <ul class="nav navbar-nav pull-right">
+                        <!-- BEGIN USER LOGIN DROPDOWN -->
+                        <li class="dropdown dropdown-user dropdown-dark">
+                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                <img alt="" class="img-circle" src="~/Assets/img/avatar9.jpg">
+                                <span class="username username-hide-mobile">Administrator</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-default">
+                                <li>
+                                    <a href="@Url.Action("Logout", "Account")">
+                                        <i class="icon-key"></i> Log Out
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- END USER LOGIN DROPDOWN -->
+                    </ul>
+                </div>
+                <!-- END TOP NAVIGATION MENU -->
+            </div>
+        </div>
+        <!-- END HEADER TOP -->
+        <!-- BEGIN HEADER MENU -->
+        <div class="page-header-menu">
+            <div class="container">
+                <!-- BEGIN MEGA MENU -->
+                <!-- DOC: Apply "hor-menu-light" class after the "hor-menu" class below to have a horizontal menu with white background -->
+                <!-- DOC: Remove data-hover="dropdown" and data-close-others="true" attributes below to disable the dropdown opening on mouse hover -->
+                <div class="hor-menu ">
+                    <ul class="nav navbar-nav">
+                        <li class="menu-dropdown mega-menu-dropdown ">
+                            <a data-hover="megamenu-dropdown" data-close-others="true" data-toggle="dropdown" href="javascript:;" class="dropdown-toggle">
+                                首页 <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <div class="mega-menu-content">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <ul class="mega-menu-submenu">
+                                                    <li>
+                                                        <a href="@Url.Action("List", "Article", new { @channelTag = "首页", @columnTag = "轮播图", @tagtype = 1 })">轮播图</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="@Url.Action("List", "Article", new { @channelTag = "首页", @columnTag = "通知公告", @tagtype = 1 })">通知公告</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="@Url.Action("List", "Article", new { @channelTag = "首页", @columnTag = "机构设置", @tagtype = 1 })">机构设置</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="@Url.Action("List", "Article", new { @channelTag = "首页", @columnTag = "中心快讯", @tagtype = 1 })">中心快讯</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="@Url.Action("List", "Article", new { @channelTag = "首页", @columnTag = "新闻博览", @tagtype = 1 })">新闻博览</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="@Url.Action("List", "Article", new { @channelTag = "首页", @columnTag = "友情连接", @tagtype = 1 })">友情连接</a>
+                                                    </li>
+                                                    @*<li>
+                                                            <a href="@Url.Action("List", "Article", new {@channelTag = "首页", @columnTag = "招聘信息", @tagtype = 1})">招聘信息</a>
+                                                        </li>*@
+                                                    <li>
+                                                        <a href="@Url.Action("List", "Article", new { @channelTag = "首页", @columnTag = "下载中心", @tagtype = 1 })">下载中心</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="menu-dropdown mega-menu-dropdown ">
+                            <a data-hover="megamenu-dropdown" data-close-others="true" data-toggle="dropdown" href="javascript:;" class="dropdown-toggle">
+                                单位概况 <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <div class="mega-menu-content">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <ul class="mega-menu-submenu">
+                                                    <li>
+                                                        <a href="@Url.Action("List", "Article", new { @channelTag = "单位概况", @columnTag = "单位简介", @tagtype = 1 })">单位简介</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="@Url.Action("List", "Article", new { @channelTag = "单位概况", @columnTag = "领导简介", @tagtype = 1 })">领导简介</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="@Url.Action("List", "Article", new { @channelTag = "单位概况", @columnTag = "机构设置", @tagtype = 1 })">机构设置</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="@Url.Action("List", "Article", new { @channelTag = "单位概况", @columnTag = "特约研究员", @tagtype = 1 })">特约研究员</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="@Url.Action("List", "Article", new { @channelTag = "单位概况", @columnTag = "研究中心", @tagtype = 1 })">研究中心</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="menu-dropdown mega-menu-dropdown ">
+                            <a data-hover="megamenu-dropdown" data-close-others="true" data-toggle="dropdown" href="javascript:;" class="dropdown-toggle">
+                                科研规划栏目 <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <div class="mega-menu-content">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <ul class="mega-menu-submenu">
+                                                    <li>
+                                                        <a href="@Url.Action("List", "Article", new { @channelTag = "科研规划", @columnTag = "科研动态", @tagtype = 1 })">科研动态</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="@Url.Action("List", "Article", new { @channelTag = "科研规划", @columnTag = "科研项目", @tagtype = 1 })">科研项目</a>
+                                                    </li>
+                                                    @*<li>
+                                                            <a href="@Url.Action("List", "Article", new { @channelTag = "科研规划", @columnTag = "全国艺术科研规划", @tagtype = 1 })">全国艺术科研规划</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="@Url.Action("List", "Article", new { @channelTag = "科研规划", @columnTag = "全国文化艺术资源标准化技术委员会", @tagtype = 1 })">全国文化艺术资源标准化技术委员会</a>
+                                                        </li>*@
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="menu-dropdown mega-menu-dropdown ">
+                            <a data-hover="megamenu-dropdown" data-close-others="true" data-toggle="dropdown" href="javascript:;" class="dropdown-toggle">
+                                科研规划 <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <div class="mega-menu-content">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <ul class="mega-menu-submenu">
+                                                    <li>
+                                                        <a href="@Url.Action("List", "Article", new { @channelTag = "科研规划", @columnTag = "科研动态", @tagtype = 1 })">科研动态</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="@Url.Action("List", "Article", new { @channelTag = "科研规划", @columnTag = "科研项目", @tagtype = 1 })">科研项目</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="@Url.Action("List", "Article", new { @channelTag = "科研规划", @columnTag = "全国艺术科研规划", @tagtype = 1 })">全国艺术科研规划</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="@Url.Action("List", "Article", new { @channelTag = "科研规划", @columnTag = "全国文化艺术资源标准化技术委员会", @tagtype = 1 })">全国文化艺术资源标准化技术委员会</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="menu-dropdown mega-menu-dropdown ">
+                            <a data-hover="megamenu-dropdown" data-close-others="true" data-toggle="dropdown" href="javascript:;" class="dropdown-toggle">
+                                重大工程 <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <div class="mega-menu-content">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <ul class="mega-menu-submenu">
+                                                    <li>
+                                                        <a href="@Url.Action("List", "Article", new { @channelTag = "重大工程", @columnTag = "中国民族民间文艺集成志书", @tagtype = 1 })">中国民族民间文艺集成志书</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="@Url.Action("List", "Article", new { @channelTag = "重大工程", @columnTag = "中国节日志", @tagtype = 1 })">中国节日志</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="@Url.Action("List", "Article", new { @channelTag = "重大工程", @columnTag = "中国史诗百部", @tagtype = 1 })">中国史诗百部</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="@Url.Action("List", "Article", new { @channelTag = "重大工程", @columnTag = "集成志书港澳台", @tagtype = 1 })">集成志书港澳台</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="@Url.Action("List", "Article", new { @channelTag = "重大工程", @columnTag = "重大工程其他", @tagtype = 1 })">其他</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="menu-dropdown mega-menu-dropdown ">
+                            <a data-hover="megamenu-dropdown" data-close-others="true" data-toggle="dropdown" href="javascript:;" class="dropdown-toggle">
+                                文化科技 <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <div class="mega-menu-content">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <ul class="mega-menu-submenu">
+                                                    <li>
+                                                        <a href="@Url.Action("List", "Article", new { @channelTag = "文化科技", @columnTag = "重点实验室", @tagtype = 1 })">重点实验室</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="@Url.Action("List", "Article", new { @channelTag = "文化科技", @columnTag = "数据库", @tagtype = 1 })">资源建设—数据库</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="@Url.Action("List", "Article", new { @channelTag = "文化科技", @columnTag = "田野考察", @tagtype = 1 })">资源建设—田野考察</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="@Url.Action("List", "Article", new { @channelTag = "文化科技", @columnTag = "学术研究", @tagtype = 1 })">资源建设—学术研究</a>
+                                                    </li>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="menu-dropdown mega-menu-dropdown ">
+                            <a data-hover="megamenu-dropdown" data-close-others="true" data-toggle="dropdown" href="javascript:;" class="dropdown-toggle">
+                                文化交流 <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <div class="mega-menu-content">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <ul class="mega-menu-submenu">
+                                                    <li>
+                                                        <a href="@Url.Action("List", "Article", new { @channelTag = "文化交流", @columnTag = "展览展演", @tagtype = 1 })">展览展演</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="@Url.Action("List", "Article", new { @channelTag = "文化交流", @columnTag = "大赛", @tagtype = 1 })">大赛</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="@Url.Action("List", "Article", new { @channelTag = "文化交流", @columnTag = "其他", @tagtype = 1 })">其他</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="menu-dropdown mega-menu-dropdown ">
+                            <a data-hover="megamenu-dropdown" data-close-others="true" data-toggle="dropdown" href="javascript:;" class="dropdown-toggle">
+                                专项管理 <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <div class="mega-menu-content">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <ul class="mega-menu-submenu">
+                                                    <li>
+                                                        <a href="@Url.Action("List", "Article", new { @channelTag = "专项管理", @columnTag = "艺术学工作", @tagtype = 1 })">艺术学工作</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="@Url.Action("List", "Article", new { @channelTag = "专项管理", @columnTag = "节庆管理", @tagtype = 1 })">节庆管理</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="@Url.Action("List", "Article", new { @channelTag = "专项管理", @columnTag = "标准化建设", @tagtype = 1 })">标准化建设</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </div>
+                <!-- END MEGA MENU -->
+            </div>
+        </div>
+        <!-- END HEADER MENU -->
+    </div>
+    <!-- END HEADER -->
+    <!-- BEGIN PAGE CONTAINER -->
+    <div class="page-container">
+        <!-- BEGIN PAGE HEAD -->
+        <div class="page-head">
+            <div class="container">
+                <!-- BEGIN PAGE TITLE -->
+                <div class="page-title">
+                    <h1>@ViewBag.Title <small>@ViewBag.SubTitle</small></h1>
+                </div>
+                <!-- END PAGE TITLE -->
+                <!-- BEGIN PAGE TOOLBAR -->
+                <div class="page-toolbar">
+                    <!-- PH: 空置工具栏 -->
+                </div>
+                <!-- END PAGE TOOLBAR -->
+            </div>
+        </div>
+        <!-- END PAGE HEAD -->
+        <!-- BEGIN PAGE CONTENT -->
+        <div class="page-content">
+            <div class="container">
+                <!-- BEGIN PAGE CONTENT INNER -->
+                @RenderBody()
+                <!-- END PAGE CONTENT INNER -->
+            </div>
+        </div>
+        <!-- END PAGE CONTENT -->
+    </div>
+    <!-- END PAGE CONTAINER -->
+    <!-- BEGIN FOOTER -->
+    <div class="page-footer">
+        <div class="container">
+            2015 &copy; Secoinfo Technology <a href="http://www.secoinfo.net" target="_blank">www.secoinfo.net</a>
+        </div>
+    </div>
+    <div class="scroll-to-top">
+        <i class="icon-arrow-up"></i>
+    </div>
+    <!-- END FOOTER -->
+    <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+    <!-- BEGIN CORE PLUGINS -->
+    <script src="~/Assets/plugins/jquery.min.js" type="text/javascript"></script>
+    <script src="~/Assets/plugins/jquery-migrate.min.js" type="text/javascript"></script>
+    <script src="~/Assets/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="~/Assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="~/Assets/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+    <script src="~/Assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <script src="~/Assets/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+    <script src="~/Assets/plugins/jquery.cokie.min.js" type="text/javascript"></script>
+    <script src="~/Assets/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+    <script src="~/Assets/scripts/metronic.js" type="text/javascript"></script>
+    <script src="~/Assets/scripts/layout.js" type="text/javascript"></script>
+    <script src="~/Scripts/angular.bundled.min.js"></script>
+    <script src="~/Scripts/angular.ui-sortable.js"></script>
+    <script src="~/Scripts/ng-infinite-scroll.min.js"></script>
+    <!-- END CORE PLUGINS -->
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    @RenderSection("~/Scripts", false)
+    @*<script src="~/Assets/plugins/jquery.pulsate.min.js" type="text/javascript"></script>
+        <script src="~/Assets/plugins/jquery-bootpag/jquery.bootpag.min.js" type="text/javascript"></script>
+        <script src="~/Assets/plugins/holder.js" type="text/javascript"></script>*@
+    <!-- END PAGE LEVEL PLUGINS -->
+    <script src="~/Scripts/seco-app-admin.js"></script>
+    <script>
+        jQuery(document).ready(function () {
+            // initiate layout and plugins
+            Metronic.init(); // init metronic core components
+            Layout.init(); // init current layout
+            //Demo.init(); // init demo features
+        });
+    </script>
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+    @*<script src="~/Assets/scripts/demo.js" type="text/javascript"></script>*@
+    @RenderSection("foot", false)
+    <!-- END PAGE LEVEL SCRIPTS -->
+    <!-- END JAVASCRIPTS -->
+</body>
+</html>

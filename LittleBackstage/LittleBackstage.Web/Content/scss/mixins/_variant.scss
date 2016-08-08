@@ -1,0 +1,20 @@
+// [converter] $parent hack
+@mixin text-variant($parent, $color) {
+    #{$parent} {
+        color: $color;
+    }
+
+    #{$parent}:hover {
+        color: darken($color, 10%);
+    }
+}
+
+@mixin bg-variant($parent, $color) {
+    #{$parent} {
+        background-color: $color;
+    }
+
+    #{$parent}:hover {
+        background-color: darken($color, 10%);
+    }
+}
