@@ -1,0 +1,32 @@
+﻿@using LittleBackstage.Infrastructure.Navigation
+@model IEnumerable<Adminmenu>
+    @helper RenderMenuItem(AdminMenu menu)
+{
+    var permissions = (IEnumerable<string>)ViewBag.Permissions;
+    <li>
+        <a><i></i> @menu.Title</a>
+        @if (menu.Contained != null && menu.Contained.Count > 0)
+        {
+            var filteredMenus = menu.Contained.Where(x => string.IsNullOrEmpty(x.Permission) || permissions.Contains(x.Permission) || permissions.Contains("*"));
+            if (filteredMenus.Any())
+            {
+                <ul>
+                    @foreach (var submenu in filteredMenus)
+                    {
+                        @RenderMenuItem(submenu)
+                    }
+                </ul>
+            }
+        }
+    </li>
+}
+    <h1>Hello your World</h1>
+    @if (Model.Any())
+    {
+        <ul>
+            @foreach (var menu in Model)
+            {
+                @RenderMenuItem(menu)
+            }
+        </ul>
+    }
