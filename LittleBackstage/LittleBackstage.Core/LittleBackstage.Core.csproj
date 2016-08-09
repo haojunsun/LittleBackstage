@@ -56,6 +56,14 @@
     <Compile Include="Migrations\201608090158526_NewThree.Designer.cs">
       <DependentUpon>201608090158526_NewThree.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201608090211461_EditOne.cs" />
+    <Compile Include="Migrations\201608090211461_EditOne.Designer.cs">
+      <DependentUpon>201608090211461_EditOne.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608090248098_addAll.cs" />
+    <Compile Include="Migrations\201608090248098_addAll.Designer.cs">
+      <DependentUpon>201608090248098_addAll.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ForExcel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -72,6 +80,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201608090158526_NewThree.resx">
       <DependentUpon>201608090158526_NewThree.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608090211461_EditOne.resx">
+      <DependentUpon>201608090211461_EditOne.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608090248098_addAll.resx">
+      <DependentUpon>201608090248098_addAll.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
