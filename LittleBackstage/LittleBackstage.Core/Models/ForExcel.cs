@@ -13,7 +13,6 @@ namespace LittleBackstage.Core.Models
         /// </summary>
         public int ForExcelId { get; set; }
 
-
         public DateTime CreatedUtc { get; set; }
 
         /// <summary>
@@ -120,5 +119,128 @@ namespace LittleBackstage.Core.Models
         /// 其他_重量
         /// </summary>
         public string Other_ZhongLiang { get; set; }
+
+
+
+        /// <summary>
+        /// 1kHz
+        /// </summary>
+        public string YikHz { get; set; }
+
+        /// <summary>
+        /// 空弦音/筒音_自然衰减、力度p 第一遍
+        /// </summary>
+        public string KongXianYin_ZiRanShuaiJian_P_First{ get; set; }
+
+        /// <summary>
+        /// 空弦音/筒音_自然衰减、力度p 第二遍
+        /// </summary>
+        public string KongXianYin_ZiRanShuaiJian_P_Second { get; set; }
+
+
+        /// <summary>
+        /// 空弦音/筒音_自然衰减、力度f 第一遍
+        /// </summary>
+        public string KongXianYin_ZiRanShuaiJian_F_First { get; set; }
+
+        /// <summary>
+        /// 空弦音/筒音_自然衰减、力度f 第二遍
+        /// </summary>
+        public string KongXianYin_ZiRanShuaiJian_F_Second { get; set; }
+
+
+        /// <summary>
+        /// 空弦音/筒音_自然衰减、力度mf 第一遍
+        /// </summary>
+        public string KongXianYin_ZiRanShuaiJian_MF_First { get; set; }
+
+        /// <summary>
+        /// 空弦音/筒音_自然衰减、力度f 第二遍
+        /// </summary>
+        public string KongXianYin_ZiRanShuaiJian_MF_Second { get; set; }
+
+
+
+
+
+        /// <summary>
+        /// 音阶_自然衰减、力度mf 第一遍
+        /// </summary>
+        public string YinJie_ZiRanShuaiJian_MF_First { get; set; }
+
+        /// <summary>
+        /// 音阶_自然衰减、力度f 第二遍
+        /// </summary>
+        public string YinJie_ZiRanShuaiJian_MF_Second { get; set; }
+
+
+        /// <summary>
+        /// 音阶_慢速、力度p 第一遍
+        /// </summary>
+        public string YinJie_ManSu_P_First { get; set; }
+
+        /// <summary>
+        /// 音阶_慢速、力度p 第二遍
+        /// </summary>
+        public string YinJie_ManSu_P_Second { get; set; }
+
+
+        /// <summary>
+        /// 音阶_慢速、力度f 第一遍
+        /// </summary>
+        public string YinJie_ManSu_F_First { get; set; }
+
+        /// <summary>
+        /// 音阶_慢速、力度f 第二遍
+        /// </summary>
+        public string YinJie_ManSu_F_Second { get; set; }
+
+        /// <summary>
+        /// 音阶_慢速、力度mf 第一遍
+        /// </summary>
+        public string YinJie_ManSu_MF_First { get; set; }
+
+        /// <summary>
+        /// 音阶_慢速、力度mf 第二遍
+        /// </summary>
+        public string YinJie_ManSu_MF_Second { get; set; }
+
+
+        /// <summary>
+        /// 音阶_中速、力度f 第一遍
+        /// </summary>
+        public string YinJie_ZhongSu_F_First { get; set; }
+
+        /// <summary>
+        /// 音阶_中速、力度f 第二遍
+        /// </summary>
+        public string YinJie_ZhongSu_F_Second { get; set; }
+
+        /// <summary>
+        /// 演奏技法_技法名称
+        /// </summary>
+        public string YanZhouJiFa_MingChen { get; set; }
+        /// <summary>
+        /// 演奏技法_第一遍
+        /// </summary>
+        public string YanZhouJiFa_First { get; set; }
+        /// <summary>
+        /// 演奏技法_第二遍
+        /// </summary>
+        public string YanZhouJiFa_Second { get; set; }
+
+
+        /// <summary>
+        /// 示范乐曲_曲目名
+        /// </summary>
+        public string ShiFanYuQu_QuMuMing { get; set; }
+        /// <summary>
+        /// 示范乐曲_音频
+        /// </summary>
+        public string ShiFanYuQu_YinPin { get; set; }
+        /// <summary>
+        /// 示范乐曲_视频
+        /// </summary>
+        public string ShiFanYuQu_ShiPin { get; set; }
     }
 }
