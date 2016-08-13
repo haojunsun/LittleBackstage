@@ -106,10 +106,10 @@ namespace LittleBackstage.Core.Services
         public IEnumerable<ForExcel> SearchFull(string key, string yzfs, string mz, int pageIndex, int pageSize, ref int totalCount)
         {
             var list = (from p in _appDbContext.ForExcels
-                        where (p.TiMing_ZhengTiMing.Contains(key) || p.TiMing_QiTaTiMing.Contains(key) || p.WenHuaBeiJing_LiShiYuanLiu.Contains(key) || p.WenHuaBeiJing_LiuBuDiYu.Contains(key) || p.WenHuaBeiJing_ShiYuongChangSuo.Contains(key) || p.CaiLuXinXi_DiDian.Contains(key) || p.YueQiJianJie.Contains(key) || p.ShiFanYuQu_QuMuMing.Contains(key)) && (p.LeiBie_YanZouFangShi.Contains(yzfs) || p.MinZuShuXing.Contains(mz))
+                        where (p.TiMing_ZhengTiMing.Contains(key) || p.TiMing_QiTaTiMing.Contains(key) || p.WenHuaBeiJing_LiShiYuanLiu.Contains(key) || p.WenHuaBeiJing_LiuBuDiYu.Contains(key) || p.WenHuaBeiJing_ShiYuongChangSuo.Contains(key) || p.CaiLuXinXi_DiDian.Contains(key) || p.YueQiJianJie.Contains(key) || p.ShiFanYuQu_QuMuMing.Contains(key)) && (p.LeiBie_YanZouFangShi.Contains(yzfs) && p.MinZuShuXing.Contains(mz))
                         orderby p.CreatedUtc descending
                         select p).Skip((pageIndex - 1) * pageSize).Take(pageSize);
-            totalCount = _appDbContext.ForExcels.Count(p => (p.TiMing_ZhengTiMing.Contains(key) || p.TiMing_QiTaTiMing.Contains(key) || p.WenHuaBeiJing_LiShiYuanLiu.Contains(key) || p.WenHuaBeiJing_LiuBuDiYu.Contains(key) || p.WenHuaBeiJing_ShiYuongChangSuo.Contains(key) || p.CaiLuXinXi_DiDian.Contains(key) || p.YueQiJianJie.Contains(key) || p.ShiFanYuQu_QuMuMing.Contains(key)) && (p.LeiBie_YanZouFangShi.Contains(yzfs) || p.MinZuShuXing.Contains(mz)));
+            totalCount = _appDbContext.ForExcels.Count(p => (p.TiMing_ZhengTiMing.Contains(key) || p.TiMing_QiTaTiMing.Contains(key) || p.WenHuaBeiJing_LiShiYuanLiu.Contains(key) || p.WenHuaBeiJing_LiuBuDiYu.Contains(key) || p.WenHuaBeiJing_ShiYuongChangSuo.Contains(key) || p.CaiLuXinXi_DiDian.Contains(key) || p.YueQiJianJie.Contains(key) || p.ShiFanYuQu_QuMuMing.Contains(key)) && (p.LeiBie_YanZouFangShi.Contains(yzfs) && p.MinZuShuXing.Contains(mz)));
             return list.ToList();
         }
 
