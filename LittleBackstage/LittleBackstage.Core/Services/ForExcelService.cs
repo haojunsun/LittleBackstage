@@ -128,32 +128,13 @@ namespace LittleBackstage.Core.Services
                 case 2:
                 {
                     var list = (from p in _appDbContext.ForExcels
-                        where p.TiMing_ZhengTiMing.Contains(key)
-                        orderby p.CreatedUtc descending
-                        select p).Skip((pageIndex - 1) * pageSize).Take(pageSize);
-                    totalCount = _appDbContext.ForExcels.Count(p => p.TiMing_ZhengTiMing.Contains(key));
-                    return list.ToList();
-                }
-                case 3:
-                {
-                    var list = (from p in _appDbContext.ForExcels
-                        where p.LeiBie_YanZouFangShi.Contains(key)
-                        orderby p.CreatedUtc descending
-                        select p).Skip((pageIndex - 1) * pageSize).Take(pageSize);
-                    totalCount = _appDbContext.ForExcels.Count(p => p.LeiBie_YanZouFangShi.Contains(key));
-                    return list.ToList();
-                }
-                case 4:
-                {
-                    var list = (from p in _appDbContext.ForExcels
-                        where p.MinZuShuXing.Contains(key)
-                        orderby p.CreatedUtc descending
-                        select p).Skip((pageIndex - 1) * pageSize).Take(pageSize);
-                    totalCount = _appDbContext.ForExcels.Count(p => p.MinZuShuXing.Contains(key));
+                                where p.TiMing_ZhengTiMing.Contains(key) || p.LeiBie_YanZouFangShi.Contains(key) || p.MinZuShuXing.Contains(key) 
+                                orderby p.CreatedUtc descending
+                                select p).Skip((pageIndex - 1) * pageSize).Take(pageSize);
+                    totalCount = _appDbContext.ForExcels.Count(p => p.TiMing_ZhengTiMing.Contains(key) || p.LeiBie_YanZouFangShi.Contains(key) || p.MinZuShuXing.Contains(key));
                     return list.ToList();
                 }
             }
-
             return List(pageIndex, pageSize, ref totalCount);
         }
 
