@@ -222,117 +222,135 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
                     //附表发音体
                     for (int a = 0; a < dt2.Rows.Count; a++)
                     {
-                            if (dt2.Rows[a][0].ToString() == rgcode)
-                            {
-                                wh1.Kaleida_MingCheng = wh1.Kaleida_MingCheng + ',' + dt2.Rows[a][1].ToString();
-                                wh1.Kaleida_JieGouChiCun = wh1.Kaleida_JieGouChiCun + ',' + dt2.Rows[a][2].ToString();
-                                wh1.Kaleida_CaiZhi = wh1.Kaleida_CaiZhi + ',' + dt2.Rows[a][3].ToString();
-                                wh1.Kaleida_ZhongLiang = wh1.Kaleida_ZhongLiang + ',' + dt2.Rows[a][4].ToString();
-                            }
+                        if (dt2.Rows[a][0].ToString() == rgcode)
+                        {
+                            if (dt2.Rows[a][1].ToString() != "")
+                                wh1.Kaleida_MingCheng = string.IsNullOrEmpty(wh1.Kaleida_MingCheng) ? dt2.Rows[a][1].ToString() : wh1.Kaleida_MingCheng + ',' + dt2.Rows[a][1].ToString();
+                            if (dt2.Rows[a][2].ToString() != "")
+                                wh1.Kaleida_JieGouChiCun = string.IsNullOrEmpty(wh1.Kaleida_JieGouChiCun) ? dt2.Rows[a][2].ToString() : wh1.Kaleida_JieGouChiCun + ',' + dt2.Rows[a][2].ToString();
+                            if (dt2.Rows[a][3].ToString() != "")
+                                wh1.Kaleida_CaiZhi = string.IsNullOrEmpty(wh1.Kaleida_CaiZhi) ? dt2.Rows[a][3].ToString() : wh1.Kaleida_CaiZhi + ',' + dt2.Rows[a][3].ToString();
+                            if (dt2.Rows[a][4].ToString() != "")
+                                wh1.Kaleida_ZhongLiang = string.IsNullOrEmpty(wh1.Kaleida_ZhongLiang) ? dt2.Rows[a][4].ToString() : wh1.Kaleida_ZhongLiang + ',' + dt2.Rows[a][4].ToString();
+                        }
                     }
                     //附表共鸣体
                     for (int a = 0; a < dt3.Rows.Count; a++)
                     {
+                        if (dt3.Rows[a][0].ToString() == rgcode)
+                        {
                             if (dt3.Rows[a][0].ToString() == rgcode)
                             {
-                                if (dt3.Rows[a][0].ToString() == rgcode)
-                                {
-                                    wh1.Resonator_MingCheng = wh1.Resonator_MingCheng + ',' + dt3.Rows[a][1].ToString();
-                                    wh1.Resonator_JieGouChiCun = wh1.Resonator_JieGouChiCun + ',' + dt3.Rows[a][2].ToString();
-                                    wh1.Resonator_CaiZhi = wh1.Resonator_CaiZhi + ',' + dt3.Rows[a][3].ToString();
-                                    wh1.Resonator_ZhongLiang = wh1.Resonator_ZhongLiang + ',' + dt3.Rows[a][4].ToString();
-                                }
+                                if (dt3.Rows[a][1].ToString() != "")
+                                    wh1.Resonator_MingCheng =string.IsNullOrEmpty(wh1.Resonator_MingCheng) ?dt3.Rows[a][1].ToString(): wh1.Resonator_MingCheng + ',' + dt3.Rows[a][1].ToString();
+                                if (dt3.Rows[a][2].ToString() != "")
+                                    wh1.Resonator_JieGouChiCun =string.IsNullOrEmpty(wh1.Resonator_JieGouChiCun) ?dt3.Rows[a][2].ToString(): wh1.Resonator_JieGouChiCun + ',' + dt3.Rows[a][2].ToString();
+                                if (dt3.Rows[a][3].ToString() != "")
+                                    wh1.Resonator_CaiZhi =string.IsNullOrEmpty(wh1.Resonator_CaiZhi) ?dt3.Rows[a][3].ToString(): wh1.Resonator_CaiZhi + ',' + dt3.Rows[a][3].ToString();
+                                if (dt3.Rows[a][4].ToString() != "")
+                                    wh1.Resonator_ZhongLiang = string.IsNullOrEmpty(wh1.Resonator_ZhongLiang) ? dt3.Rows[a][4].ToString() : wh1.Resonator_ZhongLiang + ',' + dt3.Rows[a][4].ToString();
                             }
+                        }
                     }
                     //附表其他
                     for (int a = 0; a < dt4.Rows.Count; a++)
                     {
-                            if (dt4.Rows[a][0].ToString() == rgcode)
-                            {
-                                wh1.Other_MingCheng = wh1.Other_MingCheng + ',' + dt4.Rows[a][1].ToString();
-                                wh1.Other_JieGouChiCun = wh1.Other_JieGouChiCun + ',' + dt4.Rows[a][2].ToString();
-                                wh1.Other_CaiZhi = wh1.Other_CaiZhi + ',' + dt4.Rows[a][3].ToString();
-                                wh1.Other_ZhongLiang = wh1.Other_ZhongLiang + ',' + dt4.Rows[a][4].ToString();
-                            }
+                        if (dt4.Rows[a][0].ToString() == rgcode)
+                        {
+                            if (dt4.Rows[a][1].ToString() != "")
+                                wh1.Other_MingCheng = string.IsNullOrEmpty(wh1.Other_MingCheng) ?dt4.Rows[a][1].ToString(): wh1.Other_MingCheng + ',' + dt4.Rows[a][1].ToString();
+                            if (dt4.Rows[a][2].ToString() != "")
+                                wh1.Other_JieGouChiCun = string.IsNullOrEmpty(wh1.Other_JieGouChiCun) ?dt4.Rows[a][2].ToString():wh1.Other_JieGouChiCun + ',' + dt4.Rows[a][2].ToString();
+                            if (dt4.Rows[a][3].ToString() != "")
+                                wh1.Other_CaiZhi =string.IsNullOrEmpty(wh1.Other_CaiZhi) ?dt4.Rows[a][3].ToString(): wh1.Other_CaiZhi + ',' + dt4.Rows[a][3].ToString();
+                            if (dt4.Rows[a][4].ToString() != "")
+                                wh1.Other_ZhongLiang = string.IsNullOrEmpty(wh1.Other_ZhongLiang) ? dt4.Rows[a][4].ToString() : wh1.Other_ZhongLiang + ',' + dt4.Rows[a][4].ToString();
+                        }
                     }
                     //附表音列
                     for (int a = 0; a < dt5.Rows.Count; a++)
                     {
-                            if (dt5.Rows[a][0].ToString() == rgcode)
-                            {
-                                wh1.YikHz = dt5.Rows[a][1].ToString();
-                                wh1.KongXianYin_ZiRanShuaiJian_P_First = dt5.Rows[a][2].ToString();
-                                wh1.KongXianYin_ZiRanShuaiJian_P_Second = dt5.Rows[a][3].ToString();
-                                wh1.KongXianYin_ZiRanShuaiJian_F_First = dt5.Rows[a][4].ToString();
-                                wh1.KongXianYin_ZiRanShuaiJian_F_Second = dt5.Rows[a][5].ToString();
-                                wh1.KongXianYin_ZiRanShuaiJian_MF_First = dt5.Rows[a][6].ToString();
-                                wh1.KongXianYin_ZiRanShuaiJian_MF_Second = dt5.Rows[a][7].ToString();
-                                wh1.YinJie_ZiRanShuaiJian_MF_First = dt5.Rows[a][8].ToString();
-                                wh1.YinJie_ZiRanShuaiJian_MF_Second = dt5.Rows[a][9].ToString();
-                                wh1.YinJie_ManSu_P_First = dt5.Rows[a][10].ToString();
-                                wh1.YinJie_ManSu_P_Second = dt5.Rows[a][11].ToString();
-                                wh1.YinJie_ManSu_F_First = dt5.Rows[a][12].ToString();
-                                wh1.YinJie_ManSu_F_Second = dt5.Rows[a][13].ToString();
-                                wh1.YinJie_ManSu_MF_First = dt5.Rows[a][14].ToString();
-                                wh1.YinJie_ManSu_MF_Second = dt5.Rows[a][15].ToString();
-                                wh1.YinJie_ZhongSu_F_First = dt5.Rows[a][16].ToString();
-                                wh1.YinJie_ZhongSu_F_Second = dt5.Rows[a][17].ToString();
-                            }
+                        if (dt5.Rows[a][0].ToString() == rgcode)
+                        {
+                            wh1.YikHz = dt5.Rows[a][1].ToString();
+                            wh1.KongXianYin_ZiRanShuaiJian_P_First = dt5.Rows[a][2].ToString();
+                            wh1.KongXianYin_ZiRanShuaiJian_P_Second = dt5.Rows[a][3].ToString();
+                            wh1.KongXianYin_ZiRanShuaiJian_F_First = dt5.Rows[a][4].ToString();
+                            wh1.KongXianYin_ZiRanShuaiJian_F_Second = dt5.Rows[a][5].ToString();
+                            wh1.KongXianYin_ZiRanShuaiJian_MF_First = dt5.Rows[a][6].ToString();
+                            wh1.KongXianYin_ZiRanShuaiJian_MF_Second = dt5.Rows[a][7].ToString();
+                            wh1.YinJie_ZiRanShuaiJian_MF_First = dt5.Rows[a][8].ToString();
+                            wh1.YinJie_ZiRanShuaiJian_MF_Second = dt5.Rows[a][9].ToString();
+                            wh1.YinJie_ManSu_P_First = dt5.Rows[a][10].ToString();
+                            wh1.YinJie_ManSu_P_Second = dt5.Rows[a][11].ToString();
+                            wh1.YinJie_ManSu_F_First = dt5.Rows[a][12].ToString();
+                            wh1.YinJie_ManSu_F_Second = dt5.Rows[a][13].ToString();
+                            wh1.YinJie_ManSu_MF_First = dt5.Rows[a][14].ToString();
+                            wh1.YinJie_ManSu_MF_Second = dt5.Rows[a][15].ToString();
+                            wh1.YinJie_ZhongSu_F_First = dt5.Rows[a][16].ToString();
+                            wh1.YinJie_ZhongSu_F_Second = dt5.Rows[a][17].ToString();
+                        }
                     }
                     //附表演奏技法
                     for (int a = 0; a < dt6.Rows.Count; a++)
                     {
-                            if (dt6.Rows[a][0].ToString() == rgcode)
-                            {
-                                wh1.YanZhouJiFa_MingChen = wh1.YanZhouJiFa_MingChen + ',' + dt6.Rows[a][1].ToString();
-                                wh1.YanZhouJiFa_First = wh1.YanZhouJiFa_First + ',' + dt6.Rows[a][2].ToString();
-                                wh1.YanZhouJiFa_Second = wh1.YanZhouJiFa_Second + ',' + dt6.Rows[a][3].ToString();
-                            }
+                        if (dt6.Rows[a][0].ToString() == rgcode)
+                        {
+                            if (dt6.Rows[a][1].ToString() != "")
+                                wh1.YanZhouJiFa_MingChen = string.IsNullOrEmpty(wh1.YanZhouJiFa_MingChen) ? dt6.Rows[a][1].ToString(): wh1.YanZhouJiFa_MingChen + ',' + dt6.Rows[a][1].ToString();
+                            if (dt6.Rows[a][2].ToString() != "")
+                                wh1.YanZhouJiFa_First =string.IsNullOrEmpty(wh1.YanZhouJiFa_First) ? dt6.Rows[a][2].ToString():  wh1.YanZhouJiFa_First + ',' + dt6.Rows[a][2].ToString();
+                            if (dt6.Rows[a][3].ToString() != "")
+                                wh1.YanZhouJiFa_Second = string.IsNullOrEmpty(wh1.YanZhouJiFa_Second) ? dt6.Rows[a][3].ToString() : wh1.YanZhouJiFa_Second + ',' + dt6.Rows[a][3].ToString();
+                        }
                     }
                     //附表示范乐曲
                     for (int a = 0; a < dt7.Rows.Count; a++)
                     {
-                            if (dt7.Rows[a][0].ToString() == rgcode)
-                            {
-                                wh1.ShiFanYuQu_QuMuMing = wh1.ShiFanYuQu_QuMuMing + ',' + dt7.Rows[a][1].ToString();
-                                wh1.ShiFanYuQu_YinPin = wh1.ShiFanYuQu_YinPin + ',' + dt7.Rows[a][2].ToString();
-                                wh1.ShiFanYuQu_ShiPin = wh1.ShiFanYuQu_ShiPin + ',' + dt7.Rows[a][3].ToString();
-                            }
+                        if (dt7.Rows[a][0].ToString() == rgcode)
+                        {
+                            if (dt7.Rows[a][1].ToString() != "")
+                                wh1.ShiFanYuQu_QuMuMing = string.IsNullOrEmpty(wh1.ShiFanYuQu_QuMuMing) ?dt7.Rows[a][1].ToString(): wh1.ShiFanYuQu_QuMuMing + ',' + dt7.Rows[a][1].ToString();
+                            if (dt7.Rows[a][2].ToString() != "")
+                                wh1.ShiFanYuQu_YinPin =string.IsNullOrEmpty(wh1.ShiFanYuQu_YinPin) ?dt7.Rows[a][2].ToString(): wh1.ShiFanYuQu_YinPin + ',' + dt7.Rows[a][2].ToString();
+                            if (dt7.Rows[a][3].ToString() != "")
+                                wh1.ShiFanYuQu_ShiPin = string.IsNullOrEmpty(wh1.ShiFanYuQu_ShiPin) ? dt7.Rows[a][3].ToString() : wh1.ShiFanYuQu_ShiPin + ',' + dt7.Rows[a][3].ToString();
+                        }
                     }
                     //附表演奏者基本信息
                     for (int a = 0; a < dt8.Rows.Count; a++)
                     {
-                            if (dt8.Rows[a][0].ToString() == rgcode)
-                            {
-                                wh1.JiBenXinXi_XingBie = dt8.Rows[a][1].ToString();
-                                wh1.JiBenXinXi_ChuShengNianYue = dt8.Rows[a][2].ToString();
-                                wh1.JiBenXinXi_JiGuan = dt8.Rows[a][3].ToString();
-                                wh1.JiBenXinXi_XueLi = dt8.Rows[a][4].ToString();
-                                wh1.JiBenXinXi_ZhuanYe = dt8.Rows[a][5].ToString();
-                                wh1.JiBenXinXi_ZhiCheng = dt8.Rows[a][6].ToString();
-                                wh1.JiBenXinXi_XueSuoYanZouYueQiShiJian = dt8.Rows[a][7].ToString();
-                                wh1.JiBenXinXi_LianXiFangShi = dt8.Rows[a][8].ToString();
-                                wh1.JiBenXinXi_GongZuoDanWei = dt8.Rows[a][9].ToString();
-                                wh1.JiBenXinXi_TingLiZhuangKuang = dt8.Rows[a][10].ToString();
-                                wh1.JiBenXinXi_ShiChengGuanXi = dt8.Rows[a][11].ToString();
-                                wh1.JiBenXinXi_ChuanLue = dt8.Rows[a][12].ToString();
-                            }
+                        if (dt8.Rows[a][0].ToString() == rgcode)
+                        {
+                            wh1.JiBenXinXi_XingBie = dt8.Rows[a][1].ToString();
+                            wh1.JiBenXinXi_ChuShengNianYue = dt8.Rows[a][2].ToString();
+                            wh1.JiBenXinXi_JiGuan = dt8.Rows[a][3].ToString();
+                            wh1.JiBenXinXi_XueLi = dt8.Rows[a][4].ToString();
+                            wh1.JiBenXinXi_ZhuanYe = dt8.Rows[a][5].ToString();
+                            wh1.JiBenXinXi_ZhiCheng = dt8.Rows[a][6].ToString();
+                            wh1.JiBenXinXi_XueSuoYanZouYueQiShiJian = dt8.Rows[a][7].ToString();
+                            wh1.JiBenXinXi_LianXiFangShi = dt8.Rows[a][8].ToString();
+                            wh1.JiBenXinXi_GongZuoDanWei = dt8.Rows[a][9].ToString();
+                            wh1.JiBenXinXi_TingLiZhuangKuang = dt8.Rows[a][10].ToString();
+                            wh1.JiBenXinXi_ShiChengGuanXi = dt8.Rows[a][11].ToString();
+                            wh1.JiBenXinXi_ChuanLue = dt8.Rows[a][12].ToString();
+                        }
                     }
                     //附表采录环境
                     for (int a = 0; a < dt9.Rows.Count; a++)
                     {
-                            if (dt9.Rows[a][0].ToString() == rgcode)
-                            {
-                                wh1.LuYinHuanJin_WenDu = dt9.Rows[a][1].ToString();
-                                wh1.LuYinHuanJin_ShiDu = dt9.Rows[a][2].ToString();
-                                wh1.LuYinHuanJin_DaQiYa = dt9.Rows[a][3].ToString();
-                                wh1.LuYinHuanJin_BenDiZhaoSheng = dt9.Rows[a][4].ToString();
-                                wh1.LuYinHuanJin_LuYinPengChiCun = dt9.Rows[a][5].ToString();
-                                wh1.LuYinHuanJin_HunXiangShiJian = dt9.Rows[a][6].ToString();
-                                wh1.LuYinHuanJin_LuYinRuanJian = dt9.Rows[a][7].ToString();
-                                wh1.LuYinHuanJin_LuYinSheBei = dt9.Rows[a][8].ToString();
-                                wh1.LuYinHuanJin_ShiYinTu = dt9.Rows[a][9].ToString();
-                            }
+                        if (dt9.Rows[a][0].ToString() == rgcode)
+                        {
+                            wh1.LuYinHuanJin_WenDu = dt9.Rows[a][1].ToString();
+                            wh1.LuYinHuanJin_ShiDu = dt9.Rows[a][2].ToString();
+                            wh1.LuYinHuanJin_DaQiYa = dt9.Rows[a][3].ToString();
+                            wh1.LuYinHuanJin_BenDiZhaoSheng = dt9.Rows[a][4].ToString();
+                            wh1.LuYinHuanJin_LuYinPengChiCun = dt9.Rows[a][5].ToString();
+                            wh1.LuYinHuanJin_HunXiangShiJian = dt9.Rows[a][6].ToString();
+                            wh1.LuYinHuanJin_LuYinRuanJian = dt9.Rows[a][7].ToString();
+                            wh1.LuYinHuanJin_LuYinSheBei = dt9.Rows[a][8].ToString();
+                            wh1.LuYinHuanJin_ShiYinTu = dt9.Rows[a][9].ToString();
+                        }
                     }
 
                     wh1.CreatedUtc = DateTime.Now;
