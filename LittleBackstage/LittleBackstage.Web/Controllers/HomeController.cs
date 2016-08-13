@@ -8,22 +8,33 @@ namespace LittleBackstage.Web.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        //首页
+        public ActionResult Main()
+        {
+            return View();
+        }
+        //视频列表页
+        public ActionResult VideoList()
         {
             return View();
         }
 
-        public ActionResult About()
+        //详情页
+        public ActionResult Detail()
         {
-            ViewBag.Message = "Your application description page.";
-
+            ViewBag.Url = "~/Uploads/1/14098101030102040102.mp4";
             return View();
         }
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
+        //非遗介绍页面
+        //public ActionResult ICHintroduce()
+        //{
+        //    return View();
+        //}
 
+        //引导页
+        public ActionResult GuidePage()
+        {
             return View();
         }
     }
