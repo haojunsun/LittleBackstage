@@ -799,6 +799,7 @@
     <Content Include="css\easyui.css" />
     <Content Include="css\fyjsstyle.css" />
     <Content Include="css\icon.css" />
+    <Content Include="css\jquery.searchableSelect.css" />
     <Content Include="css\login.css" />
     <Content Include="css\mediaelementplayer.min.css" />
     <Content Include="css\nstyle.css" />
@@ -985,12 +986,14 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-1.11.0.min.js" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.11.1.min.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <Content Include="Scripts\jquery-1.8.3.min.js" />
     <Content Include="Scripts\jquery.colorbox-min.js" />
     <Content Include="Scripts\jquery.easyui.min.js" />
     <Content Include="Scripts\jquery.js" />
+    <Content Include="Scripts\jquery.searchableSelect.js" />
     <Content Include="Scripts\jquery.SuperSlide.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />

@@ -12,6 +12,11 @@
     <!--必要样式-->
     <link rel="stylesheet" type="text/css" href="~/css/search-form.css" />
     <link rel="stylesheet" type="text/css" href="~/css/jquery.searchableSelect.css">
+
+
+
+
+    <link href="~/css/css.css" type="text/css" rel="stylesheet" />
     <style type="text/css">
         body.custom-background {
             background-image: url('1431335355535.jpg');
@@ -34,9 +39,8 @@
 
 <body ng-app="scApp" ng-controller="HomeController">
 
-    <div class="snow-container" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:100001;"></div>
-
-    <form>
+    <div class="snow-container" style="position:absolute;top:-400px;left:0;width:100%;height:1000px;pointer-events:none;z-index:9997;"></div>
+    <div>
         <div class="search-wrapper active">
             <div class="input-holder">
                 <input type="text" class="search-input" placeholder="请输入关键词" />
@@ -55,7 +59,7 @@
             </div>
             <div style="margin-top:30px">
                 <label style="color:#ff6a00">民&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;族：</label>
-                <select style="margin-left:45px;color:#ff6a00" >
+                <select style="margin-left:45px;color:#ff6a00">
                     <option value="全部">全部</option>
                     <option value="汉族">汉族</option>
                     <option value="壮族">壮族</option>
@@ -119,7 +123,77 @@
             <div class="result-container">
             </div>
         </div>
-    </form>
+    </div>
+    @*<div class="picmain">
+            <div class="picmain_up">
+                <div class="picmain_pic" style="height:290px" ng-repeat="item in videoList" _whid="{{item.WorldHeritageId}}" onclick="openDetail($(this).attr('_whid'));">
+                    <a href="javascript:void(0)">
+                        <img src="~/img/lj.png" width="100%" ng-show="item.HeritageType==0" />
+                        <img src="~/img/lj2.png" width="100%" ng-show="item.HeritageType==1" />
+                        <img src="~/img/lj.png" style="width:270px;height:270px" ng-show="item.HeritageType==2" />
+                        <p>{{item.Title}}</p>
+                    </a>
+                </div>
+            </div>
+        </div>*@
+    <div class="picmain">
+        <div class="picmain_up" style="z-index:1">
+            <div class="picmain_pic" style="height:290px">
+                <a href="javascript:void(0)">
+                    <img src="~/img/lj.png" style="width:270px;height:270px" />
+                    <p>rewrwerwerrewrwe</p>
+                </a>
+            </div>
+            <div class="picmain_pic" style="height:290px">
+                <a href="javascript:void(0)">
+                    <img src="~/img/lj.png" style="width:270px;height:270px" />
+                    <p>rewrwerwerrewrwe</p>
+                </a>
+            </div>
+            <div class="picmain_pic" style="height:290px">
+                <a href="javascript:void(0)">
+                    <img src="~/img/lj.png" style="width:270px;height:270px" />
+                    <p>rewrwerwerrewrwe</p>
+                </a>
+            </div>
+            <div class="picmain_pic" style="height:290px">
+                <a href="javascript:void(0)">
+                    <img src="~/img/lj.png" style="width:270px;height:270px" />
+                    <p>rewrwerwerrewrwe</p>
+                </a>
+            </div>
+            <div class="picmain_pic" style="height:290px">
+                <a href="javascript:void(0)">
+                    <img src="~/img/lj.png" style="width:270px;height:270px" />
+                    <p>rewrwerwerrewrwe</p>
+                </a>
+            </div>
+            <div class="picmain_pic" style="height:290px">
+                <a href="javascript:void(0)">
+                    <img src="~/img/lj.png" style="width:270px;height:270px" />
+                    <p>rewrwerwerrewrwe</p>
+                </a>
+            </div>
+            <div class="picmain_pic" style="height:290px">
+                <a href="javascript:void(0)">
+                    <img src="~/img/lj.png" style="width:270px;height:270px" />
+                    <p>rewrwerwerrewrwe</p>
+                </a>
+            </div>
+            <div class="picmain_pic" style="height:290px">
+                <a href="javascript:void(0)">
+                    <img src="~/img/lj.png" style="width:270px;height:270px" />
+                    <p>rewrwerwerrewrwe</p>
+                </a>
+            </div>
+            <div class="picmain_pic" style="height:290px">
+                <a href="javascript:void(0)">
+                    <img src="~/img/lj.png" style="width:270px;height:270px" />
+                    <p>rewrwerwerrewrwe</p>
+                </a>
+            </div>
+        </div>
+    </div>
     <script src="~/Scripts/jquery-1.11.1.min.js"></script>
     <script src="~/Scripts/all.js"></script>
     <script src="~/Scripts/jquery.searchableSelect.js"></script>
@@ -163,7 +237,7 @@
             evt.preventDefault();
         }
 
-     
+
     </script>
 </body>
 </html>

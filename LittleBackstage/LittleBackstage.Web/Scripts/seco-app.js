@@ -18,6 +18,8 @@ sc.app = angular.module('scApp', [])
         $scope.searchEvent = function () {
            var searchtype=$('#searchtype1')[0].checked;//全局为true  乐器名为false
         }
+
+     
     }])
     .controller('VideoListController', ['$scope', '$http', '$location', function ($scope, $http, $location) {
         $scope.classtype = "";//分类
