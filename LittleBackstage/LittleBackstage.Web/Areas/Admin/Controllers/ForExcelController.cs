@@ -51,7 +51,8 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             }
 
             var result = _forExcelService.SeniorSearch(state, key, yzfs, mz, pageIndex, pageSize, ref totalCount);
-            return Json(result, JsonRequestBehavior.DenyGet);
+            var jsonData = new { result, totalCount };
+            return Json(jsonData, JsonRequestBehavior.DenyGet);
         }
 
         /// <summary>
@@ -242,11 +243,11 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
                             if (dt3.Rows[a][0].ToString() == rgcode)
                             {
                                 if (dt3.Rows[a][1].ToString() != "")
-                                    wh1.Resonator_MingCheng =string.IsNullOrEmpty(wh1.Resonator_MingCheng) ?dt3.Rows[a][1].ToString(): wh1.Resonator_MingCheng + ',' + dt3.Rows[a][1].ToString();
+                                    wh1.Resonator_MingCheng = string.IsNullOrEmpty(wh1.Resonator_MingCheng) ? dt3.Rows[a][1].ToString() : wh1.Resonator_MingCheng + ',' + dt3.Rows[a][1].ToString();
                                 if (dt3.Rows[a][2].ToString() != "")
-                                    wh1.Resonator_JieGouChiCun =string.IsNullOrEmpty(wh1.Resonator_JieGouChiCun) ?dt3.Rows[a][2].ToString(): wh1.Resonator_JieGouChiCun + ',' + dt3.Rows[a][2].ToString();
+                                    wh1.Resonator_JieGouChiCun = string.IsNullOrEmpty(wh1.Resonator_JieGouChiCun) ? dt3.Rows[a][2].ToString() : wh1.Resonator_JieGouChiCun + ',' + dt3.Rows[a][2].ToString();
                                 if (dt3.Rows[a][3].ToString() != "")
-                                    wh1.Resonator_CaiZhi =string.IsNullOrEmpty(wh1.Resonator_CaiZhi) ?dt3.Rows[a][3].ToString(): wh1.Resonator_CaiZhi + ',' + dt3.Rows[a][3].ToString();
+                                    wh1.Resonator_CaiZhi = string.IsNullOrEmpty(wh1.Resonator_CaiZhi) ? dt3.Rows[a][3].ToString() : wh1.Resonator_CaiZhi + ',' + dt3.Rows[a][3].ToString();
                                 if (dt3.Rows[a][4].ToString() != "")
                                     wh1.Resonator_ZhongLiang = string.IsNullOrEmpty(wh1.Resonator_ZhongLiang) ? dt3.Rows[a][4].ToString() : wh1.Resonator_ZhongLiang + ',' + dt3.Rows[a][4].ToString();
                             }
@@ -258,11 +259,11 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
                         if (dt4.Rows[a][0].ToString() == rgcode)
                         {
                             if (dt4.Rows[a][1].ToString() != "")
-                                wh1.Other_MingCheng = string.IsNullOrEmpty(wh1.Other_MingCheng) ?dt4.Rows[a][1].ToString(): wh1.Other_MingCheng + ',' + dt4.Rows[a][1].ToString();
+                                wh1.Other_MingCheng = string.IsNullOrEmpty(wh1.Other_MingCheng) ? dt4.Rows[a][1].ToString() : wh1.Other_MingCheng + ',' + dt4.Rows[a][1].ToString();
                             if (dt4.Rows[a][2].ToString() != "")
-                                wh1.Other_JieGouChiCun = string.IsNullOrEmpty(wh1.Other_JieGouChiCun) ?dt4.Rows[a][2].ToString():wh1.Other_JieGouChiCun + ',' + dt4.Rows[a][2].ToString();
+                                wh1.Other_JieGouChiCun = string.IsNullOrEmpty(wh1.Other_JieGouChiCun) ? dt4.Rows[a][2].ToString() : wh1.Other_JieGouChiCun + ',' + dt4.Rows[a][2].ToString();
                             if (dt4.Rows[a][3].ToString() != "")
-                                wh1.Other_CaiZhi =string.IsNullOrEmpty(wh1.Other_CaiZhi) ?dt4.Rows[a][3].ToString(): wh1.Other_CaiZhi + ',' + dt4.Rows[a][3].ToString();
+                                wh1.Other_CaiZhi = string.IsNullOrEmpty(wh1.Other_CaiZhi) ? dt4.Rows[a][3].ToString() : wh1.Other_CaiZhi + ',' + dt4.Rows[a][3].ToString();
                             if (dt4.Rows[a][4].ToString() != "")
                                 wh1.Other_ZhongLiang = string.IsNullOrEmpty(wh1.Other_ZhongLiang) ? dt4.Rows[a][4].ToString() : wh1.Other_ZhongLiang + ',' + dt4.Rows[a][4].ToString();
                         }
@@ -297,9 +298,9 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
                         if (dt6.Rows[a][0].ToString() == rgcode)
                         {
                             if (dt6.Rows[a][1].ToString() != "")
-                                wh1.YanZhouJiFa_MingChen = string.IsNullOrEmpty(wh1.YanZhouJiFa_MingChen) ? dt6.Rows[a][1].ToString(): wh1.YanZhouJiFa_MingChen + ',' + dt6.Rows[a][1].ToString();
+                                wh1.YanZhouJiFa_MingChen = string.IsNullOrEmpty(wh1.YanZhouJiFa_MingChen) ? dt6.Rows[a][1].ToString() : wh1.YanZhouJiFa_MingChen + ',' + dt6.Rows[a][1].ToString();
                             if (dt6.Rows[a][2].ToString() != "")
-                                wh1.YanZhouJiFa_First =string.IsNullOrEmpty(wh1.YanZhouJiFa_First) ? dt6.Rows[a][2].ToString():  wh1.YanZhouJiFa_First + ',' + dt6.Rows[a][2].ToString();
+                                wh1.YanZhouJiFa_First = string.IsNullOrEmpty(wh1.YanZhouJiFa_First) ? dt6.Rows[a][2].ToString() : wh1.YanZhouJiFa_First + ',' + dt6.Rows[a][2].ToString();
                             if (dt6.Rows[a][3].ToString() != "")
                                 wh1.YanZhouJiFa_Second = string.IsNullOrEmpty(wh1.YanZhouJiFa_Second) ? dt6.Rows[a][3].ToString() : wh1.YanZhouJiFa_Second + ',' + dt6.Rows[a][3].ToString();
                         }
@@ -310,9 +311,9 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
                         if (dt7.Rows[a][0].ToString() == rgcode)
                         {
                             if (dt7.Rows[a][1].ToString() != "")
-                                wh1.ShiFanYuQu_QuMuMing = string.IsNullOrEmpty(wh1.ShiFanYuQu_QuMuMing) ?dt7.Rows[a][1].ToString(): wh1.ShiFanYuQu_QuMuMing + ',' + dt7.Rows[a][1].ToString();
+                                wh1.ShiFanYuQu_QuMuMing = string.IsNullOrEmpty(wh1.ShiFanYuQu_QuMuMing) ? dt7.Rows[a][1].ToString() : wh1.ShiFanYuQu_QuMuMing + ',' + dt7.Rows[a][1].ToString();
                             if (dt7.Rows[a][2].ToString() != "")
-                                wh1.ShiFanYuQu_YinPin =string.IsNullOrEmpty(wh1.ShiFanYuQu_YinPin) ?dt7.Rows[a][2].ToString(): wh1.ShiFanYuQu_YinPin + ',' + dt7.Rows[a][2].ToString();
+                                wh1.ShiFanYuQu_YinPin = string.IsNullOrEmpty(wh1.ShiFanYuQu_YinPin) ? dt7.Rows[a][2].ToString() : wh1.ShiFanYuQu_YinPin + ',' + dt7.Rows[a][2].ToString();
                             if (dt7.Rows[a][3].ToString() != "")
                                 wh1.ShiFanYuQu_ShiPin = string.IsNullOrEmpty(wh1.ShiFanYuQu_ShiPin) ? dt7.Rows[a][3].ToString() : wh1.ShiFanYuQu_ShiPin + ',' + dt7.Rows[a][3].ToString();
                         }
