@@ -117,9 +117,9 @@ namespace LittleBackstage.Core.Services
         {
             switch (state)
             {
-                case 1:
+                case 0:
                     return SearchFull(key, yzfs, mz, pageIndex, pageSize, ref totalCount);
-                case 2:
+                case 1:
                     {
                         var list = (from p in _appDbContext.ForExcels
                                     where p.TiMing_ZhengTiMing.Contains(key) && p.LeiBie_YanZouFangShi.Contains(yzfs) && p.MinZuShuXing.Contains(mz)

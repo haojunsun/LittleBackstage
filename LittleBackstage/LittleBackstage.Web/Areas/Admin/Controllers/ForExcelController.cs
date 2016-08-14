@@ -44,7 +44,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
         public ActionResult SeniorSearch(int state, string key, string yzfs, string mz, int pageSize, int pageIndex)
         {
             var totalCount = 0;
-            if (string.IsNullOrEmpty(key) || state == 0)
+            if (string.IsNullOrEmpty(key) && string.IsNullOrEmpty(yzfs) && string.IsNullOrEmpty(mz))
             {
                 var all = _forExcelService.List(pageIndex, pageSize, ref totalCount);
                 return Json(all, JsonRequestBehavior.DenyGet);

@@ -73,7 +73,7 @@ body {padding: 0px; margin:0px; background:url(../img/image.jpg) ; background-po
     height:70px;
     border:none;
     border-radius:6px;
-    background: #808080;
+    background:#eeeeee ;
     padding:0px;
     outline:none;
     position: relative;
@@ -115,19 +115,19 @@ body {padding: 0px; margin:0px; background:url(../img/image.jpg) ; background-po
 }
 .search-wrapper .input-holder .search-icon span::before {
     width: 4px;
-    height: 11px;
+    height: 16px;
     left: 9px;
-    top: 18px;
+    top: 13px;
     border-radius: 2px;
-    background: #822b2b;
+    background: #f0ad4e;
 }
 .search-wrapper .input-holder .search-icon span::after {
-    width: 14px;
-    height: 14px;
-    left: 0px;
-    top: 0px;
-    border-radius: 16px;
-    border: 4px solid #822b2b;
+    width:20px;
+    height: 21px;
+    left: 2px;
+    top: -4px;
+    border-radius: 42px;
+    border: 4px solid #f0ad4e;
 }
 
 .search-wrapper .close {

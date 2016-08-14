@@ -6,20 +6,67 @@ sc.app = angular.module('scApp', [])
     }])
     .controller('HomeController', ['$scope', '$location', '$http', function ($scope, $location, $http) {
         $scope.pageIndex = 1;//页码
-        $scope.pageSize = 5;//条数每页
-        $scope.mainVideoList = [];
+        $scope.pageSize = 2;//条数每页
+        $scope.videoList = [];
+        $scope.datacount = 0;//总条数
+        $scope.totalpage = 0;//总页数
+        $scope.searchtype = true;
+
+        $scope.mz = '';
+        $scope.searchkey = '';
+        $scope.yzfs = '';
 
         //进入详情页
         openDetail = function (whid, ele) {
             console.log(whid);
-            window.location.href = '/home/detail?video=' + whid;
+            window.location.href = '/home/detail?instruments=' + whid;
         }
-
+        //全文or乐器名
         $scope.searchEvent = function () {
-           var searchtype=$('#searchtype1')[0].checked;//全局为true  乐器名为false
+            $scope.searchtype = $('#searchtype1')[0].checked;//全局为true  乐器名为false
         }
 
-     
+        //$.pagination('pages', 1, 6, 13, "", { keyword: 'hello world' });
+        //加载数据
+        $scope.getVedioList = function () {
+            $scope.videoList = [];
+            var state = $scope.searchtype ? 0 : 1;
+            //alert($scope.searchtype + "," + state);
+            $http.post(sc.baseUrl + 'ForExcel/SeniorSearch', { "state": state, "key": $scope.searchkey, "yzfs": $scope.yzfs, "mz": $scope.mz, "pageSize": $scope.pageSize, "pageIndex": $scope.pageIndex }).success(function (data) {
+                console.log(data);
+                //$scope.datacount = data.TotalCount;
+                //$scope.totalpage = data.TotalPaged;
+                $scope.videoList = data;
+                //重新加载页码
+                //$.pagination('pages', $scope.pageIndex, $scope.pageSize, data.Data.TotalCount, "", { keyword: 'hello world' });
+
+            }).error(function (data) {
+                console.log("查询失败");
+            });
+        }
+
+        $scope.getVedioList();
+
+        //民族选择
+        changeSelect = function (eve) {
+            $scope.mz = $(eve).val() == '全部' ? '' : $(eve).val();
+            $scope.pageIndex = 1;
+            $scope.getVedioList();
+        }
+        //演奏方式
+        $scope.changeFs = function (val) {
+            $scope.yzfs = val == '全部' ? '' : val;
+            $scope.pageIndex = 1;
+            $scope.getVedioList();
+        }
+        //搜素关键字
+        $scope.changeSearchkey = function () {
+            $scope.searchkey = $("#searchkey").val();
+            console.log($scope.searchkey);
+            $scope.pageIndex = 1;
+            $scope.getVedioList();
+        }
+
     }])
     .controller('VideoListController', ['$scope', '$http', '$location', function ($scope, $http, $location) {
         $scope.classtype = "";//分类
@@ -29,9 +76,7 @@ sc.app = angular.module('scApp', [])
         $scope.searchkey = "";//搜索关键字
         $scope.pageIndex = 1;//页码
         $scope.pageSize = 6;//条数每页
-        $scope.datacount = 0;//总条数
-        $scope.totalpage = 0;//总页数
-        $scope.videoList = [];
+
 
         $scope.getVedioList = function () {
             $scope.videoList = [];
@@ -74,7 +119,7 @@ sc.app = angular.module('scApp', [])
         }
 
 
-       
+
     }])
     .controller('DetailController', ['$scope', '$http', function ($scope, $http) {
         var whid = window.location.search.indexOf('=') > -1 ? window.location.search.split('=')[1] : "";
@@ -84,20 +129,20 @@ sc.app = angular.module('scApp', [])
         $scope.getVideoInfo = function () {
             if (!whid)
                 return;
-            $http.post(sc.baseUrl + 'Import/Find', { "id": whid }).success(function (data) {
+            $http.post(sc.baseUrl + 'ForExcel/Find', { "id": whid }).success(function (data) {
                 console.log(data);
                 $scope.videoinfo = data;
                 //console.log($scope.videoinfo.FileName);
 
-                var curWwwPath = window.document.location.href;
-                var pathName = window.document.location.pathname;
-                var pos = curWwwPath.indexOf(pathName);
-                var localhostPaht = curWwwPath.substring(0, pos);
+                //var curWwwPath = window.document.location.href;
+                //var pathName = window.document.location.pathname;
+                //var pos = curWwwPath.indexOf(pathName);
+                //var localhostPaht = curWwwPath.substring(0, pos);
 
-                $('#videosource').attr("src", localhostPaht + $scope.videoinfo.FileName.substring(1));
-                setTimeout(function () {
-                    projekktor('#videoplayer'); // instantiation
-                }, 100)
+                //$('#videosource').attr("src", localhostPaht + $scope.videoinfo.FileName.substring(1));
+                //setTimeout(function () {
+                //    projekktor('#videoplayer'); // instantiation
+                //}, 100)
             }).error(function (data) {
                 console.log("查询失败");
             });
