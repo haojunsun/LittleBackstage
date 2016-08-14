@@ -51,10 +51,12 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             }
 
             var result = _forExcelService.SeniorSearch(state, key, yzfs, mz, pageIndex, pageSize, ref totalCount);
-            var jsonData = new { result, totalCount };
+            var jsonData = new JsonData ();
+            jsonData.totalCount = totalCount;
+            jsonData.list = result.ToList();
             return Json(jsonData, JsonRequestBehavior.DenyGet);
         }
-
+        
         /// <summary>
         /// 详情
         /// </summary>
