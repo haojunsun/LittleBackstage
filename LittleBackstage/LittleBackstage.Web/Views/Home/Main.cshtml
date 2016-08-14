@@ -140,7 +140,7 @@
         </div>*@
     <div class="picmain">
         <div class="picmain_up" style="z-index:1">
-            <div class="picmain_pic" style="height: 350px; background: white; filter: alpha(opacity:80); opacity: 0.8;" ng-repeat="item in videoList" _whid="{{item.RenGongBianMa}}" onclick="openDetail($(this).attr('_whid'));">
+            <div class="picmain_pic" style="height: 350px; background: white; filter: alpha(opacity:80); opacity: 0.8;" ng-repeat="item in videoList" _whid="{{item.ForExcelId}}" onclick="openDetail($(this).attr('_whid'));">
                 <a href="javascript:void(0)">
                     <img ng-src="~/Uploads/sources/{{item.YueQiXingZhi_JieGouShiYiTu}}" style="width:270px;height:270px" />
                     <p style="color: #532b17">名称：<span ng-bind="item.TiMing_ZhengTiMing" style="color: #ff6a00"></span>&nbsp;&nbsp;&nbsp;别称:<span ng-bind="item.TiMing_QiTaTiMing" style="color: #ff6a00"></span></p>
@@ -150,7 +150,7 @@
             </div>
         </div>
     </div>
-    <div id="pages" style="margin-left:350px"></div>
+    <div id="pages" style="margin-left:65%"></div>
     <script src="~/Scripts/jquery-1.11.1.min.js"></script>
     <script src="~/Scripts/all.js"></script>
     <script src="~/Scripts/jquery.searchableSelect.js"></script>

@@ -6,7 +6,7 @@ sc.app = angular.module('scApp', [])
     }])
     .controller('HomeController', ['$scope', '$location', '$http', function ($scope, $location, $http) {
         $scope.pageIndex = 1;//页码
-        $scope.pageSize = 2;//条数每页
+        $scope.pageSize = 1;//条数每页
         $scope.videoList = [];
         $scope.datacount = 0;//总条数
         $scope.totalpage = 0;//总页数
@@ -34,18 +34,18 @@ sc.app = angular.module('scApp', [])
             //alert($scope.searchtype + "," + state);
             $http.post(sc.baseUrl + 'ForExcel/SeniorSearch', { "state": state, "key": $scope.searchkey, "yzfs": $scope.yzfs, "mz": $scope.mz, "pageSize": $scope.pageSize, "pageIndex": $scope.pageIndex }).success(function (data) {
                 console.log(data);
-                //$scope.datacount = data.TotalCount;
-                //$scope.totalpage = data.TotalPaged;
-                $scope.videoList = data;
+                $scope.datacount = data.totalCount;
+                $scope.totalpage = ($scope.datacount / $scope.pageSize)>>0;
+                $scope.videoList = data.list;
                 //重新加载页码
-                //$.pagination('pages', $scope.pageIndex, $scope.pageSize, data.Data.TotalCount, "", { keyword: 'hello world' });
+                $.pagination('pages', $scope.pageIndex, $scope.pageSize, $scope.datacount, "", { keyword: 'hello world' });
 
             }).error(function (data) {
                 console.log("查询失败");
             });
         }
 
-        $scope.getVedioList();
+        //$scope.getVedioList();
 
         //民族选择
         changeSelect = function (eve) {
@@ -64,6 +64,23 @@ sc.app = angular.module('scApp', [])
             $scope.searchkey = $("#searchkey").val();
             console.log($scope.searchkey);
             $scope.pageIndex = 1;
+            $scope.getVedioList();
+        }
+
+        //翻页
+        changePage = function (ele) {
+            var nextpage = $(ele).text();
+            if (nextpage == '第一页') {
+                $scope.pageIndex = 1;
+            } else if (nextpage == '下一页') {
+                $scope.pageIndex = parseInt($scope.pageIndex) + 1;
+            } else if (nextpage == '最后一页') {
+                $scope.pageIndex = $scope.totalpage;
+            } else if (nextpage == '上一页') {
+                $scope.pageIndex = $scope.pageIndex - 1;
+            } else {
+                $scope.pageIndex = nextpage;
+            }
             $scope.getVedioList();
         }
 
@@ -124,14 +141,17 @@ sc.app = angular.module('scApp', [])
     .controller('DetailController', ['$scope', '$http', function ($scope, $http) {
         var whid = window.location.search.indexOf('=') > -1 ? window.location.search.split('=')[1] : "";
         $scope.videoinfo = {};
-
+        $scope.yzjflist = [];
+        console.log(whid);
         //获取单条数据
         $scope.getVideoInfo = function () {
             if (!whid)
                 return;
             $http.post(sc.baseUrl + 'ForExcel/Find', { "id": whid }).success(function (data) {
                 console.log(data);
+                console.log(data.totalCount);
                 $scope.videoinfo = data;
+                $scope.yzjflist = data.YanZhouJiFa_MingChen.split(',');
                 //console.log($scope.videoinfo.FileName);
 
                 //var curWwwPath = window.document.location.href;
@@ -148,6 +168,6 @@ sc.app = angular.module('scApp', [])
             });
         }
 
-        //$scope.getVideoInfo();
+        $scope.getVideoInfo();
     }])
 ;;

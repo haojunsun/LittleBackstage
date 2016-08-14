@@ -818,6 +818,7 @@
     <Content Include="css\jquery.searchableSelect.css" />
     <Content Include="css\login.css" />
     <Content Include="css\mediaelementplayer.min.css" />
+    <Content Include="css\normalize.css" />
     <Content Include="css\nstyle.css" />
     <Content Include="css\owl.carousel.css" />
     <Content Include="css\owl.theme.css" />
@@ -925,8 +926,10 @@
     <Content Include="img\logo-01.png" />
     <Content Include="img\logo.png" />
     <Content Include="img\nav.png" />
+    <Content Include="img\play2.png" />
     <Content Include="img\top.png" />
     <Content Include="img\top1.png" />
+    <Content Include="img\play1.png" />
     <Content Include="Scripts\all.js" />
     <Content Include="Scripts\angular.bundled.min.js" />
     <Content Include="Scripts\angular.ui-sortable.js" />
@@ -997,6 +1000,7 @@
     <Content Include="img\ic_s\Thumbs.db" />
     <Content Include="img\ic_xl\Thumbs.db" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\common.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
