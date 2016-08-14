@@ -6,7 +6,7 @@ sc.app = angular.module('scApp', [])
     }])
     .controller('HomeController', ['$scope', '$location', '$http', function ($scope, $location, $http) {
         $scope.pageIndex = 1;//页码
-        $scope.pageSize = 1;//条数每页
+        $scope.pageSize = 115;//条数每页
         $scope.videoList = [];
         $scope.datacount = 0;//总条数
         $scope.totalpage = 0;//总页数
@@ -38,14 +38,26 @@ sc.app = angular.module('scApp', [])
                 $scope.totalpage = ($scope.datacount / $scope.pageSize)>>0;
                 $scope.videoList = data.list;
                 //重新加载页码
-                $.pagination('pages', $scope.pageIndex, $scope.pageSize, $scope.datacount, "", { keyword: 'hello world' });
+                //$.pagination('pages', $scope.pageIndex, $scope.pageSize, $scope.datacount, "", { keyword: 'hello world' });
+
+                setTimeout(function () {
+                    $('#demo').jplist({
+                        itemsBox: '.list'
+                   , itemPath: '.list-item'
+                   , panelPath: '.jplist-panel'
+
+                        //save plugin state
+                   , storage: 'localstorage' //'', 'cookies', 'localstorage'
+                   , storageName: 'jplist-div-layout'
+                    });
+                }, 100);
 
             }).error(function (data) {
                 console.log("查询失败");
             });
         }
 
-        //$scope.getVedioList();
+        $scope.getVedioList();
 
         //民族选择
         changeSelect = function (eve) {

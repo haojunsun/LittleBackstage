@@ -1,0 +1,119 @@
+body{
+	overflow-x: hidden;
+}
+
+/**
+* common styles
+*/
+.jpage-relative{
+	position: relative;
+}
+
+.jpage-abs{
+	position: absolute;
+}
+
+.jpage-panel{
+	margin-bottom: 15px;
+}
+
+/**
+* content styles
+*/
+.block {
+	width:840px;
+}
+
+.title {
+	font-size:16px;
+	color:#f03800;
+}
+
+.date {
+	float:right;
+	color:#440e00;
+}
+
+.like {
+	color:#440e00;
+}
+
+/**
+* list styles
+*/
+.list {
+	/*background: #fff;
+	overflow: hidden;*/
+}
+
+.list .list-item{
+	border: 1px solid #E3E3E3;	
+	border-radius: 5px;
+	
+	margin-bottom: 15px;
+	background: #fff;
+	
+	box-sizing:border-box;
+	-moz-box-sizing:border-box;
+}
+
+.list .img {
+	width:15%;
+	float:left;
+	font-size:0;
+	text-align:center;
+}
+
+.list .img img {
+	max-width:90%;
+}
+
+.list .block {
+	float:right;
+	width:85%;
+}
+
+.list .block p {
+	margin:0;
+	padding:0 15px 5px 0;
+}
+
+.list-item {
+	padding-top:15px;
+}
+
+/**
+* pagination
+*/
+.jpage-pagination{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.jpage-pagination li{
+	float: left;
+	background: #fff;
+	border: 1px solid #E3E3E3;
+	border-radius: 2px;
+	padding: 0 10px;
+	margin-right: 5px;
+	color: #0381BB;
+	cursor: pointer;
+}
+
+.jpage-pagination li:hover{
+	background: #E2E2E2;
+	border: 1px solid #aaa;
+	outline: 1px solid #fff;
+	font-weight: bold;
+}
+
+.jpage-pagination .active,
+.jpage-pagination .active:hover{
+	border: 1px solid #FCB6A1;
+	color: #F03800;
+	background: #fff;
+}
+
+

@@ -815,6 +815,7 @@
     <Content Include="css\easyui.css" />
     <Content Include="css\fyjsstyle.css" />
     <Content Include="css\icon.css" />
+    <Content Include="css\jplist.min.css" />
     <Content Include="css\jquery.searchableSelect.css" />
     <Content Include="css\login.css" />
     <Content Include="css\mediaelementplayer.min.css" />
@@ -827,6 +828,20 @@
     <Content Include="css\picdelstyle.css" />
     <Content Include="css\search-form.css" />
     <Content Include="css\style.css" />
+    <Content Include="css\styles.min.css" />
+    <Content Include="css\vendor\github.min.css" />
+    <Content Include="css\vendor\images\animated-overlay.gif" />
+    <Content Include="css\vendor\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="css\vendor\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="css\vendor\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="css\vendor\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="css\vendor\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="css\vendor\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="css\vendor\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="css\vendor\images\ui-icons_222222_256x240.png" />
+    <Content Include="css\vendor\images\ui-icons_454545_256x240.png" />
+    <Content Include="css\vendor\jquery-ui.css" />
+    <Content Include="css\vendor\normalize.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -1001,6 +1016,7 @@
     <Content Include="img\ic_xl\Thumbs.db" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\common.js" />
+    <Content Include="Scripts\jplist.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -1035,6 +1051,10 @@
     <Content Include="Scripts\SwfUpload\plugins\swfupload.speed.js" />
     <Content Include="Scripts\SwfUpload\plugins\swfupload.swfobject.js" />
     <Content Include="Scripts\SwfUpload\swfupload.js" />
+    <Content Include="Scripts\vendor\highlight.min.js" />
+    <Content Include="Scripts\vendor\jquery-1.10.0.min.js" />
+    <Content Include="Scripts\vendor\jquery-ui.js" />
+    <Content Include="Scripts\vendor\modernizr.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Uploads\sources\L002201.png" />
     <Content Include="Uploads\sources\L002202.png" />
