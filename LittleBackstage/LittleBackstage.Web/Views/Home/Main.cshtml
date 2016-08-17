@@ -8,16 +8,22 @@
     <meta name="viewport" content="width=device-width" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- css -->
-    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" />
+    <link href="~/css/drop-down.css" rel="stylesheet" />
+    <link href="~/css/index.css" rel="stylesheet" />
+
     <link rel="stylesheet" href=" ~/css/vendor/normalize.css" />
     <link rel="stylesheet" href=" ~/css/styles.min.css" />
+    <link rel="stylesheet" href=" ~/css/main.css" />
     <link href="~/img/common/favicon.png" rel="shortcut icon" />
-    <link href="~/css/jplist.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/jplist.min.css" rel="stylesheet" />
+
 
     <style type="text/css">
         body {
-            background: url(../img/image.jpg);
-            height: 1247px;
+            background: url(../img/bgsmall.jpg);
+            background-color: white;
+            height: 1765px;
+            padding: 0px;
         }
     </style>
     <script>
@@ -29,13 +35,22 @@
 <body ng-app="scApp" ng-controller="HomeController">
 
     <!-- main content -->
-    <div id="main-content" class="box" style="background: url(../img/image.jpg);height:100%">
+    <div id="main-content" class="box" style="height:100%">
+        <div class="box text-shadow" style="height: 150px; text-align: center; background: white; background-position: center; top: 0px; background: url(../img/waterbg.png); ">
+            <div id="boatdiv" style="position:absolute;width:72px;height:72px;margin-top:73px;left:50%">
+                <img src="~/img/boat.png" style="width:72px;height:72px" />
+            </div>
+            <!-- background: url(../img/title3.jpg); background-position: center; background-repeat: no-repeat;-->
+            <div style="margin-top:7px">
+                <img src="~/img/title2.png" alt="" style="height:117px" />
+                <img src="~/img/111111.png" alt="" />
+                @*<img src="~/img/title1.png" alt="" style="height:117px" />*@
+            </div>
+        </div>
+        <div style="background: url(../img/red.png);width:100%;height:21px;margin-top:150px"></div>
         <div class="center">
             <div id="page-content" class="box">
-
-                <div class="box text-shadow">
-                    <h1 class="h1-30-normal left">中国xxxxxx</h1>
-                </div>
+                @*style="background: url(../img/detailbg.jpg ); "*@
 
                 <!-- demo -->
                 <div id="demo" class="box jplist">
@@ -44,156 +59,183 @@
                         <i class="fa fa-sort"></i>
                         jPList Actions
                     </div>
-
+                    <div style="width:100%;height:250px;margin-top:20px">
+                        <div style="width: 250px; float: left" class="col-sm-6">
+                            <div class="ih-item circle colored effect3 left_to_right">
+                                <a href="#">
+                                    <div class="img"><img src="~/images/qin1.jpg" alt="img"></div>
+                                    <div class="info" style="background-color:white">
+                                        <h3 style="color:black;">琵琶</h3>
+                                        <p style="color:black;font-size:larger;">拨弦类弦鸣乐器</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div style="width: 250px; left:120px " class="col-sm-6">
+                            <div class="ih-item circle colored effect3 left_to_right">
+                                <a href="#">
+                                    <div class="img"><img src="~/images/qin2.jpg" alt="img"></div>
+                                    <div class="info" style="background-color:white">
+                                        <h3 style="color:black;">琵琶</h3>
+                                        <p style="color:black;font-size:larger;">弹拨乐器首座</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div style="width: 250px; float: right; margin-right: 1px" class="col-sm-6">
+                            <div class="ih-item circle colored effect3 left_to_right">
+                                <a href="#">
+                                    <div class="img"><img src="~/images/qin3.jpg" alt="img"></div>
+                                    <div class="info" style="background-color:white">
+                                        <h3 style="color:black;">古筝</h3>
+                                        <p style="color:black;font-size:larger;">古老传统弹拨乐器</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                     <!-- panel -->
-                    <div class="jplist-panel box panel-top">
+                    <div class="jplist-panel box panel-top" style="height: 110px;margin-top:30px">
+                        @*style=" border: 2px solid #5a0000;"*@
+                        <!-- 全文搜索 -->
 
-                        <!-- filter by title -->
-                        <div class="text-filter-box">
+                        <div class="search">
+                            <form action="" method="get">
+                                <div class="search_input">
+                                    @*<input name="url" type="text" class="search_url" placeholder="请输入京东商品链接，查询哪儿有货！" />*@
+                                    <div class="text-filter-box">
+                                        <input data-path=".desc"
+                                               type="text"
+                                               value=""
+                                               placeholder="全文搜索"
+                                               data-control-type="textbox"
+                                               data-control-name="desc-filter"
+                                               data-control-action="filter" style="width:550px;height:46px;" />
+                                    </div>
+                                    <input name="" type="submit" class="search_submit" value="全文搜索" style="margin-top:10px" />
+                                    <a href="javascript:void(0);" class="jq" style="color:#5a0000">高级搜索</a>
+                                </div>
 
-                            <i class="fa fa-search  jplist-icon"></i>
+                                <div class="select_city">
 
-                            <input data-path=".title"
-                                   type="text"
-                                   value=""
-                                   placeholder="乐器名搜素"
-                                   data-control-type="textbox"
-                                   data-control-name="title-filter"
-                                   data-control-action="filter" />
+                                    <div class="text-filter-box">
+                                        <input data-path=".title"
+                                               type="text"
+                                               value=""
+                                               placeholder="乐器名搜素"
+                                               data-control-type="textbox"
+                                               data-control-name="title-filter"
+                                               data-control-action="filter" />
+                                    </div>
+                                    <!--民族 -->
+                                    <div class="jplist-drop-down"
+                                         data-control-type="drop-down"
+                                         data-control-name="group-filter"
+                                         data-control-action="filter">
+                                        <ul>
+                                            <li><span data-path="default">全部民族</span></li>
+                                            <li><span data-path=".汉">汉族</span></li>
+                                            <li><span data-path=".壮">壮族</span></li>
+                                            <li><span data-path=".满">满族</span></li>
+                                            <li><span data-path=".回">回族</span></li>
+                                            <li><span data-path=".苗">苗族</span></li>
+                                            <li><span data-path=".维吾尔">维吾尔族</span></li>
+                                            <li><span data-path=".土家">土家族</span></li>
+                                            <li><span data-path=".彝">彝族</span></li>
+                                            <li><span data-path=".蒙古">蒙古族</span></li>
+                                            <li><span data-path=".藏">藏族</span></li>
+                                            <li><span data-path=".布依">布依族</span></li>
+                                            <li><span data-path=".侗">侗族</span></li>
+                                            <li><span data-path=".瑶">瑶族</span></li>
+                                            <li><span data-path=".朝鲜">朝鲜族</span></li>
+                                            <li><span data-path=".白">白族</span></li>
+                                            <li><span data-path=".哈尼">哈尼族</span></li>
+                                            <li><span data-path=".哈萨克">哈萨克族</span></li>
+                                            <li><span data-path=".黎">黎族</span></li>
+                                            <li><span data-path=".傣">傣族</span></li>
+                                            <li><span data-path=".畲">畲族</span></li>
+                                            <li><span data-path=".傈僳">傈僳族</span></li>
+                                            <li><span data-path=".仡佬">仡佬族</span></li>
+                                            <li><span data-path=".东乡">东乡族</span></li>
+                                            <li><span data-path=".高山">高山族</span></li>
+                                            <li><span data-path=".拉祜">拉祜族</span></li>
+                                            <li><span data-path=".水">水族</span></li>
+                                            <li><span data-path=".佤">佤族</span></li>
+                                            <li><span data-path=".纳西">纳西族</span></li>
+                                            <li><span data-path=".羌">羌族</span></li>
+                                            <li><span data-path=".土">土族</span></li>
+                                            <li><span data-path=".仫佬">仫佬族</span></li>
+                                            <li><span data-path=".锡伯">锡伯族</span></li>
+                                            <li><span data-path=".柯尔克孜">柯尔克孜族</span></li>
+                                            <li><span data-path=".达斡尔">达斡尔族</span></li>
+                                            <li><span data-path=".景颇">景颇族</span></li>
+                                            <li><span data-path=".毛南">毛南族</span></li>
+                                            <li><span data-path=".撒拉">撒拉族</span></li>
+                                            <li><span data-path=".塔吉克">塔吉克族</span></li>
+                                            <li><span data-path=".阿昌">阿昌族</span></li>
+                                            <li><span data-path=".普米">普米族</span></li>
+                                            <li><span data-path=".鄂温克">鄂温克族</span></li>
+                                            <li><span data-path=".怒">怒族</span></li>
+                                            <li><span data-path=".京">京族</span></li>
+                                            <li><span data-path=".基诺">基诺族</span></li>
+                                            <li><span data-path=".德昂">德昂族</span></li>
+                                            <li><span data-path=".保安">保安族</span></li>
+                                            <li><span data-path=".俄罗斯">俄罗斯族</span></li>
+                                            <li><span data-path=".裕固">裕固族</span></li>
+                                            <li><span data-path=".乌兹别克">乌兹别克族</span></li>
+                                            <li><span data-path=".门巴">门巴族</span></li>
+                                            <li><span data-path=".鄂伦春">鄂伦春族</span></li>
+                                            <li><span data-path=".独龙">独龙族</span></li>
+                                            <li><span data-path=".塔塔尔">塔塔尔族</span></li>
+                                            <li><span data-path=".赫哲">赫哲族</span></li>
+                                            <li><span data-path=".珞巴">珞巴族</span></li>
+                                            <li><span data-path=".布朗">布朗族</span></li>
+                                        </ul>
+                                    </div>
+                                    <!--演奏方式 -->
+                                    <div class="jplist-drop-down"
+                                         data-control-type="drop-down"
+                                         data-control-name="yzfs-filter"
+                                         data-control-action="filter">
+                                        <ul>
+                                            <li><span data-path="default">全部方式</span></li>
+                                            <li><span data-path=".吹">吹</span></li>
+                                            <li><span data-path=".拉">拉</span></li>
+                                            <li><span data-path=".弹">弹</span></li>
+                                            <li><span data-path=".唱">唱</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
 
-                        <!-- filter by description -->
-                        <div class="text-filter-box">
-
-                            <i class="fa fa-search  jplist-icon"></i>
-
-                            <input data-path=".desc"
-                                   type="text"
-                                   value=""
-                                   placeholder="全文搜索"
-                                   data-control-type="textbox"
-                                   data-control-name="desc-filter"
-                                   data-control-action="filter" />
-                        </div>
-
-                        <div class="jplist-drop-down"
-                             data-control-type="drop-down"
-                             data-control-name="group-filter"
-                             data-control-action="filter">
-                            <ul>
-                                <li><span data-path="default">全部民族</span></li>
-                                <li><span data-path=".汉">汉族</span></li>
-                                <li><span data-path=".壮">壮族</span></li>
-                                <li><span data-path=".满">满族</span></li>
-                                <li><span data-path=".回">回族</span></li>
-                                <li><span data-path=".苗">苗族</span></li>
-                                <li><span data-path=".维吾尔">维吾尔族</span></li>
-                                <li><span data-path=".土家">土家族</span></li>
-                                <li><span data-path=".彝">彝族</span></li>
-                                <li><span data-path=".蒙古">蒙古族</span></li>
-                                <li><span data-path=".藏">藏族</span></li>
-                                <li><span data-path=".布依">布依族</span></li>
-                                <li><span data-path=".侗">侗族</span></li>
-                                <li><span data-path=".瑶">瑶族</span></li>
-                                <li><span data-path=".朝鲜">朝鲜族</span></li>
-                                <li><span data-path=".白">白族</span></li>
-                                <li><span data-path=".哈尼">哈尼族</span></li>
-                                <li><span data-path=".哈萨克">哈萨克族</span></li>
-                                <li><span data-path=".黎">黎族</span></li>
-                                <li><span data-path=".傣">傣族</span></li>
-                                <li><span data-path=".畲">畲族</span></li>
-                                <li><span data-path=".傈僳">傈僳族</span></li>
-                                <li><span data-path=".仡佬">仡佬族</span></li>
-                                <li><span data-path=".东乡">东乡族</span></li>
-                                <li><span data-path=".高山">高山族</span></li>
-                                <li><span data-path=".拉祜">拉祜族</span></li>
-                                <li><span data-path=".水">水族</span></li>
-                                <li><span data-path=".佤">佤族</span></li>
-                                <li><span data-path=".纳西">纳西族</span></li>
-                                <li><span data-path=".羌">羌族</span></li>
-                                <li><span data-path=".土">土族</span></li>
-                                <li><span data-path=".仫佬">仫佬族</span></li>
-                                <li><span data-path=".锡伯">锡伯族</span></li>
-                                <li><span data-path=".柯尔克孜">柯尔克孜族</span></li>
-                                <li><span data-path=".达斡尔">达斡尔族</span></li>
-                                <li><span data-path=".景颇">景颇族</span></li>
-                                <li><span data-path=".毛南">毛南族</span></li>
-                                <li><span data-path=".撒拉">撒拉族</span></li>
-                                <li><span data-path=".塔吉克">塔吉克族</span></li>
-                                <li><span data-path=".阿昌">阿昌族</span></li>
-                                <li><span data-path=".普米">普米族</span></li>
-                                <li><span data-path=".鄂温克">鄂温克族</span></li>
-                                <li><span data-path=".怒">怒族</span></li>
-                                <li><span data-path=".京">京族</span></li>
-                                <li><span data-path=".基诺">基诺族</span></li>
-                                <li><span data-path=".德昂">德昂族</span></li>
-                                <li><span data-path=".保安">保安族</span></li>
-                                <li><span data-path=".俄罗斯">俄罗斯族</span></li>
-                                <li><span data-path=".裕固">裕固族</span></li>
-                                <li><span data-path=".乌兹别克">乌兹别克族</span></li>
-                                <li><span data-path=".门巴">门巴族</span></li>
-                                <li><span data-path=".鄂伦春">鄂伦春族</span></li>
-                                <li><span data-path=".独龙">独龙族</span></li>
-                                <li><span data-path=".塔塔尔">塔塔尔族</span></li>
-                                <li><span data-path=".赫哲">赫哲族</span></li>
-                                <li><span data-path=".珞巴">珞巴族</span></li>
-                                <li><span data-path=".布朗">布朗族</span></li>
-                            </ul>
-                        </div>
-
-                        <div class="jplist-drop-down"
-                             data-control-type="drop-down"
-                             data-control-name="yzfs-filter"
-                             data-control-action="filter">
-                            <ul>
-                                <li><span data-path="default">全部演奏方式</span></li>
-                                <li><span data-path=".吹">吹</span></li>
-                                <li><span data-path=".拉">拉</span></li>
-                                <li><span data-path=".弹">弹</span></li>
-                                <li><span data-path=".唱">唱</span></li>
-                            </ul>
-                        </div>
-
-                        <!-- pagination results -->
-                        <div class="jplist-label"
-                             data-type="Page {current} of {pages}"
-                             data-control-type="pagination-info"
-                             data-control-name="paging"
-                             data-control-action="paging">
-                        </div>
-
-                        <!-- pagination -->
-                        <div class="jplist-pagination"
-                             data-control-type="pagination"
-                             data-control-name="paging"
-                             data-control-action="paging">
-                        </div>
-
+                        <br />
+                        <br />
                     </div>
 
 
-                    <!-- data -->
-                    <div class="list box text-shadow" style="background: white; filter: alpha(opacity:80); opacity: 0.8; height: 1025px; border-radius: 20px;">
+                    <!-- data  border: 2px solid #5a0000; filter: alpha(opacity:80); opacity: 1; -->
+                    <div class="list box text-shadow" style="filter: alpha(opacity:80); opacity: 0.9; border-top: 2px solid #c80000; border-bottom: 2px solid #c80000; margin-top: 5px; background: #FFF5EA; height: 1085px; border-radius: 20px; ">
                         <!-- item 1 -->
-                        <div class="list-item box default" ng-repeat="item in videoList" _whid="{{item.ForExcelId}}">
+                        <div class="list-item box default" ng-repeat="item in videoList" style="border-bottom: 18px solid white; ">
                             <div class="img left" style="height:190px">
-                                <img ng-src="~/Uploads/sources/{{item.YueQiXingZhi_JieGouShiYiTu}}" alt="" title="" />
+                                <img ng-src="~/Uploads/videos/{{item.YueQiXingZhi_JieGouShiYiTu}}" alt="" title="" />
                             </div>
                             <div class="block right">
-                                <p class="date desc">别称:<span ng-bind="item.TiMing_QiTaTiMing"></span></p>
+                                <p class="date desc" style="color: black">别称:<span ng-bind="item.TiMing_QiTaTiMing"></span></p>
                                 <p class="title" style="color:black">
-                                    乐器名：<a href="javascript:void(0);" onclick="openDetail($(this).attr('_whid'));"><span style="color: #ff6a00" ng-bind="item.TiMing_ZhengTiMing"></span></a>
+                                    乐器名：<a href="javascript:void(0);" onclick="openDetail($(this).attr('_whid'));" _whid="{{item.ForExcelId}}"><span style="color: #ff6a00" ng-bind="item.TiMing_ZhengTiMing"></span></a>
                                 </p>
-                                <p class="desc" style="color: #440e00">
+                                <p class="desc" style="color: black">
                                     简介：<span ng-bind="item.CaiLuXinXi_BanQuan"></span>
                                 </p>
-                                <p class="like desc">演奏方式：<span ng-bind="item.LeiBie_YanZouFangShi" class="{{item.LeiBie_YanZouFangShi}}"></span>&nbsp;&nbsp;&nbsp;民族：<span ng-bind="item.MinZuShuXing" class="{{item.MinZuShuXing}}"></span>&nbsp;&nbsp;&nbsp;工艺：<span ng-bind="item.YueQiXingZhi_QiTa"></span></p>
+                                <p class="like desc" style="color: black">演奏方式：<span ng-bind="item.LeiBie_YanZouFangShi" class="{{item.LeiBie_YanZouFangShi}}"></span>&nbsp;&nbsp;&nbsp;民族：<span ng-bind="item.MinZuShuXing" class="{{item.MinZuShuXing}}"></span>&nbsp;&nbsp;&nbsp;工艺：<span ng-bind="item.YueQiXingZhi_QiTa"></span></p>
                             </div>
                         </div>
                     </div>
 
                     <div class="box jplist-no-results text-shadow align-center">
-                        <p>No results found</p>
+                        <p>没有查询到相关条目</p>
                     </div>
 
                     <!-- ios button: show/hide panel -->
@@ -224,37 +266,90 @@
                             </ul>
                         </div>
 
-                        <!-- pagination results -->
-                        <div class="jplist-label"
-                             data-type="{start} - {end} of {all}"
-                             data-control-type="pagination-info"
-                             data-control-name="paging"
-                             data-control-action="paging">
-                        </div>
 
-                        <!-- pagination -->
-                        <div class="jplist-pagination"
-                             data-control-animate-to-top="true"
-                             data-control-type="pagination"
-                             data-control-name="paging"
-                             data-control-action="paging">
+                        <div style="margin-left:40%">
+                            <!-- pagination -->
+                            <div class="jplist-pagination"
+                                 data-control-animate-to-top="true"
+                                 data-control-type="pagination"
+                                 data-control-name="paging"
+                                 data-control-action="paging">
+                            </div>
+                            <!-- pagination results -->
+                            <div class="jplist-label"
+                                 data-type="{start} - {end} of {all}"
+                                 data-control-type="pagination-info"
+                                 data-control-name="paging"
+                                 data-control-action="paging">
+                            </div>
                         </div>
 
                     </div>
                 </div>
                 <!-- end of demo -->
             </div>
+        
         </div>
+        @*<div style="position:relative;background: white; background: url(../img/red.png); text-align: center; width: 100%; height: 150px; border-top: 2px solid #5a0000; margin-top:10px">
+            a
+        </div>*@
     </div>
     <script src="~/Scripts/jquery-1.11.1.min.js"></script>
+    <script src="~/Scripts/jquery-ui.min.js"></script>
+    <script src="~/Scripts/select-widget-min.js"></script>
     <script src="~/Scripts/angular.bundled.min.js"></script>
     <script src="~/Scripts/vendor/modernizr.min.js"></script>
     <script src="~/Scripts/jplist.min.js"></script>
     <script src="~/Scripts/seco-app.js"></script>
     <script type="text/javascript">
-        $(function () {
+        $(document).ready(function () {
+            $(".ui-select").selectWidget({
+                change: function (changes) {
+                    return changes;
+                },
+                effect: "slide",
+                keyControl: true,
+                speed: 200,
+                scrollHeight: 250
+            });
 
-        })
+            var i = 10;
+            var j = 0;
+            var e = document.getElementById('boatdiv');
+            var win = document.documentElement || document.body;
+            var width = e.clientWidth;
+            var windowWidth = win.clientWidth;
+            var acc = true;
+
+            function intern() {
+                //console.log(width, windowWidth);//e.getBoundingClientRect().left
+                if (acc) {//去
+                    e.style.left = e.getBoundingClientRect().left + 0.1 + "px";
+                    if ((e.getBoundingClientRect().left + width) >= windowWidth) {
+                        acc = false;
+                    }
+                } else {//回
+                    e.style.left = e.getBoundingClientRect().left - 0.1 + "px";
+                    if (e.getBoundingClientRect().left < windowWidth * 2 / 3) {
+                        acc = true;
+                    }
+                }
+            }
+            setInterval(intern, 1);
+        });
+        //底部
+        $(document).ready(function () {
+            if (document.documentElement.clientHeight > document.documentElement.offsetHeight) {
+                $(".nyh_footer").css({ "position": "fixed", "bottom": 0 });
+            }
+        });
+        $(document).ready(function () {
+            $(".select_city").hide();
+            $(".jq").click(function () {
+                $(".top_bg").hide();
+                $(".select_city").fadeToggle();
+            });
+        });
     </script>
 </body>
 </html>

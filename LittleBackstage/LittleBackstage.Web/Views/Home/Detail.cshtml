@@ -9,273 +9,437 @@
     <meta name="viewport" content="width=device-width" />
     <meta name="viewport" content="width=device-width" />
     <title>音频平台</title>
-    <link rel="stylesheet" href="~/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="~/css/default.css" />
     <!--必要样式-->
-    <link rel="stylesheet" type="text/css" href="~/css/search-form.css" />
+    <link rel="stylesheet" href="~/theme/style.css" type="text/css" media="screen" />
     <link rel="stylesheet" type="text/css" href="~/css/normalize.css" />
+    <link rel="stylesheet" href="~/css/styledetail.css">
+    <link rel="stylesheet" href="~/css/stylemodal.css">
+    <script src="~/Scripts/jquery.js"></script>
+    <script src="~/Scripts/mediaelement-and-player.min.js"></script>
+    <script src="~/Scripts/projekktor.js"></script>
 
-    <link href="~/css/css.css" type="text/css" rel="stylesheet" />
+
+
+    <!--放大镜-->
+    <link href="~/css/bigglass.css" rel="stylesheet" type="text/css" />
     <style type="text/css">
-        body.custom-background {
-            background-image: url('1431335355535.jpg');
-            background-size: 100% 100%;
-            background-repeat: no-repeat;
-            background-position: top left;
-            background-attachment: fixed;
+        /*body {
+            background: url(../img/detailbg.jpg);
+        }*/
+
+
+        html {
+            overflow-y: scroll;
         }
 
-        .yza {
-            margin-left: 25px;
+        body {
+            margin: 0;
+            font: 12px "\5B8B\4F53",san-serif;
+            background: url(../img/detailbg.jpg);
+        }
+
+        div, ul, li {
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            list-style-type: none;
+        }
+
+        img {
+            vertical-align: top;
+            border: 0;
+        }
+
+        /* box */
+        .box {
+            width: 610px;
+            margin: 100px auto;
+        }
+
+        .tb-pic a {
+            display: table-cell;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+            .tb-pic a img {
+                vertical-align: middle;
+            }
+
+        .tb-pic a {
+            *display: block;
+            *font-family: Arial;
+            *line-height: 1;
+        }
+
+        .tb-thumb {
+            margin: 10px 0 0;
+            overflow: hidden;
+        }
+
+            .tb-thumb li {
+                background: none repeat scroll 0 0 transparent;
+                float: left;
+                height: 42px;
+                margin: 0 6px 0 0;
+                overflow: hidden;
+                padding: 1px;
+            }
+
+        .tb-s310, .tb-s310 a {
+            height: 510px;
+            width: 510px;
+        }
+
+            .tb-s310, .tb-s310 img {
+                max-height: 510px;
+                max-width: 510px;
+            }
+
+                .tb-s310 a {
+                    *font-size: 271px;
+                }
+
+        .tb-s40 a {
+            *font-size: 35px;
+        }
+
+        .tb-s40, .tb-s40 a {
+            height: 40px;
+            width: 40px;
+        }
+
+        .tb-booth {
+            border: 1px solid #CDCDCD;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tb-thumb .tb-selected {
+            background: none repeat scroll 0 0 #C30008;
+            height: 40px;
+            padding: 2px;
+        }
+
+            .tb-thumb .tb-selected div {
+                background-color: #FFFFFF;
+                border: medium none;
+            }
+
+        .tb-thumb li div {
+            border: 1px solid #CDCDCD;
+        }
+
+        div.zoomDiv {
+            z-index: 999;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 500px;
+            height: 500px;
+            background: #ffffff;
+            border: 1px solid #CCCCCC;
+            display: none;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        div.zoomMask {
+            position: absolute;
+            background: url("images/mask.png") repeat scroll 0 0 transparent;
+            cursor: move;
+            z-index: 1;
+        }
+
+        .bigglass {
+            cursor: url(../img/bigglass.png),auto;
         }
     </style>
+
     <script>
         var sc = sc || {};
         sc.baseUrl = '@Url.Content("~/")';
     </script>
 </head>
 <body ng-app="scApp" ng-controller="DetailController">
-    <div class="showall">
-        <!--left -->
-        <div class="showbot">
-            <div id="showbox">
-                <img ng-src="~/Uploads/sources/{{videoinfo.YueQiXingZhi_JieGouShiYiTu}}" width="400" height="400" />
-                @*<img src="images/photos/img02.png" width="400" height="400" />
-                    <img src="images/photos/img03.png" width="400" height="400" />
-                    <img src="images/photos/img04.png" width="400" height="400" />
-                    <img src="images/photos/img05.png" width="400" height="400" />
-                    <img src="images/photos/img06.png" width="400" height="400" />*@
-
-            </div><!--展示图片盒子-->
-            @*<p class="showpage">
+    <div style="background: white; filter: alpha(opacity:100); opacity: 0.8; width: 85%; height: 100%; margin: 0 auto; border-radius: 20px;margin-bottom:20px">
+        <div class="showall" style="padding-top:30px">
+            <!--left -->
+            <div class="showbot" style="margin-left:30px">
+                <div id="showbox" style="cursor: url(../img/bigglass.png),auto;">
+                    <img ng-src="~/Uploads/videos/{{videoinfo.YueQiXingZhi_JieGouShiYiTu}}" width="270" height="180" />
+                    <img ng-src="~/Uploads/videos/{{videoinfo.YueQiXingZhi_JieGouShiYiTu}}" width="270" height="180" />
+                    <img ng-src="~/Uploads/videos/{{videoinfo.YueQiXingZhi_JieGouShiYiTu}}" width="270" height="180" />
+                    @*<img ng-src="~/Uploads/videos/{{videoinfo.YueQiXingZhi_JieGouShiYiTu}}" width="400" height="400" />*@
+                </div>
+                <!--图片显示在这-->
+                <div id="showsum"></div>
+                <p class="showpage">
                     <a href="javascript:void(0);" id="showlast"> < </a>
                     <a href="javascript:void(0);" id="shownext"> > </a>
-                </p>*@
-        </div>
-        <!--conet -->
-        <div class="tb-property">
-            <div class="tr-nobdr">
-                <h3 ng-bind="videoinfo.TiMing_ZhengTiMing"> </h3>
+                </p>
             </div>
-            <div class="txt">
-                别名：<span ng-bind="videoinfo.TiMing_QiTaTiMing" />
-            </div>
-            <div class="txt">
-                演奏方式：<span ng-bind="videoinfo.LeiBie_YanZouFangShi" />
-            </div>
-            <div class="txt">
-                民族：<span ng-bind="videoinfo.MinZuShuXing" />
-            </div>
-            <div class="txt">
-                乐器工艺：<span ng-bind="videoinfo.YueQiXingZhi_QiTa" />
-            </div>
-            <div class="txt">
-                文化背景：<span ng-bind="videoinfo.WenHuaBeiJing_LiShiYuanLiu" />
-            </div>
-            <div class="txt">
-                流布地区：<span ng-bind="videoinfo.WenHuaBeiJing_LiuBuDiYu" />
-            </div>
-            <div >
-                乐器简介：<span ng-bind="videoinfo.CaiLuXinXi_BanQuan" />
-            </div>
+            <!--conet -->
+            <div class="tb-property">
+                <div class="tr-nobdr">
+                    <h3 ng-bind="videoinfo.TiMing_ZhengTiMing"> </h3>
+                    <a href="@Url.Action("main","home")" style="float:right">返回列表>></a>
+                </div>
+                <div class="txt" style="color: #440e00;font-size:larger">
+                    别名：<span ng-bind="videoinfo.TiMing_QiTaTiMing" />
+                </div>
+                <div class="txt" style="color: #440e00; font-size: larger">
+                    演奏方式：<span ng-bind="videoinfo.LeiBie_YanZouFangShi" />
+                </div>
+                <div class="txt" style="color: #440e00; font-size: larger">
+                    民族：<span ng-bind="videoinfo.MinZuShuXing" />
+                </div>
+                <div class="txt" style="color: #440e00; font-size: larger">
+                    乐器工艺：<span ng-bind="videoinfo.YueQiXingZhi_QiTa" />
+                </div>
+                <div class="txt" style="color: #440e00; font-size: larger">
+                    文化背景：<span ng-bind="videoinfo.WenHuaBeiJing_LiShiYuanLiu" />
+                </div>
+                <div class="txt" style="color: #440e00; font-size: larger">
+                    流布地区：<span ng-bind="videoinfo.WenHuaBeiJing_LiuBuDiYu" />
+                </div>
+                <div class="txt" style="color: #440e00; font-size: larger">
+                    乐器简介：<span ng-bind="videoinfo.CaiLuXinXi_BanQuan" />
+                </div>
 
-            @*<div class="nobdr-btns">
-                    <button class="addcart hu"><img src="images/shop.png" width="25" height="25" />加入购物车</button>
-                    <button class="addcart yh"><img src="images/ht.png" width="25" height="25" />立即购买</button>
-                </div>
-                <div class="guarantee">
-                    <span>邮费：包邮&nbsp;&nbsp;支持货到付款 <a href=""><img src="images/me.png" /></a></span>
-                </div>*@
+                @*<div class="nobdr-btns">
+                        <button class="addcart hu"><img src="images/shop.png" width="25" height="25" />加入购物车</button>
+                        <button class="addcart yh"><img src="images/ht.png" width="25" height="25" />立即购买</button>
+                    </div>
+                    <div class="guarantee">
+                        <span>邮费：包邮&nbsp;&nbsp;支持货到付款 <a href=""><img src="images/me.png" /></a></span>
+                    </div>*@
+            </div>
         </div>
-    </div>
-    <!-- 音频视频 -->
-    <div class="gdetail">
-        <div class="dp_wrap_title">
-           <span style="color: #443dff; font-size: x-large">音节</span> 
-        </div>
-        <div class="dp_wrap" style="background: white; filter: alpha(opacity:80); opacity: 0.8;">
-            @*<div class="dq_ori">
-                <a class="dq_ori_prd" href=""><img ng-src="~/Uploads/sources/{{videoinfo.LuYinHuanJin_ShiYinTu}}" /></a>
-                <a class="ori_prd" href="">拾音图</a>
-            </div>*@
-            <div class="scroll_wrap">
-                <div class="dp_prd" >
-                    <div class="dp_p_wrap">
-                        <a class="dp_wrap_pimg" href="" target="_blank"><img src="/img/play1.png" /></a>
-                        <a class="dp_wrap_pname" href="" target="_blank">自然衰减、力度mf</a>
-                        <p class="dp_wrap_pprice">
-                            <label>
-                               第一遍
-                            </label>
-                        </p>
-                    </div>
-                </div>
-                <div class="dp_prd">
-                    <div class="dp_p_wrap">
-                        <a class="dp_wrap_pimg" href="" target="_blank"><img src="/img/play1.png" /></a>
-                        <a class="dp_wrap_pname" href="" target="_blank">自然衰减、力度mf</a>
-                        <p class="dp_wrap_pprice">
-                            <label>
-                               第二遍
-                            </label>
-                        </p>
-                    </div>
-                </div>
-                <div class="dp_prd">
-                    <div class="dp_p_wrap">
-                        <a class="dp_wrap_pimg" href="" target="_blank"><img src="/img/play1.png" /></a>
-                        <a class="dp_wrap_pname" href="" target="_blank">慢速、力度p</a>
-                        <p class="dp_wrap_pprice">
-                            <label>
-                                第一遍
-                            </label>
-                        </p>
-                    </div>
-                </div>
-                <div class="dp_prd">
-                    <div class="dp_p_wrap">
-                        <a class="dp_wrap_pimg" href="" target="_blank"><img src="/img/play1.png" /></a>
-                        <a class="dp_wrap_pname" href="" target="_blank">慢速、力度p</a>
-                        <p class="dp_wrap_pprice">
-                            <label>
-                                第二遍
-                            </label>
-                        </p>
-                    </div>
-                </div>
-                <div class="dp_prd">
-                    <div class="dp_p_wrap">
-                        <a class="dp_wrap_pimg" href="" target="_blank"><img src="/img/play1.png" /></a>
-                        <a class="dp_wrap_pname" href="" target="_blank">慢速、力度f</a>
-                        <p class="dp_wrap_pprice">
-                            <label>
-                                第一遍
-                            </label>
-                        </p>
-                    </div>
-                </div>
-                <div class="dp_prd">
-                    <div class="dp_p_wrap">
-                        <a class="dp_wrap_pimg" href="" target="_blank"><img src="/img/play1.png" /></a>
-                        <a class="dp_wrap_pname" href="" target="_blank">慢速、力度f</a>
-                        <p class="dp_wrap_pprice">
-                            <label>
-                                第二遍
-                            </label>
-                        </p>
-                    </div>
-                </div>
-                <div class="dp_prd">
-                    <div class="dp_p_wrap">
-                        <a class="dp_wrap_pimg" href="" target="_blank"><img src="/img/play1.png" /></a>
-                        <a class="dp_wrap_pname" href="" target="_blank">慢速、力度mf</a>
-                        <p class="dp_wrap_pprice">
-                            <label>
-                                第一遍
-                            </label>
-                        </p>
-                    </div>
-                </div>
-                <div class="dp_prd">
-                    <div class="dp_p_wrap">
-                        <a class="dp_wrap_pimg" href="" target="_blank"><img src="/img/play1.png" /></a>
-                        <a class="dp_wrap_pname" href="" target="_blank">慢速、力度mf</a>
-                        <p class="dp_wrap_pprice">
-                            <label>
-                                第二遍
-                            </label>
-                        </p>
-                    </div>
-                </div>
-                <div class="dp_prd">
-                    <div class="dp_p_wrap">
-                        <a class="dp_wrap_pimg" href="" target="_blank"><img src="/img/play1.png" /></a>
-                        <a class="dp_wrap_pname" href="" target="_blank">中速、力度f</a>
-                        <p class="dp_wrap_pprice">
-                            <label>
-                                第一遍
-                            </label>
-                        </p>
-                    </div>
-                </div>
-                <div class="dp_prd">
-                    <div class="dp_p_wrap">
-                        <a class="dp_wrap_pimg" href="" target="_blank"><img src="/img/play1.png" /></a>
-                        <a class="dp_wrap_pname" href="" target="_blank">中速、力度f</a>
-                        <p class="dp_wrap_pprice">
-                            <label>
-                                第二遍
-                            </label>
-                        </p>
-                    </div>
-                </div>
+        @*<video id="videoplayer" poster="~/img/pic.png" title="this is Projekktor" width="900" height="500" controls=controls>
+                <source id="videosource" src="http://localhost:27917/Uploads/test/L0021B1.mp4" type="video/mp4" />
+            </video>*@
+        <div id="yhc_responsive" class="main" style="padding-left:15px">
+
+            <div class="allProduct respl-header">
+                <ul class="productTab respl-option" data-option-key="filter">
+                    <li class="select"><a href="#" data-rl_value="*">全部资源</a></li>
+                    <li><a href="#" data-rl_value=".yinjie">音阶</a></li>
+                    <li><a href="#" data-rl_value=".yzjf">演奏技法</a></li>
+                    <li><a href="#" data-rl_value=".sfyq">示范乐曲</a></li>
+                </ul>
+                <ul class="ProductList respl-items">
+                    <li class="respl-item yinjie">
+                        <div class="unit">
+                            <p class="hoverline"></p>
+                            <a class="images" href="javascript:void(0)"><img src="~/img/16101007.jpg"></a>
+                            <h1>自然衰减、力度mf <a style="color:blue;" href="javascript:void(0)" onclick="openModal($(this));" _videoid="{{videoinfo.YinJie_ZiRanShuaiJian_MF_First}}">第一遍</a></h1>
+
+                        </div>
+                    </li>
+                    <li class="respl-item yinjie">
+                        <div class="unit">
+                            <p class="hoverline"></p>
+                            <a class="images" href="javascript:void(0)"><img src="~/img/16101007.jpg"></a>
+                            <h1>自然衰减、力度mf<a style="color:blue;" href="javascript:void(0)" onclick="openModal($(this));" _videoid="{{videoinfo.YinJie_ZiRanShuaiJian_MF_Second}}"> 第二遍</a></h1>
+
+                        </div>
+                    </li>
+                    <li class="respl-item yinjie">
+                        <div class="unit">
+                            <p class="hoverline"></p>
+                            <a class="images" href="javascript:void(0)"><img src="~/img/16101007.jpg"></a>
+                            <h1>慢速、力度p<a style="color:blue;" href="javascript:void(0)" onclick="openModal($(this));" _videoid="{{videoinfo.YinJie_ManSu_P_First}}"> 第一遍</a></h1>
+
+                        </div>
+                    </li>
+                    <li class="respl-item yinjie">
+                        <div class="unit">
+                            <p class="hoverline"></p>
+                            <a class="images" href="javascript:void(0)"><img src="~/img/16101007.jpg"></a>
+                            <h1>慢速、力度p<a style="color:blue;" href="javascript:void(0)" onclick="openModal($(this));" _videoid="{{videoinfo.YinJie_ManSu_P_Second}}"> 第二遍</a></h1>
+
+                        </div>
+                    </li>
+                    <li class="respl-item yinjie">
+                        <div class="unit">
+                            <p class="hoverline"></p>
+                            <a class="images" href="javascript:void(0)"><img src="~/img/16101007.jpg"></a>
+                            <h1>慢速、力度f<a style="color:blue;" href="javascript:void(0)" onclick="openModal($(this));" _videoid="{{videoinfo.YinJie_ManSu_F_First}}"> 第一遍</a></h1>
+
+                        </div>
+                    </li>
+                    <li class="respl-item yinjie">
+                        <div class="unit">
+                            <p class="hoverline"></p>
+                            <a class="images" href="javascript:void(0)"><img src="~/img/16101007.jpg"></a>
+                            <h1>慢速、力度f<a style="color:blue;" href="javascript:void(0)" onclick="openModal($(this));" _videoid="{{videoinfo.YinJie_ManSu_F_Second}}"> 第二遍</a></h1>
+
+                        </div>
+                    </li>
+                    <li class="respl-item yinjie">
+                        <div class="unit">
+                            <p class="hoverline"></p>
+                            <a class="images" href="javascript:void(0)"><img src="~/img/16101007.jpg"></a>
+                            <h1>慢速、力度mf<a style="color:blue;" href="javascript:void(0)" onclick="openModal($(this));" _videoid="{{videoinfo.YinJie_ManSu_MF_First}}"> 第一遍</a></h1>
+
+                        </div>
+                    </li>
+                    <li class="respl-item yinjie">
+                        <div class="unit">
+                            <p class="hoverline"></p>
+                            <a class="images" href="javascript:void(0)"><img src="~/img/16101007.jpg"></a>
+                            <h1>慢速、力度mf<a style="color:blue;" href="javascript:void(0)" onclick="openModal($(this));" _videoid="{{videoinfo.YinJie_ManSu_MF_Second}}"> 第二遍</a></h1>
+
+                        </div>
+                    </li>
+                    <li class="respl-item yinjie">
+                        <div class="unit">
+                            <p class="hoverline"></p>
+                            <a class="images" href="javascript:void(0)"><img src="~/img/16101007.jpg"></a>
+                            <h1>中速、力度f<a style="color:blue;" href="javascript:void(0)" onclick="openModal($(this));" _videoid="{{videoinfo.YinJie_ZhongSu_F_First}}"> 第一遍</a></h1>
+
+                        </div>
+                    </li>
+                    <li class="respl-item yinjie">
+                        <div class="unit">
+                            <p class="hoverline"></p>
+                            <a class="images" href="javascript:void(0)"><img src="~/img/16101007.jpg"></a>
+                            <h1>中速、力度f<a style="color:blue;" href="javascript:void(0)" onclick="openModal($(this));" _videoid="{{videoinfo.YinJie_ZhongSu_F_Second}}"> 第二遍</a></h1>
+
+                        </div>
+                    </li>
+
+
+                    <li class="respl-item yzjf" ng-repeat="item in yzjflist">
+                        <div class="unit">
+                            <p class="hoverline"></p>
+                            <a class="images" href="javascript:void(0)"><img src="~/img/16101007.jpg"></a>
+                            <h1>
+                                <a href="javascript:void(0)"><span ng-bind="item"></span></a>&nbsp;
+                                <a style="color:blue" href="javascript:void(0)" onclick="openModal($(this));" _videoid="{{yzjffirst[$index]}}">第一遍</a>&nbsp;
+                                <a style="color:blue" href="javascript:void(0)" onclick="openModal($(this));" _videoid="{{yzjfsecond[$index]}}">第二遍</a>
+                            </h1>
+                        </div>
+                    </li>
+
+                    <li class="respl-item sfyq" ng-repeat="item in sfyqlist">
+                        <div class="unit">
+                            <p class="hoverline"></p>
+                            <a class="images" href="javascript:void(0)"><img src="~/img/16101007.jpg"></a>
+                            <h1>
+                                <a href="javascript:void(0)"><span ng-bind="item"></span></a>&nbsp;
+                                <a style="color:blue" href="javascript:void(0)" onclick="openModal($(this));" _videoid="{{sfyqmp3[$index]}}">音频</a>&nbsp;
+                                <a style="color:blue" href="javascript:void(0)" onclick="openVideoModal($(this));" _videoid="{{sfyqmp4[$index]}}">视频</a>
+                            </h1>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
-    <div class="gdetail">
-        <div class="dp_wrap_title">
-            <span style="color:#443dff;font-size:x-large">演奏技法</span>
-        </div>
-        <div class="dp_wrap" style="background: white; filter: alpha(opacity:80); opacity: 0.8;">
-            @*<div class="dq_ori">
-                    <a class="dq_ori_prd" href=""><img ng-src="~/Uploads/sources/{{videoinfo.LuYinHuanJin_ShiYinTu}}" /></a>
-                    <a class="ori_prd" href="">拾音图</a>
-                </div>*@
-            <div class="scroll_wrap">
-                <div class="dp_prd">
-                    <div class="dp_p_wrap" ng-repeat="item in yzjflist">
-                        <a class="dp_wrap_pimg" href="" target="_blank"><img src="/img/play1.png" /></a>
-                        <a class="dp_wrap_pname" href="" target="_blank"><span ng-bind="item"></span></a>
-                        <p class="dp_wrap_pprice">
-                            <a href="javascript:void(0)">
-                                第一遍
-                            </a>
-                            <a href="javascript:void(0)">
-                                第二遍
-                            </a>
-                        </p>
-                    </div>
-                </div>
+
+    <div class="cd-popup3">
+        <div class="cd-popup-container3">
+            <p>音频播放</p>
+            <div class="cd-buttons">
+                <audio id="audioplayer" src="" controls="controls"></audio>
             </div>
+            <a href="#0" class="cd-popup-close">关闭</a>
         </div>
     </div>
-    <div class="gdetail">
-        <div class="dp_wrap_title">
-            <span style="color:#443dff;font-size:x-large">示范乐曲：<span ng-bind="videoinfo.ShiFanYuQu_QuMuMing"></span></span>
-        </div>
-        <div class="dp_wrap" style="background: white; filter: alpha(opacity:80); opacity: 0.8;">
-            <div class="scroll_wrap">
-                <div class="dp_prd">
-                    <div class="dp_p_wrap">
-                        <a class="dp_wrap_pimg" href="" target="_blank"><img src="/img/play2.png" /></a>
-                        <a class="dp_wrap_pname" href="" target="_blank"><span ng-bind=""></span></a>
-                        <p class="dp_wrap_pprice">
-                            <a href="javascript:void(0)">
-                                视频
-                            </a>
-                        </p>
-                    </div>
-                    <div class="dp_p_wrap">
-                        <a class="dp_wrap_pimg" href="" target="_blank"><img src="/img/play1.png" /></a>
-                        <a class="dp_wrap_pname" href="" target="_blank"><span ng-bind=""></span></a>
-                        <p class="dp_wrap_pprice">
-                            <a href="javascript:void(0)">
-                                音频
-                            </a>
-                        </p>
-                    </div>
-                </div>
+    <div class="cd-popup4">
+        <div class="cd-popup-container3">
+            <p>视频播放</p>
+            <div class="cd-buttons">
+                <h2>视频</h2>
+                <video id="videoplayer" poster="~/img/pic.png" title="this is Projekktor" width="650" height="550" controls=controls>
+                    <source id="videosource" src="" type="video/mp4" />
+                </video>
             </div>
+            <a href="#0" class="cd-popup-close">关闭</a>
         </div>
     </div>
-    <script src="~/Scripts/jquery-1.11.1.min.js"></script>
+
+    @*<div class="loadMore">
+            <a href="javascript:;">更多</a>
+        </div>*@
+
+    <script src="~/Scripts/jquery-1.7.2.min.js"></script>
+    @*<script src="~/Scripts/jquery.imagezoom.js"></script>*@
     <script src="~/Scripts/angular.bundled.min.js"></script>
-    <script src="~/Scripts/common.js"></script>
+    <script src="~/Scripts/jquery.isotope.js"></script>
+    <!--放大镜-->
+    <script src="~/Scripts/bigglass.js"></script>
     <script src="~/Scripts/seco-app.js"></script>
+    <script src="~/Scripts/script.js"></script>
+
 
     <script type="text/javascript">
         $(document).ready(function () {
+            //放大镜
+            var showproduct = {
+                "boxid": "showbox",
+                "sumid": "showsum",
+                "boxw": 400,//宽度,该版本中请把宽高填写成一样
+                "boxh": 400,//高度,该版本中请把宽高填写成一样
+                "sumw": 60,//列表每个宽度,该版本中请把宽高填写成一样
+                "sumh": 60,//列表每个高度,该版本中请把宽高填写成一样
+                "sumi": 7,//列表间隔
+                "sums": 5,//列表显示个数
+                "sumsel": "sel",
+                "sumborder": 1,//列表边框，没有边框填写0，边框在css中修改
+                "lastid": "showlast",
+                "nextid": "shownext"
+            };//参数定义
+            setTimeout(function () {
+                $.ljsGlasses.pcGlasses(showproduct);//方法调用，务必在加载完后执行
+            }, 200);
+            //放大镜
 
+            //ESC关闭
+            $(document).keyup(function (event) {
+                if (event.which == '27') {
+                    $('.cd-popup3').removeClass('is-visible3');
+                    var Media = document.getElementById("audiosource");
+                    Media.pause();
+                    Media.load();
+                }
+            });
+
+            //关闭窗口
+            $('.cd-popup3').on('click', function (event) {
+                if ($(event.target).is('.cd-popup-close') || $(event.target).is('.cd-popup3')) {
+                    event.preventDefault();
+                    $(this).removeClass('is-visible3');
+                    var Media = document.getElementById("audiosource");
+                    Media.pause();
+                    Media.load();
+                }
+            });
+
+            //ESC关闭
+            $(document).keyup(function (event) {
+                if (event.which == '27') {
+                    $('.cd-popup4').removeClass('is-visible3');
+                    var myVideo = document.getElementById('videoplayer');
+                    //myVideo.pause();
+                    myVideo.load();
+                }
+            });
+
+            //关闭窗口
+            $('.cd-popup4').on('click', function (event) {
+                if ($(event.target).is('.cd-popup-close') || $(event.target).is('.cd-popup4')) {
+                    event.preventDefault();
+                    $(this).removeClass('is-visible3');
+                    var myVideo = document.getElementById('videoplayer');
+                    //myVideo.pause();
+                    myVideo.load();
+                }
+            });
         });
     </script>
 </body>

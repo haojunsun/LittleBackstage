@@ -37,14 +37,14 @@
                     <div class="product_box member">
                         <div class="bg_box"><img src="~/img/bg_member.jpg"></div>
                         <div class="content">
-                            <div class="main_box">
+                            @*<div class="main_box">
                                 <h2 class="hide_txt  png"></h2>
-                                @*<a href="@Url.Action("main","home")" class="btn_product" title="走进非遗">走进非遗</a>*@
-                            </div>
+                               
+                            </div>*@
                         </div>
                     </div>
                 </div>
-                <div class="product_btns" id="product_btns">
+                <div class="product_btns" id="product_btns" style="display:none">
                     <div class="content">
                         <div class="btns_area">
                             <div class="btns_box" id="control_box">
@@ -88,7 +88,7 @@
                 isCan: true,
                 isOnbtn: false,
                 fColor: [2, 2, 1, 1, 1],
-                dur: 22000,
+                dur: 4000,
                 cNum: 0
             };
             var aDD = $controls.eq(0).width() + parseInt($controls.eq(0).css("margin-right").slice(0, -2)) * 2;

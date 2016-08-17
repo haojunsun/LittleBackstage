@@ -1,0 +1,244 @@
+﻿@charset "utf-8";
+/* CSS Document */
+* {
+	margin:0;
+	list-style:none;
+	padding:0;
+}
+body {
+	margin: 0px;
+	padding: 0px;
+	font-family: "Microsoft Yahei";
+}
+.top {
+	background-color: #333333;
+	height: 30px;
+	width: 100%;
+}
+.header {
+	background-image: url(../images/top_bg.png);
+	background-repeat: no-repeat;
+	background-position: center bottom;
+	height: 480px;
+	width: 100%;
+	background-color: #1bbef9;
+}
+.nayouhuo_logo {
+	height: 89px;
+	width: 435px;
+	margin-top: 0px;
+	margin-right: auto;
+	margin-bottom: 0px;
+	margin-left: auto;
+	position: relative;
+	top: 50px;
+}
+.search {
+	width: 800px;
+	margin-top: 0px;
+	margin-right: auto;
+	margin-bottom: 0px;
+	margin-left: auto;
+	top: 0px;
+	position: relative;
+}
+.search_input {
+	float: right;
+}
+.search_url {
+	line-height: 43px;
+	height: 42px;
+	width: 550px;
+	border-top-width: 0px;
+	border-right-width: 0px;
+	border-bottom-width: 0px;
+	border-left-width: 0px;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+	font-family: "Microsoft Yahei";
+	font-size: 14px;
+	padding-left: 10px;
+	color: #333333;
+	outline: none;
+	float: left;
+	box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+}
+.search_submit {
+	height: 42px;
+	float: left;
+	border-top-width: 0px;
+	border-right-width: 0px;
+	border-bottom-width: 0px;
+	border-left-width: 0px;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+	padding-right: 20px;
+	padding-left: 20px;
+	font-family: "Microsoft Yahei";
+	color: white;
+	background-color: #670000;
+	font-size: 16px;
+	cursor: pointer;
+	outline: none;
+
+	-webkit-transition: background .2s ease-in;
+    -moz-transition: background .2s ease-in;
+    -ms-transition: background .2s ease-in;
+    transition: background .2s ease-in;
+	box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+	background-image: url(../images/iconfont-sousuo.png);
+	background-repeat: no-repeat;
+	background-position: 10px center;
+}
+.search_submit:hover {
+	background-color: #FF8B17;
+}
+.jq {
+	float: left;
+	color: #FFFFFF;
+	text-decoration: underline;
+	height: 32px;
+	margin-left: 10px;
+    margin-top:18px;
+	line-height: 42px;
+	font-size: 14px;
+}
+
+.select_city {
+	float: left;
+	width: 60%;
+	margin-top: 6px;
+    margin-left: 20%;
+}
+.top_bg {
+	background-color: #1BBEF9;
+	height: 40px;
+	position: absolute;
+	z-index: 22;
+	width: 200px;
+}
+
+.show_content {
+	width: 960px;
+	margin-top: 30px;
+	margin-right: auto;
+	margin-bottom: 0px;
+	margin-left: auto;
+}
+.location {
+	float: left;
+	line-height: 40px;
+	color: #FF6600;
+	background-image: url(../images/iconfont-shouhuodizhi.png);
+	background-repeat: no-repeat;
+	background-position: left center;
+	text-indent: 30px;
+	width: 100%;
+	font-size: 16px;
+}
+.location span {
+	float: left;
+}
+.location h1 {
+	font-size: 12px;
+	margin: 0px;
+	padding: 0px;
+	float: right;
+	color: #999999;
+	font-weight: normal;
+}
+
+.show_list {
+	margin-top: 10px;
+	float: left;
+	width: 100%;
+	border-top-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-left-style: solid;
+	border-top-color: #EBEBEB;
+	border-left-color: #EBEBEB;
+}
+.show_list  td {
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-right-color: #EBEBEB;
+	border-bottom-color: #EBEBEB;
+	height: 40px;
+	font-size: 13px;
+	color: #7C7C7C;
+}
+.show_list .title_bg {
+	font-size: 14px;
+	background-color: #FAFAFA;
+	color: #8B8B8B;
+	height: 45px;
+	font-weight: bold;
+}
+.show_list a {
+	color: #10AEE6;
+	text-decoration: none;
+}
+.show_list a:hover {
+	color: #FF6600;
+}
+
+.show_list .luse {
+	color: #03a300;
+}
+.show_list .huise {
+	color: #999999;
+}
+.show_list .chengse {
+	color: #FF6600;
+}
+.cha-soucang {
+	position: fixed;
+	right: 10px;
+	bottom: 25%;
+}
+
+.nyh_footer {
+	width: 100%;
+	float: left;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #EBEBEB;
+	text-align: center;
+	font-size: 12px;
+	padding-bottom: 10px;
+	margin-top: 30px;
+}
+.nyh_footer_nav {
+	line-height: 40px;
+	padding-top: 10px;
+}
+.nyh_footer_nav a {
+	text-decoration: none;
+	color: #797979;
+	margin-right: 10px;
+}
+.nyh_footer_nav a:hover {
+	color: #666666;
+}
+.nyh_copyright {
+	color: #999999;
+}
+.friendly_link {
+	color: #999999;
+	margin-top: 10px;
+}
+.friendly_link a {
+	color: #999999;
+	margin-right: 10px;
+	text-decoration: none;
+}
+.friendly_link a:hover {
+	color: #666666;
+}

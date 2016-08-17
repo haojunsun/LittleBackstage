@@ -40,12 +40,13 @@ textarea{resize:none}
 #showsum span.sel { border:1px solid #f60;}
 
 .showpage { width:400px; position:relative;}
-.showpage a { display:block; width:15px; border:1px solid #ddd; height:60px; line-height:60px; background:#eee; text-align:center; font-size:18px; position:absolute; left:0; top:-62px; text-decoration:none; color:#999;}
+.showpage a { display:block; width:15px; border:1px solid #ddd; height:60px; line-height:60px; background:#eee; text-align:center; font-size:18px; left:0; top:-62px; text-decoration:none; color:#999;}
 .showpage a#shownext { left:auto; right:0;}
 .showpage a:hover { background:#ccc; color:#777;}
 
 .showall{
 	width: 1240px;
+    height:500px;
 	margin: 0 auto;
 	margin-top: 15px;
 }
