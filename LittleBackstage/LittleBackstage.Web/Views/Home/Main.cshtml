@@ -7,21 +7,25 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>中国传统乐器声学测量与频谱分析</title>
     <!-- css -->
-    <link href="~/css/drop-down.css" rel="stylesheet" />
-    <link href="~/css/index.css" rel="stylesheet" />
+    <!--落叶-->
+    <link rel="stylesheet" href="~/css/zzsc.css" />
+
+    <link rel="stylesheet" href="~/css/drop-down.css" />
+    <link rel="stylesheet" href="~/css/index.css" />
 
     <link rel="stylesheet" href=" ~/css/vendor/normalize.css" />
     <link rel="stylesheet" href=" ~/css/styles.min.css" />
     <link rel="stylesheet" href=" ~/css/main.css" />
-    <link href="~/img/common/favicon.png" rel="shortcut icon" />
-    <link href="~/css/jplist.min.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="~/img/common/favicon.png" />
+    <link rel="stylesheet" href="~/css/jplist.min.css" />
 
-
+    <script type="text/javascript" src="~/scripts/jquery.js"></script>
     <style type="text/css">
         body {
-            background: url(../img/bgsmall.jpg);
-            background-color: white;
+            background: url(../img/detailbg.jpg) repeat-x;
+            background-color: #f1f4c7;
             height: 1765px;
             padding: 0px;
         }
@@ -33,27 +37,51 @@
 </head>
 
 <body ng-app="scApp" ng-controller="HomeController">
+    <div class="Upper" style="margin-top:-110px">
+        <table style="width:100%" border="0" cellspacing="0" cellpadding="0" align="center">
+            <tr>
+                <td>
+                    <table style="width:600px" border="0" cellspacing="0" cellpadding="0" align="center">
 
+                        <tr>
+                            <td style="padding:70px 0 0" align="left" width="385">
+                                <h1 style="color:#f4f2ed"></h1>
+                                <p style="color:#d3f1a0"></p>
+                            </td>
+                            <td style="padding:15px 0 0" align="right" width="215">
+                                <img src="images/Autom-Leaf.png">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:10px 0" colspan="2" align="right"></td>
+                        </tr>
+                    </table>
+
+
+                </td>
+            </tr>
+        </table>
+    </div>
     <!-- main content -->
     <div id="main-content" class="box" style="height:100%">
-        <div class="box text-shadow" style="height: 150px; text-align: center; background: white; background-position: center; top: 0px; background: url(../img/waterbg.png); ">
-            <div id="boatdiv" style="position:absolute;width:72px;height:72px;margin-top:73px;left:50%">
-                <img src="~/img/boat.png" style="width:72px;height:72px" />
-            </div>
-            <!-- background: url(../img/title3.jpg); background-position: center; background-repeat: no-repeat;-->
-            <div style="margin-top:7px">
-                <img src="~/img/title2.png" alt="" style="height:117px" />
-                <img src="~/img/111111.png" alt="" />
-                @*<img src="~/img/title1.png" alt="" style="height:117px" />*@
+        <div class="box text-shadow" style="height: 150px; text-align: center; background-position: center; top: 0px;  ">
+            <!-- background: white;background: url(../img/waterbg.png);-->
+            <div  style="width: 60%; height: 117px; margin-left: auto; margin-right: auto; ">
+                <div style="margin-top: 7px; width: 60%;position:absolute;z-index:9999">
+                    <img src="~/img/title2.png" alt="" style="height:117px" />
+                    <img src="~/img/111111.png" alt="" />
+                </div>
+                <div style="margin-top: 7px; width: 60%; height: 117px; background-color: white; filter: alpha(opacity:80); opacity: 0.5; border-radius: 20px; position: absolute; z-index: 9998; ">
+
+                </div>
             </div>
         </div>
         <div style="background: url(../img/red.png);width:100%;height:21px;margin-top:150px"></div>
         <div class="center">
             <div id="page-content" class="box">
-                @*style="background: url(../img/detailbg.jpg ); "*@
 
                 <!-- demo -->
-                <div id="demo" class="box jplist">
+                <div id="demo" class="box jplist" style="z-index:1">
                     <!-- ios button: show/hide panel -->
                     <div class="jplist-ios-button">
                         <i class="fa fa-sort"></i>
@@ -202,7 +230,7 @@
                                             <li><span data-path=".吹">吹</span></li>
                                             <li><span data-path=".拉">拉</span></li>
                                             <li><span data-path=".弹">弹</span></li>
-                                            <li><span data-path=".唱">唱</span></li>
+                                            <li><span data-path=".打">打</span></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -215,11 +243,11 @@
 
 
                     <!-- data  border: 2px solid #5a0000; filter: alpha(opacity:80); opacity: 1; -->
-                    <div class="list box text-shadow" style="filter: alpha(opacity:80); opacity: 0.9; border-top: 2px solid #c80000; border-bottom: 2px solid #c80000; margin-top: 5px; background: #FFF5EA; height: 1085px; border-radius: 20px; ">
+                    <div class="list box text-shadow" style="filter: alpha(opacity:80); opacity: 0.9; border-top: 2px solid #c80000; border-bottom: 2px solid #c80000; margin-top: 5px; background: #FFF5EA; height: 1085px; border-radius: 20px; z-index: 9999;">
                         <!-- item 1 -->
                         <div class="list-item box default" ng-repeat="item in videoList" style="border-bottom: 18px solid white; ">
                             <div class="img left" style="height:190px">
-                                <img ng-src="~/Uploads/videos/{{item.YueQiXingZhi_JieGouShiYiTu}}" alt="" title="" />
+                                <img ng-src="~/Uploads/videos/{{item.RenGongBianMa}}/{{item.YueQiXingZhi_JieGouShiYiTu}}" alt="" title="" />
                             </div>
                             <div class="block right">
                                 <p class="date desc" style="color: black">别称:<span ng-bind="item.TiMing_QiTaTiMing"></span></p>
@@ -227,7 +255,7 @@
                                     乐器名：<a href="javascript:void(0);" onclick="openDetail($(this).attr('_whid'));" _whid="{{item.ForExcelId}}"><span style="color: #ff6a00" ng-bind="item.TiMing_ZhengTiMing"></span></a>
                                 </p>
                                 <p class="desc" style="color: black">
-                                    简介：<span ng-bind="item.CaiLuXinXi_BanQuan"></span>
+                                    简介：<span ng-bind="item.YueQiJianJie"></span>
                                 </p>
                                 <p class="like desc" style="color: black">演奏方式：<span ng-bind="item.LeiBie_YanZouFangShi" class="{{item.LeiBie_YanZouFangShi}}"></span>&nbsp;&nbsp;&nbsp;民族：<span ng-bind="item.MinZuShuXing" class="{{item.MinZuShuXing}}"></span>&nbsp;&nbsp;&nbsp;工艺：<span ng-bind="item.YueQiXingZhi_QiTa"></span></p>
                             </div>
@@ -288,13 +316,10 @@
                 </div>
                 <!-- end of demo -->
             </div>
-        
+
         </div>
-        @*<div style="position:relative;background: white; background: url(../img/red.png); text-align: center; width: 100%; height: 150px; border-top: 2px solid #5a0000; margin-top:10px">
-            a
-        </div>*@
     </div>
-    <script src="~/Scripts/jquery-1.11.1.min.js"></script>
+    @*<script src="~/Scripts/jquery-1.11.1.min.js"></script>*@
     <script src="~/Scripts/jquery-ui.min.js"></script>
     <script src="~/Scripts/select-widget-min.js"></script>
     <script src="~/Scripts/angular.bundled.min.js"></script>
@@ -312,30 +337,6 @@
                 speed: 200,
                 scrollHeight: 250
             });
-
-            var i = 10;
-            var j = 0;
-            var e = document.getElementById('boatdiv');
-            var win = document.documentElement || document.body;
-            var width = e.clientWidth;
-            var windowWidth = win.clientWidth;
-            var acc = true;
-
-            function intern() {
-                //console.log(width, windowWidth);//e.getBoundingClientRect().left
-                if (acc) {//去
-                    e.style.left = e.getBoundingClientRect().left + 0.1 + "px";
-                    if ((e.getBoundingClientRect().left + width) >= windowWidth) {
-                        acc = false;
-                    }
-                } else {//回
-                    e.style.left = e.getBoundingClientRect().left - 0.1 + "px";
-                    if (e.getBoundingClientRect().left < windowWidth * 2 / 3) {
-                        acc = true;
-                    }
-                }
-            }
-            setInterval(intern, 1);
         });
         //底部
         $(document).ready(function () {
@@ -350,6 +351,17 @@
                 $(".select_city").fadeToggle();
             });
         });
+
+        $.AutomLeafStart({
+            leafsfolder: "images/",
+            howmanyimgsare: 8,
+            initialleafs: 10,
+            maxYposition: -25,
+            multiplyclick: true,
+            multiplynumber: 2,
+            infinite: true,
+            fallingsequence: 2500
+        }); $("#botAgregar").on("click", function () { $.AutomLeafAdd({ leafsfolder: "~/images/", add: 4, }) });
     </script>
 </body>
 </html>

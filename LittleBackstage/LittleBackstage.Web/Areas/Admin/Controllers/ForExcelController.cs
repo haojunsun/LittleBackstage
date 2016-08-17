@@ -54,12 +54,12 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             }
 
             var result = _forExcelService.SeniorSearch(state, key, yzfs, mz, pageIndex, pageSize, ref totalCount);
-            var jsonData2 = new JsonData ();
+            var jsonData2 = new JsonData();
             jsonData2.totalCount = totalCount;
             jsonData2.list = result.ToList();
             return Json(jsonData2, JsonRequestBehavior.DenyGet);
         }
-        
+
         /// <summary>
         /// 详情
         /// </summary>
@@ -97,6 +97,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
                 //Console.WriteLine(file.Name);
                 //ExcelHelper eh = new ExcelHelper("C:\\Users\\Administrator\\Desktop\\fyexcel\\" + file.Name);
                 DataTable dt = new DataTable();
+                DataTable dtimg = new DataTable();
                 DataTable dt2 = new DataTable();
                 DataTable dt3 = new DataTable();
                 DataTable dt4 = new DataTable();
@@ -106,14 +107,15 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
                 DataTable dt8 = new DataTable();
                 DataTable dt9 = new DataTable();
                 dt = ExcelToDataTable(path + "\\fyexcel\\" + file.Name, 0, 4, 49);
-                dt2 = ExcelToDataTable(path + "\\fyexcel\\" + file.Name, 1, 3, 5);
-                dt3 = ExcelToDataTable(path + "\\fyexcel\\" + file.Name, 2, 3, 5);
-                dt4 = ExcelToDataTable(path + "\\fyexcel\\" + file.Name, 3, 3, 5);
-                dt5 = ExcelToDataTable(path + "\\fyexcel\\" + file.Name, 4, 5, 18);
-                dt6 = ExcelToDataTable(path + "\\fyexcel\\" + file.Name, 5, 3, 4);
-                dt7 = ExcelToDataTable(path + "\\fyexcel\\" + file.Name, 6, 3, 4);
-                dt8 = ExcelToDataTable(path + "\\fyexcel\\" + file.Name, 7, 3, 13);
-                dt9 = ExcelToDataTable(path + "\\fyexcel\\" + file.Name, 8, 3, 10);
+                dtimg = ExcelToDataTable(path + "\\fyexcel\\" + file.Name, 1, 3, 15);
+                dt2 = ExcelToDataTable(path + "\\fyexcel\\" + file.Name, 2, 3, 5);
+                dt3 = ExcelToDataTable(path + "\\fyexcel\\" + file.Name, 3, 3, 5);
+                dt4 = ExcelToDataTable(path + "\\fyexcel\\" + file.Name, 4, 3, 5);
+                dt5 = ExcelToDataTable(path + "\\fyexcel\\" + file.Name, 5, 5, 18);
+                dt6 = ExcelToDataTable(path + "\\fyexcel\\" + file.Name, 6, 3, 4);
+                dt7 = ExcelToDataTable(path + "\\fyexcel\\" + file.Name, 7, 3, 4);
+                dt8 = ExcelToDataTable(path + "\\fyexcel\\" + file.Name, 8, 3, 13);
+                dt9 = ExcelToDataTable(path + "\\fyexcel\\" + file.Name, 9, 3, 10);
                 //Console.WriteLine(dt.Rows.count);
 
                 for (int i = 0; i < dt.Rows.Count; i++)
@@ -356,6 +358,42 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
                             wh1.LuYinHuanJin_LuYinRuanJian = dt9.Rows[a][7].ToString();
                             wh1.LuYinHuanJin_LuYinSheBei = dt9.Rows[a][8].ToString();
                             wh1.LuYinHuanJin_ShiYinTu = dt9.Rows[a][9].ToString();
+                        }
+                    }
+
+                    //不同角度图片
+                    for (int a = 0; a < dtimg.Rows.Count; a++)
+                    {
+                        if (dtimg.Rows[a][0].ToString() == rgcode)
+                        {
+                            if (dtimg.Rows[a][1].ToString() != "")
+                                wh1.Img = string.IsNullOrEmpty(wh1.Img) ? dtimg.Rows[a][1].ToString() : wh1.Img + ',' + dtimg.Rows[a][1].ToString();
+                            if (dtimg.Rows[a][2].ToString() != "")
+                                wh1.Img = string.IsNullOrEmpty(wh1.Img) ? dtimg.Rows[a][2].ToString() : wh1.Img + ',' + dtimg.Rows[a][2].ToString();
+                            if (dtimg.Rows[a][3].ToString() != "")
+                                wh1.Img = string.IsNullOrEmpty(wh1.Img) ? dtimg.Rows[a][3].ToString() : wh1.Img + ',' + dtimg.Rows[a][3].ToString();
+                            if (dtimg.Rows[a][4].ToString() != "")
+                                wh1.Img = string.IsNullOrEmpty(wh1.Img) ? dtimg.Rows[a][4].ToString() : wh1.Img + ',' + dtimg.Rows[a][4].ToString();
+                            if (dtimg.Rows[a][5].ToString() != "")
+                                wh1.Img = string.IsNullOrEmpty(wh1.Img) ? dtimg.Rows[a][5].ToString() : wh1.Img + ',' + dtimg.Rows[a][5].ToString();
+                            if (dtimg.Rows[a][6].ToString() != "")
+                                wh1.Img = string.IsNullOrEmpty(wh1.Img) ? dtimg.Rows[a][6].ToString() : wh1.Img + ',' + dtimg.Rows[a][6].ToString();
+                            if (dtimg.Rows[a][7].ToString() != "")
+                                wh1.Img = string.IsNullOrEmpty(wh1.Img) ? dtimg.Rows[a][7].ToString() : wh1.Img + ',' + dtimg.Rows[a][7].ToString();
+                            if (dtimg.Rows[a][8].ToString() != "")
+                                wh1.Img = string.IsNullOrEmpty(wh1.Img) ? dtimg.Rows[a][8].ToString() : wh1.Img + ',' + dtimg.Rows[a][8].ToString();
+                            if (dtimg.Rows[a][9].ToString() != "")
+                                wh1.Img = string.IsNullOrEmpty(wh1.Img) ? dtimg.Rows[a][9].ToString() : wh1.Img + ',' + dtimg.Rows[a][9].ToString();
+                            if (dtimg.Rows[a][10].ToString() != "")
+                                wh1.Img = string.IsNullOrEmpty(wh1.Img) ? dtimg.Rows[a][10].ToString() : wh1.Img + ',' + dtimg.Rows[a][10].ToString();
+                            if (dtimg.Rows[a][11].ToString() != "")
+                                wh1.Img = string.IsNullOrEmpty(wh1.Img) ? dtimg.Rows[a][11].ToString() : wh1.Img + ',' + dtimg.Rows[a][11].ToString();
+                            if (dtimg.Rows[a][12].ToString() != "")
+                                wh1.Img = string.IsNullOrEmpty(wh1.Img) ? dtimg.Rows[a][12].ToString() : wh1.Img + ',' + dtimg.Rows[a][12].ToString();
+                            if (dtimg.Rows[a][13].ToString() != "")
+                                wh1.Img = string.IsNullOrEmpty(wh1.Img) ? dtimg.Rows[a][13].ToString() : wh1.Img + ',' + dtimg.Rows[a][13].ToString();
+                            if (dtimg.Rows[a][14].ToString() != "")
+                                wh1.Img = string.IsNullOrEmpty(wh1.Img) ? dtimg.Rows[a][14].ToString() : wh1.Img + ',' + dtimg.Rows[a][14].ToString();
                         }
                     }
 

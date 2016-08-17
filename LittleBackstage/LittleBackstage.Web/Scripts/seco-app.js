@@ -106,11 +106,12 @@ sc.app = angular.module('scApp', [])
         $scope.yzjflist = [];
         $scope.yzjffirst = [];
         $scope.yzjfsecond = [];
+        $scope.imglist = [];
 
         $scope.sfyqlist = [];
         $scope.sfyqmp3 = [];
         $scope.sfyqmp4 = [];
-        console.log(whid);
+
         //获取单条数据
         $scope.getVideoInfo = function () {
             if (!whid)
@@ -126,7 +127,7 @@ sc.app = angular.module('scApp', [])
                 $scope.sfyqmp3 = data.ShiFanYuQu_YinPin.split(',');
                 $scope.sfyqmp4 = data.ShiFanYuQu_ShiPin.split(',');
 
-                //console.log($scope.videoinfo.FileName);
+                $scope.imglist = data.Img.split(',');
             }).error(function (data) {
                 console.log("查询失败");
             });
@@ -144,14 +145,12 @@ sc.app = angular.module('scApp', [])
             var pathName = window.document.location.pathname;
             var pos = curWwwPath.indexOf(pathName);
             var localhostPaht = curWwwPath.substring(0, pos);
-            console.log(localhostPaht + '/Uploads/videos/' + vid + '.wav');
+            console.log(localhostPaht + '/Uploads/videos/' + $scope.videoinfo.RenGongBianMa + '/' + vid + '.wav');
             var media = document.getElementById("audioplayer");
-            media.src = localhostPaht + '/Uploads/videos/' + vid + '.mp3';
+            media.src = localhostPaht + '/Uploads/videos/' + $scope.videoinfo.RenGongBianMa + '/' + vid + '.mp3';
             media.load();
-            media.play();
-            //setTimeout(function () {
+            // media.play();
 
-            //}, 500)
         }
 
         openVideoModal = function (eve) {
@@ -164,13 +163,13 @@ sc.app = angular.module('scApp', [])
             var pathName = window.document.location.pathname;
             var pos = curWwwPath.indexOf(pathName);
             var localhostPaht = curWwwPath.substring(0, pos);
-            console.log(localhostPaht + '/Uploads/videos/' + vid + '.mp4');
+            console.log(localhostPaht + '/Uploads/videos/' + $scope.videoinfo.RenGongBianMa + '/' + vid + '.mp4');
             //$('#videosource').attr("src", localhostPaht + '/Uploads/videos/' + vid + '.mp4');
             var myVideo = document.getElementById('videoplayer');
-            myVideo.src = localhostPaht + '/Uploads/videos/' + vid + '.mp4';
+            myVideo.src = localhostPaht + '/Uploads/videos/' + $scope.videoinfo.RenGongBianMa + '/' + vid + '.mp4';
             myVideo.load();
-            myVideo.play();
-           
+            //myVideo.play();
+
         }
 
     }])

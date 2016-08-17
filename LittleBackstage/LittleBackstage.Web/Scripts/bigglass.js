@@ -1,7 +1,4 @@
-/*
-  本网站效果由昆明天度网络IRIS原创制作，未经同意不得转载
-  商城用商品展示放大镜效果
-*/
+
 jQuery.ljsGlasses = {
     pcGlasses:function(_obj){
 		var _box = $("#"+_obj.boxid);
@@ -25,19 +22,19 @@ jQuery.ljsGlasses = {
 				_arr[i][4] = _obj.boxh;//height
 				_arr[i][5] = 0;//top
 				_arr[i][6] = 0;//left
-				_arr[i][7] = _obj.boxw/2;
-				_arr[i][8] = _obj.boxw*2;//width
-				_arr[i][9] = _obj.boxh*2;//height
+				_arr[i][7] = _obj.boxw/3;
+				_arr[i][8] = _obj.boxw*3;//width
+				_arr[i][9] = _obj.boxh*3;//height
 				_sumbox.append("<span><img src='"+_imgarr.eq(i).attr("src")+"' width='"+_obj.sumw+"' height='"+_obj.sumh+"' /></span>");
 				}
 			if(_scale > 1){
 				_arr[i][3] = _obj.boxw;//width
 				_arr[i][4] = _obj.boxw/_scale;
-				_arr[i][5] = (_obj.boxh-_arr[i][4])/2;
+				_arr[i][5] = (_obj.boxh-_arr[i][4])/3;
 				_arr[i][6] = 0;//left
-				_arr[i][7] = _arr[i][4]/2;
-				_arr[i][8] = _obj.boxh*2*_scale;//width
-				_arr[i][9] = _obj.boxh*2;//height
+				_arr[i][7] = _arr[i][4]/3;
+				_arr[i][8] = _obj.boxh*3*_scale;//width
+				_arr[i][9] = _obj.boxh*3;//height
 				var _place = _obj.sumh - (_obj.sumw/_scale);
 				_place = _place/2;
 				_sumbox.append("<span><img src='"+_imgarr.eq(i).attr("src")+"' width='"+_obj.sumw+"' style='top:"+_place+"px;' /></span>");
@@ -46,10 +43,10 @@ jQuery.ljsGlasses = {
 				_arr[i][3] = _obj.boxh*_scale;//width
 				_arr[i][4] = _obj.boxh;//height
 				_arr[i][5] = 0;//top
-				_arr[i][6] = (_obj.boxw-_arr[i][3])/2;
-				_arr[i][7] = _arr[i][3]/2;
-				_arr[i][8] = _obj.boxw*2;//width
-				_arr[i][9] = _obj.boxw*2/_scale;
+				_arr[i][6] = (_obj.boxw-_arr[i][3])/3;
+				_arr[i][7] = _arr[i][3]/3;
+				_arr[i][8] = _obj.boxw*3;//width
+				_arr[i][9] = _obj.boxw*3/_scale;
 				var _place = _obj.sumw - (_obj.sumh*_scale);
 				_place = _place/2;
 				_sumbox.append("<span><img src='"+_imgarr.eq(i).attr("src")+"' height='"+_obj.sumh+"' style='left:"+_place+"px;' /></span>");
@@ -61,7 +58,7 @@ jQuery.ljsGlasses = {
 		var _sumarr = _sum.find("span");
 		var _sumimg = _sum.find("img");
 		_sumarr.eq(_index).addClass(_obj.sumsel);
-		var _border = _obj.sumborder*2 + _obj.sumh;
+		var _border = _obj.sumborder*3 + _obj.sumh;
 		var _sumwidth = (_border+_obj.sumi)*_obj.sums;
 		var _sumboxwidth = (_border+_obj.sumi)*_length;
 		_sum.css({
