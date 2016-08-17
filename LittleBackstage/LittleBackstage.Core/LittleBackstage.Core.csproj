@@ -64,6 +64,10 @@
     <Compile Include="Migrations\201608090248098_addAll.Designer.cs">
       <DependentUpon>201608090248098_addAll.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201608170822237_AddImg.cs" />
+    <Compile Include="Migrations\201608170822237_AddImg.Designer.cs">
+      <DependentUpon>201608170822237_AddImg.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ForExcel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -86,6 +90,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201608090248098_addAll.resx">
       <DependentUpon>201608090248098_addAll.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608170822237_AddImg.resx">
+      <DependentUpon>201608170822237_AddImg.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

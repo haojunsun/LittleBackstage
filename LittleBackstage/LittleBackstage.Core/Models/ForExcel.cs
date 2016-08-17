@@ -497,6 +497,9 @@ namespace LittleBackstage.Core.Models
         /// </summary>
         public string JiBenXinXi_ChuanLue { get; set; }
 
+        public string Img { get; set; }
+
+        public string Other { get; set; }
 
     }
 
