@@ -3,20 +3,18 @@ body {
     color: #edede8;
 }
 
-
-
 .Upper {
     z-index: 999;
 }
 
 .AutomLeaf {
-    position: fixed;
+    position: absolute;
     opacity: 0;
     z-index: 0;
 }
 
 .AutomLeaffalling {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     opacity: 0;

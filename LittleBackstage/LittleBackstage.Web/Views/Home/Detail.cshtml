@@ -14,6 +14,10 @@
     <link rel="stylesheet" type="text/css" href="~/css/normalize.css" />
     <link rel="stylesheet" href="~/css/styledetail.css">
     <link rel="stylesheet" href="~/css/stylemodal.css">
+    <!--音频播放-->
+    <link rel="stylesheet" href="~/css/datouwang.css" />
+    <link rel="stylesheet" href="~/css/jquery.equalizer.css" />
+
     <script src="~/Scripts/jquery.js"></script>
     @*<script src="~/Scripts/mediaelement-and-player.min.js"></script>
         <script src="~/Scripts/projekktor.js"></script>*@
@@ -34,8 +38,10 @@
 
         body {
             margin: 0;
+            height:100%;
             font: 12px "\5B8B\4F53",san-serif;
             background: url(../img/detailbg.jpg);
+            background-color: #f1f4c7;
         }
 
         div, ul, li {
@@ -164,10 +170,21 @@
     </script>
 </head>
 <body ng-app="scApp" ng-controller="DetailController">
-    <div class="box text-shadow" style="height: 150px;margin-top:0px;margin-bottom:0px; text-align: center; background: white; background-position: center; top: 0px; background: url(../img/waterbg.png); width: 100%;">
-        <div style="padding-top:7px; width: 100%;">
-            <img src="~/img/title2.png" alt="" style="height:117px" />
-            <img src="~/img/111111.png" alt="" />
+    @*<div class="box text-shadow" style="height: 150px;margin-top:0px;margin-bottom:0px; text-align: center; background: white; background-position: center; top: 0px; background: url(../img/waterbg.png); width: 100%;">
+            <div style="padding-top:7px; width: 100%;">
+                <img src="~/img/title2.png" alt="" style="height:117px" />
+                <img src="~/img/111111.png" alt="" />
+            </div>
+        </div>*@
+    <div class="box text-shadow" style="height: 150px; text-align: center; margin:0 0; background-position: center; top: 0px; ">
+        <div style="width: 100%; height: 117px;  ">
+            <div id="topimgdiv" style="margin-top: 0px; width: 73%; position: absolute; z-index: 9999; margin: 0 auto;">
+                <img src="~/img/title2.png" alt="" style="height:117px" />
+                <img src="~/img/111111.png" alt="" />
+            </div>
+            <div style="margin-top: 0px; width: 100%; height: 150px; background-color: white; filter: alpha(opacity:80); opacity: 0.5; border-radius: 20px; position: absolute; z-index: 9998; ">
+
+            </div>
         </div>
     </div>
     <div style="background: url(../img/red.png);width:100%;height:21px;"></div>
@@ -232,35 +249,37 @@
             <div class="allProduct respl-header">
                 <ul class="productTab respl-option" data-option-key="filter">
                     <li class="select"><a href="#" onclick="changeDiv('jgsyimg', 'ProductList');">结构示意图</a></li>
+                    <li><a href="#" data-rl_value=".sfyq" onclick="changeDiv('ProductList', 'jgsyimg');">示范乐曲</a></li>
                     <li><a href="#" data-rl_value=".yinjie" onclick="changeDiv('ProductList', 'jgsyimg');">音阶</a></li>
                     <li><a href="#" data-rl_value=".yzjf" onclick="changeDiv('ProductList', 'jgsyimg');">演奏技法</a></li>
-                    <li><a href="#" data-rl_value=".sfyq" onclick="changeDiv('ProductList', 'jgsyimg');">示范乐曲</a></li>
+                
                 </ul>
                 <div class="jgsyimg" style="width:500px;height:500px;margin-left:120px;">
                     <img ng-src="~/Uploads/videos/{{videoinfo.RenGongBianMa}}/{{videoinfo.YueQiXingZhi_JieGouShiYiTu}}" style="width: 500px; height: 500px;" />
                 </div>
                 <ul class="ProductList respl-items" style="display:none">
-                    <li class="respl-item yinjie">
+                    @*<li class="respl-item yinjie">
                         <div class="unit">
                             <p class="hoverline"></p>
                             <a class="images" href="javascript:void(0)"><img ng-src="~/Uploads/videos/{{videoinfo.RenGongBianMa}}/{{imglist[0]}}.png" style="height:150px"></a>
                             <h1>
-                                自然衰减、力度mf
+                                音频：自然衰减、力度mf
                                 <br>
-                                <a style="color:blue;" href="javascript:void(0)" onclick="openModal($(this));" _videoid="{{videoinfo.YinJie_ZiRanShuaiJian_MF_First}}">第一遍</a>&nbsp;
-                                <a style="color:blue;" href="javascript:void(0)" onclick="openModal($(this));" _videoid="{{videoinfo.YinJie_ZiRanShuaiJian_MF_Second}}"> 第二遍</a>
+                                <a style="color:blue;" href="javascript:void(0)" onclick="openModal($(this));" _videoname="自然衰减、力度mf 第一遍" _videoid="{{videoinfo.YinJie_ZiRanShuaiJian_MF_First}}">第一遍</a>&nbsp;
+                                <a style="color:blue;" href="javascript:void(0)" onclick="openModal($(this));" _videoname="自然衰减、力度mf 第二遍" _videoid="{{videoinfo.YinJie_ZiRanShuaiJian_MF_Second}}"> 第二遍</a>
                             </h1>
                         </div>
-                    </li>
+                    </li>*@
                     <li class="respl-item yinjie">
                         <div class="unit">
                             <p class="hoverline"></p>
                             <a class="images" href="javascript:void(0)"><img ng-src="~/Uploads/videos/{{videoinfo.RenGongBianMa}}/{{imglist[0]}}.png" style="height:150px"></a>
                             <h1>
-                                自然衰减、力度mf
+                               自然衰减、力度mf
                                 <br>
-                                <a style="color:blue;" href="javascript:void(0)" onclick="openModal($(this));" _videoid="{{videoinfo.YinJie_ZiRanShuaiJian_MF_First}}">第一遍</a>&nbsp;
-                                <a style="color:blue;" href="javascript:void(0)" onclick="openModal($(this));" _videoid="{{videoinfo.YinJie_ZiRanShuaiJian_MF_Second}}"> 第二遍</a>
+                                音频：
+                                <a style="color:blue;" href="javascript:void(0)" onclick="openModal($(this));" _videoname="自然衰减、力度mf 第一遍" _videoid="{{videoinfo.YinJie_ZiRanShuaiJian_MF_First}}">第一遍</a>&nbsp;
+                                <a style="color:blue;" href="javascript:void(0)" onclick="openModal($(this));" _videoname="自然衰减、力度mf 第二遍" _videoid="{{videoinfo.YinJie_ZiRanShuaiJian_MF_Second}}"> 第二遍</a>
                             </h1>
 
                         </div>
@@ -273,8 +292,9 @@
                             <h1>
                                 慢速、力度p
                                 <br>
-                                <a style="color:blue;" href="javascript:void(0)" onclick="openModal($(this));" _videoid="{{videoinfo.YinJie_ManSu_P_First}}"> 第一遍</a>&nbsp;
-                                <a style="color:blue;" href="javascript:void(0)" onclick="openModal($(this));" _videoid="{{videoinfo.YinJie_ManSu_P_Second}}"> 第二遍</a>
+                                音频：
+                                <a style="color:blue;" href="javascript:void(0)" onclick="openModal($(this));" _videoname="慢速、力度p 第一遍" _videoid="{{videoinfo.YinJie_ManSu_P_First}}"> 第一遍</a>&nbsp;
+                                <a style="color:blue;" href="javascript:void(0)" onclick="openModal($(this));" _videoname="慢速、力度p 第二遍" _videoid="{{videoinfo.YinJie_ManSu_P_Second}}"> 第二遍</a>
                             </h1>
                         </div>
                     </li>
@@ -286,8 +306,9 @@
                             <h1>
                                 慢速、力度f
                                 <br>
-                                <a style="color:blue;" href="javascript:void(0)" onclick="openModal($(this));" _videoid="{{videoinfo.YinJie_ManSu_F_First}}"> 第一遍</a>&nbsp;
-                                <a style="color:blue;" href="javascript:void(0)" onclick="openModal($(this));" _videoid="{{videoinfo.YinJie_ManSu_F_Second}}"> 第二遍</a>
+                                音频：
+                                <a style="color:blue;" href="javascript:void(0)" onclick="openModal($(this));" _videoname="慢速、力度f 第一遍" _videoid="{{videoinfo.YinJie_ManSu_F_First}}"> 第一遍</a>&nbsp;
+                                <a style="color:blue;" href="javascript:void(0)" onclick="openModal($(this));" _videoname="慢速、力度f 第二遍" _videoid="{{videoinfo.YinJie_ManSu_F_Second}}"> 第二遍</a>
                             </h1>
 
                         </div>
@@ -298,9 +319,11 @@
                             <p class="hoverline"></p>
                             <a class="images" href="javascript:void(0)"><img ng-src="~/Uploads/videos/{{videoinfo.RenGongBianMa}}/{{imglist[0]}}.png" style="height:150px"></a>
                             <h1>
-                                慢速、力度mf<br>
-                                <a style="color:blue;" href="javascript:void(0)" onclick="openModal($(this));" _videoid="{{videoinfo.YinJie_ManSu_MF_First}}"> 第一遍</a>&nbsp;
-                                <a style="color:blue;" href="javascript:void(0)" onclick="openModal($(this));" _videoid="{{videoinfo.YinJie_ManSu_MF_Second}}"> 第二遍</a>
+                                慢速、力度mf
+                                <br>
+                                音频：
+                                <a style="color:blue;" href="javascript:void(0)" onclick="openModal($(this));" _videoname="慢速、力度mf 第一遍" _videoid="{{videoinfo.YinJie_ManSu_MF_First}}"> 第一遍</a>&nbsp;
+                                <a style="color:blue;" href="javascript:void(0)" onclick="openModal($(this));" _videoname="慢速、力度mf 第二遍" _videoid="{{videoinfo.YinJie_ManSu_MF_Second}}"> 第二遍</a>
                             </h1>
                         </div>
                     </li>
@@ -312,8 +335,9 @@
                             <h1>
                                 中速、力度f
                                 <br>
-                                <a style="color:blue;" href="javascript:void(0)" onclick="openModal($(this));" _videoid="{{videoinfo.YinJie_ZhongSu_F_First}}"> 第一遍</a>&nbsp;
-                                <a style="color:blue;" href="javascript:void(0)" onclick="openModal($(this));" _videoid="{{videoinfo.YinJie_ZhongSu_F_Second}}"> 第二遍</a>
+                                音频：
+                                <a style="color:blue;" href="javascript:void(0)" onclick="openModal($(this));" _videoname="中速、力度f 第一遍" _videoid="{{videoinfo.YinJie_ZhongSu_F_First}}"> 第一遍</a>&nbsp;
+                                <a style="color:blue;" href="javascript:void(0)" onclick="openModal($(this));" _videoname="中速、力度f 第二遍" _videoid="{{videoinfo.YinJie_ZhongSu_F_Second}}"> 第二遍</a>
                             </h1>
 
                         </div>
@@ -326,8 +350,9 @@
                             <h1>
                                 <span ng-bind="item"></span>
                                 <br>
-                                <a style="color:blue" href="javascript:void(0)" onclick="openModal($(this));" _videoid="{{yzjffirst[$index]}}">第一遍</a>&nbsp;
-                                <a style="color:blue" href="javascript:void(0)" onclick="openModal($(this));" _videoid="{{yzjfsecond[$index]}}">第二遍</a>
+                                音频：
+                                <a style="color:blue" href="javascript:void(0)" onclick="openModal($(this));" _videoname="{{item}} 第一遍" _videoid="{{yzjffirst[$index]}}">第一遍</a>&nbsp;
+                                <a style="color:blue" href="javascript:void(0)" onclick="openModal($(this));" _videoname="{{item}} 第二遍" _videoid="{{yzjfsecond[$index]}}">第二遍</a>
                             </h1>
                         </div>
                     </li>
@@ -339,8 +364,8 @@
                             <h1>
                                 <span ng-bind="item"></span>
                                 <br>
-                                <a style="color:blue" href="javascript:void(0)" onclick="openModal($(this));" _videoid="{{sfyqmp3[$index]}}">音频</a>&nbsp;
-                                <a style="color:blue" href="javascript:void(0)" onclick="openVideoModal($(this));" _videoid="{{sfyqmp4[$index]}}">视频</a>
+                                <a style="color:blue" href="javascript:void(0)" onclick="openModal($(this));" _videoname="{{item}} 音频" _videoid="{{sfyqmp3[$index]}}">音频</a>&nbsp;
+                                <a style="color:blue" href="javascript:void(0)" onclick="openVideoModal($(this));" _videoname="{{item}} 视频" _videoid="{{sfyqmp4[$index]}}">视频</a>
                             </h1>
                         </div>
                     </li>
@@ -349,20 +374,33 @@
         </div>
     </div>
 
+    <div class="" style="height: 100px; width: 100%; text-align: center; background-position: center; background-color: #f8f9e3; bottom: 0px; ">
+        <div style="width: 100%; height: 100px;  ">
+            <div style="margin-top: 0px; width: 100%; height: 100px; position: absolute; z-index: 9998; border-top:solid 2px grey">
+                <p style="font-size: smaller; color: #402111">版权所有  ©  2016文化部民族民间文艺发展中心、北京华阳凡科数字控制技术有限公司</p>
+                <p style="font-size: smaller; color: #402111">技术支持：北京华阳凡科数字控制技术有限公司</p>
+                <p style="font-size: smaller; color: #402111">联系电话：010-56718016</p>
+                <p style="font-size: smaller; color: #402111">地址：北京市朝阳区朝来高科技产业园6号楼西侧3层</p>
+            </div>
+        </div>
+    </div>
+
     <div class="cd-popup3">
-        <div class="cd-popup-container3" style="width:650px;height:120px;background-color:#edffce">
-            <p>音频播放</p>
-            <div class="cd-buttons" style="margin-left:80px;margin-top:18px;">
-                <audio id="audioplayer" src="" controls="controls"></audio>
+        <div class="cd-popup-container3" style="width:650px;height:320px;background-color:white">
+            <p id="radioname" style="font-size:x-large">音频播放</p>
+            @*<div class="cd-buttons" style="margin-left:80px;margin-top:18px;">
+                    <audio id="audioplayer" src="" controls="controls"></audio>
+                </div>*@
+            <div id="equalizer" style="margin-left:23px">
+                <audio id="audioplayer" src="" style="opacity:1; position: absolute; margin-left: 160px; margin-top: 160px;" controls></audio>
             </div>
             <a href="#0" class="cd-popup-close">关闭</a>
         </div>
     </div>
-    <div class="cd-popup4">
-        <div class="cd-popup-container3" >
-            <p>视频播放</p>
+    <div class="cd-popup4" >
+        <div class="cd-popup-container3" style="background-color:#FFFFFF;">
+            <p id="videoname" style="font-size: x-large;color:black;">视频播放</p>
             <div class="cd-buttons">
-               
                 <video id="videoplayer" poster="~/img/videobg.png" style="margin-left:80px" width="650" height="550" controls=controls onclick="$(this)[0].play();">
                     <source id="videosource" src="" type="video/mp4" />
                 </video>
@@ -374,11 +412,14 @@
     @*<div class="loadMore">
             <a href="javascript:;">更多</a>
         </div>*@
-
+  
     <script src="~/Scripts/jquery-1.7.2.min.js"></script>
     @*<script src="~/Scripts/jquery.imagezoom.js"></script>*@
     <script src="~/Scripts/angular.bundled.min.js"></script>
     <script src="~/Scripts/jquery.isotope.js"></script>
+    <!--音频播放-->
+    <script type="text/javascript" src="~/Scripts/jquery.reverseorder.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.equalizer.js"></script>
     <!--放大镜-->
     <script src="~/Scripts/bigglass.js"></script>
     <script src="~/Scripts/seco-app.js"></script>
@@ -455,6 +496,14 @@
                     myVideo.load();
                 }
             });
+
+            //设置标题居中
+            var e = document.getElementById('topimgdiv');
+            var win = document.documentElement || document.body;
+            var width = e.clientWidth;
+            var windowWidth = win.clientWidth;
+            var leftoffset = (windowWidth - width) / 2;
+            e.style.left = leftoffset + 'px';
         });
     </script>
 </body>

@@ -44,12 +44,11 @@ sc.app = angular.module('scApp', [])
                     $('#demo').jplist({
                         itemsBox: '.list'
                    , itemPath: '.list-item'
-                   , panelPath: '.jplist-panel'
-
-                        //save plugin state
-                   , storage: 'localstorage' //'', 'cookies', 'localstorage'
+                   , panelPath: '.jplist-panel'//save plugin state
+                   , storage: '' //'', 'cookies', 'localstorage'
                    , storageName: 'jplist-div-layout'
                     });
+                    $('#shadowdiv').addClass('jplist-hidden');
                 }, 100);
 
             }).error(function (data) {
@@ -140,6 +139,9 @@ sc.app = angular.module('scApp', [])
             $('.cd-popup3').addClass('is-visible3');
 
             var vid = $(eve).attr('_videoid');
+            var radioname = $(eve).attr('_videoname');
+
+            $('#radioname').text(radioname);
 
             var curWwwPath = window.document.location.href;
             var pathName = window.document.location.pathname;
@@ -158,6 +160,9 @@ sc.app = angular.module('scApp', [])
             $('.cd-popup4').addClass('is-visible3');
 
             var vid = $(eve).attr('_videoid');
+            var videoname = $(eve).attr('_videoname');
+
+            $('#videoname').text(videoname);
 
             var curWwwPath = window.document.location.href;
             var pathName = window.document.location.pathname;
