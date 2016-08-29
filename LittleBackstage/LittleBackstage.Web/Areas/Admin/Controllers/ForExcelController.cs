@@ -330,18 +330,19 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
                     {
                         if (dt8.Rows[a][0].ToString() == rgcode)
                         {
-                            wh1.JiBenXinXi_XingBie = dt8.Rows[a][1].ToString();
-                            wh1.JiBenXinXi_ChuShengNianYue = dt8.Rows[a][2].ToString();
-                            wh1.JiBenXinXi_JiGuan = dt8.Rows[a][3].ToString();
-                            wh1.JiBenXinXi_XueLi = dt8.Rows[a][4].ToString();
-                            wh1.JiBenXinXi_ZhuanYe = dt8.Rows[a][5].ToString();
-                            wh1.JiBenXinXi_ZhiCheng = dt8.Rows[a][6].ToString();
-                            wh1.JiBenXinXi_XueSuoYanZouYueQiShiJian = dt8.Rows[a][7].ToString();
-                            wh1.JiBenXinXi_LianXiFangShi = dt8.Rows[a][8].ToString();
-                            wh1.JiBenXinXi_GongZuoDanWei = dt8.Rows[a][9].ToString();
-                            wh1.JiBenXinXi_TingLiZhuangKuang = dt8.Rows[a][10].ToString();
-                            wh1.JiBenXinXi_ShiChengGuanXi = dt8.Rows[a][11].ToString();
-                            wh1.JiBenXinXi_ChuanLue = dt8.Rows[a][12].ToString();
+                            wh1.Other = dt8.Rows[a][1].ToString();
+                            wh1.JiBenXinXi_XingBie = dt8.Rows[a][2].ToString();
+                            wh1.JiBenXinXi_ChuShengNianYue = dt8.Rows[a][3].ToString();
+                            wh1.JiBenXinXi_JiGuan = dt8.Rows[a][4].ToString();
+                            wh1.JiBenXinXi_XueLi = dt8.Rows[a][5].ToString();
+                            wh1.JiBenXinXi_ZhuanYe = dt8.Rows[a][6].ToString();
+                            wh1.JiBenXinXi_ZhiCheng = dt8.Rows[a][7].ToString();
+                            wh1.JiBenXinXi_XueSuoYanZouYueQiShiJian = dt8.Rows[a][8].ToString();
+                            wh1.JiBenXinXi_LianXiFangShi = dt8.Rows[a][9].ToString();
+                            wh1.JiBenXinXi_GongZuoDanWei = dt8.Rows[a][10].ToString();
+                            wh1.JiBenXinXi_TingLiZhuangKuang = dt8.Rows[a][11].ToString();
+                            wh1.JiBenXinXi_ShiChengGuanXi = dt8.Rows[a][12].ToString();
+                            wh1.JiBenXinXi_ChuanLue = dt8.Rows[a][13].ToString();
                         }
                     }
                     //附表采录环境
