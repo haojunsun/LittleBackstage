@@ -503,9 +503,9 @@ namespace LittleBackstage.Core.Models
 
     }
 
-    public class JsonData
-    {
-        public List<ForExcel> list { get; set; }
-        public int totalCount { get; set; }
-    }
+    //public class JsonData
+    //{
+    //    public List<ForExcel> list { get; set; }
+    //    public int totalCount { get; set; }
+    //}
 }

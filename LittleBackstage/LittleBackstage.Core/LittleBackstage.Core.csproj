@@ -68,11 +68,17 @@
     <Compile Include="Migrations\201608170822237_AddImg.Designer.cs">
       <DependentUpon>201608170822237_AddImg.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201608310650381_LiteratureExcel.cs" />
+    <Compile Include="Migrations\201608310650381_LiteratureExcel.Designer.cs">
+      <DependentUpon>201608310650381_LiteratureExcel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ForExcel.cs" />
+    <Compile Include="Models\LiteratureExcel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AppDbContext.cs" />
     <Compile Include="Services\ForExcelService.cs" />
+    <Compile Include="Services\LiteratureExcelServices.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -93,6 +99,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201608170822237_AddImg.resx">
       <DependentUpon>201608170822237_AddImg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608310650381_LiteratureExcel.resx">
+      <DependentUpon>201608310650381_LiteratureExcel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

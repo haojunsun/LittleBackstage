@@ -40,25 +40,25 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
         /// <param name="pageSize"></param>
         /// <param name="pageIndex"></param>
         /// <returns></returns>
-        [HttpPost]
-        public ActionResult SeniorSearch(int state, string key, string yzfs, string mz, int pageSize, int pageIndex)
-        {
-            var totalCount = 0;
-            if (string.IsNullOrEmpty(key) && string.IsNullOrEmpty(yzfs) && string.IsNullOrEmpty(mz))
-            {
-                var all = _forExcelService.List(pageIndex, pageSize, ref totalCount);
-                var jsonData = new JsonData();
-                jsonData.totalCount = totalCount;
-                jsonData.list = all.ToList();
-                return Json(jsonData, JsonRequestBehavior.DenyGet);
-            }
+        //[HttpPost]
+        //public ActionResult SeniorSearch(int state, string key, string yzfs, string mz, int pageSize, int pageIndex)
+        //{
+        //    var totalCount = 0;
+        //    if (string.IsNullOrEmpty(key) && string.IsNullOrEmpty(yzfs) && string.IsNullOrEmpty(mz))
+        //    {
+        //        var all = _forExcelService.List(pageIndex, pageSize, ref totalCount);
+        //        var jsonData = new JsonData();
+        //        jsonData.totalCount = totalCount;
+        //        jsonData.list = all.ToList();
+        //        return Json(jsonData, JsonRequestBehavior.DenyGet);
+        //    }
 
-            var result = _forExcelService.SeniorSearch(state, key, yzfs, mz, pageIndex, pageSize, ref totalCount);
-            var jsonData2 = new JsonData();
-            jsonData2.totalCount = totalCount;
-            jsonData2.list = result.ToList();
-            return Json(jsonData2, JsonRequestBehavior.DenyGet);
-        }
+        //    var result = _forExcelService.SeniorSearch(state, key, yzfs, mz, pageIndex, pageSize, ref totalCount);
+        //    var jsonData2 = new JsonData();
+        //    jsonData2.totalCount = totalCount;
+        //    jsonData2.list = result.ToList();
+        //    return Json(jsonData2, JsonRequestBehavior.DenyGet);
+        //}
 
         /// <summary>
         /// 详情

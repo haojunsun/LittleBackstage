@@ -17,5 +17,7 @@ namespace LittleBackstage.Core.Repositories
         }
 
         public DbSet<ForExcel> ForExcels { get; set; }
+
+        public DbSet<LiteratureExcel> LiteratureExcels { get; set; }
     }
 }
