@@ -31,19 +31,19 @@ namespace LittleBackstage.Core.Services
         /// <param name="pageSize"></param>
         /// <param name="totalCount"></param>
         /// <returns></returns>
-       // IEnumerable<LiteratureExcel> SearchFull(string key, string yzfs, string mz, int pageIndex, int pageSize, ref int totalCount);
+        // IEnumerable<LiteratureExcel> SearchFull(string key, string yzfs, string mz, int pageIndex, int pageSize, ref int totalCount);
 
         /// <summary>
         /// 高级检索
         /// </summary>
-        //IEnumerable<LiteratureExcel> SeniorSearch(int state, string key, string yzfs, string mz, int pageIndex, int pageSize, ref int totalCount);
-       // LiteratureExcel GetFirstByRenGongBianMa(string renGongBianMa);
+        IEnumerable<LiteratureExcel> SeniorSearch(string key, string fl, int pageIndex, int pageSize, ref int totalCount);
+        // LiteratureExcel GetFirstByRenGongBianMa(string renGongBianMa);
         void Import(List<LiteratureExcel> excels);
     }
     public class LiteratureExcelServices : ILiteratureExcelServices
     {
-          private readonly AppDbContext _appDbContext;
-          public LiteratureExcelServices(AppDbContext appDbContext)
+        private readonly AppDbContext _appDbContext;
+        public LiteratureExcelServices(AppDbContext appDbContext)
         {
             _appDbContext = appDbContext;
         }
@@ -94,12 +94,12 @@ namespace LittleBackstage.Core.Services
 
         //public IEnumerable<LiteratureExcel> Search(string key, int pageIndex, int pageSize, ref int totalCount)
         //{
-            //var list = (from p in _appDbContext.LiteratureExcels
-            //            where p.RenGongBianMa.Contains(key)
-            //            orderby p.CreatedUtc descending
-            //            select p).Skip((pageIndex - 1) * pageSize).Take(pageSize);
-            //totalCount = _appDbContext.ForExcels.Count(x => x.RenGongBianMa.Contains(key));
-            //return list.ToList();
+        //var list = (from p in _appDbContext.LiteratureExcels
+        //            where p.RenGongBianMa.Contains(key)
+        //            orderby p.CreatedUtc descending
+        //            select p).Skip((pageIndex - 1) * pageSize).Take(pageSize);
+        //totalCount = _appDbContext.ForExcels.Count(x => x.RenGongBianMa.Contains(key));
+        //return list.ToList();
         //}
 
         //public IEnumerable<ForExcel> SearchFull(string key, string yzfs, string mz, int pageIndex, int pageSize, ref int totalCount)
@@ -112,24 +112,45 @@ namespace LittleBackstage.Core.Services
         //    return list.ToList();
         //}
 
-        //public IEnumerable<ForExcel> SeniorSearch(int state, string key, string yzfs, string mz, int pageIndex, int pageSize, ref int totalCount)
-        //{
-        //    switch (state)
-        //    {
-        //        case 0:
-        //            return SearchFull(key, yzfs, mz, pageIndex, pageSize, ref totalCount);
-        //        case 1:
-        //            {
-        //                var list = (from p in _appDbContext.ForExcels
-        //                            where p.TiMing_ZhengTiMing.Contains(key) && p.LeiBie_YanZouFangShi.Contains(yzfs) && p.MinZuShuXing.Contains(mz)
-        //                            orderby p.CreatedUtc descending
-        //                            select p).Skip((pageIndex - 1) * pageSize).Take(pageSize);
-        //                totalCount = _appDbContext.ForExcels.Count(p => p.TiMing_ZhengTiMing.Contains(key) && p.LeiBie_YanZouFangShi.Contains(yzfs) && p.MinZuShuXing.Contains(mz));
-        //                return list.ToList();
-        //            }
-        //    }
-        //    return List(pageIndex, pageSize, ref totalCount);
-        //}
+        public IEnumerable<LiteratureExcel> SeniorSearch(string key, string fl, int pageIndex, int pageSize, ref int totalCount)
+        {
+           // var list = from p in _appDbContext.ForExcels select p;
+            if (!string.IsNullOrEmpty(key) && !string.IsNullOrEmpty(fl))
+            {
+                var list = (from p in _appDbContext.LiteratureExcels
+                            where (p.TitleProper.Contains(key) || p.XiangMuMingCheng.Contains(key)) && p.FirstLevel.Contains(fl) 
+                            orderby p.CreatedUtc descending
+                            select p).Skip((pageIndex - 1) * pageSize).Take(pageSize);
+                totalCount = _appDbContext.LiteratureExcels.Count(p => (p.TitleProper.Contains(key) || p.XiangMuMingCheng.Contains(key)) && p.FirstLevel.Contains(fl));
+                return list.ToList();
+            }
+
+            if (!string.IsNullOrEmpty(key) && string.IsNullOrEmpty(fl))
+            {
+                var list = (from p in _appDbContext.LiteratureExcels
+                            where p.TitleProper.Contains(key) || p.XiangMuMingCheng.Contains(key)
+                            orderby p.CreatedUtc descending
+                            select p).Skip((pageIndex - 1) * pageSize).Take(pageSize);
+                totalCount = _appDbContext.LiteratureExcels.Count(p => p.TitleProper.Contains(key) || p.XiangMuMingCheng.Contains(key));
+                return list.ToList();
+            }
+
+            if (string.IsNullOrEmpty(key) && !string.IsNullOrEmpty(fl))
+            {
+                var list = (from p in _appDbContext.LiteratureExcels
+                            where  p.FirstLevel.Contains(fl)
+                            orderby p.CreatedUtc descending
+                            select p).Skip((pageIndex - 1) * pageSize).Take(pageSize);
+                totalCount = _appDbContext.LiteratureExcels.Count(p =>  p.FirstLevel.Contains(fl));
+                return list.ToList();
+            }
+            //var list = (from p in _appDbContext.ForExcels
+            //            where p.TiMing_ZhengTiMing.Contains(key) && p.LeiBie_YanZouFangShi.Contains(yzfs) && p.MinZuShuXing.Contains(mz)
+            //            orderby p.CreatedUtc descending
+            //            select p).Skip((pageIndex - 1) * pageSize).Take(pageSize);
+            //totalCount = _appDbContext.ForExcels.Count(p => p.TiMing_ZhengTiMing.Contains(key) && p.LeiBie_YanZouFangShi.Contains(yzfs) && p.MinZuShuXing.Contains(mz));
+            return null;
+        }
 
         //public ForExcel GetFirstByRenGongBianMa(string renGongBianMa)
         //{

@@ -18,11 +18,11 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
     public class ForExcelController : Controller
     {
         private readonly IHelperServices _helperServices;
-        private readonly IForExcelService _forExcelService;
+        private readonly ILiteratureExcelServices _forExcelService;
         private readonly ILogService _log;
 
 
-        public ForExcelController(IHelperServices helperServices, IForExcelService forExcelService, ILogService log)
+        public ForExcelController(IHelperServices helperServices, ILiteratureExcelServices forExcelService, ILogService log)
         {
             _helperServices = helperServices;
             _forExcelService = forExcelService;
@@ -33,32 +33,30 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
         /// <summary>
         /// 高级检索
         /// </summary>
-        /// <param name="state">status=1 进行全文匹配，如果status=2进行正题名匹配，如果status=3进行演奏方式匹配，status=4进行民族匹配</param>
-        /// <param name="key">关键字</param>
-        /// <param name="yzfs"></param>
-        /// <param name="mz"></param>
+        /// <param name="key"></param>
+        /// <param name="fl"></param>
         /// <param name="pageSize"></param>
         /// <param name="pageIndex"></param>
         /// <returns></returns>
-        //[HttpPost]
-        //public ActionResult SeniorSearch(int state, string key, string yzfs, string mz, int pageSize, int pageIndex)
-        //{
-        //    var totalCount = 0;
-        //    if (string.IsNullOrEmpty(key) && string.IsNullOrEmpty(yzfs) && string.IsNullOrEmpty(mz))
-        //    {
-        //        var all = _forExcelService.List(pageIndex, pageSize, ref totalCount);
-        //        var jsonData = new JsonData();
-        //        jsonData.totalCount = totalCount;
-        //        jsonData.list = all.ToList();
-        //        return Json(jsonData, JsonRequestBehavior.DenyGet);
-        //    }
+        [HttpPost]
+        public ActionResult SeniorSearch(string key, string fl, int pageSize, int pageIndex)
+        {
+            var totalCount = 0;
+            if (string.IsNullOrEmpty(key) && string.IsNullOrEmpty(fl))
+            {
+                var all = _forExcelService.List(pageIndex, pageSize, ref totalCount);
+                var jsonData = new JsonData();
+                jsonData.totalCount = totalCount;
+                jsonData.list = all.ToList();
+                return Json(jsonData, JsonRequestBehavior.DenyGet);
+            }
 
-        //    var result = _forExcelService.SeniorSearch(state, key, yzfs, mz, pageIndex, pageSize, ref totalCount);
-        //    var jsonData2 = new JsonData();
-        //    jsonData2.totalCount = totalCount;
-        //    jsonData2.list = result.ToList();
-        //    return Json(jsonData2, JsonRequestBehavior.DenyGet);
-        //}
+            var result = _forExcelService.SeniorSearch(key, fl,pageIndex, pageSize, ref totalCount);
+            var jsonData2 = new JsonData();
+            jsonData2.totalCount = totalCount;
+            jsonData2.list = result.ToList();
+            return Json(jsonData2, JsonRequestBehavior.DenyGet);
+        }
 
         /// <summary>
         /// 详情
