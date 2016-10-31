@@ -210,9 +210,9 @@
                     <h3 ng-bind="videoinfo.TiMing_ZhengTiMing"> </h3>
                     <a href="@Url.Action("main","home")" style="float:right">返回列表>></a>
                 </div>
-                <div class="txt" style="color:#000000;font-size:larger">
+                @*<div class="txt" style="color:#000000;font-size:larger">
                     别名：<span ng-bind="videoinfo.TiMing_QiTaTiMing" />
-                </div>
+                </div>*@
                 <div class="txt" style="color: #000000; font-size: larger">
                     演奏方式：<span ng-bind="videoinfo.LeiBie_YanZouFangShi" />
                 </div>
@@ -220,18 +220,32 @@
                     民族：<span ng-bind="videoinfo.MinZuShuXing" />
                 </div>
                 <div class="txt" style="color: #000000; font-size: larger">
-                    乐器工艺：<span ng-bind="videoinfo.YueQiXingZhi_QiTa" />
+                    流布地区：<span ng-bind="videoinfo.WenHuaBeiJing_LiuBuDiYu" />
                 </div>
-                <div class="txt" style="color: #000000; font-size: larger">
+                @*<div class="txt" style="color: #000000; font-size: larger">
                     文化背景：<span ng-bind="videoinfo.WenHuaBeiJing_LiShiYuanLiu" />
                 </div>
                 <div class="txt" style="color: #000000; font-size: larger">
                     流布地区：<span ng-bind="videoinfo.WenHuaBeiJing_LiuBuDiYu" />
-                </div>
+                </div>*@
                 <div class="txt" style="color: #000000; font-size: larger">
                     乐器简介：<span ng-bind="videoinfo.YueQiJianJie" />
                 </div>
-
+                <div class="txt" style="color: #000000; font-size: larger">
+                    音域：<span ng-bind="addattr[1]" />
+                </div>
+                <div class="txt" style="color: #000000; font-size: larger">
+                    动态范围：<span ng-bind="addattr[2]" />
+                </div>
+                <div class="txt" style="color: #000000; font-size: larger">
+                    频响范围：<span ng-bind="addattr[3]" />
+                </div>
+                <div class="txt" style="color: #000000; font-size: larger">
+                    自然衰减时长：<span ng-bind="addattr[4]" />
+                </div>
+                <div class="txt" style="color: #000000; font-size: larger">
+                    音色主观评价：<span ng-bind="addattr[5]" />
+                </div>
                 @*<div class="nobdr-btns">
                         <button class="addcart hu"><img src="images/shop.png" width="25" height="25" />加入购物车</button>
                         <button class="addcart yh"><img src="images/ht.png" width="25" height="25" />立即购买</button>
@@ -255,7 +269,7 @@
 
                 </ul>
                 <div class="jgsyimg" style="width:500px;height:500px;margin-left:120px;">
-                    <img ng-src="~/Uploads/videos/{{videoinfo.RenGongBianMa}}/{{videoinfo.YueQiXingZhi_JieGouShiYiTu}}" style="width: 500px; height: 500px;" />
+                    <img ng-hide="!videoinfo.YueQiXingZhi_JieGouShiYiTu" ng-src="~/Uploads/videos/{{videoinfo.RenGongBianMa}}/{{videoinfo.YueQiXingZhi_JieGouShiYiTu}}.png" style="width: 500px; height: 500px;" />
                 </div>
                 <ul class="ProductList respl-items" style="display:none">
                     @*<li class="respl-item yinjie">
@@ -401,12 +415,13 @@
         <div class="cd-popup-container3" style="background-color:#FFFFFF;">
             <p id="videoname" style="font-size: x-large;color:black;">视频播放</p>
             <div class="cd-buttons">
-                <video id="videoplayer" poster="~/img/videobg.png" style="margin-left:27px" width="540" height="450" controls=controls onclick="$(this)[0].play();">
+                <video id="videoplayer" poster="~/img/videobg.png" style="margin-left:27px" width="540" height="380" controls=controls onclick="$(this)[0].play();">
                     <source id="videosource" src="" type="video/mp4" />
                 </video>
-                <p style="text-align:left;"><span style="font-size:larger;margin-left:90px;">演奏者：</span><span style="font-size:larger;" ng-bind="videoinfo.Other"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>性别：</span><span ng-bind="videoinfo.JiBenXinXi_XingBie"></span></p>
-                <p style="text-align:left;"><span style="font-size: larger; margin-left: 90px;">专业/职业：</span><span style="font-size:larger;" ng-bind="videoinfo.JiBenXinXi_ZhuanYe"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>职称：</span><span ng-bind="videoinfo.JiBenXinXi_ZhiCheng"></span></p>
-                <p style="text-align:left;"><span style="font-size: larger; margin-left: 90px;">师承关系：</span><span style="font-size:larger;" ng-bind="videoinfo.JiBenXinXi_ShiChengGuanXi"></span></p>
+                <p style="text-align:left;"><span style="font-size:larger;margin-left:90px;">演奏者：</span><span style="font-size:larger;" ng-bind="videoinfo.JiBenXinXi_XueLi"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>性别：</span><span ng-bind="videoinfo.JiBenXinXi_XingBie"></span></p>
+                <p style="text-align:left;"><span style="font-size: larger; margin-left: 90px;">出生年月：</span><span style="font-size:larger;" ng-bind="videoinfo.JiBenXinXi_ChuShengNianYue"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>职称：</span><span ng-bind="videoinfo.JiBenXinXi_ZhiCheng"></span></p>
+                <p style="text-align:left;"><span style="font-size: larger; margin-left: 90px;">籍贯：</span><span style="font-size:larger;" ng-bind="videoinfo.JiBenXinXi_JiGuan"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>学所演奏乐器时间：</span><span ng-bind="videoinfo.JiBenXinXi_XueSuoYanZouYueQiShiJian"></span></p>
+                 <p style="text-align: left; padding-left: 90px;"><span style="font-size: larger; ">师承关系：</span><span style="font-size:larger;" ng-bind="videoinfo.JiBenXinXi_ShiChengGuanXi"></span></p>
                 <p style="text-align:left;padding-left:90px;"><span style="font-size: larger;">传略：</span><span style="font-size:larger;" ng-bind="videoinfo.JiBenXinXi_ChuanLue"></span></p>
             </div>
             <a href="#0" class="cd-popup-close">关闭</a>

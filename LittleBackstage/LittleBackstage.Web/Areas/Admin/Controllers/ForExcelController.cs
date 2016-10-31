@@ -106,16 +106,16 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
                 DataTable dt7 = new DataTable();
                 DataTable dt8 = new DataTable();
                 DataTable dt9 = new DataTable();
-                dt = ExcelToDataTable(path + "\\fyexcel\\" + file.Name, 0, 4, 49);
-                dtimg = ExcelToDataTable(path + "\\fyexcel\\" + file.Name, 1, 3, 15);
-                dt2 = ExcelToDataTable(path + "\\fyexcel\\" + file.Name, 2, 3, 5);
-                dt3 = ExcelToDataTable(path + "\\fyexcel\\" + file.Name, 3, 3, 5);
-                dt4 = ExcelToDataTable(path + "\\fyexcel\\" + file.Name, 4, 3, 5);
-                dt5 = ExcelToDataTable(path + "\\fyexcel\\" + file.Name, 5, 5, 18);
-                dt6 = ExcelToDataTable(path + "\\fyexcel\\" + file.Name, 6, 3, 4);
-                dt7 = ExcelToDataTable(path + "\\fyexcel\\" + file.Name, 7, 3, 4);
-                dt8 = ExcelToDataTable(path + "\\fyexcel\\" + file.Name, 8, 3, 13);
-                dt9 = ExcelToDataTable(path + "\\fyexcel\\" + file.Name, 9, 3, 10);
+                dt = ExcelToDataTable(path + "\\fyexcel\\" + file.Name, 0, 4, 54);
+                dtimg = ExcelToDataTable(path + "\\fyexcel\\" + file.Name, 1, 2, 15);
+                dt2 = ExcelToDataTable(path + "\\fyexcel\\" + file.Name, 2, 2, 5);
+                dt3 = ExcelToDataTable(path + "\\fyexcel\\" + file.Name, 3, 2, 5);
+                dt4 = ExcelToDataTable(path + "\\fyexcel\\" + file.Name, 4, 2, 5);
+                dt5 = ExcelToDataTable(path + "\\fyexcel\\" + file.Name, 5, 4, 18);
+                dt6 = ExcelToDataTable(path + "\\fyexcel\\" + file.Name, 6, 2, 4);
+                dt7 = ExcelToDataTable(path + "\\fyexcel\\" + file.Name, 7, 2, 4);
+                dt8 = ExcelToDataTable(path + "\\fyexcel\\" + file.Name, 8, 2, 13);
+                dt9 = ExcelToDataTable(path + "\\fyexcel\\" + file.Name, 9, 2, 10);
                 //Console.WriteLine(dt.Rows.count);
 
                 for (int i = 0; i < dt.Rows.Count; i++)
@@ -225,7 +225,17 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
                         if (j == 48)
                             wh1.ShengXueCeLiangYuPinPuFenXiBaoGao = dt.Rows[i][j].ToString();
                         if (j == 49)
-                            wh1.CeLiangXinXiJiLuBiao = dt.Rows[i][j].ToString();
+                            wh1.Other = dt.Rows[i][j].ToString();
+                        if (j == 50)
+                            wh1.Other = wh1.Other + ',' + dt.Rows[i][j].ToString();
+                        if (j == 51)
+                            wh1.Other = wh1.Other + ',' + dt.Rows[i][j].ToString();
+                        if (j == 52)
+                            wh1.Other = wh1.Other + ',' + dt.Rows[i][j].ToString();
+                        if (j == 53)
+                            wh1.Other = wh1.Other + ',' + dt.Rows[i][j].ToString();
+                        if (j == 54)
+                            wh1.Other = wh1.Other + ',' + dt.Rows[i][j].ToString();
                     }
                     //附表发音体
                     for (int a = 0; a < dt2.Rows.Count; a++)
@@ -330,11 +340,10 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
                     {
                         if (dt8.Rows[a][0].ToString() == rgcode)
                         {
-                            wh1.Other = dt8.Rows[a][1].ToString();
                             wh1.JiBenXinXi_XingBie = dt8.Rows[a][2].ToString();
                             wh1.JiBenXinXi_ChuShengNianYue = dt8.Rows[a][3].ToString();
                             wh1.JiBenXinXi_JiGuan = dt8.Rows[a][4].ToString();
-                            wh1.JiBenXinXi_XueLi = dt8.Rows[a][5].ToString();
+                            wh1.JiBenXinXi_XueLi = dt8.Rows[a][1].ToString();//dt8.Rows[a][5].ToString();
                             wh1.JiBenXinXi_ZhuanYe = dt8.Rows[a][6].ToString();
                             wh1.JiBenXinXi_ZhiCheng = dt8.Rows[a][7].ToString();
                             wh1.JiBenXinXi_XueSuoYanZouYueQiShiJian = dt8.Rows[a][8].ToString();

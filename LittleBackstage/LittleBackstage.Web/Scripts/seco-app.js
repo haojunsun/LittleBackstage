@@ -18,8 +18,8 @@ sc.app = angular.module('scApp', [])
 
         //进入详情页
         openDetail = function (whid, ele) {
-            console.log(whid);
-            window.location.href = '/home/detail?instruments=' + whid;
+            //console.log(whid);
+            window.open('/home/detail?instruments=' + whid);
         }
         //全文or乐器名
         $scope.searchEvent = function () {
@@ -33,7 +33,7 @@ sc.app = angular.module('scApp', [])
             var state = $scope.searchtype ? 0 : 1;
             //alert($scope.searchtype + "," + state);
             $http.post(sc.baseUrl + 'ForExcel/SeniorSearch', { "state": state, "key": $scope.searchkey, "yzfs": $scope.yzfs, "mz": $scope.mz, "pageSize": $scope.pageSize, "pageIndex": $scope.pageIndex }).success(function (data) {
-                console.log(data);
+                //console.log(data);
                 $scope.datacount = data.totalCount;
                 $scope.totalpage = ($scope.datacount / $scope.pageSize) >> 0;
                 $scope.videoList = data.list;
@@ -73,7 +73,7 @@ sc.app = angular.module('scApp', [])
         //搜素关键字
         $scope.changeSearchkey = function () {
             $scope.searchkey = $("#searchkey").val();
-            console.log($scope.searchkey);
+            //console.log($scope.searchkey);
             $scope.pageIndex = 1;
             $scope.getVedioList();
         }
@@ -111,12 +111,14 @@ sc.app = angular.module('scApp', [])
         $scope.sfyqmp3 = [];
         $scope.sfyqmp4 = [];
 
+        $scope.addattr = [];
+
         //获取单条数据
         $scope.getVideoInfo = function () {
             if (!whid)
                 return;
             $http.post(sc.baseUrl + 'ForExcel/Find', { "id": whid }).success(function (data) {
-                console.log(data);
+                //console.log(data);
                 $scope.videoinfo = data;
                 $scope.yzjflist = data.YanZhouJiFa_MingChen.split(',');//演奏技法名
                 $scope.yzjffirst = data.YanZhouJiFa_First.split(',');
@@ -125,6 +127,8 @@ sc.app = angular.module('scApp', [])
                 $scope.sfyqlist = data.ShiFanYuQu_QuMuMing.split(',');//示范乐曲名
                 $scope.sfyqmp3 = data.ShiFanYuQu_YinPin.split(',');
                 $scope.sfyqmp4 = data.ShiFanYuQu_ShiPin.split(',');
+
+                $scope.addattr = data.Other.split(',');
 
                 $scope.imglist = data.Img.split(',');
             }).error(function (data) {
@@ -147,7 +151,7 @@ sc.app = angular.module('scApp', [])
             var pathName = window.document.location.pathname;
             var pos = curWwwPath.indexOf(pathName);
             var localhostPaht = curWwwPath.substring(0, pos);
-            console.log(localhostPaht + '/Uploads/videos/' + $scope.videoinfo.RenGongBianMa + '/' + vid + '.wav');
+            //console.log(localhostPaht + '/Uploads/videos/' + $scope.videoinfo.RenGongBianMa + '/' + vid + '.wav');
             var media = document.getElementById("audioplayer");
             media.src = localhostPaht + '/Uploads/videos/' + $scope.videoinfo.RenGongBianMa + '/' + vid + '.mp3';
             media.load();
@@ -168,7 +172,7 @@ sc.app = angular.module('scApp', [])
             var pathName = window.document.location.pathname;
             var pos = curWwwPath.indexOf(pathName);
             var localhostPaht = curWwwPath.substring(0, pos);
-            console.log(localhostPaht + '/Uploads/videos/' + $scope.videoinfo.RenGongBianMa + '/' + vid + '.mp4');
+            //console.log(localhostPaht + '/Uploads/videos/' + $scope.videoinfo.RenGongBianMa + '/' + vid + '.mp4');
             //$('#videosource').attr("src", localhostPaht + '/Uploads/videos/' + vid + '.mp4');
             var myVideo = document.getElementById('videoplayer');
             myVideo.src = localhostPaht + '/Uploads/videos/' + $scope.videoinfo.RenGongBianMa + '/' + vid + '.mp4';
