@@ -1,0 +1,35 @@
+﻿<section class="intro-1" ng-class="{on:curStage==1}">
+    <div class="load">
+        <div class="rotate"></div>
+        <span pj-load></span>
+    </div>
+</section>
+<section class="intro-2" ng-class="{on:curStage==2}">
+    <div class="intro-bg">
+        <div class="adver">
+            <img src="content/images/adver.png" alt="" />
+        </div>
+        <div class="pointer" ng-click="pressing()" pj-finger>
+            <div class="cursor c1"></div>
+            <div class="cursor c2"></div>
+            <div class="line"></div>
+        </div>
+        <span class="font" style="top:-300px">录入指纹    开始探索</span>
+    </div>
+</section>
+<section class="intro-3" ng-class="{on:curStage==3}">
+    <div class="bg"></div>
+    <div class="left"></div>
+    <div class="right"></div>
+    <div class="lighter"></div>
+</section>
+<!--<script>
+    function goto(url, dalay) {
+        setTimeout("window.location='" + url + "'", dalay);
+    }
+</script>-->
+<script>
+    $(".pointer").hover(function () {
+        $(".intro-1").css("display", "none")
+    })
+</script>
