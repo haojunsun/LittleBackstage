@@ -1,0 +1,126 @@
+﻿<a href="index.html#/pano1" style="position: fixed; z-index: 9999; left: 30%; font-size: larger; color: white;">非遗展厅</a>
+<a href="index.html#/pano2" style="position: fixed; z-index: 9999; left: 50%; font-size: larger; color: white; ">非遗放映厅</a>
+<!--<a href="/home/main" style="position:fixed;z-index:9999;left:100px;">非遗10大类</a>﻿-->
+<div class="mymodal  no-video">
+    <span class="close-btn" sc-on-remove=".mymodal"></span>
+    <!--<div class="image-box tab-demo" sc-on-switch-by-swipe=".video, .hotspot">
+        <ul class="video">
+            <li class="on">
+                <img src="content/images/p4-2.jpg" />
+                <img class="arrow" src="content/images/right-arrow.png" />
+            </li>
+            <li>
+                <img src="content/images/p4-1.jpg" />
+                <img class="arrow" src="content/images/left-arrow.png" />
+            </li>
+        </ul>
+        <a class="vi-switch vid" sc-on-add=".video-box" sc-on-remove=".image-box"></a>
+        <p class="hotspot">
+            <a class="on"></a>
+            <a></a>
+        </p>
+    </div>
+    <div class="video-box on">
+        <iframe height="222" width="100%" src="http://player.youku.com/embed/XNzUxODA3MTY0" frameborder=0 allowfullscreen></iframe>
+        <a class="vi-switch" sc-on-add=".image-box" sc-on-remove=".video-box"></a>
+    </div>-->
+
+    <div class="image-box tab-demo" sc-on-switch-by-swipe=".video, .hotspot">
+        <ul class="video">
+            <li class="on">
+                <img src="content/images/p4-2.jpg" />
+                <img class="arrow" src="content/images/right-arrow.png" />
+            </li>
+            <li>
+                <img src="content/images/p4-1.jpg" />
+                <img class="arrow" src="content/images/arrow.png" />
+            </li>
+
+        </ul>
+        <p class="hotspot">
+            <a class="on"></a>
+            <a></a>
+        </p>
+    </div>
+    <p class="font">
+        <img src="content/images/t1.png" />
+    </p>
+</div>
+﻿<div class="mymodal no-video">
+    <span class="close-btn" sc-on-remove=".mymodal"></span>
+    <div class="image-box tab-demo" sc-on-switch-by-swipe=".video, .hotspot, .font-tab">
+        <ul class="video">
+            <li class="on">
+                <img src="content/images/p10-1.jpg" />
+                <img class="arrow" src="content/images/right-arrow.png" />
+            </li>
+            <li>
+                <img src="content/images/p10-2.jpg" />
+                <img class="arrow" src="content/images/arrow.png" />
+            </li>
+        </ul>
+        <p class="hotspot">
+            <a class="on"></a>
+            <a></a>
+        </p>
+        <div class="font-tab">
+            <p class="font btn2 on">
+                <img src="content/images/t2.png" />
+            </p>
+            <p class="font btn2">
+                <img src="content/images/t2.png" />
+            </p>
+        </div>
+
+    </div>
+
+</div>
+﻿<div class="mymodal no-video">
+    <span class="close-btn" sc-on-remove=".mymodal"></span>
+    <div class="image-box tab-demo" sc-on-switch-by-swipe=".video, .hotspot">
+        <ul class="video">
+            <li class="on">
+                <img src="content/images/p11-1.jpg" />
+                <img class="arrow" src="content/images/right-arrow.png" />
+            </li>
+            <li>
+                <img src="content/images/p11-2.jpg" />
+                <img class="arrow" src="content/images/arrow.png" />
+            </li>
+            <li>
+                <img src="content/images/p12-3.jpg" />
+                <img class="arrow" src="content/images/arrow.png" />
+            </li>
+            <li>
+                <img src="content/images/p12-4.jpg" />
+                <img class="arrow" src="content/images/left-arrow.png" />
+            </li>
+        </ul>
+        <p class="hotspot">
+            <a class="on"></a>
+            <a></a>
+            <a></a>
+            <a></a>
+        </p>
+    </div>
+    <p class="font">
+        <img src="content/images/t4.png" />
+    </p>
+</div>
+
+<section id="pano1" class="on" pj-pano></section>
+<div class="tips" ng-hide="isTipsShown" pj-tips>
+    <a>
+        <span class="tips1" style="display:block;">
+            <span class="hand"></span>
+            <span class="hand-font"></span>
+        </span>
+        <span class="tips2"></span>
+    </a>
+</div>
+﻿<section class="sp1 on" pj-pano-loading>
+    <div class="load">
+        <div class="rotate" ng-class="{on:isLoaded}"></div>
+        <span class="load-info" ng-class="{on:isLoaded}"  style="color:white">轻触屏幕 进入现场</span>
+    </div>
+</section>

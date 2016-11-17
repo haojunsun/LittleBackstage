@@ -1,0 +1,124 @@
+﻿<a href="index.html#/pano1" style="position:fixed;z-index:9999;left:30%;font-size:larger;color:white;">非遗展厅</a>
+<a href="index.html#/pano2" style="position: fixed; z-index: 9999; left: 50%; font-size: larger; color: white;">非遗放映厅</a>
+<!--<a href="/home/main" style="position:fixed;z-index:9999;left:100px;">非遗10大类</a>﻿-->
+﻿<div class="mymodal">
+    <span class="close-btn" sc-on-remove=".mymodal, .image-box" sc-on-add=".video-box" onclick="sc.main.resumeSound()"></span>
+    <div class="image-box tab-demo" sc-on-switch-by-swipe=".video, .hotspot">
+        <ul class="video on">
+            <li class="on">
+                <img src="content/images/p10-1.jpg" />
+                <img class="arrow" src="content/images/right-arrow.png" />
+            </li>
+            <li>
+                <img src="content/images/p10-2.jpg" />
+                <img class="arrow" src="content/images/arrow.png" />
+            </li>
+            <li>
+                <img src="content/images/p10-3.jpg" />
+                <img class="arrow" src="content/images/left-arrow.png" />
+            </li>
+        </ul>
+        <a class="vi-switch vid" sc-on-add=".video-box" sc-on-remove=".image-box"></a>
+        <p class="hotspot">
+            <a class="on"></a>
+            <a></a>
+            <a></a>
+        </p>
+    </div>
+    <div class="video-box on">
+        <video id="fyvideo" controls="controls" style="width:100%;height:250px;" poster="/Content/images/videoimg.png">
+            <source src="/Content/11010101070301040202.mp4" type="video/mp4" />
+        </video>
+        <!--<iframe height="222" width="100%" src="http://player.youku.com/player.php/sid/XMTcyMjEyMDQ0OA==/v.swf" frameborder=0 allowfullscreen></iframe>-->
+        <!--http://player.youku.com/embed/XNzUxNDEyNDcy--http://player.youku.com/player.php/sid/XMTcyMjEyMDQ0OA==/v.swf -->
+        <a class="vi-switch" sc-on-add=".image-box" sc-on-remove=".video-box"></a>
+    </div>
+    <p class="font">
+        <img src="content/images/t5.png" />
+    </p>
+</div>
+﻿<div class="mymodal tab-demo no-video">
+    <span class="close-btn" sc-on-remove=".mymodal"></span>
+    <div class="image-box tab-demo" sc-on-switch-by-swipe=".video, .hotspot">
+        <ul class="video on">
+            <li class="on">
+                <img class="arrow" src="content/images/right-arrow.png" />
+                <img src="content/images/p11-1.jpg" />
+            </li>
+            <li>
+                <img src="content/images/p11-2.jpg" />
+                <img class="arrow" src="content/images/left-arrow.png" />
+            </li>
+        </ul>
+        <p class="hotspot">
+            <a class="on"></a>
+            <a></a>
+        </p>
+    </div>
+    <p class="font">
+        <img src="content/images/t6.png" />
+
+    </p>
+</div>
+﻿<div class="mymodal tab-demo no-video">
+    <span class="close-btn" sc-on-remove=".mymodal"></span>
+    <div class="image-box tab-demo" sc-on-switch-by-swipe=".video, .hotspot">
+        <ul class="video on">
+            <li class="on">
+                <img src="content/images/p12-3.jpg" />
+                <img class="arrow" src="content/images/right-arrow.png" />
+            </li>
+            <li>
+                <img src="content/images/p12-4.jpg" />
+                <img class="arrow" src="content/images/left-arrow.png" />
+            </li>
+            <!--<li><img src="content/images/p12-3.jpg" /></li>
+            <li><img src="content/images/p12-4.jpg" /></li>-->
+        </ul>
+        <p class="hotspot">
+            <a class="on"></a>
+            <a></a>
+            <!--<a></a>
+            <a></a>-->
+        </p>
+    </div>
+    <p class="font">
+        <img src="content/images/t7.png" />
+    </p>
+</div>
+﻿<div class="mymodal tab-demo no-video">
+    <span class="close-btn" sc-on-remove=".mymodal" onclick="sc.main.resumeSound()"></span>
+    <div class="image-box tab-demo" sc-on-switch-by-swipe=".video, .hotspot">
+        <ul class="video on">
+            <li class="on">
+                <img src="content/images/p13-1.jpg" />
+                <img class="arrow" src="content/images/right-arrow.png" />
+            </li>
+            <li>
+                <img src="content/images/p13-2.jpg" />
+                <img class="arrow" src="content/images/arrow.png" />
+            </li>
+            <li>
+                <img src="content/images/p13-3.jpg" />
+                <img class="arrow" src="content/images/left-arrow.png" />
+            </li>
+        </ul>
+        <p class="hotspot">
+            <a class="on"></a>
+            <a></a>
+            <a></a>
+        </p>
+    </div>
+    <p class="font">
+        <img src="content/images/t8.png" />
+    </p>
+</div>
+
+<section id="pano2" class="on" pj-pano></section>
+<section class="sp2" pj-pano-loading>
+    <div class="load">
+        <div class="rotate" ng-class="{on:isLoaded}"></div>
+        <span class="load-info" ng-class="{on:isLoaded}" style="color:white;">想要了解更多非遗精彩内容，看段视频吧</span>
+    </div>
+</section>
+
