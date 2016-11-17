@@ -1,0 +1,6 @@
+﻿.houselist{width:100%; margin:0 auto; position: relative; z-index: 1; }
+.houselist li{border-bottom: solid 1px #E8E8E8;height:80px;padding: 10px;}
+.houselist .h-img {display: block;float: left;width: 100px;height: 75px;background: url(../images/nopic.png) no-repeat scroll center center transparent;background-size:100% auto;}
+.houselist .h-img a:link{width:100px;height: 75px;display:block}
+.houselist .h-img img {border: 1px solid #CCC;width: 100px;height: 75px;}
+.houselist .h-txt{overflow:hidden;padding-left:10px;/*width: 200px;float: left;white-space: nowrap;*/}

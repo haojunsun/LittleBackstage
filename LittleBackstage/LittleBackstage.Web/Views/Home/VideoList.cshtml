@@ -1,147 +1,224 @@
 ﻿@{
     Layout = null;
 }
-
 <!DOCTYPE html>
-
 <html>
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta name="viewport" content="width=device-width" />
-    <title>音频平台</title>
-    <!--必要样式-->
-    <script src="~/Scripts/jquery.js"></script>
-    <script src='http://s.codepen.io/assets/libs/prefixfree.min.js'></script>
-    <script src='http://s.codepen.io/assets/libs/modernizr.js'></script>
-   
-    <style>
-        * {
-            user-select: none;
-            cursor: default;
-        }
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>带非遗回家</title>
+    <link href="~/css/cate.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/iscroll.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/list.css" rel="stylesheet" type="text/css" />
 
-        body, html {
-            height: 100%;
-            font-family: helvetica neue,helvetica,arial,sans-serif;
-        }
 
-        h1, p {
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
+</head>
 
-        h1 {
-            padding: 50px 0;
-            margin: 0 50px;
-            font-size: 30px;
-            line-height: 30px;
-            font-weight: 200;
-        }
+<body ng-app="scApp" ng-controller="VideoController">
+    <!--背景-->
+    <div class="mainbg" style="background:#eae3d0;">@*<img src="~/images/77.jpg" />*@</div>
+    <!--背景-->
 
-        p {
-            font-size: 14px;
-            font-weight: 200;
-            margin: 0 50px;
-            color: #53646e;
-        }
+    <div onclick="location.href='/home/main'" style="padding-top:7px;width:50px;height:40px;background-color:white;opacity:0.7;position:fixed;z-index:9999;border-radius:4px;margin-top:10px;margin-left:10px;text-align:center;font-size:large;">
+        返回
+    </div>
+    <div class="banner">
 
-            p em {
-                color: #42a6df;
+        <div id="wrapper">
+            <div id="scroller">
+                <ul id="thelist">
+                    <li><p>传承之美</p><a href="javascript:void(0)"><img src="~/images/3.jpg" /></a></li>
+                    <li><p>传承之美</p><a href="javascript:void(0)"><img src="~/images/4.jpg" /></a></li>
+                    <li><p>传承之美</p><a href="javascript:void(0)"><img src="~/images/2.jpg" /></a></li>
+                    <li><p>传承之美</p><a href="javascript:void(0)"><img src="~/images/1.jpg" /></a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="nav">
+            <ul id="indicator">
+                <li class="active"></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+        <div class="clr"></div>
+
+    </div>
+    <script type="text/javascript">
+        var count = document.getElementById("thelist").getElementsByTagName("img").length;
+
+        var count2 = document.getElementsByClassName("menuimg").length;
+        for (i = 0; i < count; i++) {
+            document.getElementById("thelist").getElementsByTagName("img").item(i).style.cssText = " width:" + document.body.clientWidth + "px";
+        }
+        document.getElementById("scroller").style.cssText = " width:" + document.body.clientWidth * count + "px";
+
+        setInterval(function () {
+            myScroll.scrollToPage('next', 0, 400, count);
+        }, 3500);
+
+        window.onresize = function () {
+            for (i = 0; i < count; i++) {
+                document.getElementById("thelist").getElementsByTagName("img").item(i).style.cssText = " width:" + document.body.clientWidth + "px";
             }
-
-        #container {
-            position: relative;
-            height: 100%;
-            width: 100%;
-            overflow: hidden;
+            document.getElementById("scroller").style.cssText = " width:" + document.body.clientWidth * count + "px";
         }
+    </script>
+    <section class="modal modal-list">
+        <div class="pic">
+            <img src="~/Uploads/sources/{{datadetail.FirstLevel}}/{{datadetail.XiangMuMingCheng}}/{{datadetail.Other1}}.jpg" />
+            @*<div id="wrapper2">
+                    <div id="scroller2">
+                        <ul id="thelist2">
+                            <li><p>传承之美</p><a href="javascript:void(0)"><img src="~/images/3.jpg" /></a></li>
+                            <li><p>传承之美</p><a href="javascript:void(0)"><img src="~/images/4.jpg" /></a></li>
+                            <li><p>传承之美</p><a href="javascript:void(0)"><img src="~/images/2.jpg" /></a></li>
+                            <li><p>传承之美</p><a href="javascript:void(0)"><img src="~/images/1.jpg" /></a></li>
+                        </ul>
+                    </div>
+                </div>*@
+        </div>
+        <div class="video">
+            <div class="video-btn" onclick="showVideo()">点击展开视频查看</div>
+            <div class="video-content" id="video-content">
 
-            #container button {
-                padding: 20px;
-                border: none;
-                background: transparent;
-                display: block;
-                position: relative;
-                z-index: 3;
-                margin: 0 auto;
-            }
+            </div>
+        </div>
+        <form class="list-form">
+            <div>
+                <span style="color:#12269b">项目名称：</span><span>{{datadetail.XiangMuMingCheng}}</span>
+            </div>
+            <div>
+                <span style="color:#12269b"> 分类：</span><span>{{datadetail.FirstLevel}}</span>--<span>{{datadetail.SecondLevel}}</span>
+            </div>
+            <div>
+                <span style="color:#12269b"> 批次：</span><span>{{datadetail.PiCi}}</span>
+            </div>
+            <div>
+                <span style="color:#12269b">  民族：</span><span>{{datadetail.MinZu}}</span>
+            </div>
+            <div>
+                <span style="color:#12269b">  申报地区：</span><span>{{datadetail.CoverageSpatial_Province}}</span>-<span>{{datadetail.CoverageSpatial_City}}</span>-<span>{{datadetail.CoverageSpatial_County}}</span>
+            </div>
+            <div>
+                <span style="color:#12269b">  申报地区或单位：</span><span>{{datadetail.CoverageSpatial_ShenBaoDiQuHuoDanWei}}</span>
+            </div>
+            <div>
+                <span style="color:#12269b">  保护单位：</span><span>{{datadetail.CoverageSpatial_BaoHuDanWei}}</span>
+            </div>
+            <div class="summary summary1">
+                <label style="color: #12269b; text-align:left;"> 项目简介：</label>
+                <div>{{datadetail.XiangMuJianJieBiaoZhunBan}}</div>
+                <span class="glyphicon glyphicon-chevron-down"></span>
+            </div>
+            <div class="summary summary2">
+                <label style="color: #12269b">
+                    所在区域及其地理环境：
+                </label>
+                <div>{{datadetail.SuoZaiQuYuJiQiDiLiHuanJing}}</div>
+                <span class="glyphicon glyphicon-chevron-down"></span>
+            </div>
+            <div class="summary summary2">
+                <label style="color: #12269b">
+                    相关制品及其作品：
+                </label>
+                <div>{{datadetail.XiangGuanZhiPinJiQiZuoPin}}</div>
+                <span class="glyphicon glyphicon-chevron-down"></span>
+            </div>
+            <div class="summary summary2">
+                <label style="color: #12269b;text-align:left">
+                    相关图片：
+                </label>
+                <img src="~/Uploads/sources/{{datadetail.FirstLevel}}/{{datadetail.XiangMuMingCheng}}/{{img}}.jpg" ng-repeat="img in imglist" style="width:100%;" />
+            </div>
+        </form>
+        <span class="glyphicon glyphicon-remove" onclick="closeModal()"></span>
+    </section>
+    <!--数据-->
+    <div style="z-index:1;position:relative;text-align:center;width:100%;margin: 15px 0 15px 0;">
 
-        .dot {
-            height: 2px;
-            width: 2px;
-            border-radius: 100%;
-            position: absolute;
-            z-index: 0;
-            animation: sploosh 3s cubic-bezier(0.165, 0.84, 0.44, 1);
-            background: transparent;
-        }
-    </style>
-    <link media="keyframes sploosh" rel="stylesheet" href="videotest.css" />
-    <script>
+        <input id="searchkey" style="height: 30px; width: 200px; border-radius: 10px;opacity:0.7;margin-left:10px; padding-left:10px;" type="text" name="name" value="" placeholder="传承人" />
+        <a ng-click="search()" href="javascript:void(0)" style="float:right;margin-right:10px;display:block;height: 30px; width: 90px; border-radius: 6px;color:black;font-size:larger;font-weight:600;background-color:white;opacity:0.7;border:solid 2px #808080">&nbsp;搜&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;索&nbsp;</a>
+
+    </div>
+    <div class="content" style="min-height:582px;">
+        <h3 class="nodata" style="width:100%;text-align:center;margin-top:100px;display:none;">没有相关数据！</h3>
+        <div class="row clearfix content-row" style="background-color:white;opacity:1;" ng-click="modalShow(item.LiteratureExcelId)" ng-repeat="item in videoList">
+            <div class="width30">
+                <img src="~/Uploads/sources/{{item.FirstLevel}}/{{item.XiangMuMingCheng}}/{{item.Other1}}.jpg" style="width:121px;height:95px" />
+            </div>
+            <div class="width70">
+                <h4 style="color:#420f0f">{{item.XiangMuMingCheng}}</h4>
+                <p>{{item.XiangMuJianJieBiaoZhunBan}}</p>
+            </div>
+        </div>
+    </div>
+    <!--数据-->
+    <div class="copy" style="position: relative; background-color: #ECE5D3; text-align: center; color: #fff; height: 26px; line-height: 26px; font-size: 12px;">
+        xxxxxxxxxxxxxx Copyright &copy; 2016
+    </div>
+    <script type="text/javascript" src="~/Scripts/jquery1.8.3.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/iscroll.js"></script>
+    <script type="text/javascript" src="~/Scripts/angular.bundled.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/seco-app2.js"></script>
+    <script type="text/javascript">
         var sc = sc || {};
         sc.baseUrl = '@Url.Content("~/")';
-    </script>
-</head>
-<body>
-   
-    <div id="container">
-        <h1>
-            Click or Touch the Screen.
-        </h1>
-        <p>
-            Click as fast as you can. <em>Try it on a touchscreen - it's even more fun.</em>
-        </p>
-    </div>
-    <script src="~/Scripts/jquery-1.7.2.min.js"></script>
-    <script type="text/javascript">
-        $(window).ready(function () {
-            setTimeout(function () {
-                setTimeout(function () {
-                    $('#container').append('<div class="dot" style="top:50%;left:50%;"></div>')
-                }, 900);
-                setTimeout(function () {
-                    $('#container').append('<div class="dot" style="top:50%;left:50%;"></div>')
-                }, 600);
-                setTimeout(function () {
-                    $('#container').append('<div class="dot" style="top:50%;left:50%;"></div>')
-                }, 300);
-                setTimeout(function () {
-                    $('#container').append('<div class="dot" style="top:50%;left:50%;"></div>')
-                }, 0);
-                setTimeout(function () {
-                    $('#container .dot').remove();
-                }, 2900);
-            }, 1500);
-        });
 
+        $(document).ready(function () {
+            $("body").addClass("on");
+            $("html").addClass("on");
+        })
+        //function modalShow() {
+        //    $(".modal-list").addClass("on");
+        //    //$(".content-box").addClass("on");
+        //}
+        function showVideo() {
+            $("#video-content").toggle(500);
+        }
+        function closeModal() {
+            $(".modal-list").removeClass("on");
+            //$(".content-box").removeClass("on");
+            //$("body").removeClass("on");
+            //$("html").removeClass("on");
+        }
+        $(".glyphicon.glyphicon-chevron-down").click(function () {
+            $(this).siblings("div").toggleClass("on");
+        })
 
-        // click animation
+        var myScroll;
 
-        if (Modernizr.touch) {
-            $('#container').on('touchstart', function (e) {
-                var left = e.originalEvent.touches[0].pageX;
-                var top = e.originalEvent.touches[0].pageY;
-
-                $(this).append('<div class="dot" style="top:' + top + 'px;left:' + left + 'px;"></div>')
-                setTimeout(function () {
-                    $('#container .dot:first-of-type').remove();
-                }, 3000);
+        function loaded() {
+            myScroll = new iScroll('wrapper', {
+                snap: true,
+                momentum: false,
+                hScrollbar: false,
+                onScrollEnd: function () {
+                    document.querySelector('#indicator > li.active').className = '';
+                    document.querySelector('#indicator > li:nth-child(' + (this.currPageX + 1) + ')').className = 'active';
+                }
             });
-            document.body.addEventListener('touchmove', function (e) {
-                e.preventDefault();
-            });
-        } else {
-            $('#container').on('mousedown', function (e) {
-                var left = e.pageX;
-                var top = e.pageY;
 
-                $(this).append('<div class="dot" style="top:' + top + 'px;left:' + left + 'px;"></div>')
-                setTimeout(function () {
-                    $('#container .dot:first-of-type').remove();
-                }, 3000);
-            });
-        } //@ sourceURL=pen.js
+        }
+        document.addEventListener('DOMContentLoaded', loaded, false);
+        //var myScroll;
+
+        //function loaded() {
+        //    myScroll = new iScroll('wrapper', {
+        //        snap: true,
+        //        momentum: false,
+        //        hScrollbar: false,
+        //        onScrollEnd: function () {
+        //            document.querySelector('#indicator > li.active').className = '';
+        //            document.querySelector('#indicator > li:nth-child(' + (this.currPageX + 1) + ')').className = 'active';
+        //        }
+        //    });
+
+        //}
+        //document.addEventListener('DOMContentLoaded', loaded, false);
     </script>
 </body>
 </html>
