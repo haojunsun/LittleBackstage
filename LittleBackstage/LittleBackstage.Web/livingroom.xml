@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<panorama>
+<!-- Pano2VR 3.1.4 panorama configuration -->
+<view fovmode="0">
+<start pan="90" tilt="-7.5" fov="70"/>
+<min pan="0" tilt="-90" fov="35"/>
+<max pan="360" tilt="90" fov="120"/>
+</view>
+<input tilesize="1600" tilescale="1.00625" tile0url="images/livingroom_o_0.jpg" tile1url="images/livingroom_o_1.jpg" tile2url="images/livingroom_o_2.jpg" tile3url="images/livingroom_o_3.jpg" tile4url="images/livingroom_o_4.jpg" tile5url="images/livingroom_o_5.jpg" />
+<userdata title="" description="" author="" datetime="" copyright="" source="" info="" comment="" />
+<control sensitivity="8" simulatemass="1" lockedmouse="0" lockedkeyboard="0" lockedwheel="0" invertwheel="1" speedwheel="1" dblclickfullscreen="1" invertcontrol="1" />
+<hotspots width="180" height="20" wordwrap="1" >
+<hotspot id="new" skinid="" pan="-151.078" tilt="-7.27623" title="&#21351;&#23460;" url="../#/pano/Bedroom" target="_self" />
+</hotspots>
+<sounds>
+</sounds>
+</panorama>

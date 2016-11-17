@@ -7,680 +7,334 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>中国传统乐器声学测量与频谱分析</title>
-    <!-- css -->
-    <!--落叶-->
-    <link rel="stylesheet" href="~/css/zzsc.css" />
-
-    <link rel="stylesheet" href="~/css/drop-down.css" />
-    <link rel="stylesheet" href="~/css/index.css" />
-
-    <link rel="stylesheet" href=" ~/css/vendor/normalize.css" />
-    <link rel="stylesheet" href=" ~/css/styles.min.css" />
-    <link rel="stylesheet" href=" ~/css/main.css" />
-    <link rel="shortcut icon" href="~/img/common/favicon.png" />
-    <link rel="stylesheet" href="~/css/jplist.min.css" />
-
-    <script src="~/Scripts/jquery-1.11.1.min.js"></script>
-    <!--落叶效果-->
-    <script type="text/javascript" src="~/scripts/jquery.js"></script>
-    <style type="text/css">
-        body {
-            background: url(../img/detailbg.jpg) repeat-x;
-            background-color: #f1f4c7;
-            height: 1300px;
-            padding: 0px;
-        }
-
-
-        .search-form {
-            width: 781px;
-            margin: 100px auto;
-            overflow: hidden;
-        }
-
-            .search-form .search-bd {
-                height: 40px;
-            }
-
-                .search-form .search-bd li {
-                    font-size: 14px;
-                    width: 90px;
-                    height: 40px;
-                    line-height: 36px;
-                    text-align: center;
-                    float: left;
-                    cursor: pointer;
-                    background-color: #eee;
-                    color: #666;
-                }
-
-                    .search-form .search-bd li.selected {
-                        color: #fff;
-                        font-weight: 700;
-                        background-color: #99af80;
-                    }
-
-            .search-form .search-hd {
-                height: 62px;
-                background-color: #EAEEDD;
-                border: 3px solid #99af80;
-                padding: 0px;
-                position: relative;
-            }
-
-                .search-form .search-hd .search-input {
-                    width: 490px;
-                    height: 22px;
-                    line-height: 22px;
-                    padding: 6px 0;
-                    background: none;
-                    text-indent: 10px;
-                    border: 0;
-                    outline: none;
-                    position: relative;
-                    left: 3px;
-                    top: 0;
-                    z-index: 5;
-                    #margin-left:-10px;
-                }
-
-                .search-form .search-hd .btn-search {
-                    width: 70px;
-                    height: 34px;
-                    line-height: 34px;
-                    position: absolute;
-                    right: 3px;
-                    top: 3px;
-                    border: 0;
-                    z-index: 6;
-                    cursor: pointer;
-                    font-size: 12px;
-                    color: #fff;
-                    font-weight: 700;
-                    background: none;
-                    outline: none;
-                }
-
-                .search-form .search-hd .pholder {
-                    display: inline-block;
-                    padding: 2px 0;
-                    font-size: 12px;
-                    color: #999;
-                    position: absolute;
-                    left: 13px;
-                    top: 11px;
-                    z-index: 4;
-                    background: url(images/zoom.jpg) no-repeat 0 0;
-                    padding-left: 25px;
-                    #top:11px;
-                }
-
-            /*.search-form .search-hd .s2, .search-form .search-hd #s2 {
-                    display: none;
-                }*/
-
-            .search-form .search-bg {
-                width: 495px;
-                height: 34px;
-                background-color: #fff;
-                position: absolute;
-                left: 3px;
-                top: 3px;
-                z-index: 1;
-            }
-    </style>
-    <script>
+    <title>带非遗回家</title>
+    <link href="~/css/cate.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/iscroll.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/list.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="~/Scripts/jquery1.8.3.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/iscroll.js"></script>
+    <script type="text/javascript" src="~/Scripts/angular.bundled.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/seco-app2.js"></script>
+    <script type="text/javascript">
         var sc = sc || {};
         sc.baseUrl = '@Url.Content("~/")';
+
+        var myScroll;
+
+        function loaded() {
+            myScroll = new iScroll('wrapper', {
+                snap: true,
+                momentum: false,
+                hScrollbar: false,
+                onScrollEnd: function () {
+                    document.querySelector('#indicator > li.active').className = '';
+                    document.querySelector('#indicator > li:nth-child(' + (this.currPageX + 1) + ')').className = 'active';
+                }
+            });
+
+        }
+        document.addEventListener('DOMContentLoaded', loaded, false);
     </script>
+
 </head>
 
 <body ng-app="scApp" ng-controller="HomeController">
-    <!--落叶div-->
-    <div class="Upper" style="margin-top:-110px;position:absolute">
-        <table style="width:100%" border="0" cellspacing="0" cellpadding="0" align="center">
-            <tr>
-                <td>
-                    <table style="width:600px" border="0" cellspacing="0" cellpadding="0" align="center">
-                        <tr>
-                            <td style="padding:70px 0 0" align="left" width="385">
-                                <h1 style="color:#f4f2ed"></h1>
-                                <p style="color:#d3f1a0"></p>
-                            </td>
-                            <td style="padding:15px 0 0" align="right" width="215">
-                                <img src="images/Autom-Leaf.png">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="padding:10px 0" colspan="2" align="right"></td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-        </table>
-    </div>
-    <!-- main content -->
-    <div id="main-content" class="box" style="height:100%">
-        <!--头-->
-        <div class="box text-shadow" style="height: 150px; text-align: center; background-position: center; top: 0px;  ">
-            <div style="width: 100%; height: 117px;  ">
-                <div id="topimgdiv" style="margin-top: 0px; width: 73%; position: absolute; z-index: 9999; margin: 0 auto;">
-                    <img src="~/img/title2.png" alt="" style="height:117px" />
-                    <img src="~/img/111111.png" alt="" />
-                </div>
-                <div style="margin-top: 0px; width: 100%; height: 150px; background-color: white; filter: alpha(opacity:80); opacity: 0.5; border-radius: 20px; position: absolute; z-index: 9998; ">
 
-                </div>
-            </div>
-        </div>
-        <div style="background: url(../img/red.png);width:100%;height:21px;margin-top:150px"></div>
-        <!--列表-->
-        <div class="center">
-            <div id="page-content" class="box">
-
-                <!-- demo -->
-                <div id="demo" class="box jplist" style="z-index:1">
-                    <!-- ios button: show/hide panel -->
-                    <div class="jplist-ios-button">
-                        <i class="fa fa-sort"></i>
-                        jPList Actions
-                    </div>
-
-                    <div style="width:100%;height:250px;margin-top:20px">
-                        <div style="width: 220px; float: left" class="col-sm-6">
-                            <div class="ih-item circle colored effect3 left_to_right">
-                                <a href="#">
-                                    <div class="img"><img src="~/images/qin1.jpg" alt="img"></div>
-                                    <div class="info" style="background-color:white">
-                                        <h3 style="color:black;">吹</h3>
-                                        <p style="color:black;font-size:larger;">民族特色的吹奏乐器</p>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div style="width: 220px; left:40px " class="col-sm-6">
-                            <div class="ih-item circle colored effect3 left_to_right">
-                                <a href="#">
-                                    <div class="img"><img src="~/images/qin2.jpg" alt="img"></div>
-                                    <div class="info" style="background-color:white">
-                                        <h3 style="color:black;">拉</h3>
-                                        <p style="color:black;font-size:larger;">发音优美表现力丰富</p>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div style="width: 220px; left: 80px; margin-right: 1px" class="col-sm-6">
-                            <div class="ih-item circle colored effect3 left_to_right">
-                                <a href="#">
-                                    <div class="img"><img src="~/images/qin3.jpg" alt="img"></div>
-                                    <div class="info" style="background-color:white">
-                                        <h3 style="color:black;">弹</h3>
-                                        <p style="color:black;font-size:larger;">古老传统弹拨乐器</p>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div style="width: 220px; float: right; margin-right: 1px" class="col-sm-6">
-                            <div class="ih-item circle colored effect3 left_to_right">
-                                <a href="#">
-                                    <div class="img"><img src="~/images/qin4.jpg" alt="img"></div>
-                                    <div class="info" style="background-color:white">
-                                        <h3 style="color:black;">打</h3>
-                                        <p style="color:black;font-size:larger;">鲜明的民族风格</p>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="" style="height: 170px; width: 1000px; text-align: left; background-position: center; position: absolute;border-radius: 20px; ">
-                        <span style="color:#402111">
-                            &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;中国各民族传统乐器据统计有2000多 种，材质、形制、演奏方法、音色各异。然而至今没有一个完整、科学、体系化的声音样本库，特别是在声音测量方面严重缺失。中国传统乐器声学数据库,是国家科技计划项目《中国传统乐器声学测量及频谱分析》的主要成果之一，旨在为国家建立一个完整、科学、体系化的声音样本库。
-                        </span>
-                        <br />
-                        <span style="color:#402111">
-                            &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;该项目采取田野调查、学术论证、技术测量等方法，借鉴音乐声学测量、乐器声学领域的最新技术，按照国际及国家声音计量标准和音乐测量学术标准，制定适用于中国民族乐器音响采样的规范，完成民族乐器音准、音域、音强、动态范围、频谱、灵敏度、余音延续性等方面的测量与分析；在全面获取声学测量相关科学数据和进行频谱分析基础上，保存中国传统乐器的自然本底情况和基础科学数据，找出各类乐器音响特性的声学听觉属性与物理数值间的内在联系，完成对中国传统乐器声音标准的制订。通过乐器声学研究项目的实施，为逐步建立具有中国特色的民族音乐体系提供支撑；为规范和创新国家传统乐器产品的优化和音乐传播能力的提高奠定基础；为在数字化条件下实现中国音乐文化的传承与创新发展提供科学数据。
-                        </span>
-                    </div>
-                    <!-- panel -->
-                    <div class="jplist-panel box panel-top" style="height: 110px;margin-top:220px">
-                        <!--头部切换搜索-->
-                        <div class="search-form" style="margin-top: 0px; filter: alpha(opacity:80); opacity: 1;">
-                            <div id="search-bd" class="search-bd">
-                                <ul>
-                                    <li class="selected">全文搜索</li>
-                                    @*<li>乐器名搜索</li>*@
-                                    <li>高级搜索</li>
-                                </ul>
-                            </div>
-                            <div id="search-hd" class="search-hd" style="background-color: #EAEEDD">
-                                <div class="search-bg" style="background-color: #EAEEDD"></div>
-                                <!--全文搜索-->
-                                <div id="s1div" class="text-filter-box" style=" position:relative;z-index:9999;margin-top:0px;width:775px;">
-                                    <input id="s1" data-path=".desc"
-                                           type="text"
-                                           value=""
-                                           placeholder="全文搜索"
-                                           data-control-type="textbox"
-                                           data-control-name="desc-filter"
-                                           data-control-action="filter" style="width: 675px; height: 55px;" />
-                                    <div style=" cursor: pointer; width: 100px; height: 56px; background-color: #809d6d; margin-left: 675px;text-align:center;" onmouseover="$(this).css('background-color', ' #487648');" onmouseout="    $(this).css('background-color', ' #809d6d');">
-                                        <span style="color:white;font-size:x-large;font-weight:800;line-height:48px">搜&nbsp;&nbsp;索</span>
-                                    </div>
-                                </div>
-                                <div id="s2div" class="text-filter-box" style="position: relative; z-index: 9999; margin-top: 0px; width: 775px;display:none">
-                                    <!--乐器名-->
-                                    <label style="float:left;margin-top:25px;margin-left:30px;padding:0px">乐&nbsp;&nbsp;器&nbsp;&nbsp;名：</label>
-                                    <div class="text-filter-box" style="z-index: 9999; margin-top: 20px;margin-left:40px; width: 500px; z-index: 9999;">
-                                        <input id="s2" data-path=".title"
-                                               type="text"
-                                               value=""
-                                               placeholder="乐器名搜素"
-                                               data-control-type="textbox"
-                                               data-control-name="title-filter"
-                                               data-control-action="filter" style="width: 500px; height: 40px; " />
-
-                                    </div>
-                                    <button type="button"
-                                            class="jplist-reset-btn"
-                                            data-control-type="reset"
-                                            data-control-name="reset"
-                                            data-control-action="reset" style="margin-top:20px">
-                                        重置 &nbsp;<i class="fa fa-share"></i>
-                                    </button>
-                                    <!--演奏方式-->
-                                    <!--民族 -->
-                                    <div id="minzudiv" class="jplist-group"
-                                         data-control-type="button-filter-group"
-                                         data-control-action="filter"
-                                         data-control-name="button-filter-group-2"
-                                         data-mode="single" style="cursor: pointer; margin-top: 20px; margin-left: 0px; padding: 0px; border: 0px; width: 100%; background-color: #EAEEDD;height:60px;overflow:hidden;">
-                                        <label style="margin-left:30px;padding:0px;">民&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;族：</label>
-                                        <ul style="font-size:large">
-                                            <li style="display:none"><span data-button="true" data-path="default"><i class="fa fa-caret-right"></i>全1部</span></li>
-                                            <li style="margin-left:40px;"><span data-button="true" data-path="*"><i class="fa fa-caret-right"></i>全部</span></li>
-                                            <li><span data-button="true" data-path=".汉" class="minli"><i class="fa fa-caret-right"></i>汉族</span></li>
-                                            <li><span data-button="true" data-path=".壮" class="minli"><i class="fa fa-caret-right"></i>壮族</span></li>
-                                            <li><span data-button="true" data-path=".满" class="minli"><i class="fa fa-caret-right"></i>满族</span></li>
-                                            <li><span data-button="true" data-path=".回"><i class="fa fa-caret-right"></i>回族</span></li>
-                                            <li><span data-button="true" data-path=".苗"><i class="fa fa-caret-right"></i>苗族</span></li>
-                                            <li><span data-button="true" data-path=".维吾尔"><i class="fa fa-caret-right"></i>维吾尔族</span></li>
-                                            <li><span data-button="true" data-path=".土家"><i class="fa fa-caret-right"></i>土家族</span></li>
-                                            <li><span data-button="true" data-path=".彝"><i class="fa fa-caret-right"></i>彝族</span></li>
-                                            <li><span data-button="true" data-path=".蒙古"><i class="fa fa-caret-right"></i>蒙古族</span></li>
-                                            <li style="margin-left:40px;"><span data-button="true" data-path=".哈萨克"><i class="fa fa-caret-right"></i>哈萨克族</span></li>
-                                            <li><span data-button="true" data-path=".布依"><i class="fa fa-caret-right"></i>布依族</span></li>
-                                            <li><span data-button="true" data-path=".藏"><i class="fa fa-caret-right"></i>藏族</span></li>
-                                            <li><span data-button="true" data-path=".朝鲜"><i class="fa fa-caret-right"></i>朝鲜族</span></li>
-                                            <li><span data-button="true" data-path=".白"><i class="fa fa-caret-right"></i>白族</span></li>
-                                            <li><span data-button="true" data-path=".哈尼"><i class="fa fa-caret-right"></i>哈尼族</span></li>
-                                            <li><span data-button="true" data-path=".瑶"><i class="fa fa-caret-right"></i>瑶族</span></li>
-                                            <li><span data-button="true" data-path=".黎"><i class="fa fa-caret-right"></i>黎族</span></li>
-                                            <li><span data-button="true" data-path=".傣"><i class="fa fa-caret-right"></i>傣族</span></li>
-
-                                            <li onclick="minzudivopen();"><img id="minzuspan" _stats="over" src="../img/open.png"></li>
-
-                                            <li style="margin-left:130px;"><span data-button="true" data-path=".畲"><i class="fa fa-caret-right"></i>畲族</span></li>
-                                            <li><span data-button="true" data-path=".傈僳"><i class="fa fa-caret-right"></i>傈僳族</span></li>
-                                            <li><span data-button="true" data-path=".仡佬"><i class="fa fa-caret-right"></i>仡佬族</span></li>
-                                            <li><span data-button="true" data-path=".珞巴"><i class="fa fa-caret-right"></i>珞巴族</span></li>
-                                            <li><span data-button="true" data-path=".东乡"><i class="fa fa-caret-right"></i>东乡族</span></li>
-                                            <li><span data-button="true" data-path=".高山"><i class="fa fa-caret-right"></i>高山族</span></li>
-                                            <li><span data-button="true" data-path=".拉祜"><i class="fa fa-caret-right"></i>拉祜族</span></li>
-                                            <li><span data-button="true" data-path=".水"><i class="fa fa-caret-right"></i>水族</span></li>
-                                            <li><span data-button="true" data-path=".佤"><i class="fa fa-caret-right"></i>佤族</span></li>
-                                            <li style="margin-left:130px;"><span data-button="true" data-path=".纳西"><i class="fa fa-caret-right"></i>纳西族</span></li>
-                                            <li><span data-button="true" data-path=".羌"><i class="fa fa-caret-right"></i>羌族</span></li>
-                                            <li><span data-button="true" data-path=".土"><i class="fa fa-caret-right"></i>土族</span></li>
-                                            <li><span data-button="true" data-path=".仫佬"><i class="fa fa-caret-right"></i>仫佬族</span></li>
-                                            <li><span data-button="true" data-path=".锡伯"><i class="fa fa-caret-right"></i>锡伯族</span></li>
-                                            <li><span data-button="true" data-path=".景颇"><i class="fa fa-caret-right"></i>景颇族</span></li>
-                                            <li><span data-button="true" data-path=".达斡尔"><i class="fa fa-caret-right"></i>达斡尔族</span></li>
-                                            <li><span data-button="true" data-path=".柯尔克孜"><i class="fa fa-caret-right"></i>柯尔克孜族</span></li>
-                                            <li style="margin-left:130px;"><span data-button="true" data-path=".毛南"><i class="fa fa-caret-right"></i>毛南族</span></li>
-                                            <li><span data-button="true" data-path=".撒拉"><i class="fa fa-caret-right"></i>撒拉族</span></li>
-                                            <li><span data-button="true" data-path=".塔吉克"><i class="fa fa-caret-right"></i>塔吉克族</span></li>
-                                            <li><span data-button="true" data-path=".阿昌"><i class="fa fa-caret-right"></i>阿昌族</span></li>
-                                            <li><span data-button="true" data-path=".普米"><i class="fa fa-caret-right"></i>普米族</span></li>
-                                            <li><span data-button="true" data-path=".鄂温克"><i class="fa fa-caret-right"></i>鄂温克族</span></li>
-                                            <li><span data-button="true" data-path=".乌兹别克"><i class="fa fa-caret-right"></i>乌兹别克族</span></li>
-                                            <li style="margin-left:130px;"><span data-button="true" data-path=".德昂"><i class="fa fa-caret-right"></i>德昂族</span></li>
-                                            <li><span data-button="true" data-path=".怒"><i class="fa fa-caret-right"></i>怒族</span></li>
-                                            <li><span data-button="true" data-path=".保安"><i class="fa fa-caret-right"></i>保安族</span></li>
-                                            <li><span data-button="true" data-path=".俄罗斯"><i class="fa fa-caret-right"></i>俄罗斯族</span></li>
-                                            <li><span data-button="true" data-path=".裕固"><i class="fa fa-caret-right"></i>裕固族</span></li>
-                                            <li><span data-button="true" data-path=".基诺"><i class="fa fa-caret-right"></i>基诺族</span></li>
-                                            <li><span data-button="true" data-path=".门巴"><i class="fa fa-caret-right"></i>门巴族</span></li>
-                                            <li><span data-button="true" data-path=".鄂伦春"><i class="fa fa-caret-right"></i>鄂伦春族</span></li>
-                                            <li style="margin-left:130px;"><span data-button="true" data-path=".独龙"><i class="fa fa-caret-right"></i>独龙族</span></li>
-                                            <li><span data-button="true" data-path=".塔塔尔"><i class="fa fa-caret-right"></i>塔塔尔族</span></li>
-                                            <li><span data-button="true" data-path=".赫哲"><i class="fa fa-caret-right"></i>赫哲族</span></li>
-                                            <li><span data-button="true" data-path=".京"><i class="fa fa-caret-right"></i>京族</span></li>
-                                            <li><span data-button="true" data-path=".侗"><i class="fa fa-caret-right"></i>侗族</span></li>
-                                            <li><span data-button="true" data-path=".布朗"><i class="fa fa-caret-right"></i>布朗族</span></li>
-                                        </ul>
-                                    </div>
-                                    <div class="jplist-group"
-                                         data-control-type="button-filter-group"
-                                         data-control-action="filter"
-                                         data-control-name="button-filter-group-1"
-                                         data-mode="single" style="cursor: pointer; margin-top: 0px; margin-left: 0px; padding: 0px; border: 0px; width: 100%; background-color: #EAEEDD">
-                                        <label style="margin-left:30px;padding:0px;">演奏方式：</label>
-                                        <ul style="font-size:large">
-                                            <li style="margin-left:40px;display:none;">
-                                                <span data-path="default"
-                                                      data-button="true">
-                                                    <i class="fa fa-caret-right"></i>
-                                                    全1部
-                                                </span>
-                                            </li>
-                                            <li style="margin-left:40px;">
-                                                <span data-path="*"
-                                                      data-button="true">
-                                                    <i class="fa fa-caret-right"></i>
-                                                    全部
-                                                </span>
-                                            </li>
-
-                                            <li style="margin-left:15px;">
-                                                <span data-path=".吹"
-                                                      data-button="true">
-                                                    <i class="fa fa-caret-right"></i>
-                                                    吹
-                                                </span>
-                                            </li>
-
-                                            <li style="margin-left:15px;">
-                                                <span data-path=".拉"
-                                                      data-button="true">
-                                                    <i class="fa fa-caret-right"></i>
-                                                    拉
-                                                </span>
-                                            </li>
-
-                                            <li style="margin-left:15px;">
-                                                <span data-path=".弹"
-                                                      data-button="true">
-                                                    <i class="fa fa-caret-right"></i>
-                                                    弹
-                                                </span>
-                                            </li>
-
-                                            <li style="margin-left:15px;">
-                                                <span data-path=".打"
-                                                      data-button="true">
-                                                    <i class="fa fa-caret-right"></i>
-                                                    打
-                                                </span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div id="searchdiv" style=" cursor: pointer; margin-top: 195px; margin-left: 314px; position: absolute; padding: 0px; border: 0px; width: 100%; height: 45px; text-align: center; ">
-                                        <div onclick="searchEffect();" style="width: 150px; height: 45px; background-color: #809d6d;" onmouseover="$(this).css('background-color', ' #487648');" onmouseout="$(this).css('background-color', ' #809d6d');">
-                                            <span style="color:white;font-size:x-large;font-weight:600;line-height:38px">搜&nbsp;&nbsp;索</span>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                @*<button id="submit" class="btn-search" value="搜索">搜索</button>*@
-                            </div>
-                        </div>
-                        <div></div>
-
-                        @*<input name="" type="submit" class="search_submit" value="全文搜索" style="margin-top:10px" />*@
-
-
-                        <!--演奏方式 -->
-                        @*<div class="jplist-drop-down"
-                                 data-control-type="drop-down"
-                                 data-control-name="yzfs-filter"
-                                 data-control-action="filter">
-                                <ul>
-                                    <li><span data-path="default">全部方式</span></li>
-                                    <li><span data-path=".吹">吹</span></li>
-                                    <li><span data-path=".拉">拉</span></li>
-                                    <li><span data-path=".弹">弹</span></li>
-                                    <li><span data-path=".打">打</span></li>
-                                </ul>
-                            </div>*@
-
-                    </div>
-
-                    <!-- data  border: 2px solid #5a0000; filter: alpha(opacity:80); opacity: 1; -->
-                    <div id="shadowdiv" class="list box text-shadow" style="filter: alpha(opacity:80); opacity: 0; border-top: 2px solid #c80000; border-bottom: 2px solid #c80000; margin-top: 80px; background: white; height: 1085px; border-radius: 20px; z-index:9999;">
-                        <!-- item 1 -->
-                        <div class="list-item box default" ng-repeat="item in videoList">
-                            <div class="img left" style="height:190px">
-                                <img ng-src="~/Uploads/videos/{{item.RenGongBianMa}}/{{item.YueQiXingZhi_JieGouShiYiTu}}" alt="" title="" />
-                            </div>
-                            <div class="block right">
-                                <p class="date desc" style="color: black">别称:<span ng-bind="item.TiMing_QiTaTiMing"></span></p>
-                                <p class="title" style="color:black">
-                                    乐器名：<a href="javascript:void(0);" onclick="openDetail($(this).attr('_whid'));" _whid="{{item.ForExcelId}}"><span style="color: #ff6a00" ng-bind="item.TiMing_ZhengTiMing"></span></a>
-                                </p>
-                                <p class="desc" style="color: black">
-                                    简介：<span ng-bind="item.YueQiJianJie"></span>
-                                </p>
-                                <p class="like desc" style="color: black">演奏方式：<span ng-bind="item.LeiBie_YanZouFangShi" class="{{item.LeiBie_YanZouFangShi}}"></span>&nbsp;&nbsp;&nbsp;民族：<span ng-bind="item.MinZuShuXing" class="{{item.MinZuShuXing}}"></span>&nbsp;&nbsp;&nbsp;工艺：<span ng-bind="item.YueQiXingZhi_QiTa"></span></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="box jplist-no-results text-shadow align-center">
-                        <p>没有查询到相关条目</p>
-                    </div>
-
-                    <!-- ios button: show/hide panel -->
-                    <div class="jplist-ios-button">
-                        <i class="fa fa-sort"></i>
-                        jPList Actions
-                    </div>
-
-                    <!-- panel -->
-                    <div class="jplist-panel box panel-bottom">
-
-                        <!-- items per page dropdown -->
-                        <div class="jplist-drop-down"
-                             data-control-type="drop-down"
-                             data-control-name="paging"
-                             data-control-action="paging"
-                             data-control-animate-to-top="true" style="display:none">
-
-                            <ul>
-                                <li><span data-number="3"> 3 per page </span></li>
-                                <li>
-                                    <span data-number="5" data-default="true">
-                                        5 perpage
-                                    </span>
-                                </li>
-                                <li><span data-number="10"> 10 per page </span></li>
-                                <li><span data-number="all"> view all </span></li>
-                            </ul>
-                        </div>
-
-
-                        <div style="margin-left: 40%; filter: alpha(opacity:80); opacity: 0;" id="pagediv">
-                            <!-- pagination -->
-                            <div class="jplist-pagination"
-                                 data-control-animate-to-top="true"
-                                 data-control-type="pagination"
-                                 data-control-name="paging"
-                                 data-control-action="paging">
-                            </div>
-                            <!-- pagination results -->
-                            <div class="jplist-label"
-                                 data-type="{start} - {end} of {all}"
-                                 data-control-type="pagination-info"
-                                 data-control-name="paging"
-                                 data-control-action="paging">
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <!-- end of demo -->
-            </div>
-
-        </div>
-
-
-
-        <div class="" style="height: 100px; width: 100%; text-align: center; background-position: center; background-color: #f8f9e3; position: absolute; bottom: 0px; ">
-            <div style="width: 100%; height: 100px;  ">
-                <div style="margin-top: 0px; width: 100%; height: 100px; position: absolute; z-index: 9998; border-top:solid 2px grey">
-                    <p style="font-size: smaller; color: #402111">版权所有  ©  2016文化部民族民间文艺发展中心、北京华阳凡科数字控制技术有限公司</p>
-                    <p style="font-size: smaller; color: #402111">技术支持：北京华阳凡科数字控制技术有限公司</p>
-                    <p style="font-size: smaller; color: #402111">联系电话：010-56718016</p>
-                    <p style="font-size: smaller; color: #402111">地址：北京市朝阳区朝来高科技产业园6号楼西侧3层</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script src="~/Scripts/jquery-ui.min.js"></script>
-    <script src="~/Scripts/select-widget-min.js"></script>
-    <script src="~/Scripts/angular.bundled.min.js"></script>
-    <script src="~/Scripts/vendor/modernizr.min.js"></script>
-    <!--jq分页搜索-->
-    <script src="~/Scripts/jplist.min.js"></script>
-
-    <script src="~/Scripts/seco-app.js"></script>
-    <script type="text/javascript">
-        var inter1, inter2;
-        var indexrem;
-
-        //民族展开
-        function minzudivopen() {
-            var spanval = $('#minzuspan').attr('_stats');
-            var e = document.getElementById('minzudiv');
-            if (spanval == 'over') {
-                e.style.height = '196px';
-                $('#minzuspan').attr('_stats', 'open');
-                $('#minzuspan').attr('src', '../img/shut.png');
-                $('#searchdiv').css('margin-top', '255px');
-            } else if (spanval == 'open') {
-                e.style.height = '60px';
-                $('#minzuspan').attr('_stats', 'over');
-                $('#minzuspan').attr('src', '../img/open.png');
-                $('#searchdiv').css('margin-top', '195px');
-            }
+    <style type="text/css">
+        .btn_music {
+            display: inline-block;
+            width: 35px;
+            height: 35px;
+            background: url('/images/play.png') no-repeat center center;
+            background-size: 100% auto;
+            position: absolute;
+            z-index: 100;
+            left: 15px;
+            top: 20px;
         }
 
-        $(document).ready(function () {
-            //默认隐藏div
-            setTimeout(function () {
-                $('#shadowdiv').css('opacity', '0.9');
-            }, 1000);
+            .btn_music.on {
+                background-image: url("/images/stop.png");
+            }
+    </style>
 
+    <script type="text/javascript">
 
-            //设置标题居中
-            var e = document.getElementById('topimgdiv');
-            var win = document.documentElement || document.body;
-            var width = e.clientWidth;
-            var windowWidth = win.clientWidth;
-            var leftoffset = (windowWidth - width) / 2;
-            e.style.left = leftoffset + 'px';
+        var playbox = (function () {
+            //author:eric_wu
+            var _playbox = function () {
+                var that = this;
+                that.box = null;
+                that.player = null;
+                that.src = null;
+                that.on = false;
+                //
+                that.autoPlayFix = {
+                    on: true,
+                    //evtName: ("ontouchstart" in window)?"touchend":"click"
+                    evtName: ("ontouchstart" in window) ? "touchstart" : "mouseover"
 
+                }
+
+            }
+            _playbox.prototype = {
+                init: function (box_ele) {
+                    this.box = "string" === typeof (box_ele) ? document.getElementById(box_ele) : box_ele;
+                    this.player = this.box.querySelectorAll("audio")[0];
+                    this.src = this.player.src;
+                    this.init = function () { return this; }
+                    this.autoPlayEvt(true);
+                    return this;
+                },
+                play: function () {
+                    if (this.autoPlayFix.on) {
+                        this.autoPlayFix.on = false;
+                        this.autoPlayEvt(false);
+                    }
+                    this.on = !this.on;
+                    if (true == this.on) {
+                        this.player.src = this.src;
+                        this.player.play();
+                    } else {
+                        this.player.pause();
+                        this.player.src = null;
+                    }
+                    if ("function" == typeof (this.play_fn)) {
+                        this.play_fn.call(this);
+                    }
+                },
+                handleEvent: function (evt) {
+                    this.play();
+                },
+                autoPlayEvt: function (important) {
+                    if (important || this.autoPlayFix.on) {
+                        document.body.addEventListener(this.autoPlayFix.evtName, this, false);
+                    } else {
+                        document.body.removeEventListener(this.autoPlayFix.evtName, this, false);
+                    }
+                }
+            }
             //
-            setInterval(function () {
-                if ($('.jplist-label').hasClass('jplist-empty') || $('#shadowdiv').hasClass('jplist-hidden')) {
-                    $('body').css('height', '1300px');
-                    $('#pagediv').css('opacity', '0');
-                } else {
-                    $('body').css('height', '2275px');
-                    $('#pagediv').css('opacity', '1');
-                }
-            }, 200);
+            return new _playbox();
+        })();
 
-            $('#s1').keyup(function () {
-                if ($(this).val() == '') {
-                    setTimeout(function () {
-                        $('#shadowdiv').addClass('jplist-hidden');
-                    }, 0);
-                }
-            })
-
-            //头部切换搜索
-            //头部搜索框
-            //切换操作
-            $('#search-bd li').click(function () {
-                var index = $(this).index();//0
-                if (indexrem == index)
-                    return;
-                indexrem = index;
-                //index == 2 ? $('#search-hd .pholder').hide(0) : $('#search-hd .pholder').eq(index).show().siblings('.pholder').hide(0);
-                //隐藏其他搜索框
-                if (index == 0) {
-                    $('#s1div').css('display', 'block');
-                    $('#s2div').css('display', 'none');
-                } else if (index == 1) {
-                    $('#s1div').css('display', 'none');
-                    $('#s2div').css('display', 'block');
-                }
-
-                //li选中样式
-                $(this).addClass('selected').siblings().removeClass('selected');
-                //清空搜索框
-                //$('#search-hd .search-input').val('');
-                //高级搜索 shadowdiv pagediv
-                if (index == 1) {
-                    $('.jplist-reset-btn').click();//重置
-                    var e = document.getElementById('search-hd');
-                    var hei = e.clientHeight;
-                    clearInterval(inter2);
-                    inter1 = setInterval(function () {
-                        e.style.height = e.getBoundingClientRect().height + 9 + "px";
-                        if (e.getBoundingClientRect().height >= 360) {
-                            clearInterval(inter1);
-                        }
-                    }, 10);
-                    $('#shadowdiv').css('margin-top', '316px');
-
-                    $('#shadowdiv').css('opacity', '0');
-                    $('#shadowdiv').addClass('jplist-hidden');
-                    setTimeout(function () {
-                        $('#shadowdiv').css('opacity', '0.9');
-                    }, 500);
-
-                } else {//切换全文搜索
-                    $('.jplist-reset-btn').click();//重置
-                    var e = document.getElementById('search-hd');
-                    var hei = e.clientHeight;
-                    clearInterval(inter1);
-                    inter2 = setInterval(function () {
-                        e.style.height = e.getBoundingClientRect().height - 12 + "px";
-                        if (e.getBoundingClientRect().height <= 53) {
-                            e.style.height = '62px';
-                            clearInterval(inter2);
-                        }
-                    }, 10)
-
-                    setTimeout(function () {
-                        $('#shadowdiv').css('margin-top', '80px');
-                    }, 300);
-
-                    $('#shadowdiv').css('opacity', '0');
-                    $('#shadowdiv').addClass('jplist-hidden');
-                    setTimeout(function () {
-                        $('#shadowdiv').css('opacity', '0.9');
-                    }, 500);
-                }
-            });
-            $('#search-hd .search-input').eq(0).show().siblings('.search-input').hide(0);
-
-        })
-
-        //落叶动画
-        $.AutomLeafStart({
-            leafsfolder: "../images/",
-            howmanyimgsare: 8,
-            initialleafs: 10,
-            maxYposition: -25,
-            multiplyclick: false,
-            multiplynumber: 2,
-            infinite: true,
-            fallingsequence: 2000
-        }); $("#botAgregar").on("click", function () { $.AutomLeafAdd({ leafsfolder: "~/images/", add: 7, }) });
+        playbox.play_fn = function () {
+            this.box.className = this.on ? "btn_music on" : "btn_music";
+        }
     </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            playbox.init("playbox");
+            /*
+            setTimeout(function() {
+                // IE
+                if(document.all) {
+                    document.getElementById("playbox").click();
+                }
+                // 其它浏览器
+                else {
+                    var e = document.createEvent("MouseEvents");
+                    e.initEvent("click", true, true);
+                    document.getElementById("playbox").dispatchEvent(e);
+                }
+            }, 2000);
+            */
+        });
+
+    </script>
+    <section class="content-box">
+        <div class="mainbg" style="background:#7ABDE9;"><img src="~/images/7.jpg" /></div>
+        <span id="playbox" class="btn_music" onclick="playbox.init(this).play();"><audio id="audio" loop src="~/images/4.mp3"></audio></span>
+
+        <div class="banner">
+
+            <div id="wrapper">
+                <div id="scroller">
+                    <ul id="thelist">
+                        <li><p>传承之美</p><a href="javascript:void(0)"><img src="~/images/3.jpg" /></a></li>
+                        <li><p>传承之美</p><a href="javascript:void(0)"><img src="~/images/4.jpg" /></a></li>
+                        <li><p>传承之美</p><a href="javascript:void(0)"><img src="~/images/2.jpg" /></a></li>
+                        <li><p>传承之美</p><a href="javascript:void(0)"><img src="~/images/1.jpg" /></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="nav">
+                <ul id="indicator">
+                    <li class="active"></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
+            <div class="clr"></div>
+
+        </div>
+        <div style="z-index:1;position:relative;text-align:center;width:100%;margin: 15px 0 15px 0;">
+            <input id="searchkey" style="height: 30px; width: 200px; border-radius: 10px;opacity:0.7;margin-left:10px; padding-left:10px;" type="text" name="name" value="" placeholder="传承人" />
+            <a ng-click="search()" href="javascript:void(0)" style="float:right;margin-right:10px;display:block;height: 30px; width: 90px; border-radius: 6px;color:black;font-size:larger;font-weight:600;background-color:white;opacity:0.7;border:solid 2px #808080">&nbsp;搜&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;索&nbsp;</a>
+        </div>
+
+        <ul class="mainmenu">
+            <li><a href="javascript:void(0)" ng-click="changetype('传统技艺')"><p><span>传统技艺</span></p></a></li>
+            <li><a href="javascript:void(0)" ng-click="changetype('传统美术')"><p><span>传统美术</span></p></a></li>
+            <li><a href="javascript:void(0)" ng-click="changetype('传统体育')"><p><span>传统体育</span></p></a></li>
+            <li><a href="javascript:void(0)" ng-click="changetype('传统舞蹈')"><p><span>传统舞蹈</span></p></a></li>
+            <li><a href="javascript:void(0)" ng-click="changetype('传统戏剧')"><p><span>传统戏剧</span></p></a></li>
+            <li><a href="javascript:void(0)" ng-click="changetype('传统医学')"><p><span>传统医学</span></p></a></li>
+            <li><a href="javascript:void(0)" ng-click="changetype('传统音乐')"><p><span>传统音乐</span></p></a></li>
+            <li><a href="javascript:void(0)" ng-click="changetype('传统文学')"><p><span>传统文学</span></p></a></li>
+            <li><a href="javascript:void(0)" ng-click="changetype('民俗')"><p><span>民俗</span></p></a></li>
+            <li><a href="javascript:void(0)" ng-click="changetype('曲艺')"><p><span>曲艺</span></p></a></li>
+        </ul>
+      
+        <div class="content">
+            <div class="row clearfix content-row" ng-click="modalShow(item.LiteratureExcelId)" ng-repeat="item in videoList">
+                <div class="width30">
+                    <img src="~/Uploads/sources/{{item.FirstLevel}}/{{item.XiangMuMingCheng}}/{{item.Other1}}.jpg" style="width:121px;height:95px"/>
+                </div>
+                <div class="width70">
+                    <h4 style="color:#420f0f">{{item.XiangMuMingCheng}}</h4>
+                    <p>{{item.XiangMuJianJieBiaoZhunBan}}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   
+
+    <script type="text/javascript">
+        var count = document.getElementById("thelist").getElementsByTagName("img").length;
+
+        var count2 = document.getElementsByClassName("menuimg").length;
+        for (i = 0; i < count; i++) {
+            document.getElementById("thelist").getElementsByTagName("img").item(i).style.cssText = " width:" + document.body.clientWidth + "px";
+        }
+        document.getElementById("scroller").style.cssText = " width:" + document.body.clientWidth * count + "px";
+
+        setInterval(function () {
+            myScroll.scrollToPage('next', 0, 400, count);
+        }, 3500);
+
+        window.onresize = function () {
+            for (i = 0; i < count; i++) {
+                document.getElementById("thelist").getElementsByTagName("img").item(i).style.cssText = " width:" + document.body.clientWidth + "px";
+            }
+            document.getElementById("scroller").style.cssText = " width:" + document.body.clientWidth * count + "px";
+        }
+    </script>
+
+    <!-- 我的js -->
+   
+    <style type="text/css">
+        .top_bar {
+            position: fixed;
+            z-index: 900;
+            bottom: -18px;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+
+        /*.top_menu {
+            border-top: 1px solid #3D3D46;
+            display: block;
+            width: 100%;
+            height: 48px;
+            margin: 0;
+            padding: 0;
+            background: rgba(0, 0, 0, 0.7);
+            background: -webkit-gradient(linear, 0 0, 0 100%, from(#524945), to(#48403c), color-stop(60%, #524945));
+            background: -o-gradient(linear, 0 0, 0 100%, from(#524945), to(#48403c), color-stop(60%, #524945));
+            background: gradient(linear, 0 0, 0 100%, from(#524945), to(#48403c), color-stop(60%, #524945));
+            box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.1) inset;
+        }*/
+
+        /*.top_bar .top_menu > li {
+            position: relative;
+            text-align: center;
+            display: inline-block;
+            width: 20%;
+            float: left;
+        }
+
+        .top_menu li:first-child {
+            background: none;
+        }
+
+        .top_bar .top_menu > li > a {
+            height: 48px;
+            margin-right: 1px;
+            display: block;
+            text-align: center;
+            color: #FFF;
+            text-decoration: none;
+            text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+        }
+
+        .top_bar .top_menu > li.home {
+            width: 20%;
+        }
+
+            .top_bar .top_menu > li.home a {
+                height: 66px;
+                width: 66px;
+                margin: auto;
+                border-radius: 60px;
+                position: relative;
+                top: -22px;
+                left: 2px;
+                background: url('~/images/home.png') no-repeat center center;
+                background-size: 100% 100%;
+            }
+
+        .top_bar .top_menu > li > a label {
+            overflow: hidden;
+            margin: 0 0 0 0;
+            font-size: 12px;
+            display: block !important;
+            line-height: 18px;
+            text-align: center;
+        }
+
+        .top_bar .top_menu > li > a img {
+            padding: 3px 0 0 0;
+            height: 24px;
+            width: 24px;
+            color: #fff;
+            line-height: 48px;
+            vertical-align: middle;
+        }
+
+        .top_bar li:first-child a {
+            display: block;
+        }
+
+        .top_menu li:last-of-type a {
+            background: none;
+            overflow: hidden;
+        }
+
+        .top_bar .top_menu > li > a:hover, .top_bar .top_menu > li > a:active {
+            background-color: #333;
+        }*/
+    </style>
+
+
+    @*<div class="top_bar">
+            <nav>
+                <ul id="top_menu" class="top_menu">
+                    <li><a href="http://www.17sucai.com/"><img src="~/images/plugmenu6.png"><label>首页</label></a></li>
+                    <li><a href="javascript:void(0)"><img src="~/images/plugmenu5.png"><label>分享</label></a></li>
+                    <li class="home"><a href="http://www.17sucai.com/"></a></li>
+                    <li><a href="tel:13888888888"><img src="~/images/plugmenu1.png"><label>拨号</label></a></li>
+                    <li><a href="javascript:void(0)"><img src="~/images/plugmenu8.png"><label>短信</label></a></li>
+                </ul>
+            </nav>
+        </div>*@
+    <div class="copy" style="position: relative; background-color: #ECE5D3; text-align: center; color: #fff; height: 26px; line-height: 26px; font-size: 12px;">
+        xxxxxxxxxxxxxx Copyright &copy; 2016
+    </div>
 </body>
 </html>
