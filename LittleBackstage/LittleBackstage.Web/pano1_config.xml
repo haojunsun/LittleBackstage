@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<panorama id="">
+  <view fovmode="0" pannorth="0">
+    <start pan="157" tilt="19.5" fov="70"/>
+    <min pan="0" tilt="-90" fov="5"/>
+    <max pan="360" tilt="90" fov="120"/>
+  </view>
+  <userdata title="" datetime="" description="" copyright="" tags="" author="" source="" comment="" info="" longitude="" latitude=""/>
+  <hotspots width="180" height="20" wordwrap="1">
+    <label width="180" backgroundalpha="1" enabled="1" height="20" backgroundcolor="0xffffff" bordercolor="0x000000" border="1" textcolor="0x000000" background="1" borderalpha="1" borderradius="1" wordwrap="1" textalpha="1"/>
+    <polystyle mode="0" backgroundalpha="0.2509803921568627" backgroundcolor="0x0000ff" bordercolor="0x0000ff" borderalpha="1"/>
+    <hotspot title="foo2" target="_self" pan="-125.12" skinid="foo2" url="javascript:sc.main.openModal(0, true);" id="Point01" tilt="3.12"/>
+    <hotspot title="foo2" target="_self" pan="-2.76" skinid="foo2" url="javascript:sc.main.openModal(1);" id="Point02" tilt="1.60"/>
+    <hotspot title="foo2" target="_self" pan="121.09" skinid="foo2" url="javascript:sc.main.openModal(2);" id="Point03" tilt="4.54"/>
+    <hotspot title="foo4" target="_self" pan="148.78" skinid="foo4" url="#/pano2" id="Point04" tilt="3.06"/>
+    <hotspot title="foo3" target="_self" pan="176.28" skinid="foo3" url="javascript:sc.main.openShare(0);" id="Point05" tilt="13.06"/>
+  </hotspots>
+  <media/>
+  <input tile0url="images/pano1_o_0.jpg" 
+         tile5url="images/pano1_o_5.jpg" 
+         tile4url="images/pano1_o_4.jpg" 
+         tile3url="images/pano1_o_3.jpg" 
+         tile2url="images/pano1_o_2.jpg" 
+         tile1url="images/pano1_o_1.jpg"
+         tilescale="1.0125" 
+         tilesize="800">
+    <preview color="0x808080"/>
+  </input>
+  <control simulatemass="1" lockedmouse="0" lockedkeyboard="0" dblclickfullscreen="0" invertwheel="0" lockedwheel="0" invertcontrol="1" speedwheel="1" sensitivity="2"/>
+</panorama>
