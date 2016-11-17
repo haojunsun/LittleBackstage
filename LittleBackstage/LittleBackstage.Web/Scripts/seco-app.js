@@ -1,182 +1,205 @@
-﻿var sc = sc || {};
-sc.app = angular.module('scApp', [])
-
-    .controller('RootController', ['$scope', '$location', function ($scope, $location) {
-
+﻿sc.app = angular.module('scApp', ['scUtils', 'ngRoute', 'ngAnimate', 'ngTouch'])
+    //angular route configuration
+    .config(['$routeProvider', function ($routeProvider) {
+        $routeProvider.when('/', {
+            templateUrl: '_home.html',
+            controller: 'HomeCtrl'
+        }).when('/pano1', {
+            templateUrl: '_pano1.html',
+            controller: 'Pano1Ctrl'
+        }).when('/pano2', {
+            templateUrl: '_pano2.html',
+            controller: 'Pano2Ctrl'
+        }).when('/pano3', {
+            templateUrl: '_pano3.html',
+            controller: 'Pano3Ctrl'
+        }).otherwise({
+            redirectTo: '/'
+        });
     }])
-    .controller('HomeController', ['$scope', '$location', '$http', function ($scope, $location, $http) {
-        $scope.pageIndex = 1;//页码
-        $scope.pageSize = 115;//条数每页
-        $scope.videoList = [];
-        $scope.datacount = 0;//总条数
-        $scope.totalpage = 0;//总页数
-        $scope.searchtype = true;
-
-        $scope.mz = '';
-        $scope.searchkey = '';
-        $scope.yzfs = '';
-
-        //进入详情页
-        openDetail = function (whid, ele) {
-            console.log(whid);
-            window.location.href = '/home/detail?instruments=' + whid;
-        }
-        //全文or乐器名
-        $scope.searchEvent = function () {
-            $scope.searchtype = $('#searchtype1')[0].checked;//全局为true  乐器名为false
-        }
-
-        //$.pagination('pages', 1, 6, 13, "", { keyword: 'hello world' });
-        //加载数据
-        $scope.getVedioList = function () {
-            $scope.videoList = [];
-            var state = $scope.searchtype ? 0 : 1;
-            //alert($scope.searchtype + "," + state);
-            $http.post(sc.baseUrl + 'ForExcel/SeniorSearch', { "state": state, "key": $scope.searchkey, "yzfs": $scope.yzfs, "mz": $scope.mz, "pageSize": $scope.pageSize, "pageIndex": $scope.pageIndex }).success(function (data) {
-                console.log(data);
-                $scope.datacount = data.totalCount;
-                $scope.totalpage = ($scope.datacount / $scope.pageSize) >> 0;
-                $scope.videoList = data.list;
-                //重新加载页码
-                //$.pagination('pages', $scope.pageIndex, $scope.pageSize, $scope.datacount, "", { keyword: 'hello world' });
-
-                setTimeout(function () {
-                    $('#demo').jplist({
-                        itemsBox: '.list'
-                   , itemPath: '.list-item'
-                   , panelPath: '.jplist-panel'//save plugin state
-                   , storage: '' //'', 'cookies', 'localstorage'
-                   , storageName: 'jplist-div-layout'
-                    });
-                    $('#shadowdiv').addClass('jplist-hidden');
-                }, 100);
-
-            }).error(function (data) {
-                console.log("查询失败");
-            });
-        }
-
-        $scope.getVedioList();
-
-        //民族选择
-        changeSelect = function (eve) {
-            $scope.mz = $(eve).val() == '全部' ? '' : $(eve).val();
-            $scope.pageIndex = 1;
-            $scope.getVedioList();
-        }
-        //演奏方式
-        $scope.changeFs = function (val) {
-            $scope.yzfs = val == '全部' ? '' : val;
-            $scope.pageIndex = 1;
-            $scope.getVedioList();
-        }
-        //搜素关键字
-        $scope.changeSearchkey = function () {
-            $scope.searchkey = $("#searchkey").val();
-            console.log($scope.searchkey);
-            $scope.pageIndex = 1;
-            $scope.getVedioList();
-        }
-
-        //翻页
-        changePage = function (ele) {
-            var nextpage = $(ele).text();
-            if (nextpage == '第一页') {
-                $scope.pageIndex = 1;
-            } else if (nextpage == '下一页') {
-                $scope.pageIndex = parseInt($scope.pageIndex) + 1;
-            } else if (nextpage == '最后一页') {
-                $scope.pageIndex = $scope.totalpage;
-            } else if (nextpage == '上一页') {
-                $scope.pageIndex = $scope.pageIndex - 1;
-            } else {
-                $scope.pageIndex = nextpage;
+    //root controller
+    .controller('RootCtrl', ['$scope', '$location', function ($scope, $location) {
+        $scope.$on('routeChangeSuccess', function (event, newRoute, oldRoute) {
+            if (ga) {
+                ga('send', 'pageview', $location.path());
             }
-            $scope.getVedioList();
-        }
-
+        });
     }])
-    .controller('VideoListController', ['$scope', '$http', '$location', function ($scope, $http, $location) {
+    //home controller
+    .controller('HomeCtrl', ['$scope', '$timeout', function ($scope, $timeout) {
+        $timeout(function () {
+            $scope.curStage = 1;
+        }, 100);
 
+        $scope.pressing = function () { };
     }])
-    .controller('DetailController', ['$scope', '$http', function ($scope, $http) {
-        var whid = window.location.search.indexOf('=') > -1 ? window.location.search.split('=')[1] : "";
-        $scope.videoinfo = {};
-        $scope.yzjflist = [];
-        $scope.yzjffirst = [];
-        $scope.yzjfsecond = [];
-        $scope.imglist = [];
-
-        $scope.sfyqlist = [];
-        $scope.sfyqmp3 = [];
-        $scope.sfyqmp4 = [];
-
-        //获取单条数据
-        $scope.getVideoInfo = function () {
-            if (!whid)
-                return;
-            $http.post(sc.baseUrl + 'ForExcel/Find', { "id": whid }).success(function (data) {
-                console.log(data);
-                $scope.videoinfo = data;
-                $scope.yzjflist = data.YanZhouJiFa_MingChen.split(',');//演奏技法名
-                $scope.yzjffirst = data.YanZhouJiFa_First.split(',');
-                $scope.yzjfsecond = data.YanZhouJiFa_Second.split(',');
-
-                $scope.sfyqlist = data.ShiFanYuQu_QuMuMing.split(',');//示范乐曲名
-                $scope.sfyqmp3 = data.ShiFanYuQu_YinPin.split(',');
-                $scope.sfyqmp4 = data.ShiFanYuQu_ShiPin.split(',');
-
-                $scope.imglist = data.Img.split(',');
-            }).error(function (data) {
-                console.log("查询失败");
-            });
-        }
-
-        $scope.getVideoInfo();
-
-        openModal = function (eve) {
-            event.preventDefault();
-            $('.cd-popup3').addClass('is-visible3');
-
-            var vid = $(eve).attr('_videoid');
-            var radioname = $(eve).attr('_videoname');
-
-            $('#radioname').text(radioname);
-
-            var curWwwPath = window.document.location.href;
-            var pathName = window.document.location.pathname;
-            var pos = curWwwPath.indexOf(pathName);
-            var localhostPaht = curWwwPath.substring(0, pos);
-            console.log(localhostPaht + '/Uploads/videos/' + $scope.videoinfo.RenGongBianMa + '/' + vid + '.wav');
-            var media = document.getElementById("audioplayer");
-            media.src = localhostPaht + '/Uploads/videos/' + $scope.videoinfo.RenGongBianMa + '/' + vid + '.mp3';
-            media.load();
-            // media.play();
-
-        }
-
-        openVideoModal = function (eve) {
-            event.preventDefault();
-            $('.cd-popup4').addClass('is-visible3');
-
-            var vid = $(eve).attr('_videoid');
-            var videoname = $(eve).attr('_videoname');
-
-            $('#videoname').text(videoname);
-
-            var curWwwPath = window.document.location.href;
-            var pathName = window.document.location.pathname;
-            var pos = curWwwPath.indexOf(pathName);
-            var localhostPaht = curWwwPath.substring(0, pos);
-            console.log(localhostPaht + '/Uploads/videos/' + $scope.videoinfo.RenGongBianMa + '/' + vid + '.mp4');
-            //$('#videosource').attr("src", localhostPaht + '/Uploads/videos/' + vid + '.mp4');
-            var myVideo = document.getElementById('videoplayer');
-            myVideo.src = localhostPaht + '/Uploads/videos/' + $scope.videoinfo.RenGongBianMa + '/' + vid + '.mp4';
-            myVideo.load();
-            //myVideo.play();
-
-        }
-
+    //the first pano scene
+    .controller('Pano1Ctrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
+        $scope.panoConfig = 'pano1_config.xml';
     }])
+    //the second pano scene
+    .controller('Pano2Ctrl', ['$scope', function ($scope) {
+        $scope.panoConfig = 'pano2_config.xml';
+    }])
+    .controller('Pano3Ctrl', ['$scope', function ($scope) {
+        $scope.panoConfig = 'livingroom.xml';
+    }])
+    //pano setup
+    .directive('pjPano', ['$timeout', function ($timeout) {
+        var pano, timer;
+        return {
+            link: function (scope, element, attrs) {
+                //delay to prevent pano initialize failure
+                $timeout(function () {
+                    pano = sc.main.createPano(element.attr('id'), scope.panoConfig);
+                }, 1000);
+                timer = setInterval(function () {
+                    if (typeof (pano) != 'undefined' && pano.isLoaded) {
+                        clearInterval(timer);
+                        scope.$apply(function () {
+                            scope.isLoaded = true;
+                        });
+                    }
+                }, 500);
+            }
+        };
+    }])
+    .directive('pjLoad', ['$timeout', function ($timeout) {
+        var size = sc.assets.images.length;
+        return {
+            link: function (scope, element, attrs) {
+                var loaded = 0;
+                function handleFileComplete(e) {
+                    scope.$apply(function () {
+                        element.html('100 %');
+                        scope.curStage = 2;
+                    });
+                }
+                function handleFileLoad(e) {
+                    loaded++;
+                    var progress = ((loaded / size) * 100).toFixed(0).toString() + ' %';
+                    element.html(progress);
+                }
 
-;;
+                var preload = new createjs.LoadQueue();
+                preload.addEventListener("fileload", handleFileLoad);
+                preload.addEventListener("complete", handleFileComplete);
+
+                $timeout(function () {
+                    for (var i = 0; i < sc.assets.images.length; i++) {
+                        preload.loadFile(sc.assets.images[i]);
+                    }
+                }, 2400);
+            }
+        };
+    }])
+    .directive('pjFinger', ['$location', function ($location) {
+        return {
+            link: function (scope, element, attrs) {
+                var hammer = new Hammer(element[0]);
+                hammer.get('press').set({
+                    time: 300
+                });
+                hammer.on('press', function () {
+                    scope.$apply(function () {
+                        scope.curStage = 3;
+                    });
+                    //scope.$apply(function () {
+                    //    $location.path('/pano1');
+                    //});
+                    setTimeout(function () {
+                        scope.$apply(function () {
+                            $location.path('/pano1');
+                        });
+                    }, 4500); //从触发指纹识别开始计算跳转pano1的时间
+                });
+            }
+        };
+    }])
+    .directive('scOnSwitchBySwipe', ['$animate', function ($animate) {
+        var dragging = false;
+        return {
+            link: function (scope, element, attrs) {
+                var hammer = new Hammer(element[0]);
+                hammer.on('panleft', function () {
+                    if (dragging) {
+                        return;
+                    }
+                    dragging = true;
+                    var $items = element.find(attrs.scOnSwitchBySwipe).children('.on');
+                    if (!$items.is(':last-child')) {
+                        element.removeClass('prev').addClass('next');
+                        $items.each(function () {
+                            $animate.removeClass($(this), 'on');
+                            $animate.addClass($(this).next(), 'on');
+                        });
+                    }
+                });
+                hammer.on('panright', function () {
+                    if (dragging) {
+                        return;
+                    }
+                    dragging = true;
+                    var $items = element.find(attrs.scOnSwitchBySwipe).children('.on');
+                    if (!$items.is(':first-child')) {
+                        element.removeClass('next').addClass('prev');
+                        $items.each(function () {
+                            $animate.removeClass($(this), 'on');
+                            $animate.addClass($(this).prev(), 'on');
+                        });
+                    }
+                });
+                hammer.on('panend', function () {
+                    dragging = false;
+                });
+            }
+        };
+    }])
+    .directive('pjTips', ['$timeout', function ($timeout) {
+        var timer;
+        function next(ele, scope) {
+            clearTimeout(timer);
+            var curItem = ele.find('span:visible');
+            if (curItem.next().length > 0) {
+                curItem.fadeOut(function () {
+                    curItem.next().fadeIn();
+                });
+                timer = setTimeout(function () {
+                    next(ele);
+                }, 3000);
+            }
+            else {
+                ele.fadeOut(function () {
+                    scope.$root.isTipsShown = true;
+                });
+            }
+        }
+        return {
+            link: function (scope, element, attrs) {
+                element.click(function () {
+                    next(element, scope);
+                });
+                scope.$on('panoLoadComplete', function () {
+                    timer = setTimeout(function () {
+                        next(element, scope);
+                    }, 3000);
+                });
+            }
+        };
+    }])
+    .directive('pjPanoLoading', function () {
+        return {
+            link: function (scope, element, attrs) {
+                element.click(function () {
+                    if (scope.isLoaded) {
+                        element.fadeOut(1000);
+                        if (!scope.isTipsShown) {
+                            scope.$emit('panoLoadComplete');
+                        }
+                    }
+                });
+            }
+        };
+    })
+
+;
