@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace LittleBackstage.Web.Areas.Admin.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class HomeController : Controller
     {
         // GET: Admin/Home
