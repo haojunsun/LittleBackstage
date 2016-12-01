@@ -91,6 +91,7 @@
     <Compile Include="Repositories\AppDbContext.cs" />
     <Compile Include="Services\ForExcelService.cs" />
     <Compile Include="Services\LiteratureExcelServices.cs" />
+    <Compile Include="Services\ManagerService.cs" />
     <Compile Include="Services\SystemLogService.cs" />
   </ItemGroup>
   <ItemGroup>
