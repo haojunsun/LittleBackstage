@@ -76,6 +76,10 @@
     <Compile Include="Migrations\201612010744554_adduser.Designer.cs">
       <DependentUpon>201612010744554_adduser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612010800302_upid.cs" />
+    <Compile Include="Migrations\201612010800302_upid.Designer.cs">
+      <DependentUpon>201612010800302_upid.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ForExcel.cs" />
     <Compile Include="Models\LiteratureExcel.cs" />
@@ -87,6 +91,7 @@
     <Compile Include="Repositories\AppDbContext.cs" />
     <Compile Include="Services\ForExcelService.cs" />
     <Compile Include="Services\LiteratureExcelServices.cs" />
+    <Compile Include="Services\SystemLogService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -113,6 +118,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612010744554_adduser.resx">
       <DependentUpon>201612010744554_adduser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612010800302_upid.resx">
+      <DependentUpon>201612010800302_upid.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

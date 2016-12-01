@@ -14,7 +14,7 @@ namespace LittleBackstage.Core.Models
         /// </summary>
         public int LogType { get;set;}
         public string LogUserName{ get;set;}
-        public string LogUserId{ get;set;}
+        public int LogUserId{ get;set;}
         /// <summary>
         /// 操作类型
         /// </summary>
