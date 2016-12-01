@@ -93,6 +93,7 @@
     <Compile Include="Services\LiteratureExcelServices.cs" />
     <Compile Include="Services\ManagerService.cs" />
     <Compile Include="Services\SystemLogService.cs" />
+    <Compile Include="Services\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
