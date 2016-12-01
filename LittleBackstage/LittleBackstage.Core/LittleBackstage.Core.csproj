@@ -72,9 +72,17 @@
     <Compile Include="Migrations\201608310650381_LiteratureExcel.Designer.cs">
       <DependentUpon>201608310650381_LiteratureExcel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612010744554_adduser.cs" />
+    <Compile Include="Migrations\201612010744554_adduser.Designer.cs">
+      <DependentUpon>201612010744554_adduser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ForExcel.cs" />
     <Compile Include="Models\LiteratureExcel.cs" />
+    <Compile Include="Models\Manager.cs" />
+    <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\SystemLog.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AppDbContext.cs" />
     <Compile Include="Services\ForExcelService.cs" />
@@ -102,6 +110,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201608310650381_LiteratureExcel.resx">
       <DependentUpon>201608310650381_LiteratureExcel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612010744554_adduser.resx">
+      <DependentUpon>201612010744554_adduser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
