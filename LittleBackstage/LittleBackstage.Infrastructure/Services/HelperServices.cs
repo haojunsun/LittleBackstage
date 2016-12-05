@@ -4,6 +4,7 @@ using System.Drawing;
 
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -123,6 +124,7 @@ namespace LittleBackstage.Infrastructure.Services
         string UpLoadFile(string fileName, string path);
 
         object GetSessionObject(string key);
+        string MD5CSP(string encypStr);
     }
 
     public class HelperServices : IHelperServices
@@ -509,6 +511,25 @@ namespace LittleBackstage.Infrastructure.Services
         public object GetSessionObject(string key)
         {
             return HttpContext.Current.Session[key];
+        }
+
+        public string MD5CSP(string encypStr)
+        {
+            string retStr;
+            MD5CryptoServiceProvider m5 = new MD5CryptoServiceProvider();
+
+            //创建md5对象
+            byte[] inputBye;
+            byte[] outputBye;
+
+            //使用GB2312编码方式把字符串转化为字节数组．
+            inputBye = Encoding.GetEncoding("GB2312").GetBytes(encypStr);
+
+            outputBye = m5.ComputeHash(inputBye);
+
+            retStr = System.BitConverter.ToString(outputBye);
+            retStr = retStr.Replace("-", "").ToLower();
+            return retStr;
         }
     }
 }

@@ -14,9 +14,11 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
     public class AccountController : Controller
     {
         private readonly IManagerService _managerService;
-        public AccountController(IManagerService managerService)
+        private readonly IHelperServices _helperServices;
+        public AccountController(IManagerService managerService, IHelperServices helperServices)
         {
             _managerService = managerService;
+            _helperServices = helperServices;
         }
         public ActionResult Login()
         {
@@ -28,8 +30,8 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
         {
             var ajaxBack = new AjaxResponse();
             ajaxBack.code = 200;
-
-            var result = _managerService.LoginByPassword(username, password);
+ 
+            var result = _managerService.LoginByPassword(username,  _helperServices.MD5CSP(password));
             if (result == null)
             {
                 ajaxBack.code = 400;
@@ -56,6 +58,30 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
         public ActionResult Register()
         {
             return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult Register(string username, string password)
+        {
+            var ajaxBack = new AjaxResponse();
+            ajaxBack.code = 200;
+            var m = new Manager();
+            m.IsEnable = 0;
+            m.IsExamine = 0;
+            m.PassWord = _helperServices.MD5CSP(password);
+            m.Register = DateTime.Now;
+            m.UserName = username;
+            //m.Role 需要默认一个 注册角色
+            if (_managerService.FindByUserName(username))
+            {
+                ajaxBack.message = "登录名重复！";
+                ajaxBack.code = 400;
+                return Json(ajaxBack, JsonRequestBehavior.DenyGet);
+            }
+            _managerService.Add(m);
+            ajaxBack.returnUrl = Url.Action("Login");
+            return Json(ajaxBack, JsonRequestBehavior.DenyGet);
         }
     }
 }
