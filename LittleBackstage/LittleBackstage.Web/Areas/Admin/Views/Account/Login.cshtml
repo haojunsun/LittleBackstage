@@ -49,7 +49,7 @@
         <script type="text/javascript">
             function login() {
                 var name = $("#name").val();
-                var password = $("password").val();
+                var password = $("#password").val();
                 $.ajax({
                     url: '@Url.Action("Login", "Account")',
                     type: "POST",
@@ -58,11 +58,12 @@
                     dataType: "json",            
                     success: function(result) {
                         if (result.code == 200) {
-                            //window.location.href = result.returnUrl;
+                            window.location.href = result.returnUrl;
                         }
                         console.log(result);
                     },
-                    error:function() {
+                    error: function (result) {
+                        console.log(result);
                         alert("服务器未知错误！");
                     }
                 });

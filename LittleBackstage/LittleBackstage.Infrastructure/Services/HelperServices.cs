@@ -125,6 +125,15 @@ namespace LittleBackstage.Infrastructure.Services
 
         object GetSessionObject(string key);
         string MD5CSP(string encypStr);
+
+        string GetSessionId();
+
+        void SetSession(string key, string value);
+        void SetSession(string key, object value);
+
+        string GetSession(string key);
+
+        void WriteCookieByDay(string strName, string strValue, int expires);
     }
 
     public class HelperServices : IHelperServices
@@ -507,12 +516,6 @@ namespace LittleBackstage.Infrastructure.Services
             return "";
         }
 
-
-        public object GetSessionObject(string key)
-        {
-            return HttpContext.Current.Session[key];
-        }
-
         public string MD5CSP(string encypStr)
         {
             string retStr;
@@ -531,5 +534,45 @@ namespace LittleBackstage.Infrastructure.Services
             retStr = retStr.Replace("-", "").ToLower();
             return retStr;
         }
+
+        public string GetSessionId()
+        {
+            return HttpContext.Current.Session.SessionID;
+        }
+
+        public void SetSession(string key, string value)
+        {
+            HttpContext.Current.Session[key] = value;
+        }
+
+        public void SetSession(string key, object value)
+        {
+            HttpContext.Current.Session[key] = value;
+        }
+
+        public string GetSession(string key)
+        {
+            return HttpContext.Current.Session[key] != null ? HttpContext.Current.Session[key].ToString() : null;
+        }
+
+        public object GetSessionObject(string key)
+        {
+            return HttpContext.Current.Session[key];
+        }
+     
+        public void WriteCookieByDay(string strName, string strValue, int expires)
+        {
+            HttpCookie cookie = HttpContext.Current.Request.Cookies[strName];
+            if (cookie == null)
+            {
+                cookie = new HttpCookie(strName);
+            }
+            cookie.Value = UrlEncode(strValue);
+            cookie.Expires = DateTime.Now.AddDays(expires);
+            HttpContext.Current.Response.AppendCookie(cookie);
+        }
+     
+
+     
     }
 }

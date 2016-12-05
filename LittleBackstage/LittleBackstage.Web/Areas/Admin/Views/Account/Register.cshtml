@@ -7,7 +7,6 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title> - 注册</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
@@ -68,7 +67,7 @@
 
         function register() {
             var name = $("#name").val();
-            var password = $("password").val();
+            var password = $("#password").val();
             $.ajax({
                 url: '@Url.Action("Register", "Account")',
                 type: "POST",
@@ -92,7 +91,5 @@
             });
         }
     </script>
-
-
 </body>
 </html>

@@ -12,16 +12,15 @@ namespace LittleBackstage.Core.Models
 
        public int RoleName { get; set; }
 
-       /// <summary>
-       /// 权限
-       /// </summary>
-       public int RoleAuthority { get; set; }
-
        public DateTime? CreateTime { get; set; }
 
        /// <summary>
        /// 角色类型 0 管理员 1 会员
        /// </summary>
        public int RoleType { get; set; }
+       /// <summary>
+       /// 权限
+       /// </summary>
+       public string Permissions { get; set; }
     }
 }

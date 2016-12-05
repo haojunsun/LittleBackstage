@@ -30,15 +30,33 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
         {
             var ajaxBack = new AjaxResponse();
             ajaxBack.code = 200;
- 
-            var result = _managerService.LoginByPassword(username,  _helperServices.MD5CSP(password));
+
+            var result = _managerService.LoginByPassword(username, _helperServices.MD5CSP(password));
             if (result == null)
             {
                 ajaxBack.code = 400;
                 ajaxBack.message = "账号密码错误！";
                 return Json(ajaxBack, JsonRequestBehavior.DenyGet);
             }
-            ajaxBack.returnUrl = Url.Action("Index", "Home");
+            if (result.IsExamine == 1 && result.IsEnable == 1)
+            {
+                ajaxBack.returnUrl = Url.Action("Index", "Home");
+                //写session
+                _helperServices.SetSession("SESSION_USER_INFO", result);
+                if (result.Role != null && !string.IsNullOrEmpty(result.Role.Permissions))
+                    _helperServices.SetSession("SESSION_ADMIN_PERMISSIONS", result.Role.Permissions);
+
+                Session.Timeout = 45;
+                //cookie expires in 24 hours
+                _helperServices.WriteCookie("SESSION_USER_NAME", result.UserName, 1440);
+                //_helperServices.WriteCookie("SESSION_USER_NAME", result.UserName, 1440);
+                //HelperServices.WriteCookieByDay(cookieName + "_LogonName", user.LogonName, expires);
+            }
+            else
+            {
+                ajaxBack.code = 500;
+                ajaxBack.message = "账号已冻结无法登陆！";
+            }
             return Json(ajaxBack, JsonRequestBehavior.DenyGet);
         }
 
@@ -59,7 +77,6 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
         {
             return View();
         }
-
 
         [HttpPost]
         public ActionResult Register(string username, string password)
