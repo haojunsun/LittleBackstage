@@ -3,39 +3,59 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using LittleBackstage.Core.Models;
+using LittleBackstage.Core.Services;
 using LittleBackstage.Infrastructure.Services;
+using LittleBackstage.Web.Filters;
 
 namespace LittleBackstage.Web.Areas.Admin.Controllers
 {
+    // [LittleBackstageAuthorize]
     public class AccountController : Controller
     {
-        private readonly ISimpleAccountManager _simpleAccountManager;
-        public AccountController(ISimpleAccountManager simpleAccountManager)
+        private readonly IManagerService _managerService;
+        public AccountController(IManagerService managerService)
         {
-            _simpleAccountManager = simpleAccountManager;
+            _managerService = managerService;
         }
         public ActionResult Login()
         {
-            return View(false);
+            return View();
         }
 
         [HttpPost]
-        public ActionResult Login(string username, string password, bool remember = false)
+        public ActionResult Login(string username, string password)
         {
-            var result = _simpleAccountManager.LoginByPassword(username, password);
-            if (!result)
-            {
-                return View(true);
-            }
+            var ajaxBack = new AjaxResponse();
+            ajaxBack.code = 200;
 
-            return RedirectToAction("Index", "Home");
+            var result = _managerService.LoginByPassword(username, password);
+            if (result == null)
+            {
+                ajaxBack.code = 400;
+                ajaxBack.message = "账号密码错误！";
+                return Json(ajaxBack, JsonRequestBehavior.DenyGet);
+            }
+            ajaxBack.returnUrl = Url.Action("Index", "Home");
+            return Json(ajaxBack, JsonRequestBehavior.DenyGet);
         }
+
+        /// <summary>
+        /// 退出登录
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Logout()
         {
-            _simpleAccountManager.Logout();
-
             return RedirectToAction("Login");
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Register()
+        {
+            return View();
+        }
     }
 }

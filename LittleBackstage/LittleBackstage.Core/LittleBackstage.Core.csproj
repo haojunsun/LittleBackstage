@@ -41,6 +41,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,6 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Basis\UserLogin.cs" />
+    <Compile Include="Common\SessionHelper.cs" />
     <Compile Include="Migrations\201608090141345_InitialCreate.cs" />
     <Compile Include="Migrations\201608090141345_InitialCreate.Designer.cs">
       <DependentUpon>201608090141345_InitialCreate.cs</DependentUpon>
@@ -81,6 +84,7 @@
       <DependentUpon>201612010800302_upid.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AjaxResponse.cs" />
     <Compile Include="Models\ForExcel.cs" />
     <Compile Include="Models\LiteratureExcel.cs" />
     <Compile Include="Models\Manager.cs" />

@@ -16,6 +16,8 @@ namespace LittleBackstage.Core.Services
         void Delete(int id);
         Manager Get(int id);
         IEnumerable<Manager> GetPageList(int pageIndex, int pageSize, ref int totalCount);
+
+        Manager LoginByPassword(string userName, string password);
     }
 
     public class ManagerService : IManagerService
@@ -71,5 +73,10 @@ namespace LittleBackstage.Core.Services
             return list.ToList();
         }
 
+        public Manager LoginByPassword(string userName, string password)
+        {
+            var user = _appDbContext.Managers.FirstOrDefault(x => x.UserName == userName && x.PassWord == password);
+            return user ?? null;
+        }
     }
 }

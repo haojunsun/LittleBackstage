@@ -169,6 +169,7 @@
     <Compile Include="Areas\Admin\Controllers\ForExcelController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Filters\LittleBackstageAuthorizeAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1239,6 +1240,7 @@
     <Content Include="Assets\js\plugins\layer\layim\data\group.json" />
     <Content Include="Assets\js\plugins\layer\layim\data\groups.json" />
     <Content Include="Assets\js\plugins\suggest\data.json" />
+    <Content Include="Areas\Admin\Views\Account\Register.cshtml" />
     <None Include="Properties\PublishProfiles\pano.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\common.js" />

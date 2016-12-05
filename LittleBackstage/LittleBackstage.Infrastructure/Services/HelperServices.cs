@@ -121,6 +121,8 @@ namespace LittleBackstage.Infrastructure.Services
         int GetStrCount(string strOriginal, string strSymbol);
 
         string UpLoadFile(string fileName, string path);
+
+        object GetSessionObject(string key);
     }
 
     public class HelperServices : IHelperServices
@@ -501,6 +503,12 @@ namespace LittleBackstage.Infrastructure.Services
                 }
             }
             return "";
+        }
+
+
+        public object GetSessionObject(string key)
+        {
+            return HttpContext.Current.Session[key];
         }
     }
 }

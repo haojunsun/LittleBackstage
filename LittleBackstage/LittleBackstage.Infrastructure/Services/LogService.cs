@@ -9,6 +9,8 @@ namespace LittleBackstage.Infrastructure.Services
         void Debug(string msg);
 
         void Error(string msg);
+
+        void Info(string msg);
     }
 
     public class LogService : ILogService
@@ -23,6 +25,10 @@ namespace LittleBackstage.Infrastructure.Services
         public void Error(string msg)
         {
             _log.Error(msg);
+        }
+        public void Info(string msg)
+        {
+            _log.Info(msg);
         }
     }
 }

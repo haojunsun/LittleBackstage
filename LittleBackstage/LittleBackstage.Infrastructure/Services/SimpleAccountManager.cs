@@ -16,7 +16,6 @@ namespace LittleBackstage.Infrastructure.Services
         bool LoginByPassword(string userName, string password);
         void Logout();
         IEnumerable<string> GetCurrentPermissions();
-
         UserElement GetUserElement();
     }
 
