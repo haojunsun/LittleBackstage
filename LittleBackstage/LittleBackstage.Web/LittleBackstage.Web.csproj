@@ -1245,6 +1245,9 @@
     <Content Include="Assets\js\plugins\layer\layim\data\groups.json" />
     <Content Include="Assets\js\plugins\suggest\data.json" />
     <Content Include="Areas\Admin\Views\Account\Register.cshtml" />
+    <Content Include="Areas\Admin\Views\User\ManagerList.cshtml" />
+    <Content Include="Areas\Admin\Views\User\AddManager.cshtml" />
+    <Content Include="Areas\Admin\Views\User\EditManager.cshtml" />
     <None Include="Properties\PublishProfiles\pano.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\common.js" />
@@ -1330,7 +1333,6 @@
     <Folder Include="Areas\Admin\Views\ForExcel\" />
     <Folder Include="Areas\Admin\Views\Log\" />
     <Folder Include="Areas\Admin\Views\Resources\" />
-    <Folder Include="Areas\Admin\Views\User\" />
     <Folder Include="css\vendor\" />
     <Folder Include="files\imgs\" />
     <Folder Include="imgs\" />
