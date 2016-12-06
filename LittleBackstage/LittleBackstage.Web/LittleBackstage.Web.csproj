@@ -1248,6 +1248,12 @@
     <Content Include="Areas\Admin\Views\User\ManagerList.cshtml" />
     <Content Include="Areas\Admin\Views\User\AddManager.cshtml" />
     <Content Include="Areas\Admin\Views\User\EditManager.cshtml" />
+    <Content Include="Areas\Admin\Views\User\AddRole.cshtml" />
+    <Content Include="Areas\Admin\Views\User\EditRole.cshtml" />
+    <Content Include="Areas\Admin\Views\User\RoleList.cshtml" />
+    <Content Include="Areas\Admin\Views\User\AddUser.cshtml" />
+    <Content Include="Areas\Admin\Views\User\EditUser.cshtml" />
+    <Content Include="Areas\Admin\Views\User\UserList.cshtml" />
     <None Include="Properties\PublishProfiles\pano.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\common.js" />
