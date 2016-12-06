@@ -65,5 +65,18 @@ namespace LittleBackstage.Core.Basis
             }
             return null;
         }
+        public static string[] GetPermissions(string SESSION_ADMIN_PERMISSIONS)
+        {
+            if (System.Web.HttpContext.Current.Session[SESSION_ADMIN_PERMISSIONS] != null)
+            {
+
+                string[] permissions = ((string)System.Web.HttpContext.Current.Session[SESSION_ADMIN_PERMISSIONS]).Split(',');
+                if (permissions != null)
+                {
+                    return permissions;
+                }
+            }
+            return null;
+        }
     }
 }

@@ -49,117 +49,124 @@
                                 <span class="nav-label">分类管理</span>
                             </a>
                         </li>*@
-                    <li class="line dk"></li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa fa-bar-chart-o"></i>
-                            <span class="nav-label">资源管理</span>
-                            <span class="fa arrow"></span>
-                        </a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a class="J_menuItem" href="graph_echarts.html">分类管理</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="graph_flot.html">分类字段管理</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="graph_morris.html">模板</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="graph_rickshaw.html">模板字段管理</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="graph_peity.html">条目管理</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="graph_sparkline.html">条目导入</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="graph_metrics.html">本地条目导入</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="graph_metrics.html">条目附件导入</a>
-                            </li>
 
-                            <li>
-                                <a class="J_menuItem" href="graph_metrics.html">条目字典管理</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="graph_metrics.html">条目搜索</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="graph_metrics.html">条目编目</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="graph_metrics.html">条目审核</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="graph_metrics.html">条目发布</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="graph_metrics.html">条目与附件关联日志</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="graph_metrics.html">条目与附件关联结果日志</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="graph_metrics.html">条目操作日志</a>
-                            </li>
+                    @if (LittleBackstage.Web.Helpers.Permission.Check("Index", "Resources"))
+                    {
+                        <li class="line dk"></li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa fa-bar-chart-o"></i>
+                                <span class="nav-label">资源管理</span>
+                                <span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a class="J_menuItem" href="graph_echarts.html">分类管理</a>
+                                </li>
+                                <li>
+                                    <a class="J_menuItem" href="graph_flot.html">分类字段管理</a>
+                                </li>
+                                <li>
+                                    <a class="J_menuItem" href="graph_morris.html">模板</a>
+                                </li>
+                                <li>
+                                    <a class="J_menuItem" href="graph_rickshaw.html">模板字段管理</a>
+                                </li>
+                                <li>
+                                    <a class="J_menuItem" href="graph_peity.html">条目管理</a>
+                                </li>
+                                <li>
+                                    <a class="J_menuItem" href="graph_sparkline.html">条目导入</a>
+                                </li>
+                                <li>
+                                    <a class="J_menuItem" href="graph_metrics.html">本地条目导入</a>
+                                </li>
+                                <li>
+                                    <a class="J_menuItem" href="graph_metrics.html">条目附件导入</a>
+                                </li>
 
-                            <li>
-                                <a class="J_menuItem" href="graph_metrics.html"> 热词管理 </a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="graph_metrics.html">节日管理</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="graph_metrics.html">会员管理</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="graph_metrics.html">会员审核</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="graph_metrics.html">栏目管理</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="line dk"></li>
-                    <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
-                        <span class="ng-scope">用户管理</span>
-                    </li>
+                                <li>
+                                    <a class="J_menuItem" href="graph_metrics.html">条目字典管理</a>
+                                </li>
+                                <li>
+                                    <a class="J_menuItem" href="graph_metrics.html">条目搜索</a>
+                                </li>
+                                <li>
+                                    <a class="J_menuItem" href="graph_metrics.html">条目编目</a>
+                                </li>
+                                <li>
+                                    <a class="J_menuItem" href="graph_metrics.html">条目审核</a>
+                                </li>
+                                <li>
+                                    <a class="J_menuItem" href="graph_metrics.html">条目发布</a>
+                                </li>
+                                <li>
+                                    <a class="J_menuItem" href="graph_metrics.html">条目与附件关联日志</a>
+                                </li>
+                                <li>
+                                    <a class="J_menuItem" href="graph_metrics.html">条目与附件关联结果日志</a>
+                                </li>
+                                <li>
+                                    <a class="J_menuItem" href="graph_metrics.html">条目操作日志</a>
+                                </li>
 
-                    <li>
-                        <a class="J_menuItem" href="graph_echarts.html"><span class="nav-label">菜单管理</span></a>
-                    </li>
-                    <li>
-                        <a class="J_menuItem" href="graph_flot.html">用户组管理</a>
-                    </li>
-                    <li>
-                        <a class="J_menuItem" href="graph_morris.html">用户管理</a>
-                    </li>
-                    <li>
-                        <a class="J_menuItem" href="graph_rickshaw.html">角色管理</a>
-                    </li>
-                    <li>
-                        <a class="J_menuItem" href="graph_peity.html">权限管理</a>
-                    </li>
+                                <li>
+                                    <a class="J_menuItem" href="graph_metrics.html"> 热词管理 </a>
+                                </li>
+                                <li>
+                                    <a class="J_menuItem" href="graph_metrics.html">节日管理</a>
+                                </li>
+                                <li>
+                                    <a class="J_menuItem" href="graph_metrics.html">会员管理</a>
+                                </li>
+                                <li>
+                                    <a class="J_menuItem" href="graph_metrics.html">会员审核</a>
+                                </li>
+                                <li>
+                                    <a class="J_menuItem" href="graph_metrics.html">栏目管理</a>
+                                </li>
+                            </ul>
+                        </li>
+                    }
+                    @if (LittleBackstage.Web.Helpers.Permission.Check("Index", "User"))
+                    {
+                        <li class="line dk"></li>
+                        <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+                            <span class="ng-scope">用户管理</span>
+                        </li>
 
-                    <li class="line dk"></li>
-                    <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
-                        <span class="ng-scope">日志管理</span>
-                    </li>
-                    <li>
-
-                    <li>
-                        <a class="J_menuItem" href="table_basic.html">登陆日志</a>
-                    </li>
-                    <li>
-                        <a class="J_menuItem" href="table_data_tables.html">用户日志</a>
-                    </li>
-                    <li>
-                        <a class="J_menuItem" href="table_jqgrid.html">文件日志</a>
-                    </li>
+                        <li>
+                            <a class="J_menuItem" href="graph_echarts.html"><span class="nav-label">菜单管理</span></a>
+                        </li>
+                        <li>
+                            <a class="J_menuItem" href="graph_flot.html">用户组管理</a>
+                        </li>
+                        <li>
+                            <a class="J_menuItem" href="graph_morris.html">用户管理</a>
+                        </li>
+                        <li>
+                            <a class="J_menuItem" href="graph_rickshaw.html">角色管理</a>
+                        </li>
+                        <li>
+                            <a class="J_menuItem" href="graph_peity.html">权限管理</a>
+                        </li>
+                    }
+                    @if (LittleBackstage.Web.Helpers.Permission.Check("Index", "Log"))
+                    {
+                        <li class="line dk"></li>
+                        <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+                            <span class="ng-scope">日志管理</span>
+                        </li>
+                        <li>
+                            <a class="J_menuItem" href="table_basic.html">登陆日志</a>
+                        </li>
+                        <li>
+                            <a class="J_menuItem" href="table_data_tables.html">用户日志</a>
+                        </li>
+                        <li>
+                            <a class="J_menuItem" href="table_jqgrid.html">文件日志</a>
+                        </li>
+                    }
                 </ul>
             </div>
         </nav>

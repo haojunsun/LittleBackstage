@@ -168,12 +168,16 @@
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\ForExcelController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\LogController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ResourcesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Filters\LittleBackstageAuthorizeAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\ControllerHelper.cs" />
+    <Compile Include="Helpers\Permission.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -1324,6 +1328,9 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\ForExcel\" />
+    <Folder Include="Areas\Admin\Views\Log\" />
+    <Folder Include="Areas\Admin\Views\Resources\" />
+    <Folder Include="Areas\Admin\Views\User\" />
     <Folder Include="css\vendor\" />
     <Folder Include="files\imgs\" />
     <Folder Include="imgs\" />

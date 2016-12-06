@@ -26,23 +26,20 @@ namespace LittleBackstage.Web.Filters
             //先判断是否登录
             if (currentUser != null)
             {
-                //if (currentUser.IsUser == 1)
-                //    return false;
-                //currentUser ;//从session 中读取管理员信息
+                //从session 中读取管理员信息
                 var rd = httpContext.Request.RequestContext.RouteData;
-                string controllerName = rd.GetRequiredString("controller").ToLower(); //当前访问的controller名称
-                string actionName = rd.GetRequiredString("action").ToLower(); //当前访问的action名称
-                //string[] Permission = AdminLogin.GetInstance().GetPermissions();
-                string Permission = UserLogin.GetPermission("SESSION_ADMIN_PERMISSIONS");
-                if (Permission == null)
+                var controllerName = rd.GetRequiredString("controller").ToLower(); //当前访问的controller名称
+                var actionName = rd.GetRequiredString("action").ToLower(); //当前访问的action名称
+                var permission = UserLogin.GetPermission("SESSION_ADMIN_PERMISSIONS");
+                if (permission == null)
                     return false;
 
-                if (Permission.Contains("all")) //超级管理员
+                if (permission.Contains("all")) //超级管理员
                     return true;
 
                 //if (controllerName == "admin" && actionName == "password")
                 //    return true;
-                if (Permission.IndexOf(controllerName + "_" + actionName) > -1)
+                if (permission.IndexOf(controllerName + "_" + actionName) > -1)
                 {
                     return true;
                 }
@@ -65,7 +62,6 @@ namespace LittleBackstage.Web.Filters
             //var returnUri = filterContext.RequestContext.HttpContext.Request.Url;
             //var reqParams = filterContext.RequestContext.HttpContext.Request.Params;
             //Log.Info("HandleUnauthorizedRequest: {returnUri} - {reqParams}");
-
             var currentUser = UserLogin.GetUserInfo("SESSION_USER_INFO");
             if (currentUser == null)
             {
