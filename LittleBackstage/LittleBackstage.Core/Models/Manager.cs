@@ -34,6 +34,6 @@ namespace LittleBackstage.Core.Models
         /// <summary>
         /// 角色
         /// </summary>
-        public Role Role { get; set; }
+        public virtual Role Role { get; set; }
     }
 }

@@ -3544,6 +3544,7 @@ video {
 
 .wrapper-content {
     padding: 20px;
+    height: auto;
 }
 
 #page-wrapper {

@@ -177,6 +177,7 @@
     <Compile Include="Areas\Admin\Controllers\LogController.cs" />
     <Compile Include="Areas\Admin\Controllers\ResourcesController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Filters\LittleBackstageAuthorizeAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -1338,6 +1339,7 @@
     <Content Include="Views\Home\GuidePage.cshtml" />
     <Content Include="theme\Thumbs.db" />
     <Content Include="Uploads\fyexcel\eeeeeeeeeee.xlsx" />
+    <Content Include="Views\Error\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

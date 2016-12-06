@@ -15,13 +15,19 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
     {
         private readonly IManagerService _managerService;
         private readonly IHelperServices _helperServices;
-        public AccountController(IManagerService managerService, IHelperServices helperServices)
+        private readonly IRoleService _roleService;
+        public AccountController(IManagerService managerService, IHelperServices helperServices,IRoleService roleService)
         {
             _managerService = managerService;
             _helperServices = helperServices;
+            _roleService = roleService;
         }
         public ActionResult Login()
         {
+            //var role = _roleService.Get(1);
+            //var user = _managerService.Get(1);
+            //user.Role = role;
+            //_managerService.Update(user);
             return View();
         }
 

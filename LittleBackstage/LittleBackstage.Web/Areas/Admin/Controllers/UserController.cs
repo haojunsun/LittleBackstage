@@ -35,7 +35,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
         {
             return View();
         }
-        public ActionResult ManagerList(string key, int page, int size)
+        public ActionResult ManagerList(string key, int? page, int? size)
         {
             return View();
         }
@@ -49,7 +49,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
         {
             return View();
         }
-        public ActionResult RoleList(string key, int page, int size)
+        public ActionResult RoleList(string key, int? page, int? size)
         {
             return View();
         }
@@ -64,7 +64,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             return View();
         }
 
-        public ActionResult UserList(string key, int page, int size)
+        public ActionResult UserList(string key, int? page, int? size)
         {
             return View();
         }
