@@ -87,6 +87,10 @@
     <Compile Include="Migrations\201612060154525_Permissions.Designer.cs">
       <DependentUpon>201612060154525_Permissions.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612060710072_name.cs" />
+    <Compile Include="Migrations\201612060710072_name.Designer.cs">
+      <DependentUpon>201612060710072_name.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AjaxResponse.cs" />
     <Compile Include="Models\ForExcel.cs" />
@@ -135,6 +139,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612060154525_Permissions.resx">
       <DependentUpon>201612060154525_Permissions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612060710072_name.resx">
+      <DependentUpon>201612060710072_name.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

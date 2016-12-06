@@ -10,7 +10,7 @@ namespace LittleBackstage.Core.Models
     {
        public int RoleId { get; set; }
 
-       public int RoleName { get; set; }
+       public string RoleName { get; set; }
 
        public DateTime? CreateTime { get; set; }
 
