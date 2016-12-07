@@ -1,4 +1,4 @@
-﻿@model List<LittleBackstage.Web.Areas.Admin.Models.TestModel>
+﻿@model List<LittleBackstage.Core.Models.User>
 @section styles_theme_level{
     <!-- Data Tables -->
     <link href="~/Assets/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
@@ -14,22 +14,32 @@
                     <table class="table table-striped table-bordered table-hover dataTables-example">
                         <thead>
                             <tr>
-                                <th>渲染引擎</th>
-                                <th>浏览器</th>
-                                <th>平台</th>
-                                <th>引擎版本</th>
-                                <th>CSS等级</th>
+                                <th>会员名称</th>
+                                <th>昵称</th>
+                                <th>注册时间</th>
+                                <th>审核状态</th>
+                                <th>操作</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in Model)
                             {
                                 <tr class="gradeX">
-                                    <td>@item.test1</td>
-                                    <td>@item.test2</td>
-                                    <td>@item.test3</td>
-                                    <td class="center">@item.test4</td>
-                                    <td class="center">@item.test5</td>
+                                    <td>@item.UserName</td>
+                                    <td>@item.NickName</td>
+                                    <td>@item.Register</td>
+                                    <td class="center">
+                                        @if (item.IsExamine == 1)
+                                        {
+                                            <span>已审核</span>
+
+                                        }
+                                        else
+                                        {
+                                            <span>未审核</span>
+                                        }
+                                    </td>
+                                    <td class="center"></td>
                                 </tr>
                             }
                         </tbody>
@@ -59,12 +69,12 @@
     @*<script src="~/Assets/js/content.js?v=1.0.0"></script>*@
     <script>
         $(document).ready(function () {
-               $('.dataTables-example').dataTable({
-                    "lengthChange": false, //是否允许用户改变表格每页显示的记录数
-                    "ordering": false,//是否允许DataTables排序
-                    "pageLength": 10//改变初始的页面长度(每页显示的记录数)
-               });           
+            $('.dataTables-example').dataTable({
+                "lengthChange": false, //是否允许用户改变表格每页显示的记录数
+                "ordering": false,//是否允许DataTables排序
+                "pageLength": 10//改变初始的页面长度(每页显示的记录数)
             });
+        });
         //var dh = $(window).height() - 50;
         //$(".row").css("min-height", dh + "px");
     </script>

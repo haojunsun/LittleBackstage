@@ -15,11 +15,13 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
         private readonly IManagerService _managerService;
         private readonly IHelperServices _helperServices;
         private readonly IRoleService _roleService;
-        public UserController(IManagerService managerService, IHelperServices helperServices,IRoleService roleService)
+        private readonly IUserService _userService;
+        public UserController(IManagerService managerService, IHelperServices helperServices, IRoleService roleService, IUserService userService)
         {
             _managerService = managerService;
             _helperServices = helperServices;
             _roleService = roleService;
+            _userService = userService;
         }
         // GET: Admin/User
         public ActionResult Index()
@@ -36,7 +38,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
         {
             return View();
         }
-        public ActionResult ManagerList(string key, int? page, int? size)
+        public ActionResult ManagerList()
         {
             return View();
         }
@@ -50,7 +52,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
         {
             return View();
         }
-        public ActionResult RoleList(string key, int? page, int? size)
+        public ActionResult RoleList()
         {
             return View();
         }
@@ -64,22 +66,10 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
         {
             return View();
         }
-
-        public ActionResult UserList(string key, int? page, int? size)
+        public ActionResult UserList()
         {
-            var list = new List<TestModel>();
-            for (int i = 0; i < 30; i++)
-            {
-                var item = new TestModel();
-                item.id = i;
-                item.test1 = i + "渲染引擎";
-                item.test2 = i + "浏览器";
-                item.test3 = i + "平台";
-                item.test4 = i + "引擎版本";
-                item.test5 = i + "CSS等级";
-                list.Add(item);
-            }
-            return View(list.OrderBy(x=>x.id).ToList());
+            var list = _userService.List().OrderByDescending(x => x.Register);
+            return View(list.ToList());
         }
     }
 }

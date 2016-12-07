@@ -91,6 +91,10 @@
     <Compile Include="Migrations\201612060710072_name.Designer.cs">
       <DependentUpon>201612060710072_name.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612070643237_addNickName.cs" />
+    <Compile Include="Migrations\201612070643237_addNickName.Designer.cs">
+      <DependentUpon>201612070643237_addNickName.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AjaxResponse.cs" />
     <Compile Include="Models\ForExcel.cs" />
@@ -142,6 +146,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612060710072_name.resx">
       <DependentUpon>201612060710072_name.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612070643237_addNickName.resx">
+      <DependentUpon>201612070643237_addNickName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -10,6 +10,8 @@ namespace LittleBackstage.Core.Models
     {
         public int UserId { get; set; }
         public string UserName { get; set; }
+        public string Phone { get; set; }
+        public string NickName { get; set; }
         public string PassWord { get; set; }
         /// <summary>
         /// 最后一次登录时间
