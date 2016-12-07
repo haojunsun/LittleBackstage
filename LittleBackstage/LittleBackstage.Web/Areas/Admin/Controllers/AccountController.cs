@@ -16,7 +16,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
         private readonly IManagerService _managerService;
         private readonly IHelperServices _helperServices;
         private readonly IRoleService _roleService;
-        public AccountController(IManagerService managerService, IHelperServices helperServices,IRoleService roleService)
+        public AccountController(IManagerService managerService, IHelperServices helperServices, IRoleService roleService)
         {
             _managerService = managerService;
             _helperServices = helperServices;
@@ -52,7 +52,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
                 if (result.Role != null && !string.IsNullOrEmpty(result.Role.Permissions))
                     _helperServices.SetSession("SESSION_ADMIN_PERMISSIONS", result.Role.Permissions);
 
-                Session.Timeout = 45;
+                Session.Timeout = 60;
                 //cookie expires in 24 hours
                 _helperServices.WriteCookie("SESSION_USER_NAME", result.UserName, 1440);
                 //_helperServices.WriteCookie("SESSION_USER_NAME", result.UserName, 1440);
@@ -72,6 +72,9 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult Logout()
         {
+            Session["SESSION_USER_INFO"] = null;
+            Session["SESSION_ADMIN_PERMISSIONS"] = null;
+            _helperServices.WriteCookie("SESSION_USER_NAME", "");
             return RedirectToAction("Login");
         }
 

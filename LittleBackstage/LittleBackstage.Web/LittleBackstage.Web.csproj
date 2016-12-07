@@ -177,6 +177,7 @@
     <Compile Include="Areas\Admin\Controllers\LogController.cs" />
     <Compile Include="Areas\Admin\Controllers\ResourcesController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
+    <Compile Include="Areas\Admin\Models\TestModel.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Filters\LittleBackstageAuthorizeAttribute.cs" />
@@ -1343,7 +1344,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\ForExcel\" />
     <Folder Include="Areas\Admin\Views\Log\" />
     <Folder Include="Areas\Admin\Views\Resources\" />

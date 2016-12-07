@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using LittleBackstage.Core.Services;
 using LittleBackstage.Infrastructure.Services;
+using LittleBackstage.Web.Areas.Admin.Models;
 
 namespace LittleBackstage.Web.Areas.Admin.Controllers
 {
@@ -66,7 +67,19 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
 
         public ActionResult UserList(string key, int? page, int? size)
         {
-            return View();
+            var list = new List<TestModel>();
+            for (int i = 0; i < 30; i++)
+            {
+                var item = new TestModel();
+                item.id = i;
+                item.test1 = i + "渲染引擎";
+                item.test2 = i + "浏览器";
+                item.test3 = i + "平台";
+                item.test4 = i + "引擎版本";
+                item.test5 = i + "CSS等级";
+                list.Add(item);
+            }
+            return View(list.OrderBy(x=>x.id).ToList());
         }
     }
 }
