@@ -40,7 +40,8 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
         }
         public ActionResult ManagerList()
         {
-            return View();
+            var list = _managerService.List().Where(x => x.UserName != "admin").OrderByDescending(x => x.Register);
+            return View(list.ToList());
         }
 
         /*角色*/
@@ -54,7 +55,8 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
         }
         public ActionResult RoleList()
         {
-            return View();
+            var list = _roleService.List().OrderByDescending(x => x.CreateTime);
+            return View(list.ToList());
         }
 
         /*用户*/
