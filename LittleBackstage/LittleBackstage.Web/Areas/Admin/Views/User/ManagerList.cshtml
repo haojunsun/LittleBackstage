@@ -31,34 +31,41 @@
                         </thead>
                         <tbody>
                             @foreach (var item in Model)
-                        {
-                            <tr class="gradeX">
-                                <td>@item.UserName</td>
-                                <td>@item.Role.RoleName</td>
-                                <td>@item.Register</td>
-                                <td class="center">
-                                    @if (item.IsExamine == 1)
-                                    {
-                                    <span class="label label-info">已审核</span>
-                                    }
-                                    else
-                                    {
-                                    <span class="label label-danger">未审核</span>
-                                    }
-                                </td>
-                                <td class="center"><a href="#">编辑</a> | <a href="#">删除</a></td>
-                            </tr>
-                        }
+                            {
+                                <tr class="gradeX">
+                                    <td>@item.UserName</td>
+                                    <td>@item.Role.RoleName</td>
+                                    <td>@item.Register</td>
+                                    <td class="center">
+                                        @if (item.IsExamine == 1)
+                                        {
+                                            <span class="label label-info">已审核</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="label label-danger">未审核</span>
+                                        }
+                                    </td>
+                                    <td class="center">
+                                        <a href="@Url.Action("EditManager", "User", new {id = item.ManagerId})">编辑</a> | <a href="@Url.Action("DelManager", "User", new {id = item.ManagerId})">删除</a>
+                                    </td>
+                                </tr>
+                            }
                         </tbody>
                         @*<tfoot>
-                                <tr>
-                                    <th>渲染引擎</th>
-                                    <th>浏览器</th>
-                                    <th>平台</th>
-                                    <th>引擎版本</th>
-                                    <th>CSS等级</th>
-                                </tr>
-                            </tfoot>*@
+                            >编辑</a> | <a href="#">删除</a></td>
+                                      </tr>
+                                  }
+                              </tbody>
+                              @*<tfoot>
+                                      <tr>
+                                          <th>渲染引擎</th>
+                                          <th>浏览器</th>
+                                          <th>平台</th>
+                                          <th>引擎版本</th>
+                                          <th>CSS等级</th>
+                                      </tr>
+                                  </tfoot>*@
                     </table>
                 </div>
             </div>

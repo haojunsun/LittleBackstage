@@ -2,19 +2,9 @@
     ViewBag.Title = "创建管理员-权限管理-用户管理";
 }
 @section styles_theme_level{
-    <link href="~/Assets/css/plugins/iCheck/custom.css" rel="stylesheet">
+  
 }
-@*/// <summary>
-        /// 通过审核
-        ///
-    </summary>
-            public int IsExamine { get; set; }
 
-            /// <summary>
-        /// 角色
-        ///
-    </summary>
-            public virtual Role Role { get; set; }*@
 <div class="wrapper wrapper-content animated fadeInRight" style="height:auto">
     <div class="row">
         <div class="col-sm-12">
@@ -23,30 +13,31 @@
                     <h5>用户管理 <small>权限管理-创建管理员</small></h5>
                 </div>
                 <div class="ibox-content">
-                    <form method="get" class="form-horizontal">
+                    @using (Html.BeginForm("AddManager", "User", FormMethod.Post, new { @class = "form-horizontal", @role = "form", enctype = "multipart/form-data" }))
+                    {
                         <div class="form-group">
                             <label class="col-sm-2 control-label">登录名</label>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control" id="UserName">
+                                <input type="text" class="form-control" id="userName" name="userName">
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">密码</label>
                             <div class="col-sm-4">
-                                <input type="password" class="form-control" id="PassWord">
+                                <input type="password" class="form-control" id="passWord" name="passWord">
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">角色</label>
-                            <div class="col-sm-4">
-                                <select class="form-control m-b" name="account">
-                                    <option>选项 1</option>
-                                    <option>选项 2</option>
-                                    <option>选项 3</option>
-                                    <option>选项 4</option>
-                                </select>               
+                            <div class="col-sm-3">
+                                @Html.DropDownList("role", (IEnumerable<SelectListItem>)ViewBag.RoleSelect, "--请选择角色--", new
+                                {
+                                    tabindex = "1",
+                                    @class = "form-control m-b",
+                                    @id = "role"
+                                })
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
@@ -57,25 +48,27 @@
                             <div class="col-sm-10">
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" checked="" value="1"  name="IsExamineRadios">已审核
+                                        <input type="radio" checked="" value="1" name="IsExamineRadios">已审核
                                     </label>
                                 </div>
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" value="0"  name="IsExamineRadios">未审核
+                                        <input type="radio" value="0" name="IsExamineRadios">未审核
                                     </label>
                                 </div>
                             </div>
                         </div>
-                        <div class="hr-line-dashed"></div> 
+                        <div class="hr-line-dashed"></div>
                         <div class="form-group">
                             <div class="col-sm-4 col-sm-offset-2">
                                 <button class="btn btn-primary" type="submit">保存内容</button>
-                               <a class="btn btn-white" href="@Url.Action("ManagerList", "User")">取消</a>
+                                <a class="btn btn-white" href="@Url.Action("ManagerList", "User")">取消</a>
                             </div>
                         </div>
-                    </form>
+
+                    }
                 </div>
+
             </div>
         </div>
     </div>
@@ -84,13 +77,5 @@
 
 
 @section scripts{
-    <script src="~/Assets/js/plugins/iCheck/icheck.min.js"></script>
-    <script>
-        //$(document).ready(function () {
-        //    $('.i-checks').iCheck({
-        //        checkboxClass: 'icheckbox_square-green',
-        //        radioClass: 'iradio_square-green',
-        //    });
-        //});
-    </script>
+
 }

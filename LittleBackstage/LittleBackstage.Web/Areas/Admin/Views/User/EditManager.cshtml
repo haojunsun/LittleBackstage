@@ -1,17 +1,78 @@
-﻿@{
-    Layout = null;
+﻿@model  LittleBackstage.Core.Models.Manager
+
+
+@{
+    ViewBag.Title = "创建管理员-权限管理-用户管理";
+}
+@section styles_theme_level{
+
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-</head>
-<body>
-    <div>
-    
+<div class="wrapper wrapper-content animated fadeInRight" style="height:auto">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>用户管理 <small>权限管理-创建管理员</small></h5>
+                </div>
+                <div class="ibox-content">
+                    @using (Html.BeginForm("EditManager", "User", FormMethod.Post, new { @class = "form-horizontal", @role = "form", enctype = "multipart/form-data" }))
+                    {
+                        @Html.HiddenFor(model => model.ManagerId)
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">登录名</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">密码</label>
+                            <div class="col-sm-4">
+                                <input type="password" class="form-control" id="passWord" name="passWord">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">角色</label>
+                            <div class="col-sm-3">
+                                @Html.DropDownListFor(m => m.Role.RoleId, (IEnumerable<SelectListItem>)ViewBag.RoleSelect, "--请选择角色--", new { @class = "form-control  m-b", @id = "role" })
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">
+                                审核状态
+                            </label>
+                            <div class="col-sm-10">
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" @(Model.IsExamine == 1 ? "checked" : "") value="1" name="IsExamineRadios"/>已审核
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" value="0" @(Model.IsExamine == 0 ? "checked" : "") name=" isexamineradios"/>未审核
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button class="btn btn-primary" type="submit">保存内容</button>
+                                <a class="btn btn-white" href="@Url.Action("ManagerList", "User")">取消</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
     </div>
-</body>
-</html>
+</div>
+
+
+
+@section scripts{
+
+}
