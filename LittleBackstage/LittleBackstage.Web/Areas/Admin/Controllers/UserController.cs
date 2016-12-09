@@ -148,11 +148,6 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             return View(list.ToList());
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         public ActionResult DelManager(int id)
         {
             var m = _managerService.Get(id);
@@ -178,6 +173,22 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             var list = _roleService.List().OrderByDescending(x => x.CreateTime);
             return View(list.ToList());
         }
+        public ActionResult DelRole(int id)
+        {
+            var m = _roleService.Get(id);
+            if (m == null)
+            {
+                return Content("<script>alert('删除失败,参数错误!');window.location.href='" + Url.Action("RoleList") + "';</script>");
+            }
+            _roleService.Delete(id);
+            return Content("<script>alert('删除成功!');window.location.href='" + Url.Action("RoleList") + "';</script>");
+        }
+
+        [HttpPost]
+        public ActionResult AddRole(string roleName, int? roleType = 0)
+        {
+            return View();
+        }
 
         /*用户*/
         public ActionResult AddUser()
@@ -192,6 +203,16 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
         {
             var list = _userService.List().OrderByDescending(x => x.Register);
             return View(list.ToList());
+        }
+        public ActionResult DelUser(int id)
+        {
+            var m = _userService.Get(id);
+            if (m == null)
+            {
+                return Content("<script>alert('删除失败,参数错误!');window.location.href='" + Url.Action("UserList") + "';</script>");
+            }
+            _userService.Delete(id);
+            return Content("<script>alert('删除成功!');window.location.href='" + Url.Action("UserList") + "';</script>");
         }
     }
 }

@@ -43,6 +43,11 @@ namespace LittleBackstage.Web.Filters
                 {
                     return true;
                 }
+
+                if (permission.IndexOf(controllerName + "_") > -1)
+                {
+                    return true;
+                }
                 //返回true表示验证通过，返回false表示验证失败，服务器发起401错误提示
                 return false;
             }
