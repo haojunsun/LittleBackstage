@@ -19,6 +19,8 @@ namespace LittleBackstage.Core.Services
         Role Get(int id);
         IEnumerable<Role> GetPageList(int pageIndex, int pageSize, ref int totalCount);
 
+        bool GetByName(string name);
+
     }
     public class RoleService : IRoleService
     {
@@ -70,6 +72,11 @@ namespace LittleBackstage.Core.Services
                         select p).Skip((pageIndex - 1) * pageSize).Take(pageSize);
             totalCount = _appDbContext.Roles.Count();
             return list.ToList();
+        }
+
+        public bool GetByName(string name)
+        {
+            return _appDbContext.Roles.Any(x => x.RoleName == name);
         }
     }
 }

@@ -40,19 +40,10 @@
                                         }
                                     </td>
                                     <td>@item.CreateTime</td>
-                                    <td class="center"><a href="#">编辑</a> | <a href="#">删除</a></td>
+                                    <td class="center"><a href="@Url.Action("EditRole", "User", new { id = item.RoleId })">编辑</a> | <a href="@Url.Action("DelRole", "User", new { id = item.RoleId })" onclick="return confirm('确认删除')">删除</a></td>
                                 </tr>
                             }
                         </tbody>
-                        @*<tfoot>
-                                <tr>
-                                    <th>渲染引擎</th>
-                                    <th>浏览器</th>
-                                    <th>平台</th>
-                                    <th>引擎版本</th>
-                                    <th>CSS等级</th>
-                                </tr>
-                            </tfoot>*@
                     </table>
                 </div>
             </div>

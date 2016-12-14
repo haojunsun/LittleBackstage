@@ -34,33 +34,24 @@
                                     <td class="center">
                                         @if (item.IsExamine == 1)
                                         {
-                                            <span>已审核</span>
-
+                                            <span class="label label-info">已审核</span>
                                         }
                                         else
                                         {
-                                            <span>未审核</span>
+                                            <span class="label label-danger">未审核</span>
                                         }
                                     </td>
-                                    <td class="center"></td>
+                                    <td class="center">
+                                        <a href="@Url.Action("EditUser", "User", new { id = item.UserId })">详情</a>
+                                    </td>
                                 </tr>
                             }
                         </tbody>
-                        @*<tfoot>
-                                <tr>
-                                    <th>渲染引擎</th>
-                                    <th>浏览器</th>
-                                    <th>平台</th>
-                                    <th>引擎版本</th>
-                                    <th>CSS等级</th>
-                                </tr>
-                            </tfoot>*@
                     </table>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
 @section scripts{
     <!-- 全局js -->

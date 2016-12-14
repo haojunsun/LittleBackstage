@@ -40,7 +40,6 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
         /// <summary>
         ///  绑定类别
         /// </summary>
-        /// <param name="pid"></param>
         /// <param name="type"></param>
         /// <param name="id"></param>
         private void TreeBindRole(int type, int id)
@@ -164,13 +163,20 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
         {
             return View();
         }
+
         public ActionResult EditRole(int id)
         {
-            return View();
+            var model = _roleService.Get(id);
+            if (model == null)
+            {
+                return Content("<script>alert('参数错误,返回列表!');window.location.href='" + Url.Action("RoleList") + "';</script>");
+            }
+            return View(model);
         }
+
         public ActionResult RoleList()
         {
-            var list = _roleService.List().OrderByDescending(x => x.CreateTime);
+            var list = _roleService.List().Where(x => !x.Permissions.Contains("all")).OrderByDescending(x => x.CreateTime);
             return View(list.ToList());
         }
         public ActionResult DelRole(int id)
@@ -187,7 +193,61 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult AddRole(string roleName, int? roleType = 0)
         {
-            return View();
+            if (string.IsNullOrEmpty(roleName))
+            {
+                return Content("<script>alert('创建失败,角色名不能为空!');window.location.href='" + Url.Action("RoleList") + "';</script>");
+            }
+
+            var permissions = Request.Form["permissions"];
+            if (string.IsNullOrEmpty(permissions))
+            {
+                return Content("<script>alert('创建失败,权限不能为空!');window.location.href='" + Url.Action("RoleList") + "';</script>");
+            }
+            var role = new Role();
+            role.CreateTime = DateTime.Now;
+            role.Permissions = permissions;
+            role.RoleName = roleName;
+            role.RoleType = (int)roleType;
+            _roleService.Add(role);
+            return Content("<script>alert('创建成功!');window.location.href='" + Url.Action("RoleList") + "';</script>");
+        }
+
+        [HttpPost]
+        public ActionResult EditRole(Role r, int? roleType = 0)
+        {
+            if (string.IsNullOrEmpty(r.RoleName))
+            {
+                return Content("<script>alert('编辑失败,角色名不能为空!');window.location.href='" + Url.Action("RoleList") + "';</script>");
+            }
+
+            var permissions = Request.Form["permissions"];
+            if (string.IsNullOrEmpty(permissions))
+            {
+                return Content("<script>alert('编辑失败,权限不能为空!');window.location.href='" + Url.Action("RoleList") + "';</script>");
+            }
+                 
+            var old = _roleService.Get(r.RoleId);
+            if (r.RoleName != old.RoleName && _roleService.GetByName(r.RoleName))
+            {
+                return Content("<script>alert('编辑失败,角色名已存在!');window.location.href='" + Url.Action("RoleList") + "';</script>");
+            }
+
+            old.Permissions = permissions;
+            old.RoleName = r.RoleName;
+            old.RoleType = (int)roleType;
+            _roleService.Update(old);
+            return Content("<script>alert('编辑成功!');window.location.href='" + Url.Action("RoleList") + "';</script>");
+        }
+
+        /// <summary>
+        /// 判断权限是否被选中
+        /// </summary>
+        /// <param name="permission">权限</param>
+        /// <returns></returns>
+        public string JudgeCheck(string permissionlist, string permission)
+        {
+            var i = _helperServices.GetStrCount(permissionlist, permission);
+            return i > 0 ? "checked" : null;
         }
 
         /*用户*/
@@ -197,8 +257,37 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
         }
         public ActionResult EditUser(int id)
         {
-            return View();
+            var model = _userService.Get(id);
+            if (model == null)
+            {
+                return Content("<script>alert('参数错误,返回列表!');window.location.href='" + Url.Action("UserList") + "';</script>");
+            }
+            TreeBindRole(1, model.Role.RoleId);
+            return View(model);
         }
+
+        [HttpPost]
+        public ActionResult EditUser(User u, string passWord, int? IsExamineRadios = 0)
+        {
+            var old = _userService.Get(u.UserId);
+            if (old == null)
+            {
+                return Content("<script>alert('编辑失败,数据错误!');window.location.href='" + Url.Action("UserList") + "';</script>");
+            }
+            if (!string.IsNullOrEmpty(passWord))
+            {
+                old.PassWord = _helperServices.MD5CSP(passWord);
+            }
+            old.IsEnable = (int)IsExamineRadios;
+            old.IsExamine = (int)IsExamineRadios;
+            if (u.Role.RoleId != 0 && u.Role.RoleId != old.Role.RoleId)
+            {
+                old.Role = _roleService.Get(u.Role.RoleId);
+            }
+            _userService.Update(old);
+            return Content("<script>alert('编辑成功!');window.location.href='" + Url.Action("UserList") + "';</script>");
+        }
+
         public ActionResult UserList()
         {
             var list = _userService.List().OrderByDescending(x => x.Register);
