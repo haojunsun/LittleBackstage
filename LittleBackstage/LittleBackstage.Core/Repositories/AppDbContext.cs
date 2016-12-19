@@ -27,5 +27,6 @@ namespace LittleBackstage.Core.Repositories
 
         public DbSet<Category> Categories { get; set; }
 
+        public DbSet<CategoryField> CategoryFields { get; set; }
     }
 }

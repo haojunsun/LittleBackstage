@@ -99,9 +99,14 @@
     <Compile Include="Migrations\201612190610588_Categories.Designer.cs">
       <DependentUpon>201612190610588_Categories.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612190630536_CategoryFields.cs" />
+    <Compile Include="Migrations\201612190630536_CategoryFields.Designer.cs">
+      <DependentUpon>201612190630536_CategoryFields.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AjaxResponse.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\CategoryField.cs" />
     <Compile Include="Models\ForExcel.cs" />
     <Compile Include="Models\LiteratureExcel.cs" />
     <Compile Include="Models\Manager.cs" />
@@ -158,6 +163,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612190610588_Categories.resx">
       <DependentUpon>201612190610588_Categories.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612190630536_CategoryFields.resx">
+      <DependentUpon>201612190630536_CategoryFields.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

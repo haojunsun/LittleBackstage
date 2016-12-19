@@ -32,5 +32,6 @@ namespace LittleBackstage.Core.Models
         /// </summary>
         public string DataTableFieldSet { get; set; }
 
+        public virtual List<CategoryField> CategoryFields { get; set; }
     }
 }
