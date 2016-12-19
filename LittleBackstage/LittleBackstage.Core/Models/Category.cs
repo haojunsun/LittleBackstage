@@ -23,6 +23,11 @@ namespace LittleBackstage.Core.Models
         public string Explain { get; set; }
 
         /// <summary>
+        /// 是否创建表（前端显示 是否创建模板）0否 1是
+        /// </summary>
+        public int IsCreateTable { get; set; }
+
+        /// <summary>
         /// 分类表名(自动生成)
         /// </summary>
         public string DataTableName { get; set; }

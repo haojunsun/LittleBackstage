@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Drawing;
 
 using System.IO;
@@ -134,6 +135,8 @@ namespace LittleBackstage.Infrastructure.Services
         string GetSession(string key);
 
         void WriteCookieByDay(string strName, string strValue, int expires);
+
+        string GetAppSettings(string name);
     }
 
     public class HelperServices : IHelperServices
@@ -558,8 +561,7 @@ namespace LittleBackstage.Infrastructure.Services
         public object GetSessionObject(string key)
         {
             return HttpContext.Current.Session[key];
-        }
-     
+        }  
         public void WriteCookieByDay(string strName, string strValue, int expires)
         {
             HttpCookie cookie = HttpContext.Current.Request.Cookies[strName];
@@ -571,8 +573,10 @@ namespace LittleBackstage.Infrastructure.Services
             cookie.Expires = DateTime.Now.AddDays(expires);
             HttpContext.Current.Response.AppendCookie(cookie);
         }
-     
 
-     
+        public string GetAppSettings(string name)
+        {
+            return ConfigurationManager.AppSettings[name];
+        }
     }
 }

@@ -1264,6 +1264,8 @@
     <Content Include="Areas\Admin\Views\User\EditUser.cshtml" />
     <Content Include="Areas\Admin\Views\User\UserList.cshtml" />
     <Content Include="Areas\Admin\Views\Category\CategoryList.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\AddCategory.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\EditCategory.cshtml" />
     <None Include="Properties\PublishProfiles\pano.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\common.js" />

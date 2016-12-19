@@ -18,6 +18,8 @@ namespace LittleBackstage.Core.Services
         void Delete(int id);
         Category Get(int id);
         IEnumerable<Category> GetPageList(int pageIndex, int pageSize, ref int totalCount);
+
+        Category FindByName(string name);
     }
 
     public class CategoryService : ICategoryService
@@ -70,6 +72,11 @@ namespace LittleBackstage.Core.Services
                         select p).Skip((pageIndex - 1) * pageSize).Take(pageSize);
             totalCount = _appDbContext.Categories.Count();
             return list.ToList();
+        }
+
+        public Category FindByName(string name)
+        {
+            return _appDbContext.Categories.FirstOrDefault(x => x.CategoryName == name);
         }
     }
 }
