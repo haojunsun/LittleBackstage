@@ -25,5 +25,7 @@ namespace LittleBackstage.Core.Repositories
         public DbSet<SystemLog> SystemLogs { get; set; }
         public DbSet<Manager> Managers { get; set; }
 
+        public DbSet<Category> Categories { get; set; }
+
     }
 }
