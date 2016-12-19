@@ -26,5 +26,7 @@ namespace LittleBackstage.Core.Models
         public string Explain { get; set; }
 
         public DateTime CreateTime { get; set; }
+
+        public virtual Category Category { get; set; }
     }
 }

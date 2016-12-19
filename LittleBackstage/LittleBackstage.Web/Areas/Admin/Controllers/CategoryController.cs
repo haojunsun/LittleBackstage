@@ -31,11 +31,22 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             var list = _categoryService.List().OrderByDescending(x => x.CreateTime);
             return View(list.ToList());
         }
+
+        public ActionResult DelCategory(int id)
+        {
+            var m = _categoryService.Get(id);
+            if (m == null)
+            {
+                return Content("<script>alert('删除失败,参数错误!');window.location.href='" + Url.Action("CategoryList") + "';</script>");
+            }
+            _categoryService.Delete(id);
+            return Content("<script>alert('删除成功!');window.location.href='" + Url.Action("CategoryList") + "';</script>");
+        }
+
         public ActionResult AddCategory()
         {
             return View();
         }
-
         [HttpPost]
         public ActionResult AddCategory(string categoryName, string explain, int? IsEnableRadios = 0)
         {
@@ -64,12 +75,40 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             return View();
         }
 
+        public ActionResult CreateTableForCategory(int id)
+        {
+            var old = _categoryService.Get(id);
+            if (old == null)
+            {
+                return Content("<script>alert('创建模版失败,参数错误!');window.location.href='" + Url.Action("CategoryList") + "';</script>");
+            }
+            old.IsCreateTable = 1;
+            old.DataTableName = _helperServices.GetAppSettings("DataTableName") + old.CategoryId;//前缀+ 分类id
+            try
+            {
+                _categoryService.Update(old);
+
+
+                //执行sql 创建 
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return Content("<script>alert('创建成功!');window.location.href='" + Url.Action("CategoryList") + "';</script>");
+        }
+
         /* 分类字段管理 */
         public ActionResult CategoryFieldList()
         {
             return View();
         }
 
+        public ActionResult CategoryFieldsList(int categoryId)
+        {
+            return View();
+        }
 
         private static string GenerateCode(int length = 4)
         {

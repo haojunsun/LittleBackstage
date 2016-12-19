@@ -103,6 +103,10 @@
     <Compile Include="Migrations\201612190630536_CategoryFields.Designer.cs">
       <DependentUpon>201612190630536_CategoryFields.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612190907189_IsCreateTable.cs" />
+    <Compile Include="Migrations\201612190907189_IsCreateTable.Designer.cs">
+      <DependentUpon>201612190907189_IsCreateTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AjaxResponse.cs" />
     <Compile Include="Models\Category.cs" />
@@ -115,6 +119,7 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AppDbContext.cs" />
+    <Compile Include="Services\CategoryFieldService.cs" />
     <Compile Include="Services\CategoryService.cs" />
     <Compile Include="Services\ForExcelService.cs" />
     <Compile Include="Services\LiteratureExcelServices.cs" />
@@ -166,6 +171,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612190630536_CategoryFields.resx">
       <DependentUpon>201612190630536_CategoryFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612190907189_IsCreateTable.resx">
+      <DependentUpon>201612190907189_IsCreateTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
