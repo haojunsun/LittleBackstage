@@ -187,6 +187,7 @@
     </Compile>
     <Compile Include="Helpers\ControllerHelper.cs" />
     <Compile Include="Helpers\Permission.cs" />
+    <Compile Include="Helpers\SqlHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
