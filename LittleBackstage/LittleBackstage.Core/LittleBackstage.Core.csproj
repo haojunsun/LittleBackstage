@@ -107,6 +107,10 @@
     <Compile Include="Migrations\201612190907189_IsCreateTable.Designer.cs">
       <DependentUpon>201612190907189_IsCreateTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612200635134_CanModify.cs" />
+    <Compile Include="Migrations\201612200635134_CanModify.Designer.cs">
+      <DependentUpon>201612200635134_CanModify.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AjaxResponse.cs" />
     <Compile Include="Models\Category.cs" />
@@ -174,6 +178,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612190907189_IsCreateTable.resx">
       <DependentUpon>201612190907189_IsCreateTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612200635134_CanModify.resx">
+      <DependentUpon>201612200635134_CanModify.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

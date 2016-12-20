@@ -114,9 +114,8 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             old.DataTableName = _helperServices.GetAppSettings("DataTableName") + old.CategoryId;//前缀+ 分类id
             try
             {
-               
                 _categoryService.Update(old);
-
+                //1.审核状态 发布时间 发布员  审核时间 审核管理员 录入员 录入时间
                 var cf1 = new CategoryField();
                 cf1.Category = old;
                 cf1.CreateTime = DateTime.Now;
@@ -144,8 +143,45 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
                 cf3.CanModify = 0;
                 old.CategoryFields.Add(cf3);
 
+                var cf4 = new CategoryField();
+                cf4.Category = old;
+                cf4.CreateTime = DateTime.Now;
+                cf4.Explain = "审核时间";
+                cf4.FieldName = "审核时间";
+                cf4.IdEntity = "ExamineTime";
+                cf4.CanModify = 0;
+                old.CategoryFields.Add(cf4);
+
+                var cf5 = new CategoryField();
+                cf5.Category = old;
+                cf5.CreateTime = DateTime.Now;
+                cf5.Explain = "审核管理员";
+                cf5.FieldName = "审核管理员";
+                cf5.IdEntity = "ExamineManager";
+                cf5.CanModify = 0;
+                old.CategoryFields.Add(cf4);
+
+                var cf6 = new CategoryField();
+                cf6.Category = old;
+                cf6.CreateTime = DateTime.Now;
+                cf6.Explain = "录入时间";
+                cf6.FieldName = "录入时间";
+                cf6.IdEntity = "InputTime";
+                cf6.CanModify = 0;
+                old.CategoryFields.Add(cf6);
+
+                var cf7 = new CategoryField();
+                cf7.Category = old;
+                cf7.CreateTime = DateTime.Now;
+                cf7.Explain = "录入员";
+                cf7.FieldName = "录入员";
+                cf7.IdEntity = "InputManager";
+                cf7.CanModify = 0;
+                old.CategoryFields.Add(cf7);
+
+                _categoryService.Update(old);
                 //执行sql 创建 
-                //1.审核状态 发布时间 发布员  审核时间 审核管理员 录入员 录入时间
+               
             }
             catch (Exception ex)
             {
