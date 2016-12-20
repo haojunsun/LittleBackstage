@@ -38,5 +38,10 @@ namespace LittleBackstage.Core.Models
         public string DataTableFieldSet { get; set; }
 
         public virtual List<CategoryField> CategoryFields { get; set; }
+
+        /// <summary>
+        /// 是否删除 逻辑删除 1是 0否
+        /// </summary>
+        public int IsDelete { get; set; }
     }
 }

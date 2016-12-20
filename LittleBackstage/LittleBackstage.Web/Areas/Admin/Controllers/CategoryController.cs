@@ -39,7 +39,9 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             {
                 return Content("<script>alert('删除失败,参数错误!');window.location.href='" + Url.Action("CategoryList") + "';</script>");
             }
-            _categoryService.Delete(id);
+            m.IsDelete = 1;
+            _categoryService.Update(m);
+           // _categoryService.Delete(id);
             return Content("<script>alert('删除成功!');window.location.href='" + Url.Action("CategoryList") + "';</script>");
         }
 
@@ -65,8 +67,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             category.Explain = explain;
             category.IsEnable = (int)IsEnableRadios;
             category.IsCreateTable = 0;//默认创建分类 不创建模板（数据表）
-            //category.DataTableName = _helperServices.GetAppSettings("DataTableName") + GenerateCode();//前缀+ 随机数
-            //category.DataTableFieldSet = "";
+            category.IsDelete = 0;
             _categoryService.Add(category);
             return Content("<script>alert('创建成功!');window.location.href='" + Url.Action("CategoryList") + "';</script>");
         }
@@ -76,12 +77,12 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             if (model == null)
             {
                 return Content("<script>alert('参数错误,返回列表!');window.location.href='" + Url.Action("CategoryList") + "';</script>");
-            }        
+            }
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult EditCategory(Category c,int? IsEnableRadios = 0)
+        public ActionResult EditCategory(Category c, int? IsEnableRadios = 0)
         {
             if (string.IsNullOrEmpty(c.CategoryName))
             {
@@ -178,10 +179,9 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
                 cf7.IdEntity = "InputManager";
                 cf7.CanModify = 0;
                 old.CategoryFields.Add(cf7);
-
                 _categoryService.Update(old);
                 //执行sql 创建 
-               
+
             }
             catch (Exception ex)
             {

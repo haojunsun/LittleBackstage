@@ -52,7 +52,7 @@ namespace LittleBackstage.Web
             else
             {
                 //Response.Redirect("/Home");
-                Response.Redirect("/Error");
+                Response.Redirect("/Error/index");
             }
             //LogHelper.ErrorLog("<br/><strong>客户机IP</strong>：" + Request.UserHostAddress + "<br /><strong>错误地址</strong>：" + Request.Url, objExp);
             //Response.Redirect("/home");

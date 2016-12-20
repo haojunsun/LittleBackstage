@@ -17,7 +17,7 @@ namespace LittleBackstage.Core.Services
         void Update(Category c);
         void Delete(int id);
         Category Get(int id);
-        IEnumerable<Category> GetPageList(int pageIndex, int pageSize, ref int totalCount);
+        // IEnumerable<Category> GetPageList(int pageIndex, int pageSize, ref int totalCount);
 
         Category FindByName(string name);
     }
@@ -32,7 +32,7 @@ namespace LittleBackstage.Core.Services
 
         public IEnumerable<Category> List()
         {
-            return _appDbContext.Categories.OrderByDescending(x => x.CreateTime).ToList();
+            return _appDbContext.Categories.Where(x => x.IsDelete == 0).OrderByDescending(x => x.CreateTime).ToList();
         }
 
         public void Add(Category c)
@@ -50,33 +50,32 @@ namespace LittleBackstage.Core.Services
         public void Delete(int id)
         {
             var category = _appDbContext.Categories.Find(id);
-
             if (category == null)
             {
                 return;
             }
-
+            _appDbContext.CategoryFields.RemoveRange(category.CategoryFields);
             _appDbContext.Categories.Remove(category);
             _appDbContext.SaveChanges();
         }
 
         public Category Get(int id)
         {
-            return _appDbContext.Categories.Find(id);
+            return _appDbContext.Categories.FirstOrDefault(x=>x.IsDelete==0&&x.CategoryId==id);
         }
 
-        public IEnumerable<Category> GetPageList(int pageIndex, int pageSize, ref int totalCount)
-        {
-            var list = (from p in _appDbContext.Categories
-                        orderby p.CreateTime descending
-                        select p).Skip((pageIndex - 1) * pageSize).Take(pageSize);
-            totalCount = _appDbContext.Categories.Count();
-            return list.ToList();
-        }
+        //public IEnumerable<Category> GetPageList(int pageIndex, int pageSize, ref int totalCount)
+        //{
+        //    var list = (from p in _appDbContext.Categories
+        //                orderby p.CreateTime descending
+        //                select p).Skip((pageIndex - 1) * pageSize).Take(pageSize);
+        //    totalCount = _appDbContext.Categories.Count();
+        //    return list.ToList();
+        //}
 
         public Category FindByName(string name)
         {
-            return _appDbContext.Categories.FirstOrDefault(x => x.CategoryName == name);
+            return _appDbContext.Categories.FirstOrDefault(x => x.CategoryName == name && x.IsDelete == 0);
         }
     }
 }

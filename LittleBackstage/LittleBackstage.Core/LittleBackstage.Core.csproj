@@ -111,6 +111,10 @@
     <Compile Include="Migrations\201612200635134_CanModify.Designer.cs">
       <DependentUpon>201612200635134_CanModify.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612200656400_IsDelete.cs" />
+    <Compile Include="Migrations\201612200656400_IsDelete.Designer.cs">
+      <DependentUpon>201612200656400_IsDelete.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AjaxResponse.cs" />
     <Compile Include="Models\Category.cs" />
@@ -181,6 +185,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612200635134_CanModify.resx">
       <DependentUpon>201612200635134_CanModify.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612200656400_IsDelete.resx">
+      <DependentUpon>201612200656400_IsDelete.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
