@@ -244,7 +244,6 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
                 {
                     return Content("<script>alert('数据模板已存在!');window.location.href='" + Url.Action("CategoryList") + "';</script>");
                 }
-
             }
             catch (Exception ex)
             {
