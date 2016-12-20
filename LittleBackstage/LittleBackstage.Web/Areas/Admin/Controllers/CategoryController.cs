@@ -72,7 +72,35 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
         }
         public ActionResult EditCategory(int id)
         {
-            return View();
+            var model = _categoryService.Get(id);
+            if (model == null)
+            {
+                return Content("<script>alert('参数错误,返回列表!');window.location.href='" + Url.Action("CategoryList") + "';</script>");
+            }        
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult EditCategory(Category c,int? IsEnableRadios = 0)
+        {
+            if (string.IsNullOrEmpty(c.CategoryName))
+            {
+                return Content("<script>alert('编辑失败,分类名不能为空!');window.location.href='" + Url.Action("CategoryList") + "';</script>");
+            }
+            var old = _categoryService.Get(c.CategoryId);
+            if (old == null)
+            {
+                return Content("<script>alert('编辑失败,数据错误!');window.location.href='" + Url.Action("CategoryList") + "';</script>");
+            }
+            if (old.CategoryName != c.CategoryName && _categoryService.FindByName(c.CategoryName) != null)
+            {
+                return Content("<script>alert('编辑失败,分类名已存在!');window.location.href='" + Url.Action("CategoryList") + "';</script>");
+            }
+
+            old.IsEnable = (int)IsEnableRadios;
+            old.CategoryName = c.CategoryName;
+            _categoryService.Update(old);
+            return Content("<script>alert('编辑成功!');window.location.href='" + Url.Action("CategoryList") + "';</script>");
         }
 
         public ActionResult CreateTableForCategory(int id)
