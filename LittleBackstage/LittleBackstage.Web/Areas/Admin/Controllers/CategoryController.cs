@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using LittleBackstage.Core.Models;
 using LittleBackstage.Core.Services;
 using LittleBackstage.Infrastructure.Services;
+using LittleBackstage.Web.Helpers;
 
 namespace LittleBackstage.Web.Areas.Admin.Controllers
 {
@@ -16,13 +18,15 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
         private readonly IRoleService _roleService;
         private readonly IUserService _userService;
         private readonly ICategoryService _categoryService;
-        public CategoryController(IManagerService managerService, IHelperServices helperServices, IRoleService roleService, IUserService userService, ICategoryService categoryService)
+        private readonly ILogService _logService;
+        public CategoryController(IManagerService managerService, IHelperServices helperServices, IRoleService roleService, IUserService userService, ICategoryService categoryService, ILogService logService)
         {
             _managerService = managerService;
             _helperServices = helperServices;
             _roleService = roleService;
             _userService = userService;
             _categoryService = categoryService;
+            _logService = logService;
         }
 
         /* 分类管理 */
@@ -41,7 +45,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             }
             m.IsDelete = 1;
             _categoryService.Update(m);
-           // _categoryService.Delete(id);
+            // _categoryService.Delete(id);
             return Content("<script>alert('删除成功!');window.location.href='" + Url.Action("CategoryList") + "';</script>");
         }
 
@@ -116,78 +120,138 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             try
             {
                 _categoryService.Update(old);
-                //1.审核状态 发布时间 发布员  审核时间 审核管理员 录入员 录入时间
-                var cf1 = new CategoryField();
-                cf1.Category = old;
-                cf1.CreateTime = DateTime.Now;
-                cf1.Explain = "审核状态";
-                cf1.FieldName = "审核状态";
-                cf1.IdEntity = "IsExamine";
-                cf1.CanModify = 0;
-                old.CategoryFields.Add(cf1);
+                if (old.CategoryFields.Any()) //包含数据 
+                {
 
-                var cf2 = new CategoryField();
-                cf2.Category = old;
-                cf2.CreateTime = DateTime.Now;
-                cf2.Explain = "发布时间";
-                cf2.FieldName = "发布时间";
-                cf2.IdEntity = "ReleaseTime";
-                cf2.CanModify = 0;
-                old.CategoryFields.Add(cf2);
+                }
+                else
+                {
+                    //1.审核状态 发布时间 发布员  审核时间 审核管理员 录入员 录入时间
+                    var cf1 = new CategoryField();
+                    cf1.Category = old;
+                    cf1.CreateTime = DateTime.Now;
+                    cf1.Explain = "审核状态";
+                    cf1.FieldName = "审核状态";
+                    cf1.IdEntity = "IsExamine";
+                    cf1.CanModify = 0;
+                    old.CategoryFields.Add(cf1);
 
-                var cf3 = new CategoryField();
-                cf3.Category = old;
-                cf3.CreateTime = DateTime.Now;
-                cf3.Explain = "发布员";
-                cf3.FieldName = "发布员";
-                cf3.IdEntity = "ReleaseManager";
-                cf3.CanModify = 0;
-                old.CategoryFields.Add(cf3);
+                    var cf2 = new CategoryField();
+                    cf2.Category = old;
+                    cf2.CreateTime = DateTime.Now;
+                    cf2.Explain = "发布时间";
+                    cf2.FieldName = "发布时间";
+                    cf2.IdEntity = "ReleaseTime";
+                    cf2.CanModify = 0;
+                    old.CategoryFields.Add(cf2);
 
-                var cf4 = new CategoryField();
-                cf4.Category = old;
-                cf4.CreateTime = DateTime.Now;
-                cf4.Explain = "审核时间";
-                cf4.FieldName = "审核时间";
-                cf4.IdEntity = "ExamineTime";
-                cf4.CanModify = 0;
-                old.CategoryFields.Add(cf4);
+                    var cf3 = new CategoryField();
+                    cf3.Category = old;
+                    cf3.CreateTime = DateTime.Now;
+                    cf3.Explain = "发布员";
+                    cf3.FieldName = "发布员";
+                    cf3.IdEntity = "ReleaseManager";
+                    cf3.CanModify = 0;
+                    old.CategoryFields.Add(cf3);
 
-                var cf5 = new CategoryField();
-                cf5.Category = old;
-                cf5.CreateTime = DateTime.Now;
-                cf5.Explain = "审核管理员";
-                cf5.FieldName = "审核管理员";
-                cf5.IdEntity = "ExamineManager";
-                cf5.CanModify = 0;
-                old.CategoryFields.Add(cf4);
+                    var cf4 = new CategoryField();
+                    cf4.Category = old;
+                    cf4.CreateTime = DateTime.Now;
+                    cf4.Explain = "审核时间";
+                    cf4.FieldName = "审核时间";
+                    cf4.IdEntity = "ExamineTime";
+                    cf4.CanModify = 0;
+                    old.CategoryFields.Add(cf4);
 
-                var cf6 = new CategoryField();
-                cf6.Category = old;
-                cf6.CreateTime = DateTime.Now;
-                cf6.Explain = "录入时间";
-                cf6.FieldName = "录入时间";
-                cf6.IdEntity = "InputTime";
-                cf6.CanModify = 0;
-                old.CategoryFields.Add(cf6);
+                    var cf5 = new CategoryField();
+                    cf5.Category = old;
+                    cf5.CreateTime = DateTime.Now;
+                    cf5.Explain = "审核管理员";
+                    cf5.FieldName = "审核管理员";
+                    cf5.IdEntity = "ExamineManager";
+                    cf5.CanModify = 0;
+                    old.CategoryFields.Add(cf5);
 
-                var cf7 = new CategoryField();
-                cf7.Category = old;
-                cf7.CreateTime = DateTime.Now;
-                cf7.Explain = "录入员";
-                cf7.FieldName = "录入员";
-                cf7.IdEntity = "InputManager";
-                cf7.CanModify = 0;
-                old.CategoryFields.Add(cf7);
-                _categoryService.Update(old);
+                    var cf6 = new CategoryField();
+                    cf6.Category = old;
+                    cf6.CreateTime = DateTime.Now;
+                    cf6.Explain = "录入时间";
+                    cf6.FieldName = "录入时间";
+                    cf6.IdEntity = "InputTime";
+                    cf6.CanModify = 0;
+                    old.CategoryFields.Add(cf6);
+
+                    var cf7 = new CategoryField();
+                    cf7.Category = old;
+                    cf7.CreateTime = DateTime.Now;
+                    cf7.Explain = "录入员";
+                    cf7.FieldName = "录入员";
+                    cf7.IdEntity = "InputManager";
+                    cf7.CanModify = 0;
+                    old.CategoryFields.Add(cf7);
+                    _categoryService.Update(old);
+                }
+
                 //执行sql 创建 
+                //创建数据表
+                var field = " ";
+                foreach (var cf in old.CategoryFields)
+                {
+                    //创建基础字段
+                    switch (cf.IdEntity)
+                    {
+                        case "IsExamine":
+                            field += " IsExamine int,";
+                            break;
+                        case "ReleaseTime":
+                            field += " ReleaseTime datetime,";
+                            break;
+                        case "ReleaseManager":
+                            field += " ReleaseManager int,";
+                            break;
+                        case "ExamineTime":
+                            field += " ExamineTime datetime,";
+                            break;
+                        case "ExamineManager":
+                            field += " ExamineManager int,";
+                            break;
+                        case "InputTime":
+                            field += " InputTime datetime,";
+                            break;
+                        case "InputManager":
+                            field += " InputManager int";
+                            break;
+                    }
+                }
+                //判断表 是否已经存在
+                var existenceSql = @"select * from " + _helperServices.GetAppSettings("DataBaseName") + "..sysobjects where xtype='u' and status>=0 and name='" + old.DataTableName + "'";
+                var existence = SqlHelper.ExecuteScalar(SqlHelper.ConnectionStringLocalTransaction, CommandType.Text, existenceSql, null);
+                if (existence == null)
+                {
+                    var sql = @"create table " + old.DataTableName + @"
+                            (
+                            " + old.DataTableName + @"_Id int primary key,
+                            " + field +
+                              @" ) ";
+                    //_logService.Debug(sql);
+                    var Scalar = SqlHelper.ExecuteNonQuery(SqlHelper.ConnectionStringLocalTransaction, CommandType.Text, sql, null);
+                    if (Scalar < 0)
+                    {
+                        return Content("<script>alert('创建成功!');window.location.href='" + Url.Action("CategoryList") + "';</script>");
+                    }
+                }
+                else
+                {
+                    return Content("<script>alert('数据模板已存在!');window.location.href='" + Url.Action("CategoryList") + "';</script>");
+                }
 
             }
             catch (Exception ex)
             {
+                _logService.Error(ex.ToString());
 
             }
-            return Content("<script>alert('创建成功!');window.location.href='" + Url.Action("CategoryList") + "';</script>");
+            return Content("<script>alert('创建失败!');window.location.href='" + Url.Action("CategoryList") + "';</script>");
         }
 
         /* 分类字段管理 */
@@ -201,6 +265,11 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 随机生成code
+        /// </summary>
+        /// <param name="length"></param>
+        /// <returns></returns>
         private static string GenerateCode(int length = 4)
         {
             Random Rnd = new Random(DateTime.Now.Millisecond);
