@@ -114,11 +114,38 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             old.DataTableName = _helperServices.GetAppSettings("DataTableName") + old.CategoryId;//前缀+ 分类id
             try
             {
+               
                 _categoryService.Update(old);
 
+                var cf1 = new CategoryField();
+                cf1.Category = old;
+                cf1.CreateTime = DateTime.Now;
+                cf1.Explain = "审核状态";
+                cf1.FieldName = "审核状态";
+                cf1.IdEntity = "IsExamine";
+                cf1.CanModify = 0;
+                old.CategoryFields.Add(cf1);
+
+                var cf2 = new CategoryField();
+                cf2.Category = old;
+                cf2.CreateTime = DateTime.Now;
+                cf2.Explain = "发布时间";
+                cf2.FieldName = "发布时间";
+                cf2.IdEntity = "ReleaseTime";
+                cf2.CanModify = 0;
+                old.CategoryFields.Add(cf2);
+
+                var cf3 = new CategoryField();
+                cf3.Category = old;
+                cf3.CreateTime = DateTime.Now;
+                cf3.Explain = "发布员";
+                cf3.FieldName = "发布员";
+                cf3.IdEntity = "ReleaseManager";
+                cf3.CanModify = 0;
+                old.CategoryFields.Add(cf3);
 
                 //执行sql 创建 
-
+                //1.审核状态 发布时间 发布员  审核时间 审核管理员 录入员 录入时间
             }
             catch (Exception ex)
             {

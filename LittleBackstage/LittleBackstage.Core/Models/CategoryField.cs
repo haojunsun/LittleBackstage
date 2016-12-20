@@ -11,8 +11,14 @@ namespace LittleBackstage.Core.Models
     /// </summary>
     public class CategoryField
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public int CategoryFieldId { get; set; }
 
+        /// <summary>
+        /// 名称
+        /// </summary>
         public string FieldName { get; set; }
 
         /// <summary>
@@ -25,8 +31,16 @@ namespace LittleBackstage.Core.Models
         /// </summary>
         public string Explain { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public DateTime CreateTime { get; set; }
 
         public virtual Category Category { get; set; }
+
+        /// <summary>
+        /// 系统设置 默认为1 可以修改 特定字段为0 用户不可操作
+        /// </summary>
+        public int CanModify { get; set; }
     }
 }
