@@ -260,6 +260,17 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             return Content("<script>alert('创建失败!');window.location.href='" + Url.Action("CategoryList") + "';</script>");
         }
 
+        public ActionResult TemplateList()
+        {
+            var list = _categoryService.List().Where(x=>x.IsCreateTable==1).OrderByDescending(x => x.CreateTime);
+            return View(list.ToList());
+        }
+
+        public ActionResult DelTemplate(int id)
+        {
+            return View();
+        }
+
         /// <summary>
         /// 随机生成code
         /// </summary>
