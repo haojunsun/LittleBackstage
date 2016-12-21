@@ -18,48 +18,48 @@
                 </div>
 
                 <div class="ibox-content">
+                    
                     <table class="table table-striped table-bordered table-hover dataTables-example">
                         <thead>
-                            <tr>
-                                <th>分类名称</th>
-                                <th>创建时间</th>
-                                <th>是否启用</th>
-                                <th>操作</th>
-                            </tr>
+                        <tr>
+                            <th>分类名称</th>
+                            <th>创建时间</th>
+                            <th>是否启用</th>
+                            <th>操作</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            @foreach (var item in Model)
-                            {
-                                <tr class="gradeX">
-                                    <td>@item.CategoryName</td>
-                                    <td>@item.CreateTime</td>
-
-                                    <td class="center">
-                                        @if (item.IsEnable == 1)
-                                        {
-                                            <span class="label label-info">已审核</span>
-                                        }
-                                        else
-                                        {
-                                            <span class="label label-danger">未审核</span>
-                                        }
-                                    </td>
-                                    <td class="center">
-                                        <a href="@Url.Action("EditCategory", "Category", new {id = item.CategoryId})">编辑</a><span> | </span>
-                                        <a href="@Url.Action("DelCategory", "Category", new {id = item.CategoryId})" onclick="return confirm('确认删除')">删除</a>
-                                        @if (item.IsCreateTable == 0)
-                                        {
-                                            <span> | </span>
-                                            <a href="@Url.Action("CreateTableForCategory", "Category", new { id = item.CategoryId })">创建模板</a>
-                                        }
-                                        else
-                                        {
-                                            <span> | </span>
-                                            <a href="@Url.Action("CategoryFieldsList", "Category", new { categoryId = item.CategoryId })">模板管理</a>
-                                        }
-                                    </td>
-                                </tr>
-                            }
+                        @foreach (var item in Model)
+                        {
+                            <tr class="gradeX">
+                                <td>@item.CategoryName</td>
+                                <td>@item.CreateTime</td>
+                                <td class="center">
+                                    @if (item.IsEnable == 1)
+                                    {
+                                        <span class="label label-info">已审核</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="label label-danger">未审核</span>
+                                    }
+                                </td>
+                                <td class="center">
+                                    <a href="@Url.Action("EditCategory", "Category", new {id = item.CategoryId})">编辑</a><span> | </span>
+                                    <a href="@Url.Action("DelCategory", "Category", new {id = item.CategoryId})" onclick="return confirm('确认删除')">删除</a>
+                                    @if (item.IsCreateTable == 0)
+                                    {
+                                        <span> | </span>
+                                        <a href="@Url.Action("CreateTableForCategory", "Category", new {id = item.CategoryId})">创建模板</a>
+                                    }
+                                    else
+                                    {
+                                        <span> | </span>
+                                        <a href="@Url.Action("CategoryFieldsListByCategoryId", "CategoryField", new { categoryId = item.CategoryId })">模板字段管理</a>
+                                    }
+                                </td>
+                            </tr>
+                        }
                         </tbody>
                     </table>
                 </div>

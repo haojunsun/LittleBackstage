@@ -1,0 +1,107 @@
+﻿@model  List<LittleBackstage.Core.Models.CategoryField>
+@{
+    ViewBag.Title = "字段列表-模板管理-资源管理";
+}
+@section styles_theme_level{
+    <link href="~/Assets/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+}
+<div class="wrapper wrapper-content animated fadeInRight" style="width: 100%; height: 100%">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>资源管理 <small>模板管理-字段列表</small></h5>
+                    <div class="ibox-tools">
+                        <a href="@Url.Action("AddCategoryField", "CategoryField")" class="btn btn-primary btn-xs">创建字段</a>
+                    </div>
+                </div>
+                @*<div class="ibox-content">
+                        <div class="form-group">
+
+                            <div class="col-sm-2">
+
+                            </div>
+                        </div>
+                    </div>*@
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            @Html.DropDownList("category", (IEnumerable<SelectListItem>)ViewBag.CategorySelect, "--请选择模板--", new
+                                 {
+                                     onchange = "getCategory(this);",
+                                     tabindex = "1",
+                                     @class = "form-control m-b",
+                                     @id = "category"
+                                 })
+                        </div>
+
+                        <div class="col-sm-3">
+                            @*<div class="input-group">
+                                    <input type="text" placeholder="请输入关键词" class="input-sm form-control"> <span class="input-group-btn">
+                                        <button type="button" class="btn btn-sm btn-primary"> 搜索</button>
+                                    </span>
+                                </div>*@
+                        </div>
+                    </div>
+
+                    <table class="table table-striped table-bordered table-hover dataTables-example">
+                        <thead>
+                            <tr>
+                                <th>字段名称</th>
+                                <th>标识</th>
+                                <th>创建时间</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr class="gradeX">
+                                    <td>@item.FieldName</td>
+                                    <td>@item.IdEntity</td>
+                                    <td>@item.CreateTime</td>
+                                    <td class="center">
+                                        <a href="@Url.Action("EditCategory", "Category", new {id = item.CategoryFieldId})">编辑</a><span> | </span>
+                                        <a href="@Url.Action("DelCategory", "Category", new {id = item.CategoryFieldId})" onclick="return confirm('确认删除')">删除</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <!-- 全局js -->
+    <script src="~/Assets/js/plugins/jeditable/jquery.jeditable.js"></script>
+    <!-- Data Tables -->
+    <script src="~/Assets/js/plugins/dataTables/jquery.dataTables.js"></script>
+    <script src="~/Assets/js/plugins/dataTables/dataTables.bootstrap.js"></script>
+    <!-- 自定义js -->
+    @*<script src="~/Assets/js/content.js?v=1.0.0"></script>*@
+    <script>
+        $(document)
+            .ready(function() {
+                $('.dataTables-example')
+                    .dataTable({
+                        "lengthChange": false, //是否允许用户改变表格每页显示的记录数
+                        "ordering": false, //是否允许DataTables排序
+                        "pageLength": 10 //改变初始的页面长度(每页显示的记录数)
+                    });
+            });
+
+        function getCategory(id) {
+            var category = $("#category").val();
+            //alert(proid);
+            if (category == '') {
+                //console.log("无值");
+            } else {
+                window.location.href = 'CategoryFieldsListByCategoryId?categoryId=' + category;
+            }
+            //console.log(category);
+        }
+    </script>
+}
+<!-- Page-Level Scripts -->

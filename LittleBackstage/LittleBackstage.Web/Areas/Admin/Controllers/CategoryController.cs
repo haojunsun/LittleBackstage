@@ -19,7 +19,13 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
         private readonly IUserService _userService;
         private readonly ICategoryService _categoryService;
         private readonly ILogService _logService;
-        public CategoryController(IManagerService managerService, IHelperServices helperServices, IRoleService roleService, IUserService userService, ICategoryService categoryService, ILogService logService)
+        private readonly ICategoryFieldService _categoryFieldService;
+        public CategoryController(IManagerService managerService,
+            IHelperServices helperServices,
+            IRoleService roleService,
+            IUserService userService,
+            ICategoryService categoryService,
+            ILogService logService, ICategoryFieldService categoryFieldService)
         {
             _managerService = managerService;
             _helperServices = helperServices;
@@ -27,6 +33,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             _userService = userService;
             _categoryService = categoryService;
             _logService = logService;
+            _categoryFieldService = categoryFieldService;
         }
 
         /* 分类管理 */
@@ -251,17 +258,6 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
 
             }
             return Content("<script>alert('创建失败!');window.location.href='" + Url.Action("CategoryList") + "';</script>");
-        }
-
-        /* 分类字段管理 */
-        public ActionResult CategoryFieldList()
-        {
-            return View();
-        }
-
-        public ActionResult CategoryFieldsList(int categoryId)
-        {
-            return View();
         }
 
         /// <summary>
