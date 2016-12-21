@@ -262,12 +262,36 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
 
         public ActionResult TemplateList()
         {
-            var list = _categoryService.List().Where(x=>x.IsCreateTable==1).OrderByDescending(x => x.CreateTime);
+            var list = _categoryService.List().Where(x => x.IsCreateTable == 1).OrderByDescending(x => x.CreateTime);
             return View(list.ToList());
         }
 
-        public ActionResult DelTemplate(int id)
+        public ActionResult DelTemplate(int id)//删除模板 表 关系记录 
         {
+            var m = _categoryService.Get(id);
+            if (m == null)
+            {
+                return Content("<script>alert('删除失败,参数错误!');window.location.href='" + Url.Action("CategoryList") + "';</script>");
+            }
+            try
+            {
+                var sql = @"DROP TABLE " + m.DataTableName;
+                var Scalar = SqlHelper.ExecuteNonQuery(SqlHelper.ConnectionStringLocalTransaction, CommandType.Text, sql, null);
+                if (Scalar < 0)
+                {
+                    m.IsCreateTable = 0;
+                    m.DataTableName = "";
+                    if (m.CategoryFields != null)
+                        _categoryFieldService.Delete(m.CategoryFields);
+                    _categoryService.Update(m);
+                    return Content("<script>alert('删除成功!');window.location.href='" + Url.Action("TemplateList") + "';</script>");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logService.Debug(ex.ToString());
+                return Content("<script>alert('删除失败,系统错误！');window.location.href='" + Url.Action("TemplateList") + "';</script>");
+            }
             return View();
         }
 

@@ -22,6 +22,8 @@ namespace LittleBackstage.Core.Services
         //IEnumerable<CategoryField> GetPageList(int pageIndex, int pageSize, ref int totalCount);
 
         CategoryField FindByNameAndCategoryId(string name, int categoryId);
+
+        void Delete(List<CategoryField> categoryFields);
     }
 
     public class CategoryFieldService : ICategoryFieldService
@@ -64,6 +66,12 @@ namespace LittleBackstage.Core.Services
             }
 
             _appDbContext.CategoryFields.Remove(categoryFields);
+            _appDbContext.SaveChanges();
+        }
+
+        public void Delete(List<CategoryField> categoryFields)
+        {
+            _appDbContext.CategoryFields.RemoveRange(categoryFields);
             _appDbContext.SaveChanges();
         }
 
