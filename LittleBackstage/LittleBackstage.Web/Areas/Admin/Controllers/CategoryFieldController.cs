@@ -97,7 +97,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddCategoryField(int categoryId, string fieldName, string idEntity, string explain)
+        public ActionResult AddCategoryField(int categoryId, string fieldName, string idEntity, string explain, int? IsShow = 0)
         {
             if (string.IsNullOrEmpty(fieldName))
             {
@@ -119,6 +119,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             categoryField.Explain = explain;
             categoryField.FieldName = fieldName.Trim();
             categoryField.IdEntity = idEntity.Trim();
+            categoryField.IsShow = (int) IsShow;
             var category = _categoryService.Get(categoryId);
             categoryField.Category = category;
             _categoryFieldService.Add(categoryField);//创建 字段
@@ -159,7 +160,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditCategoryField(int categoryId, CategoryField cf)
+        public ActionResult EditCategoryField(int categoryId, CategoryField cf, int? IsShow = 0)
         {
             if (string.IsNullOrEmpty(cf.FieldName))
             {
@@ -192,6 +193,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
                 old.FieldName = cf.FieldName;
                 old.IdEntity = cf.IdEntity;
                 old.Explain = cf.Explain;
+                old.IsShow = (int)IsShow;
                 _categoryFieldService.Update(old);
                 return Content("<script>alert('编辑字段成功!');window.location.href='" + Url.Action("CategoryFieldsListByCategoryId", new { categoryId }) + "';</script>");
             }
