@@ -201,6 +201,29 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
 
         public ActionResult DelCategoryField(int id)
         {
+            var m = _categoryFieldService.Get(id);
+            if (m == null)
+            {
+                return Content("<script>alert('删除失败,参数错误!');window.location.href='" + Url.Action("CategoryFieldsListByCategoryId", new { m.Category.CategoryId }) + "';</script>");
+            }
+            var categoryId = m.Category.CategoryId;
+            try
+            {
+                var table = m.Category.DataTableName;
+                var sql = @"alter table " + table + " drop column " + m.IdEntity;
+                
+                var Scalar = SqlHelper.ExecuteNonQuery(SqlHelper.ConnectionStringLocalTransaction, CommandType.Text, sql, null);
+                if (Scalar < 0)
+                {
+                    _categoryFieldService.Delete(id);
+                    return Content("<script>alert('删除成功!');window.location.href='" + Url.Action("CategoryFieldsListByCategoryId", new { categoryId }) + "';</script>");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logService.Debug(ex.ToString());
+                return Content("<script>alert('删除失败,系统错误!');window.location.href='" + Url.Action("CategoryFieldsListByCategoryId", new { categoryId }) + "';</script>");
+            }
             return View();
         }
     }
