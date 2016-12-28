@@ -51,6 +51,18 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
         {
             return View();
         }
+        public ActionResult AddEntryList()
+        {
+            return View();
+        }
+        public ActionResult EditEntry()
+        {
+            return View();
+        }
 
+        public ActionResult DelEntry(int id)
+        {
+            return View();
+        }
     }
 }

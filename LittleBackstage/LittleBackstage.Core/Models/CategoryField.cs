@@ -42,5 +42,10 @@ namespace LittleBackstage.Core.Models
         /// 系统设置 默认为1 可以修改 特定字段为0 用户不可操作
         /// </summary>
         public int CanModify { get; set; }
+
+        /// <summary>
+        /// 是否显示在table 0 否 1是 
+        /// </summary>
+        public int IsShow { get; set; }
     }
 }

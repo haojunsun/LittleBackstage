@@ -115,6 +115,10 @@
     <Compile Include="Migrations\201612200656400_IsDelete.Designer.cs">
       <DependentUpon>201612200656400_IsDelete.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612280854402_addIsShow.cs" />
+    <Compile Include="Migrations\201612280854402_addIsShow.Designer.cs">
+      <DependentUpon>201612280854402_addIsShow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AjaxResponse.cs" />
     <Compile Include="Models\Category.cs" />
@@ -188,6 +192,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612200656400_IsDelete.resx">
       <DependentUpon>201612200656400_IsDelete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612280854402_addIsShow.resx">
+      <DependentUpon>201612280854402_addIsShow.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
