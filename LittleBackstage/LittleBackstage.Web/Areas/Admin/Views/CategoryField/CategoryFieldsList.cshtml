@@ -12,14 +12,12 @@
                 <div class="ibox-title">
                     <h5>资源管理 <small>模板管理-字段列表</small></h5>
                     <div class="ibox-tools">
-                        <a href="@Url.Action("AddCategoryField", "CategoryField")" class="btn btn-primary btn-xs">创建字段</a>
+                        <a href="javascript:void(0);" class=" btn btn-primary btn-xs" onclick="addField();">创建字段</a>
                     </div>
                 </div>
                 @*<div class="ibox-content">
                         <div class="form-group">
-
                             <div class="col-sm-2">
-
                             </div>
                         </div>
                     </div>*@
@@ -61,8 +59,8 @@
                                     <td>@item.IdEntity</td>
                                     <td>@item.CreateTime</td>
                                     <td class="center">
-                                        <a href="@Url.Action("EditCategory", "Category", new {id = item.CategoryFieldId})">编辑</a><span> | </span>
-                                        <a href="@Url.Action("DelCategory", "Category", new {id = item.CategoryFieldId})" onclick="return confirm('确认删除')">删除</a>
+                                        <a href="@Url.Action("EditCategoryField", "CategoryField", new { categoryId = item.Category.CategoryId, id = item.CategoryFieldId })">编辑</a><span> | </span>
+                                        <a href="@Url.Action("DelCategoryField", "CategoryField", new { id = item.CategoryFieldId })" onclick="return confirm('确认删除')">删除</a>
                                     </td>
                                 </tr>
                             }
@@ -83,7 +81,7 @@
     @*<script src="~/Assets/js/content.js?v=1.0.0"></script>*@
     <script>
         $(document)
-            .ready(function() {
+            .ready(function () {
                 $('.dataTables-example')
                     .dataTable({
                         "lengthChange": false, //是否允许用户改变表格每页显示的记录数
@@ -101,6 +99,15 @@
                 window.location.href = 'CategoryFieldsListByCategoryId?categoryId=' + category;
             }
             //console.log(category);
+        }
+
+        function addField() {
+            var category = $("#category").val();
+            if (category == '') {
+                //console.log("无值");
+            } else {
+                window.location.href = 'AddCategoryField?categoryId=' + category;
+            }
         }
     </script>
 }

@@ -24,6 +24,8 @@ namespace LittleBackstage.Core.Services
         CategoryField FindByNameAndCategoryId(string name, int categoryId);
 
         void Delete(List<CategoryField> categoryFields);
+
+        CategoryField CategoryFieldFindByName(int id, string name, string idEntity);
     }
 
     public class CategoryFieldService : ICategoryFieldService
@@ -88,6 +90,12 @@ namespace LittleBackstage.Core.Services
         public CategoryField FindByNameAndCategoryId(string name, int categoryId)
         {
             return _appDbContext.CategoryFields.FirstOrDefault(x => x.FieldName == name && x.Category.CategoryId == categoryId);
+        }
+
+
+        public CategoryField CategoryFieldFindByName(int id, string name, string idEntity)
+        {
+            return _appDbContext.CategoryFields.FirstOrDefault(x => x.FieldName == name && x.Category.CategoryId == id && x.IdEntity == idEntity);
         }
     }
 }

@@ -86,17 +86,117 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             {
                 return Content("<script>alert('参数错误,返回列表!');window.location.href='" + Url.Action("CategoryFieldsList") + "';</script>");
             }
+            ViewBag.id = categoryId;
             return View("CategoryFieldsList", model.CategoryFields);
         }
 
-        public ActionResult AddCategoryField()
+        public ActionResult AddCategoryField(int categoryId)
         {
+            ViewBag.id = categoryId;
             return View();
         }
 
-        public ActionResult EditCategoryField()
+        [HttpPost]
+        public ActionResult AddCategoryField(int categoryId, string fieldName, string idEntity, string explain)
         {
-            return View();
+            if (string.IsNullOrEmpty(fieldName))
+            {
+                return Content("<script>alert('名称不能为空!');window.location.href='" + Url.Action("AddCategoryField", new { categoryId }) + "';</script>");
+            }
+            if (string.IsNullOrEmpty(idEntity))
+            {
+                return Content("<script>alert('标识不能为空!');window.location.href='" + Url.Action("AddCategoryField", new { categoryId }) + "';</script>");
+            }
+            var old = _categoryFieldService.CategoryFieldFindByName(categoryId, fieldName.Trim(), idEntity.Trim());
+            if (old != null)
+            {
+                return Content("<script>alert('字段标识已存在!');window.location.href='" + Url.Action("AddCategoryField", new { categoryId }) + "';</script>");
+            }
+
+            var categoryField = new CategoryField();
+            categoryField.CanModify = 1;
+            categoryField.CreateTime = DateTime.Now;
+            categoryField.Explain = explain;
+            categoryField.FieldName = fieldName.Trim();
+            categoryField.IdEntity = idEntity.Trim();
+            var category = _categoryService.Get(categoryId);
+            categoryField.Category = category;
+            _categoryFieldService.Add(categoryField);//创建 字段
+
+            var table = category.DataTableName;
+            if (!string.IsNullOrEmpty(table))
+            {
+                var findsql = @"select * from syscolumns where name='" + categoryField.IdEntity + "' and id=object_id('" + table + "')";
+                var reader = SqlHelper.ExecuteReader(SqlHelper.ConnectionStringLocalTransaction, CommandType.Text, findsql, null);
+                if (!reader.HasRows)
+                {
+                    //执行sql  
+                    var addSql = @"alter table " + table + " add " + categoryField.IdEntity + " varchar(MAX)";
+                    var scalar = SqlHelper.ExecuteNonQuery(SqlHelper.ConnectionStringLocalTransaction, CommandType.Text,
+                        addSql, null);
+                    if (scalar < 0)
+                    {
+                        return Content("<script>alert('创建字段成功!');window.location.href='" + Url.Action("CategoryFieldsListByCategoryId", new { categoryId }) + "';</script>");
+                    }
+                }
+                else
+                {
+                    _logService.Info("------------------创建字段：" + categoryField.IdEntity + " ----" + table + "表中已存在");
+                }
+            }
+            return Content("<script>alert('创建失败,系统错误！');window.location.href='" + Url.Action("CategoryFieldsListByCategoryId", new { categoryId }) + "';</script>");
+        }
+
+        public ActionResult EditCategoryField(int categoryId, int id)
+        {
+            ViewBag.id = categoryId;
+            var model = _categoryFieldService.Get(id);
+            if (model == null)
+            {
+                return Content("<script>alert('参数错误,返回列表!');window.location.href='" + Url.Action("CategoryFieldsListByCategoryId", new { categoryId }) + "';</script>");
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult EditCategoryField(int categoryId, CategoryField cf)
+        {
+            if (string.IsNullOrEmpty(cf.FieldName))
+            {
+                return Content("<script>alert('名称不能为空!');window.location.href='" + Url.Action("EditCategoryField", new { id = cf.CategoryFieldId, categoryId = categoryId }) + "';</script>");
+            }
+            if (string.IsNullOrEmpty(cf.IdEntity))
+            {
+                return Content("<script>alert('标识不能为空!');window.location.href='" + Url.Action("EditCategoryField", new { id = cf.CategoryFieldId, categoryId = categoryId }) + "';</script>");
+            }
+
+            var old = _categoryFieldService.Get(cf.CategoryFieldId);
+            if (old == null)
+            {
+                return Content("<script>alert('编辑失败,数据错误!');window.location.href='" + Url.Action("CategoryFieldsListByCategoryId", new { categoryId }) + "';</script>");
+            }
+            if (old.FieldName != cf.FieldName && _categoryFieldService.CategoryFieldFindByName(categoryId, cf.FieldName, cf.IdEntity) != null)
+            {
+                return Content("<script>alert('编辑失败,字段名已存在!');window.location.href='" + Url.Action("EditCategoryField", new { id = cf.CategoryFieldId, categoryId }) + "';</script>");
+            }
+            if (old.IdEntity != cf.IdEntity && _categoryFieldService.CategoryFieldFindByName(categoryId, cf.FieldName, cf.IdEntity) != null)
+            {
+                return Content("<script>alert('编辑失败,标识已存在!');window.location.href='" + Url.Action("EditCategoryField", new { id = cf.CategoryFieldId, categoryId }) + "';</script>");
+            }
+            var category = _categoryService.Get(categoryId);
+            var table = category.DataTableName;
+            var addSql = @"sp_rename '" + table + "." + old.IdEntity + "','" + cf.IdEntity + "','column'";
+            var scalar = SqlHelper.ExecuteNonQuery(SqlHelper.ConnectionStringLocalTransaction, CommandType.Text, addSql, null);
+            if (scalar < 0)
+            {
+                old.FieldName = cf.FieldName;
+                old.IdEntity = cf.IdEntity;
+                old.Explain = cf.Explain;
+                _categoryFieldService.Update(old);
+                return Content("<script>alert('编辑字段成功!');window.location.href='" + Url.Action("CategoryFieldsListByCategoryId", new { categoryId }) + "';</script>");
+            }
+
+            return Content("<script>alert('编辑失败,数据错误!');window.location.href='" + Url.Action("CategoryFieldsListByCategoryId", new { categoryId }) + "';</script>");
         }
 
         public ActionResult DelCategoryField(int id)

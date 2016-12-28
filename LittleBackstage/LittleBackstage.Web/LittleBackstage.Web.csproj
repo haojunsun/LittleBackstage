@@ -1269,6 +1269,8 @@
     <Content Include="Areas\Admin\Views\Category\EditCategory.cshtml" />
     <Content Include="Areas\Admin\Views\CategoryField\CategoryFieldsList.cshtml" />
     <Content Include="Areas\Admin\Views\Category\TemplateList.cshtml" />
+    <Content Include="Areas\Admin\Views\CategoryField\AddCategoryField.cshtml" />
+    <Content Include="Areas\Admin\Views\CategoryField\EditCategoryField.cshtml" />
     <None Include="Properties\PublishProfiles\pano.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\common.js" />
