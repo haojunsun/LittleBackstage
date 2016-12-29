@@ -87,7 +87,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
                 return Content("<script>alert('参数错误,返回列表!');window.location.href='" + Url.Action("CategoryFieldsList") + "';</script>");
             }
             ViewBag.id = categoryId;
-            return View("CategoryFieldsList", model.CategoryFields);
+            return View("CategoryFieldsList", model.CategoryFields.OrderByDescending(x=>x.Sort).ToList());
         }
 
         public ActionResult AddCategoryField(int categoryId)
@@ -97,7 +97,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddCategoryField(int categoryId, string fieldName, string idEntity, string explain, int? IsShow = 0)
+        public ActionResult AddCategoryField(int categoryId, string fieldName, string idEntity, string explain, int? sort = 0, int? IsShow = 0)
         {
             if (string.IsNullOrEmpty(fieldName))
             {
@@ -119,7 +119,8 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             categoryField.Explain = explain;
             categoryField.FieldName = fieldName.Trim();
             categoryField.IdEntity = idEntity.Trim();
-            categoryField.IsShow = (int) IsShow;
+            categoryField.IsShow = (int)IsShow;
+            categoryField.Sort = (int)sort;
             var category = _categoryService.Get(categoryId);
             categoryField.Category = category;
             _categoryFieldService.Add(categoryField);//创建 字段
@@ -194,6 +195,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
                 old.IdEntity = cf.IdEntity;
                 old.Explain = cf.Explain;
                 old.IsShow = (int)IsShow;
+                old.Sort = cf.Sort;
                 _categoryFieldService.Update(old);
                 return Content("<script>alert('编辑字段成功!');window.location.href='" + Url.Action("CategoryFieldsListByCategoryId", new { categoryId }) + "';</script>");
             }
@@ -213,7 +215,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             {
                 var table = m.Category.DataTableName;
                 var sql = @"alter table " + table + " drop column " + m.IdEntity;
-                
+
                 var Scalar = SqlHelper.ExecuteNonQuery(SqlHelper.ConnectionStringLocalTransaction, CommandType.Text, sql, null);
                 if (Scalar < 0)
                 {

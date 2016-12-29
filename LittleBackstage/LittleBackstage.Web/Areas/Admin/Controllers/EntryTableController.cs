@@ -40,6 +40,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             _logService = logService;
             _categoryFieldService = categoryFieldService;
         }
+
         /// <summary>
         ///  绑定类别
         /// </summary>
@@ -89,8 +90,21 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
         {
             var c = new Category();
             TreeBindCategory(0, ref c);
+            ViewBag.tableTitle = new List<CategoryField>();
+            ViewBag.categoryId = 0;
+            ViewBag.idName = "";
+            var table = new DataTable();
+            if (c != null && c.CategoryFields.Any())
+            {
+                ViewBag.categoryId = c.CategoryId;
+                ViewBag.tableTitle = c.CategoryFields;
+                ViewBag.idName = c.DataTableName ;
+                var sql = @"select * from " + c.DataTableName;
+                table = SqlHelper.QueryDataTable(SqlHelper.ConnectionStringLocalTransaction, CommandType.Text, sql, null);
+            }
+
             //return View(new List<CategoryField>());
-            return View();
+            return View(table);
         }
 
         public ActionResult EntryList(int categoryId)

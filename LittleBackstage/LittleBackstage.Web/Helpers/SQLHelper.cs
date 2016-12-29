@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Security;
 using System.Collections;
 using System.Data.SqlClient;
+using System.Threading;
 
 ///<summary>
 /// 数据库的通用访问代码
@@ -13,6 +14,8 @@ using System.Data.SqlClient;
 
 public abstract class SqlHelper
 {
+    // 超时时间
+    private static int Timeout = 1000;
     //获取数据库连接字符串，其属于静态变量且只读，项目中所有文档可以直接使用，但不能修改
     public static readonly string ConnectionStringLocalTransaction = ConfigurationManager.ConnectionStrings["LittleBackstageDb"].ConnectionString;
 
@@ -132,7 +135,106 @@ public abstract class SqlHelper
     }
 
 
+    /// <summary>
+    /// 查询数据，返回DataSet
+    /// </summary>
+    /// <param name="connectionString"></param>
+    /// <param name="cmdType">查询类型(SQL语句/存储过程名)</param>
+    /// <param name="cmdText">SQL语句或存储过程名</param>
+    /// <param name="commandParameters">参数</param>
+    /// <returns></returns>
+    public static DataSet QueryDataSet(string connectionString, CommandType cmdType, string cmdText, params SqlParameter[] commandParameters)
+    {
+        //SqlCommand cmd = new SqlCommand();
+        //using (SqlConnection connection = new SqlConnection(connectionString))
+        //{
+        //    PrepareCommand(cmd, connection, null, cmdType, cmdText, commandParameters);
+        //    object val = cmd.ExecuteScalar();
+        //    cmd.Parameters.Clear();
+        //    return val;
+        //}
+        try
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                using (SqlCommand cmd = GetCommand(conn, null, cmdType, cmdText, commandParameters))
+                {
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        DataSet ds = new DataSet();
+                        da.Fill(ds);
+                        return ds;
+                    }
+                }
+            }
+        }
+        catch (SqlException ex)
+        {
+            System.Text.StringBuilder log = new System.Text.StringBuilder();
+            log.Append("查询数据出错：");
+            log.Append(ex);
+            throw new Exception(log.ToString());
+        }
+    }
 
+
+
+    /// <summary>
+    /// 查询数据，返回DataTable
+    /// </summary>
+    /// <param name="connectionString"></param>
+    /// <param name="cmdType">查询类型(SQL语句/存储过程名)</param>
+    /// <param name="cmdText">SQL语句或存储过程名</param>
+    /// <param name="parms">参数</param>
+    /// <returns></returns>
+    public static DataTable QueryDataTable(string connectionString, CommandType cmdType, string cmdText, params SqlParameter[] parms)
+    {
+        try
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = GetCommand(conn, null, cmdType, cmdText, parms))
+                {
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+                        return dt;
+                    }
+                }
+            }
+        }
+        catch (SqlException ex)
+        {
+            System.Text.StringBuilder log = new System.Text.StringBuilder();
+            log.Append("查询数据出错：");
+            log.Append(ex);
+            throw new Exception(log.ToString());
+        }
+    }
+    /// <summary>
+    /// 获取SqlCommand
+    /// </summary>
+    /// <param name="conn">SqlConnection</param>
+    /// <param name="transaction">SqlTransaction</param>
+    /// <param name="cmdType">CommandType</param>
+    /// <param name="sql">SQL</param>
+    /// <param name="parms">SqlParameter数组</param>
+    /// <returns></returns>
+    private static SqlCommand GetCommand(SqlConnection conn, SqlTransaction transaction, CommandType cmdType, string sql, SqlParameter[] parms)
+    {
+        var cmd = new SqlCommand(sql, conn);
+        cmd.CommandType = cmdType;
+        cmd.CommandTimeout = Timeout;
+        if (transaction != null)
+            cmd.Transaction = transaction;
+        if (parms != null && parms.Length != 0)
+            cmd.Parameters.AddRange(parms);
+        return cmd;
+    }
     ///<summary>
     ///执行一条返回第一条记录第一列的SqlCommand命令，通过专用的连接字符串。 
     ///使用参数数组提供参数
@@ -245,4 +347,8 @@ public abstract class SqlHelper
                 cmd.Parameters.Add(parm);
         }
     }
+
+
+
+
 }

@@ -47,5 +47,10 @@ namespace LittleBackstage.Core.Models
         /// 是否显示在table 0 否 1是 
         /// </summary>
         public int IsShow { get; set; }
+
+        /// <summary>
+        /// 排序 默认 0 逆序排列
+        /// </summary>
+        public int Sort { get; set; }
     }
 }

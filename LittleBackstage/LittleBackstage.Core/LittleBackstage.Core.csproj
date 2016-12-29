@@ -119,6 +119,10 @@
     <Compile Include="Migrations\201612280854402_addIsShow.Designer.cs">
       <DependentUpon>201612280854402_addIsShow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612290703572_addSort.cs" />
+    <Compile Include="Migrations\201612290703572_addSort.Designer.cs">
+      <DependentUpon>201612290703572_addSort.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AjaxResponse.cs" />
     <Compile Include="Models\Category.cs" />
@@ -195,6 +199,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612280854402_addIsShow.resx">
       <DependentUpon>201612280854402_addIsShow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612290703572_addSort.resx">
+      <DependentUpon>201612290703572_addSort.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

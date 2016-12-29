@@ -237,7 +237,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
                 {
                     var sql = @"create table " + old.DataTableName + @"
                             (
-                            " + old.DataTableName + @"_Id int primary key,
+                            " + old.DataTableName + @"_Id int primary key IDENTITY(1,1),
                             " + field +
                               @" ) ";
                     //_logService.Debug(sql);
