@@ -49,9 +49,6 @@
                                     <th>@title.FieldName</th>
 
                                 }
-                                @*<th>字段名称</th>
-                                    <th>标识</th>
-                                    <th>创建时间</th>*@
                                 <th>操作</th>
                             </tr>
                         </thead>
@@ -106,7 +103,7 @@
             if (category == '') {
                 //console.log("无值");
             } else {
-                window.location.href = 'index?id=' + category;
+                window.location.href = 'EntryTable/index?id=' + category;
             }
             //console.log(category);
         }
@@ -116,7 +113,7 @@
             if (category == '') {
                 //console.log("无值");
             } else {
-                window.location.href = 'AddEntry?categoryId=' + category;
+                window.location.href = 'EntryTable/AddEntryTable?categoryId=' + category;
             }
         }
     </script>

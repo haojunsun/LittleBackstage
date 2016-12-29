@@ -112,8 +112,9 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
         //    return View();
         //}
 
-        public ActionResult AddEntry(int categoryId)
+        public ActionResult AddEntryTable(int categoryId)
         {
+            ViewBag.categoryId = categoryId;
             return View();
         }
 
@@ -135,6 +136,11 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
                 return admin.UserName;
             }
             return "数据错误";
+        }
+
+        public string GetAddEntryForm(int categoryId)
+        {
+            return  "<div>2112121221</div>";
         }
     }
 }
