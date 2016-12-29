@@ -86,10 +86,10 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             ViewBag.CategorySelect = selectList;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(int? id=0)
         {
             var c = new Category();
-            TreeBindCategory(0, ref c);
+            TreeBindCategory((int)id, ref c);
             ViewBag.tableTitle = new List<CategoryField>();
             ViewBag.categoryId = 0;
             ViewBag.idName = "";
@@ -107,10 +107,10 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             return View(table);
         }
 
-        public ActionResult EntryList(int categoryId)
-        {
-            return View();
-        }
+        //public ActionResult EntryList(int categoryId)
+        //{
+        //    return View();
+        //}
 
         public ActionResult AddEntry(int categoryId)
         {
@@ -125,6 +125,16 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
         public ActionResult DelEntry(int id)
         {
             return View();
+        }
+
+        public string GetName(int id)
+        {
+            var admin=_managerService.Get(id);
+            if (admin != null)
+            {
+                return admin.UserName;
+            }
+            return "数据错误";
         }
     }
 }

@@ -45,7 +45,9 @@
                             <tr>
                                 @foreach (var title in list)
                                 {
+
                                     <th>@title.FieldName</th>
+
                                 }
                                 @*<th>字段名称</th>
                                     <th>标识</th>
@@ -60,10 +62,16 @@
                                 <tr class="gradeX">
                                     @foreach (var title in list)
                                     {
-                                        <td>@dr[title.IdEntity]</td>
+                                        if (title.IdEntity == "InputManager")
+                                        {
+                                            <td>@Html.Action("GetName", "EntryTable", new { id = dr[title.IdEntity] })</td>
+                                        }
+                                        else
+                                        {
+                                            <td>@dr[title.IdEntity]</td>
+                                        }
                                     }
-                                    <td><a href="@Url.Action("EditEntry", "EntryTable", new { id, categoryId })">编辑</a> | <a href="@Url.Action("DelEntry", "EntryTable", new { id, categoryId })" onclick="return confi onclick=" return confirm('确认删除')">删除</a></td>
-                                    @*<li><a id="MeauID" href="#">@dr["A_Customer_Name"]</a></li>*@
+                                    <td><a href="@Url.Action("EditEntry", "EntryTable", new { id, categoryId })">编辑</a> | <a href="@Url.Action("DelEntry", "EntryTable", new { id, categoryId })" onclick="return confirm('确认删除')">删除</a></td>
                                 </tr>
                             }
                         </tbody>
@@ -98,7 +106,7 @@
             if (category == '') {
                 //console.log("无值");
             } else {
-                window.location.href = 'EntryList?categoryId=' + category;
+                window.location.href = 'index?id=' + category;
             }
             //console.log(category);
         }

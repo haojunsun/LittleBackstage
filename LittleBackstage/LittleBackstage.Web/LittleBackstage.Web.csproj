@@ -1273,7 +1273,6 @@
     <Content Include="Areas\Admin\Views\CategoryField\AddCategoryField.cshtml" />
     <Content Include="Areas\Admin\Views\CategoryField\EditCategoryField.cshtml" />
     <Content Include="Areas\Admin\Views\EntryTable\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\EntryTable\EntryList.cshtml" />
     <None Include="Properties\PublishProfiles\pano.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\common.js" />
