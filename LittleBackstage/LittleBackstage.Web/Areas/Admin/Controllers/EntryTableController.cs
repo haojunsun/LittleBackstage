@@ -86,7 +86,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             ViewBag.CategorySelect = selectList;
         }
 
-        public ActionResult Index(int? id=0)
+        public ActionResult Index(int? id = 0)
         {
             var c = new Category();
             TreeBindCategory((int)id, ref c);
@@ -98,7 +98,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             {
                 ViewBag.categoryId = c.CategoryId;
                 ViewBag.tableTitle = c.CategoryFields;
-                ViewBag.idName = c.DataTableName ;
+                ViewBag.idName = c.DataTableName;
                 var sql = @"select * from " + c.DataTableName;
                 table = SqlHelper.QueryDataTable(SqlHelper.ConnectionStringLocalTransaction, CommandType.Text, sql, null);
             }
@@ -106,11 +106,6 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             //return View(new List<CategoryField>());
             return View(table);
         }
-
-        //public ActionResult EntryList(int categoryId)
-        //{
-        //    return View();
-        //}
 
         public ActionResult AddEntryTable(int categoryId)
         {
@@ -128,9 +123,14 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 获取管理员名
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public string GetName(int id)
         {
-            var admin=_managerService.Get(id);
+            var admin = _managerService.Get(id);
             if (admin != null)
             {
                 return admin.UserName;
@@ -140,7 +140,33 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
 
         public string GetAddEntryForm(int categoryId)
         {
-            return  "<div>2112121221</div>";
+            //<div class="form-group">
+            //             <label class="col-sm-2 control-label">字段名称</label>
+            //             <div class="col-sm-4">
+            //                 <input type="text" class="form-control" id="fieldName" name="fieldName">
+            //             </div>
+            //         </div>
+            //         <div class="hr-line-dashed"></div>
+            var category = _categoryService.Get(categoryId);
+            if (category != null && category.IsCreateTable == 1 && category.CategoryFields.Any())
+            {
+                var form = "";
+                foreach (var item in category.CategoryFields.Where(x => x.CanModify == 1))
+                {
+                    form += "<div class=\"form-group\">";
+                    form += "<label class=\"col-sm-2 control-label\">" + item.FieldName + "</label>";
+                    form += "<div class=\"col-sm-6\">";
+                    form += "<input type=\"text\" class=\"form-control\" id=\"" + item.IdEntity + "\" name=\"" + item.IdEntity + "\"/>";
+                    form += "</div>";
+                    form += "</div>";
+                    form += " <div class=\"hr-line-dashed\"></div>";
+                }
+                return form;
+            }
+            else
+            {
+                return "<div>无字段</div>";
+            }
         }
     }
 }
