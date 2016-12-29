@@ -1272,6 +1272,8 @@
     <Content Include="Areas\Admin\Views\Category\TemplateList.cshtml" />
     <Content Include="Areas\Admin\Views\CategoryField\AddCategoryField.cshtml" />
     <Content Include="Areas\Admin\Views\CategoryField\EditCategoryField.cshtml" />
+    <Content Include="Areas\Admin\Views\EntryTable\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\EntryTable\EntryList.cshtml" />
     <None Include="Properties\PublishProfiles\pano.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\common.js" />
@@ -1354,7 +1356,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Views\EntryTable\" />
     <Folder Include="Areas\Admin\Views\ForExcel\" />
     <Folder Include="Areas\Admin\Views\Log\" />
     <Folder Include="Areas\Admin\Views\Resources\" />

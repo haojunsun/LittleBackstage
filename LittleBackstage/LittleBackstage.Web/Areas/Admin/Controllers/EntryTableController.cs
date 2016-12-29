@@ -40,22 +40,70 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             _logService = logService;
             _categoryFieldService = categoryFieldService;
         }
+        /// <summary>
+        ///  绑定类别
+        /// </summary>
+        /// <param name="id"></param>
+        private void TreeBindCategory(int id, ref Category c)
+        {
+            var list = new List<Category>();
+            list = _categoryService.List().Where(x => x.IsCreateTable == 1).ToList();
+            var selectList = new List<SelectListItem>();
+            int i = 0;
+            foreach (var r in list)
+            {
+                if (id == 0 && i == 0)
+                {
+                    selectList.Add(new SelectListItem()
+                    {
+                        Value = r.CategoryId.ToString(),
+                        Text = r.CategoryName,
+                        Selected = true
+                    });
+                    c = r;
+                }
+                else if (r.CategoryId == id)
+                {
+                    selectList.Add(new SelectListItem()
+                    {
+                        Value = r.CategoryId.ToString(),
+                        Text = r.CategoryName,
+                        Selected = true
+                    });
+                    c = r;
+                }
+                else
+                {
+                    selectList.Add(new SelectListItem()
+                    {
+                        Value = r.CategoryId.ToString(),
+                        Text = r.CategoryName,
+                    });
+                }
+                i++;
+            }
+            ViewBag.CategorySelect = selectList;
+        }
 
-        // GET: Admin/EntryTable
         public ActionResult Index()
         {
+            var c = new Category();
+            TreeBindCategory(0, ref c);
+            //return View(new List<CategoryField>());
             return View();
         }
 
-        public ActionResult EntryList(int id)
+        public ActionResult EntryList(int categoryId)
         {
             return View();
         }
-        public ActionResult AddEntryList()
+
+        public ActionResult AddEntry(int categoryId)
         {
             return View();
         }
-        public ActionResult EditEntry()
+
+        public ActionResult EditEntry(int categoryId, int id)
         {
             return View();
         }
