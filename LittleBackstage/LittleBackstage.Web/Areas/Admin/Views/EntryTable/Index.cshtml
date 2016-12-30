@@ -101,7 +101,7 @@
             if (category == '') {
                 //console.log("无值");
             } else {
-                window.location.href = 'EntryTable/index?id=' + category;
+                window.location.href = '@Url.Action("index", "EntryTable")' +'?id=' + category;
             }
             //console.log(category);
         }
@@ -111,7 +111,7 @@
             if (category == '') {
                 //console.log("无值");
             } else {
-                window.location.href = 'EntryTable/AddEntryTable?categoryId=' + category;
+                window.location.href ='@Url.Action("AddEntryTable", "EntryTable")' +'?categoryId=' + category;
             }
         }
     </script>

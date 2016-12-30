@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using LittleBackstage.Core.Basis;
 using LittleBackstage.Core.Models;
 using LittleBackstage.Core.Services;
 using LittleBackstage.Infrastructure.Services;
@@ -113,14 +114,63 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult AddEntryTablePost(int categoryId)
+        {
+            var insertSql = @"INSERT INTO ";
+            var category = _categoryService.Get(categoryId);
+            if (category != null && category.IsCreateTable == 1 && category.CategoryFields.Any())
+            {
+                insertSql += category.DataTableName + "(";
+                foreach (var item in category.CategoryFields.Where(x => x.CanModify == 1))
+                {
+                    insertSql += item.IdEntity + ",";
+                }
+                //insertSql = _helperServices.DelLastChar(insertSql, ",");//去掉最后的逗号
+                insertSql += "InputManager,InputTime";
+                insertSql += ") VALUES (";
+                foreach (var item in category.CategoryFields.Where(x => x.CanModify == 1))
+                {
+                    insertSql += "'" + Request.Form[item.IdEntity] + "',";
+                }
+                var admin = UserLogin.GetUserInfo("SESSION_USER_INFO");
+                insertSql += admin.ManagerId + ",'" + DateTime.Now + "') SELECT @@IDENTITY";
+
+                var reader = SqlHelper.ExecuteScalar(SqlHelper.ConnectionStringLocalTransaction, CommandType.Text, insertSql, null);
+                //if ((int)reader > 0)
+                //{
+                return Content("<script>alert('创建成功!');window.location.href='" + Url.Action("Index", new { id = categoryId }) + "';</script>");
+                //}
+            }
+            return Content("<script>alert('数据错误!');window.location.href='" + Url.Action("Index", new { id = categoryId }) + "';</script>");
+        }
+
         public ActionResult EditEntry(int categoryId, int id)
         {
             return View();
         }
 
-        public ActionResult DelEntry(int id)
+        [HttpPost]
+        public ActionResult EditEntryPost(int categoryId, int id)
         {
             return View();
+        }
+
+        public ActionResult DelEntry(int id, int categoryId)
+        {
+            var admin = UserLogin.GetUserInfo("SESSION_USER_INFO");//
+            var delSql = @"DELETE FROM ";
+            var category = _categoryService.Get(categoryId);
+            if (category != null && category.IsCreateTable == 1 && category.CategoryFields.Any())
+            {
+                delSql += category.DataTableName + " where " + category.DataTableName + "_Id =" + id;
+                var del = SqlHelper.ExecuteNonQuery(SqlHelper.ConnectionStringLocalTransaction, CommandType.Text, delSql, null);
+                if (del > 0)
+                {
+                    return Content("<script>alert('删除成功!');window.location.href='" + Url.Action("Index", new { id = categoryId }) + "';</script>");
+                }
+            }
+            return Content("<script>alert('数据错误!');window.location.href='" + Url.Action("Index", new { id = categoryId }) + "';</script>");
         }
 
         /// <summary>
@@ -140,13 +190,6 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
 
         public string GetAddEntryForm(int categoryId)
         {
-            //<div class="form-group">
-            //             <label class="col-sm-2 control-label">字段名称</label>
-            //             <div class="col-sm-4">
-            //                 <input type="text" class="form-control" id="fieldName" name="fieldName">
-            //             </div>
-            //         </div>
-            //         <div class="hr-line-dashed"></div>
             var category = _categoryService.Get(categoryId);
             if (category != null && category.IsCreateTable == 1 && category.CategoryFields.Any())
             {

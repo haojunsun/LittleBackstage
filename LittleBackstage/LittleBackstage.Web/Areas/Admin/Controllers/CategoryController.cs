@@ -134,6 +134,15 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
                 else
                 {
                     //1.审核状态 发布时间 发布员  审核时间 审核管理员 录入员 录入时间
+                    var cf0 = new CategoryField();
+                    cf0.Category = old;
+                    cf0.CreateTime = DateTime.Now;
+                    cf0.Explain = "发布状态";
+                    cf0.FieldName = "发布状态";
+                    cf0.IdEntity = "IsRelease";
+                    cf0.CanModify = 0;
+                    old.CategoryFields.Add(cf0);
+
                     var cf1 = new CategoryField();
                     cf1.Category = old;
                     cf1.CreateTime = DateTime.Now;
@@ -209,6 +218,9 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
                     {
                         case "IsExamine":
                             field += " IsExamine int,";
+                            break;
+                        case "IsRelease":
+                            field += " IsRelease int,";
                             break;
                         case "ReleaseTime":
                             field += " ReleaseTime datetime,";

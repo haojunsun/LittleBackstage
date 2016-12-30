@@ -13,7 +13,7 @@
                     <h5>资源管理 <small>条目管理-创建条目</small></h5>
                 </div>
                 <div class="ibox-content" style="overflow: auto; height:700px;">
-                    @using (Html.BeginForm("AddEntryTable", "EntryTable", FormMethod.Post, new { @class = "form-horizontal", @role = "form", enctype = "multipart/form-data" }))
+                    @using (Html.BeginForm("AddEntryTablePost", "EntryTable", FormMethod.Post, new { @class = "form-horizontal", @role = "form", enctype = "multipart/form-data" }))
                     {
                         <input type="hidden" id="categoryId" value="@ViewBag.categoryId" name="categoryId" />
                         @Html.Raw(Html.Action("GetAddEntryForm", "EntryTable", new { ViewBag.categoryId }))
