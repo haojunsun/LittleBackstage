@@ -1274,6 +1274,7 @@
     <Content Include="Areas\Admin\Views\CategoryField\EditCategoryField.cshtml" />
     <Content Include="Areas\Admin\Views\EntryTable\Index.cshtml" />
     <Content Include="Areas\Admin\Views\EntryTable\AddEntryTable.cshtml" />
+    <Content Include="Areas\Admin\Views\EntryTable\EditEntryTable.cshtml" />
     <None Include="Properties\PublishProfiles\pano.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\common.js" />

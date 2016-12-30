@@ -145,20 +145,22 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             return Content("<script>alert('数据错误!');window.location.href='" + Url.Action("Index", new { id = categoryId }) + "';</script>");
         }
 
-        public ActionResult EditEntry(int categoryId, int id)
+        public ActionResult EditEntryTable(int categoryId, int id)
         {
+            ViewBag.categoryId = categoryId;
+            ViewBag.id = id;
             return View();
         }
 
         [HttpPost]
-        public ActionResult EditEntryPost(int categoryId, int id)
+        public ActionResult EditEntryTablePost(int categoryId, int id)
         {
             return View();
         }
 
         public ActionResult DelEntry(int id, int categoryId)
         {
-            var admin = UserLogin.GetUserInfo("SESSION_USER_INFO");//
+            var admin = UserLogin.GetUserInfo("SESSION_USER_INFO");
             var delSql = @"DELETE FROM ";
             var category = _categoryService.Get(categoryId);
             if (category != null && category.IsCreateTable == 1 && category.CategoryFields.Any())
@@ -203,6 +205,37 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
                     form += "</div>";
                     form += "</div>";
                     form += " <div class=\"hr-line-dashed\"></div>";
+                }
+                return form;
+            }
+            else
+            {
+                return "<div>无字段</div>";
+            }
+        }
+
+        public string GetEditEntryForm(int categoryId, int id)
+        {
+
+            var category = _categoryService.Get(categoryId);
+            if (category != null && category.IsCreateTable == 1 && category.CategoryFields.Any())
+            {
+                var sql = @"select * from " + category.DataTableName + " where  " + category.DataTableName + "_Id =" + id;
+                var table = SqlHelper.QueryDataTable(SqlHelper.ConnectionStringLocalTransaction, CommandType.Text, sql, null);
+                var form = "";
+                foreach (DataRow dr in table.Rows)
+                {
+                    foreach (var item in category.CategoryFields.Where(x => x.CanModify == 1))
+                    {
+                        form += "<div class=\"form-group\">";
+                        form += "<label class=\"col-sm-2 control-label\">" + item.FieldName + "</label>";
+                        form += "<div class=\"col-sm-6\">";
+                        form += "<input type=\"text\" class=\"form-control\" id=\"" + item.IdEntity + "\" name=\"" +
+                                item.IdEntity + "\" value=\"" + dr[item.IdEntity] + "\"/>";
+                        form += "</div>";
+                        form += "</div>";
+                        form += " <div class=\"hr-line-dashed\"></div>";
+                    }
                 }
                 return form;
             }
