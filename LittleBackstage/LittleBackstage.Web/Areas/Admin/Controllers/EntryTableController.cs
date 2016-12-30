@@ -155,7 +155,21 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult EditEntryTablePost(int categoryId, int id)
         {
-            return View();
+            var updateSql = @"UPDATE ";
+            var category = _categoryService.Get(categoryId);
+            if (category != null && category.IsCreateTable == 1 && category.CategoryFields.Any())
+            {
+                updateSql += category.DataTableName + " SET ";
+                foreach (var item in category.CategoryFields.Where(x => x.CanModify == 1))
+                {
+                    updateSql += item.IdEntity + "='" + Request.Form[item.IdEntity] + "',";
+                }
+                updateSql = _helperServices.DelLastChar(updateSql, ",");
+                updateSql += " WHERE " + category.DataTableName + "_Id =" + id;
+                var reader = SqlHelper.ExecuteScalar(SqlHelper.ConnectionStringLocalTransaction, CommandType.Text, updateSql, null);
+                return Content("<script>alert('编辑成功!');window.location.href='" + Url.Action("Index", new { id = categoryId }) + "';</script>");
+            }
+            return Content("<script>alert('数据错误!');window.location.href='" + Url.Action("Index", new { id = categoryId }) + "';</script>");
         }
 
         public ActionResult DelEntry(int id, int categoryId)

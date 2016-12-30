@@ -16,6 +16,7 @@
                     @using (Html.BeginForm("EditEntryTablePost", "EntryTable", FormMethod.Post, new { @class = "form-horizontal", @role = "form", enctype = "multipart/form-data" }))
                     {
                         <input type="hidden" id="categoryId" value="@ViewBag.categoryId" name="categoryId" />
+                        <input type="hidden" id="id" value="@ViewBag.id" name="id" />
                         @Html.Raw(Html.Action("GetEditEntryForm", "EntryTable", new { ViewBag.categoryId, ViewBag.id }))
                         <div class="form-group">
                             <div class="col-sm-4 col-sm-offset-2">
