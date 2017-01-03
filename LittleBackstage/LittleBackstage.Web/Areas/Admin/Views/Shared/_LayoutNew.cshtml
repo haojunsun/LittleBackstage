@@ -94,7 +94,7 @@
                                     <a class="J_menuItem" href="@Url.Action("Catalogue", "EntryTable")">条目编目</a>
                                 </li>
                                 <li>
-                                    <a class="J_menuItem" href="graph_metrics.html">条目审核</a>
+                                    <a class="J_menuItem" href="@Url.Action("ExamineEntryTable", "EntryTable")">条目审核</a>
                                 </li>
                                 <li>
                                     <a class="J_menuItem" href="graph_metrics.html">条目发布</a>
@@ -115,7 +115,7 @@
                                     <a class="J_menuItem" href="graph_metrics.html">节日管理</a>
                                 </li>*@
                                 <li>
-                                    <a class="J_menuItem" href="graph_metrics.html">会员管理</a>
+                                    <a class="J_menuItem" href="@Url.Action("UserList","User",new{@Area = "Admin"})">会员管理</a>
                                 </li>
                                 <li>
                                     <a class="J_menuItem" href="graph_metrics.html">会员审核</a>

@@ -1,0 +1,139 @@
+﻿@using System.Data
+@using LittleBackstage.Core.Models
+@model System.Data.DataTable
+
+@{
+    ViewBag.Title = "条目审核-条目管理-资源管理";
+    var categoryFields = (List<CategoryField>)ViewBag.tableTitle;
+    var list = categoryFields.Where(x => x.IsShow == 1).OrderByDescending(x => x.Sort).ToList();
+    var categoryId = ViewBag.categoryId;
+    string idName = ViewBag.idName;
+}
+@section styles_theme_level{
+    <link href="~/Assets/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+}
+<div class="wrapper wrapper-content animated fadeInRight" style="width: 100%; height: 100%">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>资源管理 <small>条目管理-条目审核</small></h5>
+                    @*<div class="ibox-tools">
+                            <a href="javascript:void(0);" class=" btn btn-primary btn-xs" onclick="addEntry();">创建条目</a>
+                        </div>*@
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            @Html.DropDownList("category", (IEnumerable<SelectListItem>)ViewBag.CategorySelect, "--请选择条目分类--", new
+                                 {
+                                     //onchange = "getCategory(this);",
+                                     tabindex = "1",
+                                     @class = "form-control m-b",
+                                     @id = "category"
+                                 })
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="input-group">
+                                <select class="form-control" id="examineState">
+                                    <option value="-3">所有状态</option>
+                                    <option value="0">待审核</option>
+                                    <option value="-1">退回审核</option>
+                                    <option value="-2">审核不通过</option>
+                                </select>
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-sm btn-primary" onclick="searchExamine();">搜索</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table table-striped table-bordered table-hover dataTables-example">
+                        <thead>
+                            <tr>
+                                @foreach (var title in list)
+                                {
+                                    <th>@title.FieldName</th>
+                                }
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (DataRow dr in Model.Rows)
+                            {
+                                var id = dr[ViewBag.idName + "_Id"];
+                                <tr class="gradeX">
+                                    @foreach (var title in list)
+                                    {
+                                        if (title.IdEntity == "InputManager")
+                                        {
+                                            <td>@Html.Action("GetName", "EntryTable", new { id = dr[title.IdEntity] })</td>
+                                        }
+                                        else if (title.IdEntity == "IsExamine")
+                                        {
+                                            if (dr[title.IdEntity].ToString() == "0")
+                                            {
+                                                <td> <span class="label label-default">待审核</span></td>
+                                            }
+                                            else if (dr[title.IdEntity].ToString() == "-1")
+                                            {
+                                                <td> <span class="label label-warning">退回审核</span></td>
+                                            }
+                                            else if (dr[title.IdEntity].ToString() == "-2")
+                                            {
+                                                <td> <span class="label label-danger">审核不通过</span></td>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <td>@dr[title.IdEntity]</td>
+                                        }
+                                    }
+                                    <td><a href="@Url.Action("ExamineEntry", "EntryTable", new { id, categoryId })">设置审核状态</a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <!-- 全局js -->
+    <script src="~/Assets/js/plugins/jeditable/jquery.jeditable.js"></script>
+    <!-- Data Tables -->
+    <script src="~/Assets/js/plugins/dataTables/jquery.dataTables.js"></script>
+    <script src="~/Assets/js/plugins/dataTables/dataTables.bootstrap.js"></script>
+    <!-- 自定义js -->
+    @*<script src="~/Assets/js/content.js?v=1.0.0"></script>*@
+    <script>
+        $(document)
+            .ready(function () {
+                $('.dataTables-example')
+                    .dataTable({
+                        "lengthChange": false, //是否允许用户改变表格每页显示的记录数
+                        "ordering": false, //是否允许DataTables排序
+                        "pageLength": 10 //改变初始的页面长度(每页显示的记录数)
+                    });
+            });
+
+        function searchExamine() {
+            var category = $("#category").val();
+            var state = $("#examineState").val();
+            //alert(proid);
+            if (category == '' || state == '') {
+                //console.log("无值");
+            } else {
+                //ExamineEntryTable(int? categoryId = 0, int? state=-3)
+                window.location.href = '@Url.Action("ExamineEntryTable", "EntryTable")' + '?categoryId=' + category + "&state=" + state;
+            }
+            //console.log(category);
+        }
+
+        function addEntry() {
+            var category = $("#category").val();
+
+        }
+    </script>
+}
+<!-- Page-Level Scripts -->

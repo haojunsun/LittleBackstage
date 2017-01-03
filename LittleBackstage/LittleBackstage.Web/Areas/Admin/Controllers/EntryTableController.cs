@@ -259,10 +259,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             }
         }
 
-        public ActionResult List()
-        {
-            return View();
-        }
+
 
         public ActionResult Catalogue()
         {
@@ -308,7 +305,72 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
         /// 审核
         /// </summary>
         /// <returns></returns>
-        public ActionResult ExamineEntryTable()
+        public ActionResult ExamineEntryTable(int? categoryId = 0, int? state = -3)
+        {
+            var c = new Category();
+            TreeBindCategory((int)categoryId, ref c);
+            ViewBag.tableTitle = new List<CategoryField>();
+            ViewBag.categoryId = 0;
+            ViewBag.idName = "";
+            var table = new DataTable();
+            if (c != null && c.CategoryFields.Any())
+            {
+                //IsRelease 发布状态 默认0 未发布 1 已发布 
+                //IsExamine 审核状态 默认 0 待审核 -1 退回审核 -2 审核不通过   审核通过 1
+                ViewBag.categoryId = c.CategoryId;
+                ViewBag.tableTitle = c.CategoryFields;
+                ViewBag.idName = c.DataTableName;
+                var sql = @"select * from " + c.DataTableName + " where IsRelease=0 and ";
+                if (state == -3)
+                {
+                    sql += "IsExamine !=1";
+                }
+                else
+                {
+                    sql += "IsExamine ==" + state;
+                }
+                table = SqlHelper.QueryDataTable(SqlHelper.ConnectionStringLocalTransaction, CommandType.Text, sql, null);
+            }
+            return View(table);
+        }
+
+        public ActionResult ExamineEntry(int id, int categoryId)
+        {
+            ViewBag.categoryId = categoryId;
+            ViewBag.id = id;
+            return View();
+        }
+
+        /// <summary>
+        /// 审核
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="categoryId"></param>
+        /// <param name="examineState"></param>
+        /// <param name="explain">审核说明-存到log中</param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult ExamineData(int id, int categoryId, int examineState, string explain)
+        {
+            var admin = UserLogin.GetUserInfo("SESSION_USER_INFO");
+            var updateSql = "UPDATE ";
+            var category = _categoryService.Get(categoryId);
+            if (category != null && category.IsCreateTable == 1 && category.CategoryFields.Any())
+            {
+
+                updateSql += category.DataTableName + "  SET ";
+                updateSql += "  IsExamine= " + examineState + ",";
+
+                updateSql += "  ExamineTime= '" + DateTime.Now + "',";
+                updateSql += "  ExamineManager=" + admin.ManagerId;
+                updateSql += " WHERE " + category.DataTableName + "_Id =" + id;
+                var reader = SqlHelper.ExecuteScalar(SqlHelper.ConnectionStringLocalTransaction, CommandType.Text, updateSql, null);
+                return Content("<script>alert('审核成功!');window.location.href='" + Url.Action("ExamineEntryTable", new { categoryId }) + "';</script>");
+            }
+            return Content("<script>alert('数据错误!');window.location.href='" + Url.Action("ExamineEntryTable", new { categoryId  }) + "';</script>");
+        }
+
+        public ActionResult List()
         {
             return View();
         }
