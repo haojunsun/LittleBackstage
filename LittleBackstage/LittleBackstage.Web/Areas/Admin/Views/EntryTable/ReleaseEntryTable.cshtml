@@ -3,7 +3,7 @@
 @model System.Data.DataTable
 
 @{
-    ViewBag.Title = "条目审核-条目管理-资源管理";
+    ViewBag.Title = "条目发布-条目管理-资源管理";
     var categoryFields = (List<CategoryField>)ViewBag.tableTitle;
     var list = categoryFields.Where(x => x.IsShow == 1).OrderByDescending(x => x.Sort).ToList();
     var categoryId = ViewBag.categoryId;
@@ -17,17 +17,13 @@
         <div class="col-sm-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>资源管理 <small>条目管理-条目审核</small></h5>
-                    @*<div class="ibox-tools">
-                            <a href="javascript:void(0);" class=" btn btn-primary btn-xs" onclick="addEntry();">创建条目</a>
-                        </div>*@
+                    <h5>资源管理 <small>条目管理-条目发布</small></h5>
                 </div>
                 <div class="ibox-content">
                     <div class="row">
                         <div class="col-sm-2">
                             @Html.DropDownList("category", (IEnumerable<SelectListItem>)ViewBag.CategorySelect, "--请选择条目分类--", new
                                  {
-                                     //onchange = "getCategory(this);",
                                      tabindex = "1",
                                      @class = "form-control m-b",
                                      @id = "category"
@@ -36,10 +32,10 @@
                         <div class="col-sm-2">
                             <div class="input-group">
                                 <select class="form-control" id="examineState">
-                                    <option value="-3">所有状态</option>
-                                    <option value="0">待审核</option>
-                                    <option value="-1">退回审核</option>
-                                    <option value="-2">审核不通过</option>
+                                    <option value="-2">所有状态</option>
+                                    <option value="0">待发布</option>
+                                    <option value="1">发布</option>
+                                    <option value="-1">取消发布</option>
                                 </select>
                                 <span class="input-group-btn">
                                     <button type="button" class="btn btn-sm btn-primary" onclick="searchExamine();">搜索</button>
@@ -70,18 +66,8 @@
                                         }
                                         else if (title.IdEntity == "IsExamine")
                                         {
-                                            if (dr[title.IdEntity].ToString() == "0")
-                                            {
-                                                <td> <span class="label label-default">待审核</span></td>
-                                            }
-                                            else if (dr[title.IdEntity].ToString() == "-1")
-                                            {
-                                                <td> <span class="label label-warning">退回审核</span></td>
-                                            }
-                                            else if (dr[title.IdEntity].ToString() == "-2")
-                                            {
-                                                <td> <span class="label label-danger">审核不通过</span></td>
-                                            }
+                                          
+                                            <td> <span class="label label-success">通过</span></td>
                                         }
                                         else if (title.IdEntity == "IsRelease")
                                         {
@@ -99,7 +85,7 @@
                                             <td>@dr[title.IdEntity]</td>
                                         }
                                     }
-                                    <td><a href="@Url.Action("ExamineEntry", "EntryTable", new { id, categoryId })">设置审核状态</a></td>
+                                    <td><a href="@Url.Action("ReleaseEntry", "EntryTable", new { id, categoryId })">设置发布状态</a></td>
                                 </tr>
                             }
                         </tbody>
@@ -136,7 +122,7 @@
                 //console.log("无值");
             } else {
                 //ExamineEntryTable(int? categoryId = 0, int? state=-3)
-                window.location.href = '@Url.Action("ExamineEntryTable", "EntryTable")' + '?categoryId=' + category + "&state=" + state;
+                window.location.href = '@Url.Action("ReleaseEntryTable", "EntryTable")' + '?categoryId=' + category + "&state=" + state;
             }
             //console.log(category);
         }

@@ -1,0 +1,69 @@
+﻿@{
+    ViewBag.Title = "条目发布-条目管理-资源管理";
+}
+@section styles_theme_level{
+
+}
+
+<div class="wrapper wrapper-content animated fadeInRight" style="height:auto">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>资源管理 <small>条目管理-条目发布</small></h5>
+                </div>
+                <div class="ibox-content">
+                    @using (Html.BeginForm("ReleaseData", "EntryTable", FormMethod.Post, new { @class = "form-horizontal", @role = "form", enctype = "multipart/form-data" }))
+                    {
+                        <input type="hidden" id="categoryId" value="@ViewBag.categoryId" name="categoryId" />
+                        <input type="hidden" id="id" value="@ViewBag.id" name="id" />
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">
+                                发布状态
+                            </label>
+                            <div class="col-sm-10">
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" value="1" name="releaseState" required>发布
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" value="-1" name="releaseState">取消发布
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" value="0" name="releaseState">退回审核状态
+                                    </label>
+                                </div>
+                                @*<div class="radio">
+                                    <label>
+                                        <input type="radio" value="-2" name="releaseState">退回修改 退回给著录人重新录入
+                                    </label>
+                                </div>*@
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">描述</label>
+                            <div class="col-sm-6">
+                                <textarea rows="5" class="form-control" cols="20" id="explain" name="explain"></textarea>
+                                <span class="help-block m-b-none">如果对此条目有特殊说明请在此处填写</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button class="btn btn-primary" type="submit">保存</button>
+                                <a class="btn btn-white" href="@Url.Action("ExamineEntryTable", "EntryTable", new {ViewBag.categoryId })">取消</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+
+}
