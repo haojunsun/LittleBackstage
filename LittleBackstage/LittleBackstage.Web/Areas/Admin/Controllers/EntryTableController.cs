@@ -258,5 +258,59 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
                 return "<div>无字段</div>";
             }
         }
+
+        public ActionResult List()
+        {
+            return View();
+        }
+
+        public ActionResult Catalogue()
+        {
+            var c = new Category();
+            TreeBindCategory(0);
+            return View();
+        }
+        /// <summary>
+        ///  绑定类别
+        /// </summary>
+        /// <param name="id"></param>
+        private void TreeBindCategory(int id)
+        {
+            var list = new List<Category>();
+
+            list = _categoryService.List().ToList();
+
+            var selectList = new List<SelectListItem>();
+
+            foreach (var r in list)
+            {
+                if (r.CategoryId == id)
+                {
+                    selectList.Add(new SelectListItem()
+                    {
+                        Value = r.CategoryId.ToString(),
+                        Text = r.CategoryName,
+                        Selected = true
+                    });
+                }
+                else
+                {
+                    selectList.Add(new SelectListItem()
+                    {
+                        Value = r.CategoryId.ToString(),
+                        Text = r.CategoryName,
+                    });
+                }
+            }
+            ViewBag.CategorySelect = selectList;
+        }
+        /// <summary>
+        /// 审核
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ExamineEntryTable()
+        {
+            return View();
+        }
     }
 }

@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "条目编目-条目管理-资源管理";
+}
+@section styles_theme_level{
+
+}
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>资源管理 <small>条目管理-条目编目</small></h5>
+                </div>
+                <div class="ibox-content" style="overflow: auto; height:700px;">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">所属分类</label>
+                        <div class="col-sm-4">
+                            @Html.DropDownList("category", (IEnumerable<SelectListItem>)ViewBag.CategorySelect, "--请选择条目分类--", new
+                                 {
+                                     onchange = "getCategory(this);",
+                                     tabindex = "1",
+                                     @class = "form-control m-b",
+                                     @id = "category"
+                                 })
+                        </div>
+                    </div>
+               
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script>
+        function getCategory(id) {
+            var category = $("#category").val();
+            //alert(proid);
+            if (category == '') {
+                //console.log("无值");
+            } else {
+                window.location.href = '@Url.Action("AddEntryTable", "EntryTable")' + '?categoryId=' + category;
+            }
+            //console.log(category);
+        }
+    </script>
+}
