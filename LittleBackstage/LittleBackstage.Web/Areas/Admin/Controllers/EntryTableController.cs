@@ -25,13 +25,15 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
         private readonly ICategoryService _categoryService;
         private readonly ILogService _logService;
         private readonly ICategoryFieldService _categoryFieldService;
-
+        private readonly ISystemLogService _systemLogService;
         public EntryTableController(IManagerService managerService,
             IHelperServices helperServices,
             IRoleService roleService,
             IUserService userService,
             ICategoryService categoryService,
-            ILogService logService, ICategoryFieldService categoryFieldService)
+            ILogService logService,
+            ICategoryFieldService categoryFieldService, 
+            ISystemLogService systemLogService)
         {
             _managerService = managerService;
             _helperServices = helperServices;
@@ -40,6 +42,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             _categoryService = categoryService;
             _logService = logService;
             _categoryFieldService = categoryFieldService;
+            _systemLogService = systemLogService;
         }
 
         /// <summary>
@@ -103,7 +106,8 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
                 var sql = @"select * from " + c.DataTableName;
                 table = SqlHelper.QueryDataTable(SqlHelper.ConnectionStringLocalTransaction, CommandType.Text, sql, null);
             }
-
+            var m = UserLogin.GetUserInfo("SESSION_USER_INFO");
+            _systemLogService.EntryLog(m.UserName, m.ManagerId, "查看条目列表", "查看条目列表", 0);
             //return View(new List<CategoryField>());
             return View(table);
         }
@@ -118,6 +122,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
         public ActionResult AddEntryTablePost(int categoryId)
         {
             var insertSql = @"INSERT INTO ";
+            var title = "";
             var category = _categoryService.Get(categoryId);
             if (category != null && category.IsCreateTable == 1 && category.CategoryFields.Any())
             {
@@ -132,6 +137,10 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
                 foreach (var item in category.CategoryFields.Where(x => x.CanModify == 1))
                 {
                     insertSql += "'" + Request.Form[item.IdEntity] + "',";
+                    if (item.IdEntity == "Title")
+                    {
+                        title = Request.Form[item.IdEntity];
+                    }
                 }
                 var admin = UserLogin.GetUserInfo("SESSION_USER_INFO");
                 insertSql += admin.ManagerId + ",'" + DateTime.Now + "') SELECT @@IDENTITY";
@@ -142,6 +151,8 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
                 return Content("<script>alert('创建成功!');window.location.href='" + Url.Action("Index", new { id = categoryId }) + "';</script>");
                 //}
             }
+            var m = UserLogin.GetUserInfo("SESSION_USER_INFO");
+            _systemLogService.EntryLog(m.UserName, m.ManagerId, "创建条目-" + title, "创建条目-" + title, 0);
             return Content("<script>alert('数据错误!');window.location.href='" + Url.Action("Index", new { id = categoryId }) + "';</script>");
         }
 
@@ -157,16 +168,24 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
         {
             var updateSql = @"UPDATE ";
             var category = _categoryService.Get(categoryId);
+            var title = "";
             if (category != null && category.IsCreateTable == 1 && category.CategoryFields.Any())
             {
                 updateSql += category.DataTableName + " SET ";
                 foreach (var item in category.CategoryFields.Where(x => x.CanModify == 1))
                 {
                     updateSql += item.IdEntity + "='" + Request.Form[item.IdEntity] + "',";
+                    if (item.IdEntity == "Title")
+                    {
+                        title = Request.Form[item.IdEntity];
+                    }
                 }
                 updateSql = _helperServices.DelLastChar(updateSql, ",");
                 updateSql += " WHERE " + category.DataTableName + "_Id =" + id;
                 var reader = SqlHelper.ExecuteScalar(SqlHelper.ConnectionStringLocalTransaction, CommandType.Text, updateSql, null);
+
+                var m = UserLogin.GetUserInfo("SESSION_USER_INFO");
+                _systemLogService.EntryLog(m.UserName, m.ManagerId, "编辑条目-" + title, "编辑条目-" + title, id);
                 return Content("<script>alert('编辑成功!');window.location.href='" + Url.Action("Index", new { id = categoryId }) + "';</script>");
             }
             return Content("<script>alert('数据错误!');window.location.href='" + Url.Action("Index", new { id = categoryId }) + "';</script>");
@@ -183,6 +202,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
                 var del = SqlHelper.ExecuteNonQuery(SqlHelper.ConnectionStringLocalTransaction, CommandType.Text, delSql, null);
                 if (del > 0)
                 {
+                    _systemLogService.EntryLog(admin.UserName, admin.ManagerId, "删除条目", "删除条目", id);
                     return Content("<script>alert('删除成功!');window.location.href='" + Url.Action("Index", new { id = categoryId }) + "';</script>");
                 }
             }
@@ -334,6 +354,8 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
                 }
                 table = SqlHelper.QueryDataTable(SqlHelper.ConnectionStringLocalTransaction, CommandType.Text, sql, null);
             }
+            var m = UserLogin.GetUserInfo("SESSION_USER_INFO");
+            _systemLogService.EntryLog(m.UserName, m.ManagerId, "查看条目审核列表", "查看条目审核列表" , 0);
             return View(table);
         }
 
@@ -368,8 +390,12 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
                 updateSql += "  ExamineManager=" + admin.ManagerId;
                 updateSql += " WHERE " + category.DataTableName + "_Id =" + id;
                 var reader = SqlHelper.ExecuteScalar(SqlHelper.ConnectionStringLocalTransaction, CommandType.Text, updateSql, null);
+
+                _systemLogService.EntryLog(admin.UserName, admin.ManagerId, "审核条目-成功", "审核条目-成功", id);
+
                 return Content("<script>alert('审核成功!');window.location.href='" + Url.Action("ExamineEntryTable", new { categoryId }) + "';</script>");
             }
+            _systemLogService.EntryLog(admin.UserName, admin.ManagerId, "审核条目-错误", "审核条目-错误", id);
             return Content("<script>alert('数据错误!');window.location.href='" + Url.Action("ExamineEntryTable", new { categoryId }) + "';</script>");
         }
 
@@ -403,6 +429,8 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
                 }
                 table = SqlHelper.QueryDataTable(SqlHelper.ConnectionStringLocalTransaction, CommandType.Text, sql, null);
             }
+            var m = UserLogin.GetUserInfo("SESSION_USER_INFO");
+            _systemLogService.EntryLog(m.UserName, m.ManagerId, "查看条目发布列表", "查看条目发布列表", 0);
             return View(table);
         }
 
@@ -429,8 +457,10 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
                 updateSql += "  ReleaseManager=" + admin.ManagerId;
                 updateSql += " WHERE " + category.DataTableName + "_Id =" + id;
                 var reader = SqlHelper.ExecuteScalar(SqlHelper.ConnectionStringLocalTransaction, CommandType.Text, updateSql, null);
-                return Content("<script>alert('审核成功!');window.location.href='" + Url.Action("ReleaseEntryTable", new { categoryId }) + "';</script>");
+                _systemLogService.EntryLog(admin.UserName, admin.ManagerId, "发布条目-成功", "发布条目-成功", id);
+                return Content("<script>alert('发布成功!');window.location.href='" + Url.Action("ReleaseEntryTable", new { categoryId }) + "';</script>");
             }
+            _systemLogService.EntryLog(admin.UserName, admin.ManagerId, "发布条目-错误", "发布条目-错误", id);
             return Content("<script>alert('数据错误!');window.location.href='" + Url.Action("ReleaseEntryTable", new { categoryId }) + "';</script>");
         }
 

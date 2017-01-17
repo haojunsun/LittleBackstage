@@ -1282,6 +1282,8 @@
     <Content Include="Areas\Admin\Views\EntryTable\ReleaseEntryTable.cshtml" />
     <Content Include="Areas\Admin\Views\EntryTable\ReleaseEntry.cshtml" />
     <Content Include="Areas\Admin\Views\Log\LogList.cshtml" />
+    <Content Include="Areas\Admin\Views\Log\UserLogList.cshtml" />
+    <Content Include="Areas\Admin\Views\Log\EntryLogList.cshtml" />
     <None Include="Properties\PublishProfiles\pano.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\common.js" />
