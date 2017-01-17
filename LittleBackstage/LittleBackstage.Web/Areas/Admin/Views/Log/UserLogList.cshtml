@@ -1,0 +1,68 @@
+﻿@model List<LittleBackstage.Core.Models.SystemLog>
+@{
+    ViewBag.Title = "列表-用户日志-日志管理";
+}
+@section styles_theme_level{
+    <!-- Data Tables -->
+    <link href="~/Assets/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+}
+<div class="wrapper wrapper-content animated fadeInRight" style="width:100%;height:100%">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>日志管理 <small>用户日志-列表</small></h5>
+                </div>
+                <div class="ibox-content">
+                    <table class="table table-striped table-bordered table-hover dataTables-example">
+                        <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>昵称</th>
+                                <th>登录时间</th>
+                                <th>操作详情</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr class="gradeX">
+                                    <td>@item.LogUserId</td>
+                                    <td>@item.LogUserName</td>
+                                    <td>@item.LogTime</td>
+                                    <td class="center">
+                                        @item.OperateType
+                                    </td>
+                                    @*<td class="center">
+                                            <a href="@Url.Action("EditUser", "User", new { id = item.UserId })">详情</a>
+                                        </td>*@
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <!-- 全局js -->
+    <script src="~/Assets/js/plugins/jeditable/jquery.jeditable.js"></script>
+    <!-- Data Tables -->
+    <script src="~/Assets/js/plugins/dataTables/jquery.dataTables.js"></script>
+    <script src="~/Assets/js/plugins/dataTables/dataTables.bootstrap.js"></script>
+    <!-- 自定义js -->
+    @*<script src="~/Assets/js/content.js?v=1.0.0"></script>*@
+    <script>
+        $(document).ready(function () {
+            $('.dataTables-example').dataTable({
+                "lengthChange": false, //是否允许用户改变表格每页显示的记录数
+                "ordering": false,//是否允许DataTables排序
+                "pageLength": 10//改变初始的页面长度(每页显示的记录数)
+            });
+        });
+        //var dh = $(window).height() - 50;
+        //$(".row").css("min-height", dh + "px");
+    </script>
+}
+<!-- Page-Level Scripts -->

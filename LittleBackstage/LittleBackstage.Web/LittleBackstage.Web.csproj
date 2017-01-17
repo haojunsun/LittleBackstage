@@ -1281,6 +1281,7 @@
     <Content Include="Areas\Admin\Views\EntryTable\ExamineEntry.cshtml" />
     <Content Include="Areas\Admin\Views\EntryTable\ReleaseEntryTable.cshtml" />
     <Content Include="Areas\Admin\Views\EntryTable\ReleaseEntry.cshtml" />
+    <Content Include="Areas\Admin\Views\Log\LogList.cshtml" />
     <None Include="Properties\PublishProfiles\pano.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\common.js" />
@@ -1364,7 +1365,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Views\ForExcel\" />
-    <Folder Include="Areas\Admin\Views\Log\" />
     <Folder Include="Areas\Admin\Views\Resources\" />
     <Folder Include="css\vendor\" />
     <Folder Include="files\imgs\" />

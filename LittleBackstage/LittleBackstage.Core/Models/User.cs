@@ -22,7 +22,7 @@ namespace LittleBackstage.Core.Models
         /// </summary>
         public DateTime? Register { get; set; }
         /// <summary>
-        /// 是否启用
+        /// 是否启用 0 未审核 1 已审核
         /// </summary>
         public int IsEnable { get; set; }
         /// <summary>

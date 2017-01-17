@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using LittleBackstage.Core.Basis;
 using LittleBackstage.Core.Models;
 using LittleBackstage.Core.Services;
 using LittleBackstage.Infrastructure.Services;
@@ -17,12 +18,18 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
         private readonly IHelperServices _helperServices;
         private readonly IRoleService _roleService;
         private readonly IUserService _userService;
-        public UserController(IManagerService managerService, IHelperServices helperServices, IRoleService roleService, IUserService userService)
+        private readonly ISystemLogService _systemLogService;
+        public UserController(IManagerService managerService,
+            IHelperServices helperServices,
+            IRoleService roleService,
+            IUserService userService,
+            ISystemLogService systemLogService)
         {
             _managerService = managerService;
             _helperServices = helperServices;
             _roleService = roleService;
             _userService = userService;
+            _systemLogService = systemLogService;
         }
         // GET: Admin/User
         public ActionResult Index()
@@ -225,7 +232,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             {
                 return Content("<script>alert('编辑失败,权限不能为空!');window.location.href='" + Url.Action("RoleList") + "';</script>");
             }
-                 
+
             var old = _roleService.Get(r.RoleId);
             if (r.RoleName != old.RoleName && _roleService.GetByName(r.RoleName))
             {
@@ -269,14 +276,22 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult EditUser(User u, string passWord, int? IsExamineRadios = 0)
         {
+            var m = UserLogin.GetUserInfo("SESSION_USER_INFO");
             var old = _userService.Get(u.UserId);
             if (old == null)
             {
+                _systemLogService.UserLog(m.UserName, m.ManagerId, "编辑会员资料-失败", "编辑会员资料-失败", old.UserId);
                 return Content("<script>alert('编辑失败,数据错误!');window.location.href='" + Url.Action("UserList") + "';</script>");
             }
             if (!string.IsNullOrEmpty(passWord))
             {
                 old.PassWord = _helperServices.MD5CSP(passWord);
+            }
+
+            var operate = "";
+            if (old.IsEnable != (int) IsExamineRadios)
+            {
+                operate = "审核会员";
             }
             old.IsEnable = (int)IsExamineRadios;
             old.IsExamine = (int)IsExamineRadios;
@@ -285,6 +300,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
                 old.Role = _roleService.Get(u.Role.RoleId);
             }
             _userService.Update(old);
+            _systemLogService.UserLog(m.UserName, m.ManagerId, operate, operate, old.UserId);
             return Content("<script>alert('编辑成功!');window.location.href='" + Url.Action("UserList") + "';</script>");
         }
 

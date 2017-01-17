@@ -108,21 +108,13 @@
                                 <li>
                                     <a class="J_menuItem" href="graph_metrics.html">条目操作日志</a>
                                 </li>
-                                <li>
+                                @*<li>
                                     <a class="J_menuItem" href="graph_metrics.html"> 热词管理 </a>
-                                </li>
-                                @*<li>
-                                    <a class="J_menuItem" href="graph_metrics.html">节日管理</a>
-                                </li>*@
-                                @*<li>
-                                    <a class="J_menuItem" href="@Url.Action("UserList","User",new{@Area = "Admin"})">会员管理</a>
                                 </li>*@
                                 <li>
-                                    <a class="J_menuItem" href="graph_metrics.html">会员审核</a>
+                                    <a class="J_menuItem" href="@Url.Action("UserList","User")">会员审核</a>
                                 </li>
-                                @*<li>
-                                    <a class="J_menuItem" href="graph_metrics.html">栏目管理</a>
-                                </li>*@
+                              
                             </ul>
                         </li>
                     }
@@ -140,7 +132,7 @@
                                 <a class="J_menuItem" href="#">用户组管理</a>
                             </li>*@
                         <li>
-                            <a class="J_menuItem" href="@Url.Action("UserList","User",new{@Area = "Admin"})">会员管理</a>
+                            <a class="J_menuItem" href="@Url.Action("UserList","User")">会员管理</a>
                         </li>
                         <li>
                             <a class="J_menuItem" href="@Url.Action("RoleList","User")">角色管理</a>
@@ -156,10 +148,10 @@
                             <span class="ng-scope">日志管理</span>
                         </li>
                         <li>
-                            <a class="J_menuItem" href="table_basic.html">登陆日志</a>
+                            <a class="J_menuItem" href="@Url.Action("LogList", "Log")">登陆日志</a>
                         </li>
                         <li>
-                            <a class="J_menuItem" href="table_data_tables.html">用户日志</a>
+                            <a class="J_menuItem" href="@Url.Action("UserLogList", "Log")">用户日志</a>
                         </li>
                         @*<li>
                             <a class="J_menuItem" href="table_jqgrid.html">文件日志</a>
