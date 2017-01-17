@@ -16,18 +16,19 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
         private readonly IManagerService _managerService;
         private readonly IHelperServices _helperServices;
         private readonly IRoleService _roleService;
-        public AccountController(IManagerService managerService, IHelperServices helperServices, IRoleService roleService)
+        private readonly ISystemLogService _systemLogService;
+        public AccountController(IManagerService managerService,
+            IHelperServices helperServices,
+            IRoleService roleService,
+            ISystemLogService systemLogService)
         {
             _managerService = managerService;
             _helperServices = helperServices;
             _roleService = roleService;
+            _systemLogService = systemLogService;
         }
         public ActionResult Login()
         {
-            //var role = _roleService.Get(1);
-            //var user = _managerService.Get(1);
-            //user.Role = role;
-            //_managerService.Update(user);
             return View();
         }
 
@@ -42,6 +43,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             {
                 ajaxBack.code = 400;
                 ajaxBack.message = "账号密码错误！";
+                _systemLogService.LoginLog(username, 0, "管理员登录失败-账号密码错误!", "管理员登录失败", 0);
                 return Json(ajaxBack, JsonRequestBehavior.DenyGet);
             }
             if (result.IsExamine == 1 && result.IsEnable == 1)
@@ -53,15 +55,14 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
                     _helperServices.SetSession("SESSION_ADMIN_PERMISSIONS", result.Role.Permissions);
 
                 Session.Timeout = 60;
-                //cookie expires in 24 hours
                 _helperServices.WriteCookie("SESSION_USER_NAME", result.UserName, 1440);
-                //_helperServices.WriteCookie("SESSION_USER_NAME", result.UserName, 1440);
-                //HelperServices.WriteCookieByDay(cookieName + "_LogonName", user.LogonName, expires);
+                _systemLogService.LoginLog(result.UserName, result.ManagerId, "管理员登录", "管理员登录", 0);
             }
             else
             {
                 ajaxBack.code = 500;
                 ajaxBack.message = "账号已冻结无法登陆！";
+                _systemLogService.LoginLog(result.UserName, result.ManagerId, "管理员登录失败-账号已冻结", "管理员登录失败", 0);
             }
             return Json(ajaxBack, JsonRequestBehavior.DenyGet);
         }
@@ -72,6 +73,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult Logout()
         {
+            //_systemLogService.LoginLog(result.UserName, result.ManagerId, "管理员登录失败-账号已冻结", "管理员登录失败", 0);
             Session["SESSION_USER_INFO"] = null;
             Session["SESSION_ADMIN_PERMISSIONS"] = null;
             _helperServices.WriteCookie("SESSION_USER_NAME", "");
@@ -109,7 +111,5 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             ajaxBack.returnUrl = Url.Action("Login");
             return Json(ajaxBack, JsonRequestBehavior.DenyGet);
         }
-
-      
     }
 }

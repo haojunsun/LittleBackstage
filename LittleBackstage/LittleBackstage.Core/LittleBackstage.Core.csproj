@@ -123,6 +123,10 @@
     <Compile Include="Migrations\201612290703572_addSort.Designer.cs">
       <DependentUpon>201612290703572_addSort.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701170659132_addRelevantId.cs" />
+    <Compile Include="Migrations\201701170659132_addRelevantId.Designer.cs">
+      <DependentUpon>201701170659132_addRelevantId.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AjaxResponse.cs" />
     <Compile Include="Models\Category.cs" />
@@ -202,6 +206,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612290703572_addSort.resx">
       <DependentUpon>201612290703572_addSort.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701170659132_addRelevantId.resx">
+      <DependentUpon>201701170659132_addRelevantId.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -17,6 +18,16 @@ namespace LittleBackstage.Core.Services
         SystemLog Get(int id);
         IEnumerable<SystemLog> GetPageList(int pageIndex, int pageSize, ref int totalCount);
         IEnumerable<SystemLog> GetPageListByType(int logType, int pageIndex, int pageSize, ref int totalCount);
+
+        /// <summary>
+        /// 记录登录日志
+        /// </summary>
+        void LoginLog(string userName, int userId, string details, string operateType, int relevantId);
+
+        /// <summary>
+        /// 用户日志
+        /// </summary>
+        void UserLog(string userName, int userId, string details, string operateType, int relevantId);
     }
 
     public class SystemLogService : ISystemLogService
@@ -32,7 +43,7 @@ namespace LittleBackstage.Core.Services
             return _appDbContext.SystemLogs.OrderByDescending(x => x.LogTime).ToList();
         }
 
-        public  void Add(SystemLog log)
+        public void Add(SystemLog log)
         {
             _appDbContext.SystemLogs.Add(log);
             _appDbContext.SaveChanges();
@@ -80,6 +91,48 @@ namespace LittleBackstage.Core.Services
                         select p).Skip((pageIndex - 1) * pageSize).Take(pageSize);
             totalCount = _appDbContext.SystemLogs.Count(x => x.LogType == logType);
             return list.ToList();
+        }
+
+        /// <summary>
+        /// 记录登录日志
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="userId"></param>
+        /// <param name="details"></param>
+        /// <param name="operateType"></param>
+        /// <param name="relevantId"></param>
+        public void LoginLog(string userName, int userId, string details, string operateType, int relevantId)
+        {
+            var log = new SystemLog();
+            log.LogUserName = userName;
+            log.LogUserId = userId;
+            log.LogDetails = details;
+            log.LogTime = DateTime.Now;
+            log.LogType = 1;
+            log.OperateType = operateType;
+            log.RelevantId = relevantId;
+            Add(log);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="userId"></param>
+        /// <param name="details"></param>
+        /// <param name="operateType"></param>
+        /// <param name="relevantId"></param>
+        public void UserLog(string userName, int userId, string details, string operateType, int relevantId)
+        {
+            var log = new SystemLog();
+            log.LogUserName = userName;
+            log.LogUserId = userId;
+            log.LogDetails = details;
+            log.LogTime = DateTime.Now;
+            log.LogType = 2;
+            log.OperateType = operateType;
+            log.RelevantId = relevantId;
+            Add(log);
         }
     }
 }

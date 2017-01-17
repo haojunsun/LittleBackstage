@@ -10,7 +10,7 @@ namespace LittleBackstage.Core.Models
     {
         public int SystemLogId { get; set; }
         /// <summary>
-        /// log 类型
+        /// log 类型： 1 登录 2会员操作
         /// </summary>
         public int LogType { get;set;}
         public string LogUserName{ get;set;}
@@ -24,5 +24,10 @@ namespace LittleBackstage.Core.Models
         /// 操作详情
         /// </summary>
         public string LogDetails{ get;set;}
+
+        /// <summary>
+        /// 相关id 如 条目 模板等 id
+        /// </summary>
+        public int RelevantId { get; set; }
     }
 }
