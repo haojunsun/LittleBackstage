@@ -28,6 +28,11 @@ namespace LittleBackstage.Core.Services
         /// 用户日志
         /// </summary>
         void UserLog(string userName, int userId, string details, string operateType, int relevantId);
+
+        /// <summary>
+        /// 条目日志
+        /// </summary>
+        void EntryLog(string userName, int userId, string details, string operateType, int relevantId);
     }
 
     public class SystemLogService : ISystemLogService
@@ -115,7 +120,7 @@ namespace LittleBackstage.Core.Services
         }
 
         /// <summary>
-        /// 
+        /// 用户日志
         /// </summary>
         /// <param name="userName"></param>
         /// <param name="userId"></param>
@@ -130,6 +135,27 @@ namespace LittleBackstage.Core.Services
             log.LogDetails = details;
             log.LogTime = DateTime.Now;
             log.LogType = 2;
+            log.OperateType = operateType;
+            log.RelevantId = relevantId;
+            Add(log);
+        }
+
+        /// <summary>
+        /// 条目日志
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="userId"></param>
+        /// <param name="details"></param>
+        /// <param name="operateType"></param>
+        /// <param name="relevantId"></param>
+        public void EntryLog(string userName, int userId, string details, string operateType, int relevantId)
+        {
+            var log = new SystemLog();
+            log.LogUserName = userName;
+            log.LogUserId = userId;
+            log.LogDetails = details;
+            log.LogTime = DateTime.Now;
+            log.LogType = 3;
             log.OperateType = operateType;
             log.RelevantId = relevantId;
             Add(log);

@@ -29,9 +29,16 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             var list = _systemLogService.List().Where(x => x.LogType == 1).OrderByDescending(x => x.LogTime);
             return View(list.ToList());
         }
+
         public ActionResult UserLogList()
         {
             var list = _systemLogService.List().Where(x => x.LogType == 2).OrderByDescending(x => x.LogTime);
+            return View(list.ToList());
+        }
+
+        public ActionResult EntryLogList()
+        {
+            var list = _systemLogService.List().Where(x => x.LogType == 3).OrderByDescending(x => x.LogTime);
             return View(list.ToList());
         }
     }

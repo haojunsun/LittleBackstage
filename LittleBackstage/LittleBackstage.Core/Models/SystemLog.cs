@@ -10,13 +10,13 @@ namespace LittleBackstage.Core.Models
     {
         public int SystemLogId { get; set; }
         /// <summary>
-        /// log 类型： 1 登录 2会员操作
+        /// log 类型： 1 登录 2会员操作 3条目操作
         /// </summary>
         public int LogType { get;set;}
         public string LogUserName{ get;set;}
         public int LogUserId{ get;set;}
         /// <summary>
-        /// 操作类型
+        /// 操作类型 
         /// </summary>
         public string OperateType{ get;set;}
         public DateTime? LogTime { get;set;}
