@@ -50,7 +50,6 @@
                                 <span class="nav-label">分类管理</span>
                             </a>
                         </li>*@
-
                     @if (LittleBackstage.Web.Helpers.Permission.Check("Index", "Category"))
                     {
                         <li class="line dk"></li>
@@ -79,14 +78,14 @@
                                 <li>
                                     <a class="J_menuItem" href="graph_sparkline.html">条目导入</a>
                                 </li>
-                            
-                                @*<li>
-                                    <a class="J_menuItem" href="graph_metrics.html">条目附件导入</a>
-                                </li>*@
 
                                 @*<li>
-                                    <a class="J_menuItem" href="graph_metrics.html">条目字典管理</a>
-                                </li>*@
+                                        <a class="J_menuItem" href="graph_metrics.html">条目附件导入</a>
+                                    </li>*@
+
+                                @*<li>
+                                        <a class="J_menuItem" href="graph_metrics.html">条目字典管理</a>
+                                    </li>*@
                                 <li>
                                     <a class="J_menuItem" href="@Url.Action("List", "EntryTable")">条目搜索</a>
                                 </li>
@@ -100,21 +99,21 @@
                                     <a class="J_menuItem" href="@Url.Action("ReleaseEntryTable", "EntryTable")">条目发布</a>
                                 </li>
                                 @*<li>
-                                    <a class="J_menuItem" href="graph_metrics.html">条目与附件关联日志</a>
-                                </li>
-                                <li>
-                                    <a class="J_menuItem" href="graph_metrics.html">条目与附件关联结果日志</a>
-                                </li>*@
+                                        <a class="J_menuItem" href="graph_metrics.html">条目与附件关联日志</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href="graph_metrics.html">条目与附件关联结果日志</a>
+                                    </li>*@
                                 <li>
                                     <a class="J_menuItem" href="@Url.Action("EntryLogList", "Log")">条目操作日志</a>
                                 </li>
                                 @*<li>
-                                    <a class="J_menuItem" href="graph_metrics.html"> 热词管理 </a>
-                                </li>*@
+                                        <a class="J_menuItem" href="graph_metrics.html"> 热词管理 </a>
+                                    </li>*@
                                 <li>
                                     <a class="J_menuItem" href="@Url.Action("UserList","User")">会员审核</a>
                                 </li>
-                              
+
                             </ul>
                         </li>
                     }
@@ -154,8 +153,8 @@
                             <a class="J_menuItem" href="@Url.Action("UserLogList", "Log")">用户日志</a>
                         </li>
                         @*<li>
-                            <a class="J_menuItem" href="table_jqgrid.html">文件日志</a>
-                        </li>*@
+                                <a class="J_menuItem" href="table_jqgrid.html">文件日志</a>
+                            </li>*@
                     }
                 </ul>
             </div>
