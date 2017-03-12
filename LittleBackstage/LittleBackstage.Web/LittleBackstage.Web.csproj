@@ -298,6 +298,7 @@
     <Content Include="Assets\img\loading-upload.gif" />
     <Content Include="Assets\img\locked.png" />
     <Content Include="Assets\img\login-background.jpg" />
+    <Content Include="Assets\img\newbg.jpg" />
     <Content Include="Assets\img\p1.jpg" />
     <Content Include="Assets\img\p2.jpg" />
     <Content Include="Assets\img\p3.jpg" />
