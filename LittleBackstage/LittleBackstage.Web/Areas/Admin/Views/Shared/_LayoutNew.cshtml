@@ -149,12 +149,12 @@
                                 @*<li>
                                         <a class="J_menuItem" href="graph_metrics.html"> 热词管理 </a>
                                     </li>*@
-                                @if (LittleBackstage.Web.Helpers.Permission.Check("UserList", "User"))
+                                @*@if (LittleBackstage.Web.Helpers.Permission.Check("UserList", "User"))
                                 {
                                     <li>
                                         <a class="J_menuItem" href="@Url.Action("UserList", "User")">会员审核</a>
                                     </li>
-                                }
+                                }*@
 
 
                             </ul>
@@ -173,12 +173,12 @@
                             <li>
                                 <a class="J_menuItem" href="#">用户组管理</a>
                             </li>*@
-                        if (LittleBackstage.Web.Helpers.Permission.Check("UserList", "User"))
+                        @*if (LittleBackstage.Web.Helpers.Permission.Check("UserList", "User"))
                         {
                             <li>
                                 <a class="J_menuItem" href="@Url.Action("UserList","User")">会员管理</a>
                             </li>
-                        }
+                        }*@
                         if (LittleBackstage.Web.Helpers.Permission.Check("RoleList", "User"))
                         {
                             <li>
