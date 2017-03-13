@@ -17,7 +17,7 @@ namespace LittleBackstage.Web.Helpers
             if (permission.Contains("all"))
                 return true;
 
-            if (permission.IndexOf(controller.ToLower() + "_" + action.ToLower()) > -1)
+            if (permission.ToLower().IndexOf(controller.ToLower() + "_" + action.ToLower()) > -1)
             {
                 return true;
             }

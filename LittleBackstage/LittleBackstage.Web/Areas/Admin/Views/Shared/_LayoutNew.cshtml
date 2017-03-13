@@ -38,8 +38,8 @@
                             </a>
                         </div>
                         @*<div class="logo-element">
-                            @Html.Action("GetName", "Home")
-                        </div>*@
+                                @Html.Action("GetName", "Home")
+                            </div>*@
                     </li>
                     @*<li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
                             <span class="ng-scope">资源管理</span>
@@ -50,7 +50,13 @@
                                 <span class="nav-label">分类管理</span>
                             </a>
                         </li>*@
-                    @if (LittleBackstage.Web.Helpers.Permission.Check("Index", "Category"))
+                    @if (LittleBackstage.Web.Helpers.Permission.Check("CategoryList", "Category") ||
+                       LittleBackstage.Web.Helpers.Permission.Check("TemplateList", "Category") ||
+                       LittleBackstage.Web.Helpers.Permission.Check("CategoryFieldsList", "CategoryField") ||
+                        LittleBackstage.Web.Helpers.Permission.Check("Index", "EntryTable") ||
+                        LittleBackstage.Web.Helpers.Permission.Check("List", "EntryTable") ||
+                        LittleBackstage.Web.Helpers.Permission.Check("Catalogue", "EntryTable") || LittleBackstage.Web.Helpers.Permission.Check("ReleaseEntryTable", "EntryTable") ||
+                        LittleBackstage.Web.Helpers.Permission.Check("EntryLogList", "Log") || LittleBackstage.Web.Helpers.Permission.Check("UserList", "User"))
                     {
                         <li class="line dk"></li>
                         <li>
@@ -60,21 +66,35 @@
                                 <span class="fa arrow"></span>
                             </a>
                             <ul class="nav nav-second-level">
-                                <li>
-                                    <a class="J_menuItem" href="@Url.Action("CategoryList", "Category")">分类管理</a>
-                                </li>
+                                @if (LittleBackstage.Web.Helpers.Permission.Check("CategoryList", "Category"))
+                                {
+                                    <li>
+                                        <a class="J_menuItem" href="@Url.Action("CategoryList", "Category")">分类管理</a>
+                                    </li>
+                                }
+
                                 @*<li>
                                         <a class="J_menuItem" href="@Url.Action("CategoryFieldList", "Category")">分类字段管理</a>
                                     </li>*@
-                                <li>
-                                    <a class="J_menuItem" href="@Url.Action("TemplateList", "Category")">模板管理</a>
-                                </li>
-                                <li>
-                                    <a class="J_menuItem" href="@Url.Action("CategoryFieldsList", "CategoryField")">模板字段管理</a>
-                                </li>
-                                <li>
-                                    <a class="J_menuItem" href="@Url.Action("Index", "EntryTable")">条目管理</a>
-                                </li>
+                                @if (LittleBackstage.Web.Helpers.Permission.Check("TemplateList", "Category"))
+                                {
+                                    <li>
+                                        <a class="J_menuItem" href="@Url.Action("TemplateList", "Category")">模板管理</a>
+                                    </li>
+                                }
+                                @if (LittleBackstage.Web.Helpers.Permission.Check("CategoryFieldsList", "CategoryField"))
+                                {
+                                    <li>
+                                        <a class="J_menuItem" href="@Url.Action("CategoryFieldsList", "CategoryField")">模板字段管理</a>
+                                    </li>
+                                }
+                                @if (LittleBackstage.Web.Helpers.Permission.Check("Index", "EntryTable"))
+                                {
+                                    <li>
+                                        <a class="J_menuItem" href="@Url.Action("Index", "EntryTable")">条目管理</a>
+                                    </li>
+                                }
+
                                 <li>
                                     <a class="J_menuItem" href="graph_sparkline.html">条目导入</a>
                                 </li>
@@ -86,72 +106,113 @@
                                 @*<li>
                                         <a class="J_menuItem" href="graph_metrics.html">条目字典管理</a>
                                     </li>*@
-                                <li>
-                                    <a class="J_menuItem" href="@Url.Action("List", "EntryTable")">条目搜索</a>
-                                </li>
-                                <li>
-                                    <a class="J_menuItem" href="@Url.Action("Catalogue", "EntryTable")">条目编目</a>
-                                </li>
-                                <li>
-                                    <a class="J_menuItem" href="@Url.Action("ExamineEntryTable", "EntryTable")">条目审核</a>
-                                </li>
-                                <li>
-                                    <a class="J_menuItem" href="@Url.Action("ReleaseEntryTable", "EntryTable")">条目发布</a>
-                                </li>
+                                @if (LittleBackstage.Web.Helpers.Permission.Check("List", "EntryTable"))
+                                {
+                                    <li>
+                                        <a class="J_menuItem" href="@Url.Action("List", "EntryTable")">条目搜索</a>
+                                    </li>
+                                }
+
+                                @if (LittleBackstage.Web.Helpers.Permission.Check("Catalogue", "EntryTable"))
+                                {
+                                    <li>
+                                        <a class="J_menuItem" href="@Url.Action("Catalogue", "EntryTable")">条目编目</a>
+                                    </li>
+                                }
+
+                                @if (LittleBackstage.Web.Helpers.Permission.Check("Catalogue", "EntryTable"))
+                                {
+                                    <li>
+                                        <a class="J_menuItem" href="@Url.Action("Catalogue", "EntryTable")">条目审核</a>
+                                    </li>
+                                }
+                                @if (LittleBackstage.Web.Helpers.Permission.Check("ReleaseEntryTable", "EntryTable"))
+                                {
+                                    <li>
+                                        <a class="J_menuItem" href="@Url.Action("ReleaseEntryTable", "EntryTable")">条目发布</a>
+                                    </li>
+                                }
+
                                 @*<li>
                                         <a class="J_menuItem" href="graph_metrics.html">条目与附件关联日志</a>
                                     </li>
                                     <li>
                                         <a class="J_menuItem" href="graph_metrics.html">条目与附件关联结果日志</a>
                                     </li>*@
-                                <li>
-                                    <a class="J_menuItem" href="@Url.Action("EntryLogList", "Log")">条目操作日志</a>
-                                </li>
+                                @if (LittleBackstage.Web.Helpers.Permission.Check("EntryLogList", "Log"))
+                                {
+                                    <li>
+                                        <a class="J_menuItem" href="@Url.Action("EntryLogList", "Log")">条目操作日志</a>
+                                    </li>
+                                }
+
                                 @*<li>
                                         <a class="J_menuItem" href="graph_metrics.html"> 热词管理 </a>
                                     </li>*@
-                                <li>
-                                    <a class="J_menuItem" href="@Url.Action("UserList","User")">会员审核</a>
-                                </li>
+                                @if (LittleBackstage.Web.Helpers.Permission.Check("UserList", "User"))
+                                {
+                                    <li>
+                                        <a class="J_menuItem" href="@Url.Action("UserList", "User")">会员审核</a>
+                                    </li>
+                                }
+
 
                             </ul>
                         </li>
                     }
-                    @if (LittleBackstage.Web.Helpers.Permission.Check("Index", "User"))
+                    @if (LittleBackstage.Web.Helpers.Permission.Check("UserList", "User") ||
+                        LittleBackstage.Web.Helpers.Permission.Check("RoleList", "User") || LittleBackstage.Web.Helpers.Permission.Check("ManagerList", "User"))
                     {
                         <li class="line dk"></li>
                         <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
                             <span class="ng-scope">用户管理</span>
                         </li>
-
                         @*<li>
                                 <a class="J_menuItem" href="graph_echarts.html"><span class="nav-label">菜单管理</span></a>
                             </li>
                             <li>
                                 <a class="J_menuItem" href="#">用户组管理</a>
                             </li>*@
-                        <li>
-                            <a class="J_menuItem" href="@Url.Action("UserList","User")">会员管理</a>
-                        </li>
-                        <li>
-                            <a class="J_menuItem" href="@Url.Action("RoleList","User")">角色管理</a>
-                        </li>
-                        <li>
-                            <a class="J_menuItem" href="@Url.Action("ManagerList", "User")">权限管理</a>
-                        </li>
+                        if (LittleBackstage.Web.Helpers.Permission.Check("UserList", "User"))
+                        {
+                            <li>
+                                <a class="J_menuItem" href="@Url.Action("UserList","User")">会员管理</a>
+                            </li>
+                        }
+                        if (LittleBackstage.Web.Helpers.Permission.Check("RoleList", "User"))
+                        {
+                            <li>
+                                <a class="J_menuItem" href="@Url.Action("RoleList", "User")">角色管理</a>
+                            </li>
+                        }
+
+                        if (LittleBackstage.Web.Helpers.Permission.Check("ManagerList", "User"))
+                        {
+                            <li>
+                                <a class="J_menuItem" href="@Url.Action("ManagerList", "User")">权限管理</a>
+                            </li>
+                        }
+
                     }
-                    @if (LittleBackstage.Web.Helpers.Permission.Check("Index", "Log"))
+                    @if (LittleBackstage.Web.Helpers.Permission.Check("LogList", "Log") || LittleBackstage.Web.Helpers.Permission.Check("UserLogList", "Log"))
                     {
                         <li class="line dk"></li>
                         <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
                             <span class="ng-scope">日志管理</span>
                         </li>
-                        <li>
-                            <a class="J_menuItem" href="@Url.Action("LogList", "Log")">登陆日志</a>
-                        </li>
-                        <li>
-                            <a class="J_menuItem" href="@Url.Action("UserLogList", "Log")">用户日志</a>
-                        </li>
+                        if (LittleBackstage.Web.Helpers.Permission.Check("LogList", "Log"))
+                        {
+                            <li>
+                                <a class="J_menuItem" href="@Url.Action("LogList", "Log")">登陆日志</a>
+                            </li>
+                        }
+                        if (LittleBackstage.Web.Helpers.Permission.Check("UserLogList", "Log"))
+                        {
+                            <li>
+                                <a class="J_menuItem" href="@Url.Action("UserLogList", "Log")">用户日志</a>
+                            </li>
+                        }
+
                         @*<li>
                                 <a class="J_menuItem" href="table_jqgrid.html">文件日志</a>
                             </li>*@
