@@ -62,7 +62,7 @@
                     dataType: "json",
                     success: function (result) {
                         if (result.code == 200) {
-                            window.location.href = result.returnUrl;
+                            window.location.href = '/Admin/Category/TemplateList';//result.returnUrl;
                         } else {
                             console.log(result);
                             $('#errorMgs').html(result.message);

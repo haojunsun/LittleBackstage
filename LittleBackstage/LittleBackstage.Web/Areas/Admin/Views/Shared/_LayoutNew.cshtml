@@ -31,7 +31,7 @@
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="clear">
                                     <span class="block m-t-xs" style="font-size:20px;">
-                                        <i class="fa fa-area-chart"></i>
+                                        <i class="fa fa-user"></i>
                                         <strong class="font-bold">@Html.Action("GetName", "Home")</strong>
                                     </span>
                                 </span>
@@ -59,9 +59,9 @@
                         LittleBackstage.Web.Helpers.Permission.Check("EntryLogList", "Log") || LittleBackstage.Web.Helpers.Permission.Check("UserList", "User"))
                     {
                         <li class="line dk"></li>
-                        <li>
+                        <li id="tag1">
                             <a href="#">
-                                <i class="fa fa fa-bar-chart-o"></i>
+                                <i class="fa fa fa-list"></i>
                                 <span class="nav-label">资源管理</span>
                                 <span class="fa arrow"></span>
                             </a>
@@ -106,12 +106,12 @@
                                 @*<li>
                                         <a class="J_menuItem" href="graph_metrics.html">条目字典管理</a>
                                     </li>*@
-                                @if (LittleBackstage.Web.Helpers.Permission.Check("List", "EntryTable"))
-                                {
-                                    <li>
-                                        <a class="J_menuItem" href="@Url.Action("List", "EntryTable")">条目搜索</a>
-                                    </li>
-                                }
+                                @*@if (LittleBackstage.Web.Helpers.Permission.Check("List", "EntryTable"))
+                                    {
+                                        <li>
+                                            <a class="J_menuItem" href="@Url.Action("List", "EntryTable")">条目搜索</a>
+                                        </li>
+                                    }*@
 
                                 @if (LittleBackstage.Web.Helpers.Permission.Check("Catalogue", "EntryTable"))
                                 {
@@ -149,23 +149,43 @@
                                 @*<li>
                                         <a class="J_menuItem" href="graph_metrics.html"> 热词管理 </a>
                                     </li>*@
-                                @*@if (LittleBackstage.Web.Helpers.Permission.Check("UserList", "User"))
-                                {
-                                    <li>
-                                        <a class="J_menuItem" href="@Url.Action("UserList", "User")">会员审核</a>
-                                    </li>
-                                }*@
+                                    @*@if (LittleBackstage.Web.Helpers.Permission.Check("UserList", "User"))
+                                        {
+                                            <li>
+                                                <a class="J_menuItem" href="@Url.Action("UserList", "User")">会员审核</a>
+                                            </li>
+                                        }*@
 
 
-                            </ul>
-                        </li>
+                                </ul>
+                            </li>
                     }
                     @if (LittleBackstage.Web.Helpers.Permission.Check("UserList", "User") ||
                         LittleBackstage.Web.Helpers.Permission.Check("RoleList", "User") || LittleBackstage.Web.Helpers.Permission.Check("ManagerList", "User"))
                     {
                         <li class="line dk"></li>
-                        <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
-                            <span class="ng-scope">用户管理</span>
+                        <li id="tag2">
+                            @*<span class="ng-scope">用户管理</span>*@
+                            <a href="#">
+                                <i class="fa fa fa-user"></i>
+                                <span class="nav-label">用户管理</span>
+                                <span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+                                @if (LittleBackstage.Web.Helpers.Permission.Check("RoleList", "User"))
+                                {
+                                    <li>
+                                        <a class="J_menuItem" href="@Url.Action("RoleList", "User")">角色管理</a>
+                                    </li>
+                                }
+
+                                @if (LittleBackstage.Web.Helpers.Permission.Check("ManagerList", "User"))
+                                {
+                                    <li>
+                                        <a class="J_menuItem" href="@Url.Action("ManagerList", "User")">权限管理</a>
+                                    </li>
+                                }
+                            </ul>
                         </li>
                         @*<li>
                                 <a class="J_menuItem" href="graph_echarts.html"><span class="nav-label">菜单管理</span></a>
@@ -174,44 +194,39 @@
                                 <a class="J_menuItem" href="#">用户组管理</a>
                             </li>*@
                         @*if (LittleBackstage.Web.Helpers.Permission.Check("UserList", "User"))
-                        {
-                            <li>
-                                <a class="J_menuItem" href="@Url.Action("UserList","User")">会员管理</a>
-                            </li>
-                        }*@
-                        if (LittleBackstage.Web.Helpers.Permission.Check("RoleList", "User"))
-                        {
-                            <li>
-                                <a class="J_menuItem" href="@Url.Action("RoleList", "User")">角色管理</a>
-                            </li>
-                        }
+                            {
+                                <li>
+                                    <a class="J_menuItem" href="@Url.Action("UserList","User")">会员管理</a>
+                                </li>
+                            }*@
 
-                        if (LittleBackstage.Web.Helpers.Permission.Check("ManagerList", "User"))
-                        {
-                            <li>
-                                <a class="J_menuItem" href="@Url.Action("ManagerList", "User")">权限管理</a>
-                            </li>
-                        }
 
                     }
                     @if (LittleBackstage.Web.Helpers.Permission.Check("LogList", "Log") || LittleBackstage.Web.Helpers.Permission.Check("UserLogList", "Log"))
                     {
                         <li class="line dk"></li>
-                        <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
-                            <span class="ng-scope">日志管理</span>
+                        <li id="tag3">
+                            <a href="#">
+                                <i class="fa fa fa-folder"></i>
+                                <span class="nav-label">日志管理</span>
+                                <span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+                                @if (LittleBackstage.Web.Helpers.Permission.Check("LogList", "Log"))
+                                {
+                                    <li>
+                                        <a class="J_menuItem" href="@Url.Action("LogList", "Log")">登陆日志</a>
+                                    </li>
+                                }
+                                @if (LittleBackstage.Web.Helpers.Permission.Check("UserLogList", "Log"))
+                                {
+                                    <li>
+                                        <a class="J_menuItem" href="@Url.Action("UserLogList", "Log")">用户日志</a>
+                                    </li>
+                                }
+                            </ul>
                         </li>
-                        if (LittleBackstage.Web.Helpers.Permission.Check("LogList", "Log"))
-                        {
-                            <li>
-                                <a class="J_menuItem" href="@Url.Action("LogList", "Log")">登陆日志</a>
-                            </li>
-                        }
-                        if (LittleBackstage.Web.Helpers.Permission.Check("UserLogList", "Log"))
-                        {
-                            <li>
-                                <a class="J_menuItem" href="@Url.Action("UserLogList", "Log")">用户日志</a>
-                            </li>
-                        }
+
 
                         @*<li>
                                 <a class="J_menuItem" href="table_jqgrid.html">文件日志</a>
@@ -309,7 +324,9 @@
                                     </li>
                                 </ul>
                             </li>*@
-                        <li><a href="@Url.Action("Logout", "Account")">退出</a></li>
+                        <li>
+                            <a href="@Url.Action("Logout", "Account")"><i class="fa fa fa-sign-out"></i>退出登录</a>
+                        </li>
                     </ul>
                 </nav>
             </div>
@@ -335,5 +352,24 @@
     @*<div style="text-align:center;">
             <p>来源:<a href="http://www.mycodes.net/" target="_blank">源码之家</a></p>
         </div>*@
+    <script>
+        window.onload = function () {
+            var href = location.href;
+            if (href.indexOf('Category') > -1 || href.indexOf('TemplateList') > -1 || href.indexOf('Entry') > -1 || href.indexOf('Catalogue') > -1) {
+                $('#tag1').addClass('active');
+                $('#tag1 ul').addClass('in');
+            }
+
+            if (href.indexOf('Role') > -1 || href.indexOf('Manager') > -1) {
+                $('#tag2').addClass('active');
+                $('#tag2 ul').addClass('in');
+            }
+
+            if (href.indexOf('LogList') > -1) {
+                $('#tag3').addClass('active');
+                $('#tag3 ul').addClass('in');
+            }
+        }
+    </script>
 </body>
 </html>
