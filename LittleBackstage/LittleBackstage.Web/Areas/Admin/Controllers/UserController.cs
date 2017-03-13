@@ -115,7 +115,10 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             {
                 return Content("<script>alert('参数错误,返回列表!');window.location.href='" + Url.Action("ManagerList") + "';</script>");
             }
-            TreeBindRole(0, model.Role.RoleId);
+            if (model.Role != null)
+                TreeBindRole(0, model.Role.RoleId);
+            else
+                TreeBindRole(0, 0);
             return View(model);
         }
 
@@ -289,7 +292,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             }
 
             var operate = "";
-            if (old.IsEnable != (int) IsExamineRadios)
+            if (old.IsEnable != (int)IsExamineRadios)
             {
                 operate = "审核会员";
             }

@@ -32,14 +32,14 @@
                                 <span class="clear">
                                     <span class="block m-t-xs" style="font-size:20px;">
                                         <i class="fa fa-area-chart"></i>
-                                        <strong class="font-bold">hAdmin</strong>
+                                        <strong class="font-bold">@Html.Action("GetName", "Home")</strong>
                                     </span>
                                 </span>
                             </a>
                         </div>
-                        <div class="logo-element">
-                            hAdmin
-                        </div>
+                        @*<div class="logo-element">
+                            @Html.Action("GetName", "Home")
+                        </div>*@
                     </li>
                     @*<li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
                             <span class="ng-scope">资源管理</span>

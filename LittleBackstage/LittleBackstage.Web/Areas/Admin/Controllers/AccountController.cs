@@ -10,7 +10,7 @@ using LittleBackstage.Web.Filters;
 
 namespace LittleBackstage.Web.Areas.Admin.Controllers
 {
-    // [LittleBackstageAuthorize]
+    //[LittleBackstageAuthorize]
     public class AccountController : Controller
     {
         private readonly IManagerService _managerService;
@@ -100,6 +100,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             m.PassWord = _helperServices.MD5CSP(password);
             m.Register = DateTime.Now;
             m.UserName = username;
+            
             //m.Role 需要默认一个 注册角色
             if (_managerService.FindByUserName(username))
             {

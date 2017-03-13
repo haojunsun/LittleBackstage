@@ -34,7 +34,14 @@
                             {
                                 <tr class="gradeX">
                                     <td>@item.UserName</td>
-                                    <td>@item.Role.RoleName</td>
+                                    @if (item.Role != null)
+                                    {
+                                        <td>@item.Role.RoleName</td>
+                                    }
+                                    else
+                                    {
+                                        <td>无角色</td>
+                                    }
                                     <td>@item.Register</td>
                                     <td class="center">
                                         @if (item.IsExamine == 1)
