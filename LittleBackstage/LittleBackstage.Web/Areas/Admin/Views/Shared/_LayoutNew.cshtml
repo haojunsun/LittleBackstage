@@ -95,70 +95,72 @@
                                     </li>
                                 }
 
-                                <li>
-                                    <a class="J_menuItem" href="graph_sparkline.html">条目导入</a>
-                                </li>
-
+                                @if (LittleBackstage.Web.Helpers.Permission.Check("Import", "EntryTable"))
+                                {
+                                    <li>
+                                        <a class="J_menuItem" href="@Url.Action("Import", "CategoryField")">条目导入</a>
+                                    </li>
+                                }
                                 @*<li>
                                         <a class="J_menuItem" href="graph_metrics.html">条目附件导入</a>
                                     </li>*@
 
-                                @*<li>
-                                        <a class="J_menuItem" href="graph_metrics.html">条目字典管理</a>
-                                    </li>*@
-                                @*@if (LittleBackstage.Web.Helpers.Permission.Check("List", "EntryTable"))
-                                    {
-                                        <li>
-                                            <a class="J_menuItem" href="@Url.Action("List", "EntryTable")">条目搜索</a>
-                                        </li>
-                                    }*@
-
-                                @if (LittleBackstage.Web.Helpers.Permission.Check("Catalogue", "EntryTable"))
-                                {
-                                    <li>
-                                        <a class="J_menuItem" href="@Url.Action("Catalogue", "EntryTable")">条目编目</a>
-                                    </li>
-                                }
-
-                                @if (LittleBackstage.Web.Helpers.Permission.Check("Catalogue", "EntryTable"))
-                                {
-                                    <li>
-                                        <a class="J_menuItem" href="@Url.Action("Catalogue", "EntryTable")">条目审核</a>
-                                    </li>
-                                }
-                                @if (LittleBackstage.Web.Helpers.Permission.Check("ReleaseEntryTable", "EntryTable"))
-                                {
-                                    <li>
-                                        <a class="J_menuItem" href="@Url.Action("ReleaseEntryTable", "EntryTable")">条目发布</a>
-                                    </li>
-                                }
-
-                                @*<li>
-                                        <a class="J_menuItem" href="graph_metrics.html">条目与附件关联日志</a>
-                                    </li>
-                                    <li>
-                                        <a class="J_menuItem" href="graph_metrics.html">条目与附件关联结果日志</a>
-                                    </li>*@
-                                @if (LittleBackstage.Web.Helpers.Permission.Check("EntryLogList", "Log"))
-                                {
-                                    <li>
-                                        <a class="J_menuItem" href="@Url.Action("EntryLogList", "Log")">条目操作日志</a>
-                                    </li>
-                                }
-
-                                @*<li>
-                                        <a class="J_menuItem" href="graph_metrics.html"> 热词管理 </a>
-                                    </li>*@
-                                    @*@if (LittleBackstage.Web.Helpers.Permission.Check("UserList", "User"))
+                                    @*<li>
+                                            <a class="J_menuItem" href="graph_metrics.html">条目字典管理</a>
+                                        </li>*@
+                                    @*@if (LittleBackstage.Web.Helpers.Permission.Check("List", "EntryTable"))
                                         {
                                             <li>
-                                                <a class="J_menuItem" href="@Url.Action("UserList", "User")">会员审核</a>
+                                                <a class="J_menuItem" href="@Url.Action("List", "EntryTable")">条目搜索</a>
                                             </li>
                                         }*@
 
+                                    @if (LittleBackstage.Web.Helpers.Permission.Check("Catalogue", "EntryTable"))
+                                    {
+                                        <li>
+                                            <a class="J_menuItem" href="@Url.Action("Catalogue", "EntryTable")">条目编目</a>
+                                        </li>
+                                    }
 
-                                </ul>
-                            </li>
+                                    @if (LittleBackstage.Web.Helpers.Permission.Check("ExamineEntryTable", "EntryTable"))
+                                    {
+                                        <li>
+                                            <a class="J_menuItem" href="@Url.Action("ExamineEntryTable", "EntryTable")">条目审核</a>
+                                        </li>
+                                    }
+                                    @if (LittleBackstage.Web.Helpers.Permission.Check("ReleaseEntryTable", "EntryTable"))
+                                    {
+                                        <li>
+                                            <a class="J_menuItem" href="@Url.Action("ReleaseEntryTable", "EntryTable")">条目发布</a>
+                                        </li>
+                                    }
+
+                                    @*<li>
+                                            <a class="J_menuItem" href="graph_metrics.html">条目与附件关联日志</a>
+                                        </li>
+                                        <li>
+                                            <a class="J_menuItem" href="graph_metrics.html">条目与附件关联结果日志</a>
+                                        </li>*@
+                                    @if (LittleBackstage.Web.Helpers.Permission.Check("EntryLogList", "Log"))
+                                    {
+                                        <li>
+                                            <a class="J_menuItem" href="@Url.Action("EntryLogList", "Log")">条目操作日志</a>
+                                        </li>
+                                    }
+
+                                    @*<li>
+                                            <a class="J_menuItem" href="graph_metrics.html"> 热词管理 </a>
+                                        </li>*@
+                                        @*@if (LittleBackstage.Web.Helpers.Permission.Check("UserList", "User"))
+                                            {
+                                                <li>
+                                                    <a class="J_menuItem" href="@Url.Action("UserList", "User")">会员审核</a>
+                                                </li>
+                                            }*@
+
+
+                                    </ul>
+                                </li>
                     }
                     @if (LittleBackstage.Web.Helpers.Permission.Check("UserList", "User") ||
                         LittleBackstage.Web.Helpers.Permission.Check("RoleList", "User") || LittleBackstage.Web.Helpers.Permission.Check("ManagerList", "User"))

@@ -1,6 +1,6 @@
 ﻿@model  List<LittleBackstage.Core.Models.CategoryField>
 @{
-    ViewBag.Title = "字段列表-模板管理-资源管理";
+    ViewBag.Title = "字段列表-条目管理-条目导入";
 }
 @section styles_theme_level{
     <link href="~/Assets/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
@@ -12,7 +12,7 @@
                 <div class="ibox-title">
                     <h5>资源管理 <small>模板管理-字段列表</small></h5>
                     <div class="ibox-tools">
-                        <a href="javascript:void(0);" class=" btn btn-primary btn-xs" onclick="addField();">创建字段</a>
+                        <a href="javascript:void(0);" class=" btn btn-primary btn-xs" onclick="importEntry();">导入条目</a>
                     </div>
                 </div>
                 @*<div class="ibox-content">
@@ -25,12 +25,12 @@
                     <div class="row">
                         <div class="col-sm-2">
                             @Html.DropDownList("category", (IEnumerable<SelectListItem>)ViewBag.CategorySelect, "--请选择模板--", new
-                                 {
-                                     onchange = "getCategory(this);",
-                                     tabindex = "1",
-                                     @class = "form-control m-b",
-                                     @id = "category"
-                                 })
+                                {
+                                    onchange = "getCategory(this);",
+                                    tabindex = "1",
+                                    @class = "form-control m-b",
+                                    @id = "category"
+                                })
                         </div>
 
                         <div class="col-sm-3">
@@ -48,7 +48,7 @@
                                 <th>字段名称</th>
                                 <th>标识</th>
                                 <th>创建时间</th>
-                                <th>操作</th>
+                                @*<th>操作</th>*@
                             </tr>
                         </thead>
                         <tbody>
@@ -58,10 +58,10 @@
                                     <td>@item.FieldName</td>
                                     <td>@item.IdEntity</td>
                                     <td>@item.CreateTime</td>
-                                    <td class="center">
+                                    @*<td class="center">
                                         <a href="@Url.Action("EditCategoryField", "CategoryField", new { categoryId = item.Category.CategoryId, id = item.CategoryFieldId })"><i class="fa fa fa-edit"></i>编辑</a><span> | </span>
-                                        <a href="@Url.Action("DelCategoryField", "CategoryField", new { id = item.CategoryFieldId })" onclick="return confirm('确认删除')"><i class="fa fa fa-remove"></i>删除</a>
-                                    </td>
+                                        <a href="@Url.Action("DelCategoryField", "CategoryField", new { id = item.CategoryFieldId })" onclick="return confirm('确认删除')"><i class="fa fa fa-edit"></i>删除</a>
+                                    </td>*@
                                 </tr>
                             }
                         </tbody>
@@ -84,6 +84,7 @@
             .ready(function () {
                 $('.dataTables-example')
                     .dataTable({
+                        "searching":false,//禁用搜索框
                         "lengthChange": false, //是否允许用户改变表格每页显示的记录数
                         "ordering": false, //是否允许DataTables排序
                         "pageLength": 10 //改变初始的页面长度(每页显示的记录数)
@@ -96,17 +97,21 @@
             if (category == '') {
                 //console.log("无值");
             } else {
-                window.location.href = 'CategoryFieldsListByCategoryId?categoryId=' + category;
+                window.location.href = 'CategoryFieldsListByCategoryIdImport?categoryId=' + category;
             }
             //console.log(category);
         }
 
-        function addField() {
+        function importEntry() {
             var category = $("#category").val();
             if (category == '') {
-                //console.log("无值");
+                alert('请选择导入条目对应模板');
             } else {
-                window.location.href = 'AddCategoryField?categoryId=' + category;
+                $.post("/Admin/ForExcel/ImportFile?categoryId=" + category, {}, function (data, state) {
+                    if (state == 'success') {
+                        alert('导入成功！');
+                    }
+                });
             }
         }
     </script>

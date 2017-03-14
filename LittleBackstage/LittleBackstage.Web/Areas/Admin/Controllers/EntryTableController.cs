@@ -112,6 +112,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             return View(table);
         }
 
+       
         public ActionResult AddEntryTable(int categoryId)
         {
             ViewBag.categoryId = categoryId;
@@ -146,6 +147,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
                 insertSql += admin.ManagerId + ",'" + DateTime.Now + "') SELECT @@IDENTITY";
 
                 var reader = SqlHelper.ExecuteScalar(SqlHelper.ConnectionStringLocalTransaction, CommandType.Text, insertSql, null);
+                _systemLogService.EntryLog(admin.UserName, admin.ManagerId, "创建条目-" + title, "创建条目-" + title, 0);
                 //if ((int)reader > 0)
                 //{
                 return Content("<script>alert('创建成功!');window.location.href='" + Url.Action("Index", new { id = categoryId }) + "';</script>");
@@ -421,7 +423,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
                 var sql = @"select * from " + c.DataTableName + " where IsExamine=1 and ";
                 if (state == -2)
                 {
-                    sql += "IsRelease !=1";
+                    sql += "IsRelease !=10";
                 }
                 else
                 {

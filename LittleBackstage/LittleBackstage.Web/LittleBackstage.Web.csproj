@@ -1285,6 +1285,7 @@
     <Content Include="Areas\Admin\Views\Log\LogList.cshtml" />
     <Content Include="Areas\Admin\Views\Log\UserLogList.cshtml" />
     <Content Include="Areas\Admin\Views\Log\EntryLogList.cshtml" />
+    <Content Include="Areas\Admin\Views\CategoryField\Import.cshtml" />
     <None Include="Properties\PublishProfiles\pano.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\common.js" />

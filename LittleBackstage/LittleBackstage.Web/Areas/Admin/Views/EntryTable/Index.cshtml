@@ -21,7 +21,7 @@
                         <a href="javascript:void(0);" class=" btn btn-primary btn-xs" onclick="addEntry();">创建条目</a>
                     </div>
                 </div>
-                <div class="ibox-content">
+                <div class="ibox-content" style="overflow:auto;height:700px;">
                     <div class="row">
                         <div class="col-sm-2">
                             @Html.DropDownList("category", (IEnumerable<SelectListItem>)ViewBag.CategorySelect, "--请选择条目分类--", new
@@ -45,7 +45,7 @@
                             <tr>
                                 @foreach (var title in list)
                                 {
-                                    <th>@title.FieldName</th>
+                                    <th style="width:60px;">@title.FieldName</th>
                                 }
                                 <th>操作</th>
                             </tr>
@@ -61,12 +61,47 @@
                                         {
                                             <td>@Html.Action("GetName", "EntryTable", new { id = dr[title.IdEntity] })</td>
                                         }
+                                        else if (title.IdEntity == "IsExamine")
+                                        {
+                                            if (dr[title.IdEntity].ToString() == "0")
+                                            {
+                                                <td> <span class="label label-default">待审核</span></td>
+                                            }
+                                            else if (dr[title.IdEntity].ToString() == "1")
+                                            {
+                                                <td> <span class="label label-success">审核通过</span></td>
+                                            }
+                                            else if (dr[title.IdEntity].ToString() == "-1")
+                                            {
+                                                <td> <span class="label label-warning">退回审核</span></td>
+                                            }
+                                            else if (dr[title.IdEntity].ToString() == "-2")
+                                            {
+                                                <td> <span class="label label-danger">审核不通过</span></td>
+                                            }
+                                        }
+                                        else if (title.IdEntity == "IsRelease")
+                                        {
+                                            if (dr[title.IdEntity].ToString() == "0")
+                                            {
+                                                <td> <span class="label label-default">待发布</span></td>
+                                            }
+                                            else if (dr[title.IdEntity].ToString() == "1")
+                                            {
+                                                <td> <span class="label label-success">发布成功</span></td>
+                                            }
+                                            else if (dr[title.IdEntity].ToString() == "-1")
+                                            {
+                                                <td> <span class="label label-warning">取消发布</span></td>
+                                            }
+                                        }
                                         else
                                         {
                                             <td>@dr[title.IdEntity]</td>
                                         }
                                     }
-                                    <td><a href="@Url.Action("EditEntryTable", "EntryTable", new { id, categoryId })">编辑</a> | <a href="@Url.Action("DelEntry", "EntryTable", new { id, categoryId })" onclick="return confirm('确认删除')">删除</a></td>
+                                    <td><a href="@Url.Action("EditEntryTable", "EntryTable", new { id, categoryId })"><i class="fa fa fa-edit"></i>编辑</a> | 
+                                    <a href="@Url.Action("DelEntry", "EntryTable", new { id, categoryId })" onclick="return confirm('确认删除')"><i class="fa fa fa-remove"></i>删除</a></td>
                                 </tr>
                             }
                         </tbody>
@@ -89,6 +124,7 @@
             .ready(function () {
                 $('.dataTables-example')
                     .dataTable({
+                        "bAutoWidth": false,
                         "lengthChange": false, //是否允许用户改变表格每页显示的记录数
                         "ordering": false, //是否允许DataTables排序
                         "pageLength": 10 //改变初始的页面长度(每页显示的记录数)
@@ -101,7 +137,7 @@
             if (category == '') {
                 //console.log("无值");
             } else {
-                window.location.href = '@Url.Action("index", "EntryTable")' +'?id=' + category;
+                window.location.href = '@Url.Action("index", "EntryTable")' + '?id=' + category;
             }
             //console.log(category);
         }
@@ -111,7 +147,7 @@
             if (category == '') {
                 //console.log("无值");
             } else {
-                window.location.href ='@Url.Action("AddEntryTable", "EntryTable")' +'?categoryId=' + category;
+                window.location.href = '@Url.Action("AddEntryTable", "EntryTable")' + '?categoryId=' + category;
             }
         }
     </script>

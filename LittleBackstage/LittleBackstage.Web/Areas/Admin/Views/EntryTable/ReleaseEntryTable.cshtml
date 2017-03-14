@@ -24,6 +24,7 @@
                         <div class="col-sm-2">
                             @Html.DropDownList("category", (IEnumerable<SelectListItem>)ViewBag.CategorySelect, "--请选择条目分类--", new
                                  {
+                                     onchange = "searchExamine();",
                                      tabindex = "1",
                                      @class = "form-control m-b",
                                      @id = "category"
@@ -31,15 +32,16 @@
                         </div>
                         <div class="col-sm-2">
                             <div class="input-group">
-                                <select class="form-control" id="examineState">
+                                <select class="form-control" id="examineState" onchange="searchExamine();">
+                                    <option value="-2">请选择</option>
                                     <option value="-2">所有状态</option>
                                     <option value="0">待发布</option>
                                     <option value="1">发布</option>
                                     <option value="-1">取消发布</option>
                                 </select>
-                                <span class="input-group-btn">
-                                    <button type="button" class="btn btn-sm btn-primary" onclick="searchExamine();">搜索</button>
-                                </span>
+                                @*<span class="input-group-btn">
+                                        <button type="button" class="btn btn-sm btn-primary" onclick="searchExamine();">搜索</button>
+                                    </span>*@
                             </div>
                         </div>
                     </div>
@@ -66,7 +68,7 @@
                                         }
                                         else if (title.IdEntity == "IsExamine")
                                         {
-                                          
+
                                             <td> <span class="label label-success">通过</span></td>
                                         }
                                         else if (title.IdEntity == "IsRelease")
@@ -74,6 +76,10 @@
                                             if (dr[title.IdEntity].ToString() == "0")
                                             {
                                                 <td> <span class="label label-default">待发布</span></td>
+                                            }
+                                            else if (dr[title.IdEntity].ToString() == "1")
+                                            {
+                                                <td> <span class="label label-success">成功发布</span></td>
                                             }
                                             else if (dr[title.IdEntity].ToString() == "-1")
                                             {

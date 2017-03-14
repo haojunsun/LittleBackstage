@@ -70,6 +70,9 @@
                                     <input type="checkbox" value="EntryTable_Catalogue" name="permissions" id="EntryTable_Catalogue" @Html.Action("JudgeCheck", new { permissionlist = Model.Permissions, permission = "EntryTable_Catalogue" })>条目编目
                                 </label>
                                 <label class="checkbox-inline i-checks">
+                                    <input type="checkbox" value="EntryTable_Import" name="permissions" id="EntryTable_Import" @Html.Action("JudgeCheck", new { permissionlist = Model.Permissions, permission = "EntryTable_Import" })>条目导入
+                                </label>
+                                <label class="checkbox-inline i-checks">
                                     <input type="checkbox" value="EntryTable_ExamineEntryTable" name="permissions" id="EntryTable_ExamineEntryTable" @Html.Action("JudgeCheck", new { permissionlist = Model.Permissions, permission = "EntryTable_ExamineEntryTable" })>条目审核
                                 </label>
                                 <label class="checkbox-inline i-checks">

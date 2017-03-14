@@ -27,23 +27,24 @@
                         <div class="col-sm-2">
                             @Html.DropDownList("category", (IEnumerable<SelectListItem>)ViewBag.CategorySelect, "--请选择条目分类--", new
                                  {
-                                     //onchange = "getCategory(this);",
+                                     onchange = "searchExamine();",
                                      tabindex = "1",
                                      @class = "form-control m-b",
                                      @id = "category"
                                  })
                         </div>
-                        <div class="col-sm-2">
+                        <div class="col-sm-2" style="padding-left:0px;">
                             <div class="input-group">
-                                <select class="form-control" id="examineState">
+                                <select class="form-control" id="examineState" onchange="searchExamine();">
+                                    <option value="-3">请选择</option>
                                     <option value="-3">所有状态</option>
                                     <option value="0">待审核</option>
                                     <option value="-1">退回审核</option>
                                     <option value="-2">审核不通过</option>
                                 </select>
-                                <span class="input-group-btn">
+                                @*<span class="input-group-btn" style="margin-left:20px;">
                                     <button type="button" class="btn btn-sm btn-primary" onclick="searchExamine();">搜索</button>
-                                </span>
+                                </span>*@
                             </div>
                         </div>
                     </div>
@@ -99,7 +100,7 @@
                                             <td>@dr[title.IdEntity]</td>
                                         }
                                     }
-                                    <td><a href="@Url.Action("ExamineEntry", "EntryTable", new { id, categoryId })">设置审核状态</a></td>
+                                    <td><a href="@Url.Action("ExamineEntry", "EntryTable", new { id, categoryId })"><i class="fa fa fa-wrench"></i>设置审核状态</a></td>
                                 </tr>
                             }
                         </tbody>

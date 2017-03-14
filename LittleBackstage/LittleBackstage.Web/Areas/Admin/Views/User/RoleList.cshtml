@@ -32,7 +32,6 @@
                                         @if (item.RoleType == 1)
                                         {
                                             <span>会员</span>
-
                                         }
                                         else
                                         {
@@ -40,7 +39,8 @@
                                         }
                                     </td>
                                     <td>@item.CreateTime</td>
-                                    <td class="center"><a href="@Url.Action("EditRole", "User", new { id = item.RoleId })">编辑</a> | <a href="@Url.Action("DelRole", "User", new { id = item.RoleId })" onclick="return confirm('确认删除')">删除</a></td>
+                                    <td class="center"><a href="@Url.Action("EditRole", "User", new { id = item.RoleId })"><i class="fa fa fa-edit"></i>编辑</a> | 
+                                    <a href="@Url.Action("DelRole", "User", new { id = item.RoleId })" onclick="return confirm('确认删除')"><i class="fa fa fa-remove"></i>删除</a></td>
                                 </tr>
                             }
                         </tbody>

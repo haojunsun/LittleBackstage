@@ -78,6 +78,12 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             return View(new List<CategoryField>());
         }
 
+        public ActionResult Import()
+        {
+            TreeBindCategory(0);
+            return View(new List<CategoryField>());
+        }
+
         public ActionResult CategoryFieldsListByCategoryId(int categoryId)
         {
             TreeBindCategory(categoryId);
@@ -88,6 +94,18 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             }
             ViewBag.id = categoryId;
             return View("CategoryFieldsList", model.CategoryFields.OrderByDescending(x=>x.Sort).ToList());
+        }
+
+        public ActionResult CategoryFieldsListByCategoryIdImport(int categoryId)
+        {
+            TreeBindCategory(categoryId);
+            var model = _categoryService.Get(categoryId);
+            if (model == null)
+            {
+                return Content("<script>alert('参数错误,返回列表!');window.location.href='" + Url.Action("CategoryFieldsList") + "';</script>");
+            }
+            ViewBag.id = categoryId;
+            return View("Import", model.CategoryFields.OrderByDescending(x => x.Sort).ToList());
         }
 
         public ActionResult AddCategoryField(int categoryId)
