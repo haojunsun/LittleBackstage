@@ -137,7 +137,6 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
         /// <param name="cid">模板id</param>
         /// <param name="id"></param>
         /// <returns></returns>
-
         public ActionResult Find(int cid,int id)
         {
             var c = _categoryService.List().First(x => x.IsCreateTable == 1 && x.CategoryId == cid);

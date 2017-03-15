@@ -33,21 +33,26 @@ sc.app = angular.module('scApp', [])
 
         //获取数据
         $scope.getMainList = function () {
+          
             if (!searchkey)
                 searchkey = '';
             if (!type)
                 type = '';
             $scope.videoList = [];
-            $http.post(sc.baseUrl + 'ForExcel/SeniorSearch', { "key": searchkey, "fl": type, "pageSize": 500, "pageIndex": 1 }).success(function (data) {
-                if (data.list.length && data.list.length > 0) {
-                    $('.nodata').css('display', 'none');
-                } else {
-                    $('.nodata').css('display', 'block');
-                }
-                $scope.videoList = data.list;
-            }).error(function (data) {
-                console.log("查询失败");
-            });
+            $.post(sc.baseUrl + 'ForExcel/SeniorSearch', { "pageSize": 500, "pageIndex": 1 }, function (data, da) {
+                console.log(data,da);
+            })
+            //$http.post(sc.baseUrl + 'ForExcel/SeniorSearch', { "pageSize": 500, "pageIndex": 1 }).success(function (data) {// "key": searchkey, "fl": type,
+            //    console.log(data);
+            //    //if (data.list.length && data.list.length > 0) {
+            //    //    $('.nodata').css('display', 'none');
+            //    //} else {
+            //    //    $('.nodata').css('display', 'block');
+            //    //}
+            //    //$scope.videoList = data.list;
+            //}).error(function (data) {
+            //    console.log("查询失败");
+            //});
         }
 
         $scope.getMainList();

@@ -107,7 +107,7 @@
             if (category == '') {
                 alert('请选择导入条目对应模板');
             } else {
-                $.post("/Admin/ForExcel/ImportFile?categoryId=" + category, {}, function (data, state) {
+                $.post("/Admin/ForExcel/ImportFile", {"categoryId":category}, function (data, state) {
                     if (state == 'success') {
                         alert('导入成功！');
                     }
