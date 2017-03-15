@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,10 +12,13 @@ using LittleBackstage.Web.Helpers;
 using System.IO;
 using System.Data;
 using System.Text;
+using System.Web.Script.Serialization;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 using NPOI.HSSF.UserModel;
 using LittleBackstage.Core.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace LittleBackstage.Web.Areas.Admin.Controllers
 {
@@ -69,11 +73,11 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             if (c != null)
             {
                 var table = new DataTable();
-
                 var sql = @"select * from " + c.DataTableName;
                 table = SqlHelper.QueryDataTable(SqlHelper.ConnectionStringLocalTransaction, CommandType.Text, sql, null);
                 totalCount = table.Rows.Count;//数据总数
-                var list =DataTable2Json(GetPagedTable(table, pageIndex, pageSize));
+                var list = JsonConvert.SerializeObject(GetPagedTable(table, pageIndex, pageSize), new DataTableConverter()); //Convert.ToBase64String(Encoding.UTF8.GetBytes(html));
+                list = list.Replace(System.Environment.NewLine, ""); //OK
                 var json = new
                 {
                     list,
@@ -83,6 +87,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             }
             return Json(null, JsonRequestBehavior.AllowGet);
         }
+
         public static string DataTable2Json(DataTable dt)
         {
             StringBuilder jsonBuilder = new StringBuilder();
@@ -109,6 +114,8 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             jsonBuilder.Append("}");
             return jsonBuilder.ToString();
         }
+
+
         public DataTable GetPagedTable(DataTable dt, int PageIndex, int PageSize)//PageIndex表示第几页，PageSize表示每页的记录数
         {
             if (PageIndex == 0)
@@ -164,13 +171,14 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
         /// <param name="cid">模板id</param>
         /// <param name="id"></param>
         /// <returns></returns>
-        public ActionResult Find(int cid,int id)
+        public ActionResult Find(int cid, int id)
         {
             var c = _categoryService.List().First(x => x.IsCreateTable == 1 && x.CategoryId == cid);
             if (c != null)
             {
                 var sql = @"select * from " + c.DataTableName + " where [" + c.DataTableName + "_Id]=" + id;
-                var table =DataTable2Json( SqlHelper.QueryDataTable(SqlHelper.ConnectionStringLocalTransaction, CommandType.Text, sql, null));
+                var table = JsonConvert.SerializeObject(SqlHelper.QueryDataTable(SqlHelper.ConnectionStringLocalTransaction, CommandType.Text, sql, null));
+                table = table.Replace(System.Environment.NewLine, ""); //OK
                 var json = new
                 {
                     table
