@@ -60,6 +60,7 @@
         <script src="~/Assets/js/bootstrap.min.js?v=3.3.6"></script>
         <script type="text/javascript">
             var timeo;
+
             function keyLogin() {
                 var e = event || window.event || arguments.callee.caller.arguments[0];
                 if (e && e.keyCode == 13) { // enter 键
@@ -83,10 +84,7 @@
                             console.log(result);
                             $('#errorMgs').html(result.message);
                             $('#errorMgs').css('display', 'block');
-                            //clearTimeout(timeo);
-                            //timeo = setTimeout(function () {
-                            //    $("#errorMgs").fadeOut();
-                            //}, 3000);
+                         
                         }
                     },
                     error: function (result) {
@@ -94,6 +92,23 @@
                         alert("服务器未知错误！");
                     }
                 });
+
+              
+                @*$.ajax({
+                    url: '@Url.Action("SeniorSearch", "ForExcel")',
+                    type: "Get",
+                    cache: false,
+                    data: { pageSize: 5, id: 5,pageIndex:1 },
+                    dataType: "json",
+                    success: function (result) {
+                        console.log(result);
+                      
+                    },
+                    error: function (result) {
+                        console.log(result);
+                        alert("服务器未知错误！");
+                    }
+                });*@
             }
         </script>
     </body>

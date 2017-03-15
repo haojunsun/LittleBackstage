@@ -10,6 +10,7 @@ using LittleBackstage.Infrastructure.Services;
 using LittleBackstage.Web.Helpers;
 using System.IO;
 using System.Data;
+using System.Text;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 using NPOI.HSSF.UserModel;
@@ -72,7 +73,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
                 var sql = @"select * from " + c.DataTableName;
                 table = SqlHelper.QueryDataTable(SqlHelper.ConnectionStringLocalTransaction, CommandType.Text, sql, null);
                 totalCount = table.Rows.Count;//数据总数
-                var list = GetPagedTable(table, pageIndex, pageSize);
+                var list =DataTable2Json(GetPagedTable(table, pageIndex, pageSize));
                 var json = new
                 {
                     list,
@@ -81,6 +82,32 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
                 return Json(json, JsonRequestBehavior.AllowGet);
             }
             return Json(null, JsonRequestBehavior.AllowGet);
+        }
+        public static string DataTable2Json(DataTable dt)
+        {
+            StringBuilder jsonBuilder = new StringBuilder();
+            jsonBuilder.Append("{\"");
+            jsonBuilder.Append(dt.TableName);
+            jsonBuilder.Append("\":[");
+            jsonBuilder.Append("[");
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                jsonBuilder.Append("{");
+                for (int j = 0; j < dt.Columns.Count; j++)
+                {
+                    jsonBuilder.Append("\"");
+                    jsonBuilder.Append(dt.Columns[j].ColumnName);
+                    jsonBuilder.Append("\":\"");
+                    jsonBuilder.Append(dt.Rows[i][j].ToString());
+                    jsonBuilder.Append("\",");
+                }
+                jsonBuilder.Remove(jsonBuilder.Length - 1, 1);
+                jsonBuilder.Append("},");
+            }
+            jsonBuilder.Remove(jsonBuilder.Length - 1, 1);
+            jsonBuilder.Append("]");
+            jsonBuilder.Append("}");
+            return jsonBuilder.ToString();
         }
         public DataTable GetPagedTable(DataTable dt, int PageIndex, int PageSize)//PageIndex表示第几页，PageSize表示每页的记录数
         {
@@ -143,7 +170,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             if (c != null)
             {
                 var sql = @"select * from " + c.DataTableName + " where [" + c.DataTableName + "_Id]=" + id;
-                var table = SqlHelper.QueryDataTable(SqlHelper.ConnectionStringLocalTransaction, CommandType.Text, sql, null);
+                var table =DataTable2Json( SqlHelper.QueryDataTable(SqlHelper.ConnectionStringLocalTransaction, CommandType.Text, sql, null));
                 var json = new
                 {
                     table
