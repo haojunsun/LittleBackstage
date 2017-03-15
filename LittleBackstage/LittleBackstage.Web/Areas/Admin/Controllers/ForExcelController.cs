@@ -61,7 +61,6 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
         /// <param name="pageSize"></param>
         /// <param name="pageIndex"></param>
         /// <returns></returns>
-        [HttpPost]
         public ActionResult SeniorSearch(int pageSize, int pageIndex, int id = 0)
         {
             var totalCount = 0;
@@ -79,9 +78,9 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
                     list,
                     totalCount
                 };
-                return Json(json, JsonRequestBehavior.DenyGet);
+                return Json(json, JsonRequestBehavior.AllowGet);
             }
-            return Json(null, JsonRequestBehavior.DenyGet);
+            return Json(null, JsonRequestBehavior.AllowGet);
         }
         public DataTable GetPagedTable(DataTable dt, int PageIndex, int PageSize)//PageIndex表示第几页，PageSize表示每页的记录数
         {
@@ -138,7 +137,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
         /// <param name="cid">模板id</param>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpPost]
+
         public ActionResult Find(int cid,int id)
         {
             var c = _categoryService.List().First(x => x.IsCreateTable == 1 && x.CategoryId == cid);
@@ -150,9 +149,9 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
                 {
                     table
                 };
-                return Json(json, JsonRequestBehavior.DenyGet);
+                return Json(json, JsonRequestBehavior.AllowGet);
             }
-            return Json(null, JsonRequestBehavior.DenyGet);
+            return Json(null, JsonRequestBehavior.AllowGet);
             //var result = _forExcelService.Get(id);
             //return Json(result, JsonRequestBehavior.DenyGet);
         }
