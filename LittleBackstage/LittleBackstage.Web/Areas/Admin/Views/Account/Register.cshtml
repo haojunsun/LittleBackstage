@@ -17,14 +17,23 @@
     <link href="~/Assets/css/animate.css" rel="stylesheet">
     <link href="~/Assets/css/style.css" rel="stylesheet">
     <script>if (window.top !== window.self) { window.top.location = window.location; }</script>
+    <style>
+        .logo-h {
+            color: #90b6f2;
+        }
+
+            .logo-h:hover {
+                color: white;
+            }
+    </style>
 </head>
-<body class="gray-bg">
+<body style="background: url(../../Assets/img/login-bg.png)0 0 repeat-x;">
     <div class="middle-box text-center loginscreen   animated fadeInDown">
         <div>
             <div>
-                <h2 class="logo-name">后台管理系统V1.0</h2>
+                <h3 class="logo-name" style="font-size:70px;color:white;">带非遗回家后台管理系统</h3>
             </div>
-            <h3 style="margin-top:80px;">欢迎注册</h3>
+            <h3 style="margin-top: 80px; color: #a9a9a9">欢迎注册</h3>
             <p>创建后需通过管理员审核方可登录</p>
             <span id="errorMsg" style="display:none;color:red;"></span>
             <form class="m-t" role="form">
@@ -47,7 +56,7 @@
                         </div>*@
                     <button type="button" class="btn btn-primary block full-width m-b" onclick="register();">注 册</button>
                     <p class="text-muted text-center">
-                        <small>已经有账户了？</small><a href="@Url.Action("Login")">点此登录</a>
+                        <small>已经有账户了？</small><a class="logo-h" href="@Url.Action("Login")">点此登录</a>
                     </p>
                 </center>
             </form>

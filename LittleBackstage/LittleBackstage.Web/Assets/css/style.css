@@ -4178,7 +4178,8 @@ table.table-mail tr td {
 /* BACKGROUNDS */
 
 .gray-bg {
-    background-color: #f0f3f4;
+    /*background-color: #f0f3f4;*/
+    background: url(../../Assets/img/login-bg.png)0 0 repeat-x;
 }
 
 .white-bg {
@@ -4844,7 +4845,7 @@ body.modal-open {
 }
 
 .loginscreen.middle-box {
-    width: 800px;
+    width: 900px;
 }
 
 .loginColumns {
