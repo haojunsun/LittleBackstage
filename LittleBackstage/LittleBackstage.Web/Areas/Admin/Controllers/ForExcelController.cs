@@ -135,13 +135,26 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
         /// <summary>
         /// 详情
         /// </summary>
+        /// <param name="cid">模板id</param>
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult Find(int id)
+        public ActionResult Find(int cid,int id)
         {
-            var result = _forExcelService.Get(id);
-            return Json(result, JsonRequestBehavior.DenyGet);
+            var c = _categoryService.List().First(x => x.IsCreateTable == 1 && x.CategoryId == cid);
+            if (c != null)
+            {
+                var sql = @"select * from " + c.DataTableName + " where [" + c.DataTableName + "_Id]=" + id;
+                var table = SqlHelper.QueryDataTable(SqlHelper.ConnectionStringLocalTransaction, CommandType.Text, sql, null);
+                var json = new
+                {
+                    table
+                };
+                return Json(json, JsonRequestBehavior.DenyGet);
+            }
+            return Json(null, JsonRequestBehavior.DenyGet);
+            //var result = _forExcelService.Get(id);
+            //return Json(result, JsonRequestBehavior.DenyGet);
         }
 
 
