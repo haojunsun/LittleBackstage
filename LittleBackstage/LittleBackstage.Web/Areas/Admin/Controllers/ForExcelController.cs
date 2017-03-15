@@ -66,7 +66,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
         /// <param name="pageSize"></param>
         /// <param name="pageIndex"></param>
         /// <returns></returns>
-        public ActionResult SeniorSearch(int pageSize, int pageIndex, int id = 0)
+        public ActionResult SeniorSearch(int pageSize, int pageIndex, int id = 5)
         {
             var totalCount = 0;
             var c = _categoryService.List().First(x => x.IsCreateTable == 1 && x.CategoryId == id);
