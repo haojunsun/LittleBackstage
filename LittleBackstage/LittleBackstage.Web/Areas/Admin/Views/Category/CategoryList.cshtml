@@ -45,17 +45,17 @@
                                     }
                                 </td>
                                 <td class="center">
-                                    <a href="@Url.Action("EditCategory", "Category", new {id = item.CategoryId})">编辑</a><span> | </span>
-                                    <a href="@Url.Action("DelCategory", "Category", new {id = item.CategoryId})" onclick="return confirm('确认删除')">删除</a>
+                                    <a href="@Url.Action("EditCategory", "Category", new {id = item.CategoryId})"><i class="fa fa fa-edit"></i>编辑</a><span> | </span>
+                                    <a href="@Url.Action("DelCategory", "Category", new {id = item.CategoryId})" onclick="return confirm('确认删除')"><i class="fa fa fa-remove"></i>删除</a>
                                     @if (item.IsCreateTable == 0)
                                     {
                                         <span> | </span>
-                                        <a href="@Url.Action("CreateTableForCategory", "Category", new {id = item.CategoryId})">创建模板</a>
+                                        <a href="@Url.Action("CreateTableForCategory", "Category", new {id = item.CategoryId})"><i class="fa fa fa-star"></i>创建模板</a>
                                     }
                                     else
                                     {
                                         <span> | </span>
-                                        <a href="@Url.Action("CategoryFieldsListByCategoryId", "CategoryField", new { categoryId = item.CategoryId })">模板字段管理</a>
+                                        <a href="@Url.Action("CategoryFieldsListByCategoryId", "CategoryField", new { categoryId = item.CategoryId })"><i class="fa fa fa-wrench"></i>模板字段管理</a>
                                     }
                                 </td>
                             </tr>

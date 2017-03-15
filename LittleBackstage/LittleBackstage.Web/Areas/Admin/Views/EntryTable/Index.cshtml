@@ -45,7 +45,7 @@
                             <tr>
                                 @foreach (var title in list)
                                 {
-                                    <th style="width:60px;">@title.FieldName</th>
+                                    <th style="width:30px;">@title.FieldName</th>
                                 }
                                 <th>操作</th>
                             </tr>
@@ -100,8 +100,10 @@
                                             <td>@dr[title.IdEntity]</td>
                                         }
                                     }
-                                    <td><a href="@Url.Action("EditEntryTable", "EntryTable", new { id, categoryId })"><i class="fa fa fa-edit"></i>编辑</a> | 
-                                    <a href="@Url.Action("DelEntry", "EntryTable", new { id, categoryId })" onclick="return confirm('确认删除')"><i class="fa fa fa-remove"></i>删除</a></td>
+                                    <td>
+                                        <a href="@Url.Action("EditEntryTable", "EntryTable", new { id, categoryId })"><i class="fa fa fa-edit"></i>编辑</a> |
+                                        <a href="@Url.Action("DelEntry", "EntryTable", new { id, categoryId })" onclick="return confirm('确认删除')"><i class="fa fa fa-remove"></i>删除</a>
+                                    </td>
                                 </tr>
                             }
                         </tbody>
@@ -124,9 +126,11 @@
             .ready(function () {
                 $('.dataTables-example')
                     .dataTable({
-                        "bAutoWidth": false,
+                        "bAutoWidth": true,
+                        //"bAutoHeight": false,
                         "lengthChange": false, //是否允许用户改变表格每页显示的记录数
                         "ordering": false, //是否允许DataTables排序
+                        "sScrollX": "100%",
                         "pageLength": 10 //改变初始的页面长度(每页显示的记录数)
                     });
             });

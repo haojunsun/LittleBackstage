@@ -32,7 +32,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             IUserService userService,
             ICategoryService categoryService,
             ILogService logService,
-            ICategoryFieldService categoryFieldService, 
+            ICategoryFieldService categoryFieldService,
             ISystemLogService systemLogService)
         {
             _managerService = managerService;
@@ -112,7 +112,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             return View(table);
         }
 
-       
+
         public ActionResult AddEntryTable(int categoryId)
         {
             ViewBag.categoryId = categoryId;
@@ -133,7 +133,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
                     insertSql += item.IdEntity + ",";
                 }
                 //insertSql = _helperServices.DelLastChar(insertSql, ",");//去掉最后的逗号
-                insertSql += "InputManager,InputTime";
+                insertSql += "InputManager,InputTime,IsRelease,IsExamine";
                 insertSql += ") VALUES (";
                 foreach (var item in category.CategoryFields.Where(x => x.CanModify == 1))
                 {
@@ -144,7 +144,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
                     }
                 }
                 var admin = UserLogin.GetUserInfo("SESSION_USER_INFO");
-                insertSql += admin.ManagerId + ",'" + DateTime.Now + "') SELECT @@IDENTITY";
+                insertSql += admin.ManagerId + ",'" + DateTime.Now + "','0','0') SELECT @@IDENTITY";
 
                 var reader = SqlHelper.ExecuteScalar(SqlHelper.ConnectionStringLocalTransaction, CommandType.Text, insertSql, null);
                 _systemLogService.EntryLog(admin.UserName, admin.ManagerId, "创建条目-" + title, "创建条目-" + title, 0);
@@ -237,7 +237,17 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
                     form += "<div class=\"form-group\">";
                     form += "<label class=\"col-sm-2 control-label\">" + item.FieldName + "</label>";
                     form += "<div class=\"col-sm-6\">";
-                    form += "<input type=\"text\" class=\"form-control\" id=\"" + item.IdEntity + "\" name=\"" + item.IdEntity + "\"/>";
+                 
+                    if (item.IdEntity == "XiangMuJianJieBiaoZhunBan" || item.IdEntity == "XiangMuJianJie" || item.IdEntity == "SuoZaiQuYuJiQiDiLiHuanJing" || item.IdEntity == "FenBuQuYu" || item.IdEntity == "LiShiYuanYuan" || item.IdEntity == "JiBenNeiRong"
+                           || item.IdEntity == "XiangGuanZhiPinJiQiZuoPin" || item.IdEntity == "ChuanChengPuXi" || item.IdEntity == "DaiBiaoXingChuanChengRen" || item.IdEntity == "ZhuYaoTeZheng" || item.IdEntity == "ZhongYaoJiaZhi" || item.IdEntity == "CunXuZhuangKuang")
+                    {
+                        form += "<textarea rows=\"5\" style=\"width:100%\" class=\"form-control\" id=\"" + item.IdEntity + "\" name=\"" +
+                              item.IdEntity + "\" ></textarea>";
+                    }
+                    else
+                    {
+                        form += "<input type=\"text\" class=\"form-control\" id=\"" + item.IdEntity + "\" name=\"" + item.IdEntity + "\"/>";
+                    }
                     form += "</div>";
                     form += "</div>";
                     form += " <div class=\"hr-line-dashed\"></div>";
@@ -266,8 +276,18 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
                         form += "<div class=\"form-group\">";
                         form += "<label class=\"col-sm-2 control-label\">" + item.FieldName + "</label>";
                         form += "<div class=\"col-sm-6\">";
-                        form += "<input type=\"text\" class=\"form-control\" id=\"" + item.IdEntity + "\" name=\"" +
-                                item.IdEntity + "\" value=\"" + dr[item.IdEntity] + "\"/>";
+
+                        if (item.IdEntity == "XiangMuJianJieBiaoZhunBan" || item.IdEntity == "XiangMuJianJie" || item.IdEntity == "SuoZaiQuYuJiQiDiLiHuanJing" || item.IdEntity == "FenBuQuYu" || item.IdEntity == "LiShiYuanYuan" || item.IdEntity == "JiBenNeiRong"
+                            || item.IdEntity == "XiangGuanZhiPinJiQiZuoPin" || item.IdEntity == "ChuanChengPuXi" || item.IdEntity == "DaiBiaoXingChuanChengRen" || item.IdEntity == "ZhuYaoTeZheng" || item.IdEntity == "ZhongYaoJiaZhi" || item.IdEntity == "CunXuZhuangKuang")
+                        {
+                            form += "<textarea rows=\"5\" style=\"width:100%\" class=\"form-control\" id=\"" + item.IdEntity + "\" name=\"" +
+                                  item.IdEntity + "\" >" + dr[item.IdEntity] + "</textarea>";
+                        }
+                        else
+                        {
+                            form += "<input type=\"text\" class=\"form-control\" id=\"" + item.IdEntity + "\" name=\"" +
+                                    item.IdEntity + "\" value=\"" + dr[item.IdEntity] + "\"/>";
+                        }
                         form += "</div>";
                         form += "</div>";
                         form += " <div class=\"hr-line-dashed\"></div>";
@@ -348,7 +368,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
                 var sql = @"select * from " + c.DataTableName + " where IsRelease=0 and ";
                 if (state == -3)
                 {
-                    sql += "IsExamine !=1";
+                    sql += "IsExamine !=10";
                 }
                 else
                 {
@@ -357,7 +377,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
                 table = SqlHelper.QueryDataTable(SqlHelper.ConnectionStringLocalTransaction, CommandType.Text, sql, null);
             }
             var m = UserLogin.GetUserInfo("SESSION_USER_INFO");
-            _systemLogService.EntryLog(m.UserName, m.ManagerId, "查看条目审核列表", "查看条目审核列表" , 0);
+            _systemLogService.EntryLog(m.UserName, m.ManagerId, "查看条目审核列表", "查看条目审核列表", 0);
             return View(table);
         }
 

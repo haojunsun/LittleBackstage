@@ -7,12 +7,12 @@
 
 <div class="wrapper wrapper-content animated fadeInRight"  >
     <div class="row" >
-        <div class="col-sm-12">
+        <div class="col-sm-12" style="height:650px;">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>资源管理 <small>条目管理-创建条目</small></h5>
                 </div>
-                <div class="ibox-content" style="overflow: auto; height:700px;">
+                <div class="ibox-content" style="overflow: auto; height:650px;">
                     @using (Html.BeginForm("AddEntryTablePost", "EntryTable", FormMethod.Post, new { @class = "form-horizontal", @role = "form", enctype = "multipart/form-data" }))
                     {
                         <input type="hidden" id="categoryId" value="@ViewBag.categoryId" name="categoryId" />

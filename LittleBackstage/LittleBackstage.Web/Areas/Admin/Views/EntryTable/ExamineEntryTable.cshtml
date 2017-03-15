@@ -37,7 +37,7 @@
                             <div class="input-group">
                                 <select class="form-control" id="examineState" onchange="searchExamine();">
                                     <option value="-3">请选择</option>
-                                    <option value="-3">所有状态</option>
+                                    <option value="1">通过审核</option>
                                     <option value="0">待审核</option>
                                     <option value="-1">退回审核</option>
                                     <option value="-2">审核不通过</option>
@@ -75,6 +75,10 @@
                                             {
                                                 <td> <span class="label label-default">待审核</span></td>
                                             }
+                                             else if (dr[title.IdEntity].ToString() == "1")
+                                            {
+                                                <td> <span class="label label-success">通过审核</span></td>
+                                            }
                                             else if (dr[title.IdEntity].ToString() == "-1")
                                             {
                                                 <td> <span class="label label-warning">退回审核</span></td>
@@ -89,6 +93,10 @@
                                             if (dr[title.IdEntity].ToString() == "0")
                                             {
                                                 <td> <span class="label label-default">待发布</span></td>
+                                            }
+                                            else if (dr[title.IdEntity].ToString() == "1")
+                                            {
+                                                <td> <span class="label label-success">成功发布</span></td>
                                             }
                                             else if (dr[title.IdEntity].ToString() == "-1")
                                             {

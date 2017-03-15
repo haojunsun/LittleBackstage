@@ -257,7 +257,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
                         {
                             insertSql += item.IdEntity + ",";
                         }
-                        insertSql += "InputManager,InputTime";
+                        insertSql += "InputManager,InputTime,IsRelease,IsExamine";
                         insertSql += ") VALUES (";
                         //根据遍历的字段放入对应的值
                         //foreach (var item in category.CategoryFields.Where(x => x.CanModify == 1))
@@ -278,7 +278,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
                         //}
                         //}
                         var admin = UserLogin.GetUserInfo("SESSION_USER_INFO");
-                        insertSql += admin.ManagerId + ",'" + DateTime.Now + "') SELECT @@IDENTITY";
+                        insertSql += admin.ManagerId + ",'" + DateTime.Now + "','0','0') SELECT @@IDENTITY";
 
                         var reader = SqlHelper.ExecuteScalar(SqlHelper.ConnectionStringLocalTransaction, CommandType.Text, insertSql, null);
                         _systemLogService.EntryLog(admin.UserName, admin.ManagerId, "创建条目-" + title, "创建条目-" + title, 0);
