@@ -196,6 +196,26 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             {
                 return Content("<script>alert('删除失败,参数错误!');window.location.href='" + Url.Action("RoleList") + "';</script>");
             }
+            if (m.RoleType == 0)
+            {
+                var u = _managerService.List().Where(x => x.Role.RoleId == id);
+                if (u.Any())
+                {
+                    return
+                        Content("<script>alert('删除失败,有使用此角色的管理员!');window.location.href='" + Url.Action("RoleList") +
+                                "';</script>");
+                }
+            }
+            else if (m.RoleType == 1)
+            {
+                var u = _userService.List().Where(x => x.Role.RoleId == id);
+                if (u.Any())
+                {
+                    return
+                        Content("<script>alert('删除失败,有使用此角色的会员!');window.location.href='" + Url.Action("RoleList") +
+                                "';</script>");
+                }
+            }
             _roleService.Delete(id);
             return Content("<script>alert('删除成功!');window.location.href='" + Url.Action("RoleList") + "';</script>");
         }
