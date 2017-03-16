@@ -216,15 +216,15 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             if (category != null && category.IsCreateTable == 1 && category.CategoryFields.Any())
             {
                 //解析文件 读取文件 导出datatable
-                DirectoryInfo di = new DirectoryInfo(path + "\\fyexcel");
+                DirectoryInfo di = new DirectoryInfo(path + @"\fyexcel");
                 DirectoryInfo[] dir = di.GetDirectories();//获取子文件夹列表
                 var wh = new List<LiteratureExcel>();
                 foreach (FileInfo file in di.GetFiles())
                 {
                     //ExcelHelper eh = new ExcelHelper("C:\\Users\\Administrator\\Desktop\\fyexcel\\" + file.Name);
                     DataTable dt = new DataTable();
-
-                    dt = ExcelToDataTable(path + "\\fyexcel\\" + file.Name, 0, 4, 60);
+                    string excelpath = path + @"fyexcel\" + file.Name;
+                    dt = ExcelToDataTable(excelpath, 0, 4, 60);
 
                     for (int i = 0; i < dt.Rows.Count; i++)
                     {
