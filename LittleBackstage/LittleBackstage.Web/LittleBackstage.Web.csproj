@@ -1290,7 +1290,7 @@
     <Content Include="Views\Home\GuidePage.cshtml" />
     <Content Include="theme\Thumbs.db" />
     <Content Include="Views\Error\Index.cshtml" />
-    <Content Include="Uploads\fyexcel\eeeeeeeeeee.xlsx" />
+    <Content Include="Uploads\fyexcel\ee.xlsx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
