@@ -33,47 +33,44 @@ sc.app = angular.module('scApp', [])
 
         //获取数据
         $scope.getMainList = function () {
-
-            if (!searchkey)
+            if (!searchkey)//搜索字
                 searchkey = '';
-            if (!type)
+            if (!type)//项目类型
                 type = '';
             $scope.videoList = [];
             //$.get(sc.baseUrl + 'ForExcel/SeniorSearch?pageSize=500&pageIndex=1', function (data) {
             //    console.log(data);
             //})
 
-            $http.get(sc.baseUrl + 'ForExcel/SeniorSearch?pageSize=500&pageIndex=1').success(function (data) {// "key": searchkey, "fl": type,
+            $http.get(sc.baseUrl + 'ForExcel/SeniorSearch?pageSize=500&pageIndex=1&key=' + searchkey + '&type=' + type).success(function (data) {
                 var str = data.list.substring(1);
                 var str2 = str.substring(0, str.length - 1);
-                var arr = [];
-                arr = str2.indexOf('},{') > -1 ? str2.split('},{') : [];
-                if (arr.length > 2) {
-                    arr[0] = arr[0] + '}';
-                    arr[arr.length - 1] = '{' + arr[arr.length - 1];
-                    for (var i = 1; i < arr.length - 1; i++) {
-                        arr[i] = '{' + arr[i] + '}';
+                if (str2.length > 0) {
+                    $('.nodata').css('display', 'none');
+                    var arr = [];
+                    arr = str2.indexOf('},{') > -1 ? str2.split('},{') : [];
+                    if (arr.length > 2) {
+                        arr[0] = arr[0] + '}';
+                        arr[arr.length - 1] = '{' + arr[arr.length - 1];
+                        for (var i = 1; i < arr.length - 1; i++) {
+                            arr[i] = '{' + arr[i] + '}';
+                        }
                     }
-                }
-                else if (arr.length == 2) {
-                    arr[0] = arr[0] + '}';
-                    arr[1] = '{' + arr[1];
-                } else {//1
-                    arr[0] = str2;
-                }
+                    else if (arr.length == 2) {
+                        arr[0] = arr[0] + '}';
+                        arr[1] = '{' + arr[1];
+                    } else {//1
+                        arr[0] = str2;
+                    }
 
-                //console.log(arr[9].replace(/\s/g, "").replace(/—/g, "0"));
+                    for (var i = 0; i < arr.length; i++) {
+                        $scope.videoList.push(JSON.parse(arr[i]));
+                    }
 
-                for (var i = 0; i < arr.length; i++) {
-                    $scope.videoList.push(JSON.parse(arr[i]));
+                    console.log($scope.videoList);
+                } else {
+                    $('.nodata').css('display', 'block');
                 }
-               
-                console.log($scope.videoList);
-                //if (data.list.length && data.list.length > 0) {
-                //    $('.nodata').css('display', 'none');
-                //} else {
-                //    $('.nodata').css('display', 'block');
-                //}
                 //$scope.videoList = data.list;
             }).error(function (data) {
                 console.log("查询失败");
@@ -88,16 +85,22 @@ sc.app = angular.module('scApp', [])
             $scope.getMainList();
         }
 
+        $scope.firstimg = "";
+
         //获取详情
         $scope.getDataDetails = function (id) {
             $scope.datadetail = '';
 
-            $http.post(sc.baseUrl + 'ForExcel/Find', { "id": id }).success(function (data) {
-                console.log(data);
-                $scope.datadetail = data;
-                var htmlvideo = '  <video id="detailvideo" src="' + "/Uploads/sources/" + $scope.datadetail.FirstLevel + "/" + $scope.datadetail.XiangMuMingCheng + "/" + $scope.datadetail.ZhuYaoChuanChengRen + ".mp4" + '" controls="controls" width="100%" type="video/mp4"></video>';
+            $http.get(sc.baseUrl + 'ForExcel/Find?id=' + id).success(function (data) {
+                var str = data.table.substring(1);
+                var str2 = str.substring(0, str.length - 1);
+                $scope.datadetail = JSON.parse(str2);
+                console.log($scope.datadetail);
+
+                var htmlvideo = '  <video id="detailvideo" src="' + "/Uploads/sources/" + $scope.datadetail.FirstLevel + "/" + $scope.datadetail.XiangMuMingCheng + "/" + $scope.datadetail.TypeVideo + ".mp4" + '" controls="controls" width="100%" type="video/mp4"></video>';
                 $('#video-content').html(htmlvideo);
-                $scope.imglist = data.Type.substring(1).split(',');
+                $scope.imglist = $scope.datadetail.Type.substring(1).split(',');
+                $scope.firstimg = $scope.imglist[0];
                 //$('#detailvideo').attr('src', "/Uploads/sources/" + $scope.datadetail.FirstLevel + "/" + $scope.datadetail.XiangMuMingCheng + "/" + $scope.datadetail.ZhuYaoChuanChengRen + ".mp4");
             }).error(function (data) {
                 console.log("查询失败");
@@ -105,9 +108,10 @@ sc.app = angular.module('scApp', [])
         }
 
         $scope.modalShow = function (whid) {
-            console.log(whid);
             $scope.getDataDetails(whid);
             $(".modal-list").addClass("on");
+            $('#to_back').fadeOut();
+            $('#to_top').fadeOut();
         }
     }])
     .controller('DetailController', ['$scope', '$http', function ($scope, $http) {

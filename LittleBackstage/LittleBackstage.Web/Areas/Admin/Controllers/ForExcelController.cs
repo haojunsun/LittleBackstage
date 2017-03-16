@@ -66,14 +66,22 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
         /// <param name="pageSize"></param>
         /// <param name="pageIndex"></param>
         /// <returns></returns>
-        public ActionResult SeniorSearch(int pageSize, int pageIndex, int id = 5)
+        public ActionResult SeniorSearch(int pageSize, int pageIndex, string key, string type, int id = 5)
         {
             var totalCount = 0;
             var c = _categoryService.List().First(x => x.IsCreateTable == 1 && x.CategoryId == id);
             if (c != null)
             {
                 var table = new DataTable();
-                var sql = @"select * from " + c.DataTableName;
+                var sql = @"select * from " + c.DataTableName + " where IsRelease=1 ";
+                if (!string.IsNullOrEmpty(type))
+                {
+                    sql += " and FirstLevel like '%" + type + "%'";
+                    if (!string.IsNullOrEmpty(key))
+                    {
+                        sql += " and (TitleProper like '%" + key + "%' or SecondLevel like '%" + key + "%' or MinZu like '%" + key + "%' or XiangMuJianJie like '%key%' or DaiBiaoXingChuanChengRen like '%"+key+"%')";
+                    }
+                }
                 table = SqlHelper.QueryDataTable(SqlHelper.ConnectionStringLocalTransaction, CommandType.Text, sql, null);
                 totalCount = table.Rows.Count;//数据总数
                 var list = JsonConvert.SerializeObject(GetPagedTable(table, pageIndex, pageSize), new DataTableConverter()); //Convert.ToBase64String(Encoding.UTF8.GetBytes(html));
@@ -115,7 +123,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
             return jsonBuilder.ToString();
         }
 
-
+      
         public DataTable GetPagedTable(DataTable dt, int PageIndex, int PageSize)//PageIndex表示第几页，PageSize表示每页的记录数
         {
             if (PageIndex == 0)
@@ -171,7 +179,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
         /// <param name="cid">模板id</param>
         /// <param name="id"></param>
         /// <returns></returns>
-        public ActionResult Find(int cid, int id)
+        public ActionResult Find(int id,int cid=5)
         {
             var c = _categoryService.List().First(x => x.IsCreateTable == 1 && x.CategoryId == cid);
             if (c != null)
@@ -375,7 +383,7 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
                         //}
                         //}
                         var admin = UserLogin.GetUserInfo("SESSION_USER_INFO");
-                        insertSql += admin.ManagerId + ",'" + DateTime.Now + "','0','0') SELECT @@IDENTITY";
+                        insertSql += admin.ManagerId + ",'" + DateTime.Now + "','1','1') SELECT @@IDENTITY";
 
                         var reader = SqlHelper.ExecuteScalar(SqlHelper.ConnectionStringLocalTransaction, CommandType.Text, insertSql, null);
                         _systemLogService.EntryLog(admin.UserName, admin.ManagerId, "创建条目-" + title, "创建条目-" + title, 0);

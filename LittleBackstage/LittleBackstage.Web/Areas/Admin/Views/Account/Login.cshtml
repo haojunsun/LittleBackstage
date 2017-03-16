@@ -79,7 +79,7 @@
                     dataType: "json",
                     success: function (result) {
                         if (result.code == 200) {
-                            window.location.href = '/Admin/Category/TemplateList';//result.returnUrl;
+                            window.location.href = '/Admin/EntryTable';//result.returnUrl;
                         } else {
                             console.log(result);
                             $('#errorMgs').html(result.message);

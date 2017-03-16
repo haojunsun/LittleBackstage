@@ -12,17 +12,60 @@
     <link href="~/css/iscroll.css" rel="stylesheet" type="text/css" />
     <link href="~/css/bootstrap.css" rel="stylesheet" type="text/css" />
     <link href="~/css/list.css" rel="stylesheet" type="text/css" />
+    <style>
+        * {
+            font-family: KaiTi;
+        }
 
+        #to_top {
+            font-family: KaiTi;
+            padding-top: 7px;
+            width: 60px;
+            height: 40px;
+            background-color: #EAE3D0;
+            opacity: 0.9;
+            position: fixed;
+            z-index: 9999;
+            border-radius: 4px;
+            text-align: center;
+            font-size: large;
+        }
 
+        #to_back {
+            font-family: KaiTi;
+            font-size:20px;
+            padding-top: 7px;
+            width: 50px;
+            height: 40px;
+            background-color: white;
+            opacity: 0.7;
+            position: fixed;
+            z-index: 9999;
+            border-radius: 4px;
+            margin-top: 10px;
+            margin-left: 10px;
+            text-align: center;
+            font-size: large;
+        }
+
+        .hr1 {
+            height: 1px;
+            border: none;
+            border-top: 1px solid #555555;
+        }
+    </style>
 </head>
 
 <body ng-app="scApp" ng-controller="VideoController">
     <!--背景-->
-    <div class="mainbg" style="background:#eae3d0;">@*<img src="~/images/77.jpg" />*@</div>
+    <div id="page" class="mainbg" style="background:#eae3d0;">@*<img src="~/images/77.jpg" />*@</div>
     <!--背景-->
 
-    <div onclick="location.href='/home/main'" style="padding-top:7px;width:50px;height:40px;background-color:white;opacity:0.7;position:fixed;z-index:9999;border-radius:4px;margin-top:10px;margin-left:10px;text-align:center;font-size:large;">
+    <div id="to_back" onclick="location.href='/home/main'">
         返回
+    </div>
+    <div id="to_top" onclick="pageScroll()">
+        顶部↑
     </div>
     <div class="banner">
 
@@ -69,7 +112,7 @@
     </script>
     <section class="modal modal-list">
         <div class="pic">
-            <img src="~/Uploads/sources/{{datadetail.FirstLevel}}/{{datadetail.XiangMuMingCheng}}/{{datadetail.Other1}}.jpg" />
+            <img src="~/Uploads/sources/{{datadetail.FirstLevel}}/{{datadetail.XiangMuMingCheng}}/{{firstimg}}.jpg" />
             @*<div id="wrapper2">
                     <div id="scroller2">
                         <ul id="thelist2">
@@ -91,43 +134,53 @@
             <div>
                 <span style="color:#12269b">项目名称：</span><span>{{datadetail.XiangMuMingCheng}}</span>
             </div>
+            <hr class="hr1" />
             <div>
                 <span style="color:#12269b"> 分类：</span><span>{{datadetail.FirstLevel}}</span>--<span>{{datadetail.SecondLevel}}</span>
             </div>
-            <div>
-                <span style="color:#12269b"> 批次：</span><span>{{datadetail.PiCi}}</span>
-            </div>
+            <hr class="hr1" />
             <div>
                 <span style="color:#12269b">  民族：</span><span>{{datadetail.MinZu}}</span>
             </div>
+            <hr class="hr1" />
             <div>
                 <span style="color:#12269b">  申报地区：</span><span>{{datadetail.CoverageSpatial_Province}}</span>-<span>{{datadetail.CoverageSpatial_City}}</span>-<span>{{datadetail.CoverageSpatial_County}}</span>
             </div>
+            <hr class="hr1" />
             <div>
-                <span style="color:#12269b">  申报地区或单位：</span><span>{{datadetail.CoverageSpatial_ShenBaoDiQuHuoDanWei}}</span>
+                <span style="color:#12269b">  申报单位：</span><span>{{datadetail.CoverageSpatial_ShenBaoDiQuHuoDanWei}}</span>
             </div>
+            @*<div>
+                    <span style="color:#12269b"> 批次：</span><span>{{datadetail.PiCi}}</span>
+                </div>
+                <hr class="hr1" />*@
+            <hr class="hr1" />
             <div>
                 <span style="color:#12269b">  保护单位：</span><span>{{datadetail.CoverageSpatial_BaoHuDanWei}}</span>
             </div>
+            <hr class="hr1" />
             <div class="summary summary1">
                 <label style="color: #12269b; text-align:left;"> 项目简介：</label>
-                <div>{{datadetail.XiangMuJianJieBiaoZhunBan}}</div>
+                <div>{{datadetail.XiangMuJianJie}}</div>
                 <span class="glyphicon glyphicon-chevron-down"></span>
             </div>
+            <hr class="hr1" />
             <div class="summary summary2">
                 <label style="color: #12269b">
-                    所在区域及其地理环境：
+                    代表性传承人：
                 </label>
-                <div>{{datadetail.SuoZaiQuYuJiQiDiLiHuanJing}}</div>
+                <div>{{datadetail.DaiBiaoXingChuanChengRen}}</div>
                 <span class="glyphicon glyphicon-chevron-down"></span>
             </div>
+            <hr class="hr1" />
             <div class="summary summary2">
                 <label style="color: #12269b">
-                    相关制品及其作品：
+                  传承重要价值：
                 </label>
-                <div>{{datadetail.XiangGuanZhiPinJiQiZuoPin}}</div>
+                <div>{{datadetail.ZhongYaoJiaZhi}}</div>
                 <span class="glyphicon glyphicon-chevron-down"></span>
             </div>
+            <hr class="hr1" />
             <div class="summary summary2">
                 <label style="color: #12269b;text-align:left">
                     相关图片：
@@ -138,21 +191,21 @@
         <span class="glyphicon glyphicon-remove" onclick="closeModal()"></span>
     </section>
     <!--数据-->
-    <div style="z-index:1;position:relative;text-align:center;width:100%;margin: 15px 0 15px 0;">
+    <div style="z-index:2;position:relative;text-align:center;width:100%;margin: 15px 0 15px 0;">
 
-        <input id="searchkey" style="height: 30px; width: 200px; border-radius: 10px;opacity:0.7;margin-left:10px; padding-left:10px;" type="text" name="name" value="" placeholder="传承人" />
-        <a ng-click="search()" href="javascript:void(0)" style="float:right;margin-right:10px;display:block;height: 30px; width: 90px; border-radius: 6px;color:black;font-size:larger;font-weight:600;background-color:white;opacity:0.7;border:solid 2px #808080">&nbsp;搜&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;索&nbsp;</a>
+        <input id="searchkey" style="height: 30px; width: 200px; border-radius: 10px; opacity: 0.7; margin-left: 10px; padding-left: 10px; font-family: KaiTi;" type="text" name="name" value="" placeholder="传承人" />
+        <a ng-click="search()" href="javascript:void(0)" style="font-family: KaiTi; float: right; margin-right: 10px; display: block; height: 30px; width: 90px; border-radius: 6px; color: black; font-size: 18px; font-weight: 600; background-color: white; opacity: 0.7; border: solid 2px #808080">&nbsp;搜&nbsp;&nbsp;索&nbsp;</a>
 
     </div>
     <div class="content" style="min-height:582px;">
         <h3 class="nodata" style="width:100%;text-align:center;margin-top:100px;display:none;">没有相关数据！</h3>
-        <div class="row clearfix content-row" style="background-color:white;opacity:1;" ng-click="modalShow(item.LiteratureExcelId)" ng-repeat="item in videoList">
+        <div class="row clearfix content-row" style="background-color:white;opacity:1;" ng-click="modalShow(item.Template_Table_5_Id)" ng-repeat="item in videoList">
             <div class="width30">
-                <img src="~/Uploads/sources/{{item.FirstLevel}}/{{item.XiangMuMingCheng}}/{{item.Other1}}.jpg" style="width:121px;height:95px" />
+                <img src="~/Uploads/sources/{{item.FirstLevel}}/{{item.XiangMuMingCheng}}/{{firstimg}}.jpg" style="width:121px;height:95px" />
             </div>
             <div class="width70">
-                <h4 style="color:#420f0f">{{item.XiangMuMingCheng}}</h4>
-                <p>{{item.XiangMuJianJieBiaoZhunBan}}</p>
+                <h4 style="color:#420f0f;font-size:18px;">{{item.XiangMuMingCheng}}</h4>
+                <p style="font-size: 14px;">{{item.XiangMuJianJie}}</p>
             </div>
         </div>
     </div>
@@ -171,6 +224,14 @@
         $(document).ready(function () {
             $("body").addClass("on");
             $("html").addClass("on");
+
+            //返回顶部
+            $('#to_top').fadeOut();
+            var oTop = document.getElementById("to_top");
+            var screenw = document.documentElement.clientWidth || document.body.clientWidth;
+            var screenh = document.documentElement.clientHeight || document.body.clientHeight;
+            oTop.style.left = screenw - oTop.offsetWidth - 5 + "px";
+            oTop.style.top = screenh - oTop.offsetHeight + "px";
         })
         //function modalShow() {
         //    $(".modal-list").addClass("on");
@@ -181,9 +242,8 @@
         }
         function closeModal() {
             $(".modal-list").removeClass("on");
-            //$(".content-box").removeClass("on");
-            //$("body").removeClass("on");
-            //$("html").removeClass("on");
+            $('#to_back').fadeIn();
+            $('#to_top').fadeIn();
         }
         $(".glyphicon.glyphicon-chevron-down").click(function () {
             $(this).siblings("div").toggleClass("on");
@@ -204,6 +264,25 @@
 
         }
         document.addEventListener('DOMContentLoaded', loaded, false);
+
+        function pageScroll() {
+            window.scrollBy(0, -100);
+            scrolldelay = setTimeout('pageScroll()', 100);
+            var sTop = document.documentElement.scrollTop + document.body.scrollTop;
+            if (sTop == 0) clearTimeout(scrolldelay);
+        }
+
+        window.onscroll = function () {
+            var scrolltop = document.documentElement.scrollTop || document.body.scrollTop;
+            if ($(".modal-list").hasClass('on'))
+                return;
+            if (scrolltop >= 300) {
+                $('#to_top').fadeIn();
+            } else {
+                $('#to_top').fadeOut();
+            }
+
+        }
         //var myScroll;
 
         //function loaded() {
