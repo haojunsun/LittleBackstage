@@ -76,10 +76,9 @@ namespace LittleBackstage.Web.Areas.Admin.Controllers
                 if (!string.IsNullOrEmpty(type))
                 {
                     sql += " and FirstLevel like '%" + type + "%'";
-                    if (!string.IsNullOrEmpty(key))
-                    {
-                        sql += " and (TitleProper like '%" + key + "%' or SecondLevel like '%" + key + "%' or MinZu like '%" + key + "%' or XiangMuJianJie like '%key%' or DaiBiaoXingChuanChengRen like '%"+key+"%')";
-                    }
+                }
+                if (!string.IsNullOrEmpty(key)) {
+                    sql += " and (TitleProper like '%" + key + "%' or SecondLevel like '%" + key + "%' or MinZu like '%" + key + "%' or XiangMuJianJie like '%key%' or DaiBiaoXingChuanChengRen like '%" + key + "%')";
                 }
                 table = SqlHelper.QueryDataTable(SqlHelper.ConnectionStringLocalTransaction, CommandType.Text, sql, null);
                 totalCount = table.Rows.Count;//数据总数
