@@ -593,9 +593,7 @@
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\site.min.css" />
     <Content Include="Content\style.css" />
-    <Content Include="Content\fy.mp4" />
     <Content Include="Content\x4.mp3" />
-    <Content Include="Content\非物质文化遗产空间信息平台视频.mov" />
     <Content Include="css\animate.min.css" />
     <Content Include="css\base.css" />
     <Content Include="css\bootstrap.css" />
@@ -1298,7 +1296,9 @@
     <Content Include="Scripts\vendor\modernizr.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="theme\style.css" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

@@ -17,7 +17,7 @@ public abstract class SqlHelper
     // 超时时间
     private static int Timeout = 1000;
     //获取数据库连接字符串，其属于静态变量且只读，项目中所有文档可以直接使用，但不能修改
-    public static readonly string ConnectionStringLocalTransaction = ConfigurationManager.ConnectionStrings["LittleBackstageDb"].ConnectionString;
+    public static readonly string ConnectionStringLocalTransaction = ConfigurationManager.ConnectionStrings["GoHomeLittleBackstageDb"].ConnectionString;
 
     //哈希表用来存储缓存的参数信息，哈希表可以存储任意类型的参数。
     private static Hashtable parmCache = Hashtable.Synchronized(new Hashtable());

@@ -5,140 +5,161 @@
 <link rel="stylesheet" href="~/Assets/materialize/css/materialize.css" media="screen,projection" />
 <link href="~/Assets/css/custom-styles.css" rel="stylesheet" />
 <div style="margin-top:100px;">
-    <div class="col-xs-12 col-sm-6 col-md-3">
+    <a href="@Url.Action("CategoryList", "Category")">
+        <div class="col-xs-12 col-sm-6 col-md-3">
 
-        <div class="card horizontal cardIcon waves-effect waves-dark">
-            <div class="card-image yellow">
-                <i class="fa fa-tags fa-5x"></i>
-            </div>
-            <div class="card-stacked">
-                <div class="card-content">
-                    <h3>@ViewBag.caCount</h3>
+            <div class="card horizontal cardIcon waves-effect waves-dark">
+                <div class="card-image yellow">
+                    <i class="fa fa-tags fa-5x"></i>
                 </div>
-                <div class="card-action">
-                    <strong>分类数</strong>
+                <div class="card-stacked">
+                    <div class="card-content">
+                        <h3>@ViewBag.caCount</h3>
+                    </div>
+                    <div class="card-action">
+                        <strong>分类数</strong>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </a>
+
+    <a class="J_menuItem" href="@Url.Action("Index", "EntryTable")">
+        <div class="col-xs-12 col-sm-6 col-md-3">
+
+            <div class="card horizontal cardIcon waves-effect waves-dark">
+                <div class="card-image red">
+                    <i class="fa fa-table fa-5x"></i>
+                </div>
+                <div class="card-stacked">
+                    <div class="card-content">
+                        <h3>@ViewBag.entryCount</h3>
+                    </div>
+                    <div class="card-action">
+                        <strong>总条目数</strong>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </a>
+
+    <a class="J_menuItem" href="@Url.Action("ExamineEntryTable", "EntryTable")">
+        <div class="col-xs-12 col-sm-6 col-md-3">
+
+            <div class="card horizontal cardIcon waves-effect waves-dark">
+                <div class="card-image green">
+                    <i class="fa fa-list fa-5x"></i>
+                </div>
+                <div class="card-stacked">
+                    <div class="card-content">
+                        <h3>@ViewBag.exEntryCount</h3>
+                    </div>
+                    <div class="card-action">
+                        <strong>待审核条目数</strong>
+                    </div>
                 </div>
             </div>
         </div>
+    </a>
 
-    </div>
-    <div class="col-xs-12 col-sm-6 col-md-3">
+    <a class="J_menuItem" href="@Url.Action("ExamineEntryTable", "EntryTable")">
+        <div class="col-xs-12 col-sm-6 col-md-3">
 
-        <div class="card horizontal cardIcon waves-effect waves-dark">
-            <div class="card-image red">
-                <i class="fa fa-table fa-5x"></i>
-            </div>
-            <div class="card-stacked">
-                <div class="card-content">
-                    <h3>@ViewBag.entryCount</h3>
+            <div class="card horizontal cardIcon waves-effect waves-dark">
+                <div class="card-image green">
+                    <i class="fa fa-list fa-5x"></i>
                 </div>
-                <div class="card-action">
-                    <strong>总条目数</strong>
+                <div class="card-stacked">
+                    <div class="card-content">
+                        <h3>@ViewBag.exdEntryCount</h3>
+                    </div>
+                    <div class="card-action">
+                        <strong>已审核条目数</strong>
+                    </div>
                 </div>
             </div>
+
         </div>
+    </a>
 
-    </div>
-    <div class="col-xs-12 col-sm-6 col-md-3">
+    <a class="J_menuItem" href="@Url.Action("ReleaseEntryTable", "EntryTable")">
+        <div class="col-xs-12 col-sm-6 col-md-3">
 
-        <div class="card horizontal cardIcon waves-effect waves-dark">
-            <div class="card-image green">
-                <i class="fa fa-list fa-5x"></i>
-            </div>
-            <div class="card-stacked">
-                <div class="card-content">
-                    <h3>@ViewBag.exEntryCount</h3>
+            <div class="card horizontal cardIcon waves-effect waves-dark">
+                <div class="card-image purple">
+                    <i class="fa fa-book fa-5x"></i>
                 </div>
-                <div class="card-action">
-                    <strong>待审核条目数</strong>
+                <div class="card-stacked">
+                    <div class="card-content">
+                        <h3>@ViewBag.reEntryCount</h3>
+                    </div>
+                    <div class="card-action">
+                        <strong>待发布条目数</strong>
+                    </div>
                 </div>
             </div>
+
         </div>
-    </div>
-    <div class="col-xs-12 col-sm-6 col-md-3">
+    </a>
 
-        <div class="card horizontal cardIcon waves-effect waves-dark">
-            <div class="card-image green">
-                <i class="fa fa-list fa-5x"></i>
-            </div>
-            <div class="card-stacked">
-                <div class="card-content">
-                    <h3>@ViewBag.exdEntryCount</h3>
+    <a class="J_menuItem" href="@Url.Action("ReleaseEntryTable", "EntryTable")">
+        <div class="col-xs-12 col-sm-6 col-md-3">
+
+            <div class="card horizontal cardIcon waves-effect waves-dark">
+                <div class="card-image purple">
+                    <i class="fa fa-book fa-5x"></i>
                 </div>
-                <div class="card-action">
-                    <strong>已审核条目数</strong>
+                <div class="card-stacked">
+                    <div class="card-content">
+                        <h3>@ViewBag.redEntryCount</h3>
+                    </div>
+                    <div class="card-action">
+                        <strong>已发布条目数</strong>
+                    </div>
                 </div>
             </div>
+
         </div>
+    </a>
 
-    </div>
-    <div class="col-xs-12 col-sm-6 col-md-3">
+    <a class="J_menuItem" href="@Url.Action("ManagerList", "User")">
+        <div class="col-xs-12 col-sm-6 col-md-3">
 
-        <div class="card horizontal cardIcon waves-effect waves-dark">
-            <div class="card-image purple">
-                <i class="fa fa-book fa-5x"></i>
-            </div>
-            <div class="card-stacked">
-                <div class="card-content">
-                    <h3>@ViewBag.reEntryCount</h3>
+            <div class="card horizontal cardIcon waves-effect waves-dark">
+                <div class="card-image blue">
+                    <i class="fa fa-users fa-5x"></i>
                 </div>
-                <div class="card-action">
-                    <strong>待发布条目数</strong>
+                <div class="card-stacked">
+                    <div class="card-content">
+                        <h3>@ViewBag.adminCount</h3>
+                    </div>
+                    <div class="card-action">
+                        <strong>管理员</strong>
+                    </div>
                 </div>
             </div>
+
         </div>
+    </a>
+    <a class="J_menuItem" href="@Url.Action("ManagerList", "User")">
+        <div class="col-xs-12 col-sm-6 col-md-3">
 
-    </div>
-    <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="card horizontal cardIcon waves-effect waves-dark">
+                <div class="card-image blue">
+                    <i class="fa fa-user fa-5x"></i>
+                </div>
+                <div class="card-stacked">
+                    <div class="card-content">
+                        <h3>@ViewBag.exAdminCount</h3>
+                    </div>
+                    <div class="card-action">
+                        <strong>待审核管理员</strong>
+                    </div>
+                </div>
+            </div>
 
-        <div class="card horizontal cardIcon waves-effect waves-dark">
-            <div class="card-image purple">
-                <i class="fa fa-book fa-5x"></i>
-            </div>
-            <div class="card-stacked">
-                <div class="card-content">
-                    <h3>@ViewBag.redEntryCount</h3>
-                </div>
-                <div class="card-action">
-                    <strong>已发布条目数</strong>
-                </div>
-            </div>
         </div>
-
-    </div>
-   
-    <div class="col-xs-12 col-sm-6 col-md-3">
-
-        <div class="card horizontal cardIcon waves-effect waves-dark">
-            <div class="card-image blue">
-                <i class="fa fa-users fa-5x"></i>
-            </div>
-            <div class="card-stacked">
-                <div class="card-content">
-                    <h3>@ViewBag.adminCount</h3>
-                </div>
-                <div class="card-action">
-                    <strong>管理员</strong>
-                </div>
-            </div>
-        </div>
-
-    </div>
-    <div class="col-xs-12 col-sm-6 col-md-3">
-
-        <div class="card horizontal cardIcon waves-effect waves-dark">
-            <div class="card-image blue">
-                <i class="fa fa-user fa-5x"></i>
-            </div>
-            <div class="card-stacked">
-                <div class="card-content">
-                    <h3>@ViewBag.exAdminCount</h3>
-                </div>
-                <div class="card-action">
-                    <strong>待审核管理员</strong>
-                </div>
-            </div>
-        </div>
-
-    </div>
+    </a>
 </div>
